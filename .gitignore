@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+._*
+
+# Local editor / preview tooling (not part of the deployed site)
+.claude/
+
+# Master logo artwork — kept locally, never published.
+# The site uses assets/ldt-inc-logo-white-web.png.
+LDT INC Logo white.png
+assets/ldt-inc-logo-white.png
