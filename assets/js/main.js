@@ -239,6 +239,9 @@
        not. The serif question is a statement, not narrative — left alone. */
     { sel: '.reading > p:not(.reading__question) strong', unit: 'word', quiet: true },
     { sel: '.track__narrative p strong', unit: 'word', quiet: true },
+    /* Scope carries the same emphasis in a ruled list rather than a
+       paragraph; the phrase is still the reading unit. */
+    { sel: '#transformation .indexed__text strong', unit: 'word', quiet: true },
     { sel: '.credits',                unit: '.credits__item' },
     { sel: '.anchor',                 unit: 'word' },
     { sel: '#workshops .lead',        unit: 'word' },
