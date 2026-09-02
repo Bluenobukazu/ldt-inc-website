@@ -295,6 +295,21 @@ strong {
 .reading > .reading__question + p { margin-top: calc(var(--space-para) * 1.35); }
 
 
+/* Controlled justified setting — the three long-form narrative reading
+   blocks only, never body copy at large. The measure is the one already
+   established; hyphenation does the work word spacing would otherwise have
+   to do, and the last line of every paragraph stays naturally left. */
+#core .reading--offset > p,
+#transformation .reading--offset > p,
+#workshops .reading > p:not(.reading__question) {
+  text-align: justify;
+  text-align-last: left;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  hyphenate-limit-chars: 6 2 3;
+}
+
+
 /* ── 06 CHROME ───────────────────────────────────────────────────────── */
 
 .chrome {
@@ -335,6 +350,41 @@ html[data-chrome="light"] .chrome { color: var(--ink); }
 .chrome__slash { padding-inline: 0.4em; }
 
 @media (min-width: 64rem) { .chrome__counter { display: none; } }
+
+
+/* ── 06b RETURN · handheld only ──────────────────────────────────────── */
+/* Not a button in the product sense — a small navigation signal in the
+   site's own mono, absent until the reader asks for it by turning back.
+   Desktop has the spine and is deliberately excluded. */
+
+.totop {
+  position: fixed;
+  z-index: 85;
+  right: var(--pad-x);
+  bottom: calc(clamp(1.05rem, 2.1vw, 1.75rem) + env(safe-area-inset-bottom, 0px));
+  font-family: var(--f-mono);
+  font-weight: 400;
+  font-size: var(--fs-meta);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--paper);
+  opacity: 0;
+  transform: translate3d(0, 0.4rem, 0);
+  pointer-events: none;
+  transition: opacity var(--m-fast) var(--m-ease),
+              transform var(--m-fast) var(--m-ease);
+}
+html[data-foot="light"] .totop { color: var(--ink); }
+
+.totop__arrow { margin-right: 0.55em; }
+
+.totop.is-in { opacity: 0.62; transform: none; pointer-events: auto; }
+.totop.is-in:hover,
+.totop.is-in:focus-visible { opacity: 1; }
+
+@media (min-width: 64rem) { .totop { display: none !important; } }
+@media print { .totop { display: none !important; } }
 
 
 /* ── 07 SECTION SPINE ────────────────────────────────────────────────── */

@@ -20,6 +20,7 @@
   /* ── Section awareness ─────────────────────────────────────────────── */
 
   var lastTheme = null;
+  var lastFoot  = null;
   var lastIndex = -1;
   var ticking = false;
 
@@ -50,6 +51,16 @@
       if (theme !== lastTheme) {
         root.setAttribute('data-chrome', theme);
         lastTheme = theme;
+      }
+    }
+
+    /* Same rule at the lower edge, for anything anchored there. */
+    var foot = fieldAt(window.innerHeight - 40);
+    if (foot) {
+      var ftheme = foot.classList.contains('field--light') ? 'light' : 'dark';
+      if (ftheme !== lastFoot) {
+        root.setAttribute('data-foot', ftheme);
+        lastFoot = ftheme;
       }
     }
 
@@ -223,7 +234,11 @@
     { sel: '.hero__statement',        unit: 'word' },
     { sel: '#core .lead',             unit: 'word' },
     { sel: '.dimensions',             unit: '.dimensions__term' },
-    { sel: '#core .reading--offset p strong', unit: 'word', quiet: true },
+    /* Emphasis is the reading unit: every bold phrase inside a narrative
+       reading block lights as it is reached, the body copy around it does
+       not. The serif question is a statement, not narrative — left alone. */
+    { sel: '.reading > p:not(.reading__question) strong', unit: 'word', quiet: true },
+    { sel: '.track__narrative p strong', unit: 'word', quiet: true },
     { sel: '.credits',                unit: '.credits__item' },
     { sel: '.anchor',                 unit: 'word' },
     { sel: '#workshops .lead',        unit: 'word' },
@@ -490,4 +505,72 @@
       }, { passive: true, once: false });
     });
   })();
+})();
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   RETURN  ·  handheld only
+   Desktop already carries the spine, so there is nothing to add there.
+   Below it, the page has no persistent map — so a single editorial signal
+   is offered, and only when it is actually wanted: after the reader has
+   travelled a real distance, and only once they start moving back up.
+   ═══════════════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  var btn = document.getElementById('to-top');
+  if (!btn) return;
+
+  var handheld = window.matchMedia('(max-width: 63.99rem)');
+  var reduced  = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  var DEPTH    = 1.6;  /* viewports travelled before a return means anything */
+  var NEAR_TOP = 0.9;  /* viewports from the top where it stops being useful */
+  var INTENT   = 90;   /* px of sustained upward travel that reveals it      */
+
+  var shown = false, hideT = null, up = 0;
+  var lastY = window.scrollY, ticking = false;
+
+  function show(on) {
+    if (on === shown) return;
+    shown = on;
+    if (on) {
+      window.clearTimeout(hideT);
+      btn.hidden = false;
+      window.requestAnimationFrame(function () { btn.classList.add('is-in'); });
+    } else {
+      btn.classList.remove('is-in');
+      hideT = window.setTimeout(function () { btn.hidden = true; }, 460);
+    }
+  }
+
+  function update() {
+    ticking = false;
+    if (!handheld.matches) { up = 0; show(false); return; }
+
+    var y = window.scrollY, vh = window.innerHeight, d = y - lastY;
+    lastY = y;
+    if (d < 0) up -= d;
+
+    if (d > 2)               { up = 0; show(false); return; }  /* going down */
+    if (y < vh * NEAR_TOP)   { up = 0; show(false); return; }  /* home again */
+    if (shown) return;
+    if (y > vh * DEPTH && up > INTENT) show(true);
+  }
+
+  function onScroll() {
+    if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', function () { lastY = window.scrollY; up = 0; update(); }, { passive: true });
+  if (handheld.addEventListener) handheld.addEventListener('change', update);
+
+  btn.addEventListener('click', function () {
+    up = 0;
+    show(false);
+    window.scrollTo({ top: 0, behavior: reduced.matches ? 'auto' : 'smooth' });
+  });
+
+  update();
 })();
