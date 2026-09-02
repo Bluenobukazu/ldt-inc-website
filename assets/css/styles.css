@@ -273,12 +273,30 @@ strong {
 .reading p { color: var(--muted); }
 
 /* End of narrative → introduction of framework. A perceptible pause, not
-   a void, and the cue stays tied to the framework it announces. */
+   a void, and the cue stays tied to the framework it announces — in the
+   same serif as the terms it introduces, at body scale so it stays
+   clearly subordinate to them. */
 .reading > p.reading__cue {
-  margin-top: calc(var(--space-para) * 3.4);
-  font-size: var(--fs-body);
+  /* The pause is held at its approved value by pinning it to the body token
+     rather than to this element's own em, so the type can grow without the
+     rhythm moving with it. */
+  margin-top: calc(var(--fs-body) * 1.6 * 3.4);
+  font-family: var(--f-serif);
+  font-style: normal;
+  font-weight: 400;
+  /* The serif carries a smaller x-height than the sans it replaced; a step
+     up restores its optical size as the label for the terms below. */
+  font-size: calc(var(--fs-body) * 1.22);
   color: var(--faint) !important;
   letter-spacing: 0.02em;
+}
+
+/* Where the narrative is indented to the axis, the cue steps back out of it:
+   it belongs to the terms it introduces, so it takes their left edge and not
+   the body copy's. Below the breakpoint the narrative is already flush and
+   the two edges coincide on their own. */
+@media (min-width: 48rem) {
+  .reading > p.reading__cue { margin-left: calc(var(--axis) * -1); }
 }
 
 /* One paragraph in the Workshops narrative carries the central question.
@@ -567,6 +585,15 @@ html[data-chrome="light"] .spine { color: var(--ink); }
 }
 .hero__name-line { display: block; }
 
+/* The positioning line reads as metadata belonging to the mark, not as a
+   second statement: the established mono/meta voice, set one step below the
+   name and never competing with the serif statement opposite. */
+.hero__role {
+  margin-top: clamp(1.125rem, 2.6vh, 2.25rem);
+  line-height: 1.55;
+  text-wrap: balance;
+}
+
 .hero__body { display: flex; flex-direction: column; margin-top: auto; }
 
 .hero__statement {
@@ -609,6 +636,16 @@ html[data-chrome="light"] .spine { color: var(--ink); }
   }
   .hero__foot { padding-top: 1.25rem; }
   .scroll-cue { height: 1.75rem; }
+}
+
+/* Wherever the hero is a two-column composition, the name and its
+   positioning line form the left stack and the statement holds the right
+   column, still resolving to one shared bottom edge. The row gap is closed
+   so the pair is spaced by the type, not by the column gutter. */
+@media (min-width: 64rem), (min-width: 40rem) and (max-height: 36rem) {
+  .hero__body { row-gap: 0; }
+  .hero__role { grid-column: 1; }
+  .hero__statement { grid-column: 2; grid-row: 1 / span 2; }
 }
 
 /* With the availability line moved to Contact, the hero holds two anchors:

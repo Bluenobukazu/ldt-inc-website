@@ -281,6 +281,7 @@
     { sel: '#focus .indexed', stagger: '.indexed__item', step: 60 },
 
     { sel: '#track .lead', mask: true },
+    { sel: '#track .reading' },
     { sel: '.track__label' },
     { sel: '.track__narrative', stagger: 'p', step: 40 },
     { sel: '.track__note', from: 200 },
