@@ -1,0 +1,4 @@
+# Crawling is intentionally allowed so that crawlers can fetch each page
+# and read its noindex directive (meta robots + X-Robots-Tag header).
+User-agent: *
+Allow: /

@@ -1,0 +1,1550 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   LDT INC — ldt-inc.com
+   Stage 1 (Foundation) + Stage 2 (Static Art Direction)
+   Monochrome · editorial · typography-led · web-native responsive
+   No motion system yet — interface transitions only.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── 01 RESET ────────────────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body, h1, h2, h3, h4, p, ul, ol, dl, dd, figure {
+  margin: 0;
+  padding: 0;
+}
+
+ul, ol { list-style: none; }
+
+a { color: inherit; }
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+
+::selection { background: #0B0B0B; color: #F2F1ED; }
+.field--dark ::selection { background: #F2F1ED; color: #0B0B0B; }
+
+
+/* ── 02 TOKENS ───────────────────────────────────────────────────────── */
+
+:root {
+  /* Ink & paper — monochrome only. No accent colour. */
+  --ink:      #0B0B0B;
+  --charcoal: #1E1C1A;
+  --paper:    #F2F1ED;
+
+  /* Families — three, deliberately: editorial serif × grotesque sans × mono */
+  --f-serif: "Instrument Serif", "Times New Roman", Times, serif;
+  --f-sans:  "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --f-mono:  "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* ── Fluid type scale ──────────────────────────────────────────────
+     Six recognisable levels, largest to smallest:
+       hero · editorial statement · primary heading · subsection heading
+       · body · meta                                                     */
+  --fs-hero:     min(clamp(4.25rem, 1rem + 11vw, 10.5rem), 17svh);
+  --fs-anchor:   clamp(2.25rem, 0.9rem + 5.62vw, 6rem);
+  --fs-lead:     clamp(1.5rem, 1.05rem + 2.1vw, 3rem);
+  --fs-credit:   clamp(1.5rem, 0.95rem + 2.5vw, 3rem);
+  --fs-list:     clamp(1.0625rem, 0.95rem + 1.05vw, 1.75rem);
+  --fs-sect:     clamp(1.4rem, 1.1424rem + 1.2096vw, 2.52rem);
+  --fs-sect-num: clamp(0.6875rem, 0.65rem + 0.2vw, 0.875rem);
+  --fs-sub:      clamp(1.25rem, 1.02rem + 1.08vw, 2.25rem);
+  --fs-read:     clamp(1.0625rem, 0.98rem + 0.5vw, 1.3125rem);
+  --fs-layer:    clamp(0.75rem, 0.66rem + 0.45vw, 1.0625rem);
+  --fs-body:     clamp(1rem, 0.95rem + 0.28vw, 1.1875rem);
+  --fs-meta:     clamp(0.625rem, 0.58rem + 0.18vw, 0.75rem);
+
+  /* Reading field — the editorial narrative column, and the grid axis it
+     shares with every section title. */
+  --measure:      min(100%, 48rem);
+  --measure-read: min(100%, 55rem);
+  --axis:    calc(2.25rem + var(--gutter));
+
+  /* ── Vertical rhythm ───────────────────────────────────────────────
+     One scale governs the whole scroll. Larger values mark a change of
+     level; smaller values keep related information connected.          */
+  --space-chapter:   clamp(4.5rem, 8.5vw, 9.5rem);    /* chapter pause   */
+  --space-head:      clamp(2.5rem, 5.25vw, 5.75rem);  /* heading → body  */
+  --space-statement: clamp(2.75rem, 5.5vw, 6rem);     /* statement → body*/
+  --space-sub:       clamp(3.25rem, 6.75vw, 7.5rem);  /* subsection step */
+  --space-subhead:   clamp(1.5rem, 3vw, 3rem);        /* subhead → body  */
+  --space-block:     clamp(1.5rem, 3vw, 2.75rem);     /* related blocks  */
+  --space-para:      1.6em;                           /* paragraph → para*/
+
+  /* Ruled-list row rhythm, by the weight of what each row carries */
+  --row-tight: clamp(0.8rem, 1.5vw, 1.45rem);
+  --row-base:  clamp(1rem, 2vw, 2rem);
+  --row-loose: clamp(1.5rem, 3vw, 3rem);
+
+  /* Space & grid */
+  --pad-x:   clamp(1.25rem, 5vw, 5.5rem);
+  --gutter:  clamp(1rem, 1.8vw, 2rem);
+  --maxw:    100rem;
+  --spine-w: 8rem;
+}
+
+@media (min-width: 48rem) {
+  :root { --axis: calc(6rem + var(--gutter)); }
+
+  /* Interface timing — interface only, not the motion system */
+  --ui: 240ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Field inversion — the site's only "colour" device */
+.field--dark {
+  --bg: var(--ink);
+  --fg: var(--paper);
+  --muted: color-mix(in srgb, var(--fg) 60%, transparent);
+  --faint: color-mix(in srgb, var(--fg) 52%, transparent);
+  --rule:  color-mix(in srgb, var(--fg) 16%, transparent);
+}
+
+.field--light {
+  --bg: var(--paper);
+  --fg: var(--ink);
+  --muted: color-mix(in srgb, var(--fg) 68%, transparent);
+  --faint: color-mix(in srgb, var(--fg) 60%, transparent);
+  --rule:  color-mix(in srgb, var(--fg) 15%, transparent);
+}
+
+.field--charcoal {
+  --bg: var(--charcoal);
+  --fg: var(--paper);
+  --muted: color-mix(in srgb, var(--fg) 62%, transparent);
+  --faint: color-mix(in srgb, var(--fg) 54%, transparent);
+  --rule:  color-mix(in srgb, var(--fg) 18%, transparent);
+}
+
+.field {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+/* Where two unlit fields meet, the inversion alone cannot mark the chapter
+   change — a single hairline does the work instead. */
+.field:not(.field--light) + .field:not(.field--light) {
+  border-top: 1px solid var(--rule);
+}
+
+/* Architectural chapter numeral. Structure, not ornament: it sits behind
+   the composition at the threshold of contrast and never takes a click. */
+.section[data-numeral] { position: relative; overflow: hidden; }
+
+.section[data-numeral]::before {
+  content: attr(data-numeral);
+  position: absolute;
+  right: -0.08em;
+  top: -0.24em;
+  z-index: 0;
+  font-family: var(--f-sans);
+  font-weight: 500;
+  font-size: 34vw;
+  line-height: 0.78;
+  letter-spacing: -0.05em;
+  color: color-mix(in srgb, var(--fg) 4%, transparent);
+  pointer-events: none;
+  user-select: none;
+}
+
+.section[data-numeral] > .container { position: relative; z-index: 1; }
+
+@media (max-width: 47.99rem) {
+  .section[data-numeral]::before { display: none; }
+}
+
+
+/* ── 03 BASE ─────────────────────────────────────────────────────────── */
+
+html {
+  background: var(--ink);
+  scroll-behavior: smooth;
+  scroll-padding-top: clamp(4rem, 9vh, 6rem);
+}
+
+body {
+  background: var(--ink);
+  font-family: var(--f-sans);
+  font-size: var(--fs-body);
+  font-weight: 300;
+  line-height: 1.6;
+  letter-spacing: 0.005em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+strong {
+  font-weight: 500;
+  color: var(--fg);
+}
+
+:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 4px;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 200;
+  padding: 0.6rem 1rem;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-mono);
+  font-size: var(--fs-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+.skip-link:focus { transform: none; }
+
+
+/* ── 04 LAYOUT ───────────────────────────────────────────────────────── */
+
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--pad-x);
+}
+
+.section { padding-block: var(--space-chapter); }
+
+@media (min-width: 64rem) {
+  .container { padding-left: max(var(--pad-x), var(--spine-w)); }
+}
+
+
+
+
+/* ── 05 TYPOGRAPHIC PRIMITIVES ───────────────────────────────────────── */
+
+.meta {
+  font-family: var(--f-mono);
+  font-weight: 400;
+  font-size: var(--fs-meta);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--faint);
+}
+.meta--end { text-align: right; }
+
+.lead {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--fs-lead);
+  line-height: 1.14;
+  letter-spacing: -0.005em;
+  max-width: min(100%, 32ch);
+  color: var(--fg);
+  text-wrap: balance;
+}
+
+.reading {
+  max-width: var(--measure-read);
+  margin-top: var(--space-statement);
+  font-size: var(--fs-read);
+  line-height: 1.7;
+}
+
+@media (min-width: 48rem) {
+  .reading { margin-left: var(--axis); }
+}
+.reading > p + p { margin-top: var(--space-para); }
+
+.reading--offset { max-width: min(100%, 54rem); }
+.reading--offset > p + p { margin-top: calc(var(--space-para) * 1.12); }
+.reading p { color: var(--muted); }
+
+/* End of narrative → introduction of framework. A perceptible pause, not
+   a void, and the cue stays tied to the framework it announces. */
+.reading > p.reading__cue {
+  margin-top: calc(var(--space-para) * 3.4);
+  font-size: var(--fs-body);
+  color: var(--faint) !important;
+  letter-spacing: 0.02em;
+}
+
+/* One paragraph in the Workshops narrative carries the central question.
+   It reads as a moment while scanning without becoming a pull quote. */
+.reading__question {
+  margin-top: calc(var(--space-para) * 1.35);
+  font-family: var(--f-serif);
+  font-size: clamp(1.375rem, 1.05rem + 1.25vw, 2.125rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--fg) !important;
+}
+.reading__question strong { font-style: italic; font-weight: 400; }
+.reading > .reading__question + p { margin-top: calc(var(--space-para) * 1.35); }
+
+
+/* ── 06 CHROME ───────────────────────────────────────────────────────── */
+
+.chrome {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: clamp(1.05rem, 2.1vw, 1.75rem) var(--pad-x);
+  pointer-events: none;
+  color: var(--paper);
+  transition: color var(--ui);
+}
+html[data-chrome="light"] .chrome { color: var(--ink); }
+.chrome > * { pointer-events: auto; }
+
+.chrome__mark,
+.chrome__index,
+.chrome__counter {
+  font-family: var(--f-mono);
+  font-weight: 400;
+  font-size: var(--fs-meta);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+}
+
+.chrome__mark { text-decoration: none; }
+.chrome__index { letter-spacing: 0.22em; }
+
+.chrome__mark:hover,
+.chrome__index:hover { opacity: 0.6; }
+.chrome__mark, .chrome__index { transition: opacity var(--ui); }
+
+.chrome__counter { color: color-mix(in srgb, currentColor 55%, transparent); }
+.chrome__slash { padding-inline: 0.4em; }
+
+@media (min-width: 64rem) { .chrome__counter { display: none; } }
+
+
+/* ── 07 SECTION SPINE ────────────────────────────────────────────────── */
+
+.spine {
+  position: fixed;
+  left: clamp(1.25rem, 2.4vw, 2.5rem);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 80;
+  display: none;
+  color: var(--paper);
+  transition: color var(--ui);
+}
+html[data-chrome="light"] .spine { color: var(--ink); }
+
+@media (min-width: 64rem) { .spine { display: block; } }
+
+.spine__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding-block: 0.42rem;
+  text-decoration: none;
+}
+
+.spine__num {
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  opacity: 0.32;
+  transition: opacity var(--ui);
+}
+
+.spine__label {
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-0.35rem);
+  transition: opacity var(--ui), transform var(--ui);
+}
+
+.spine:hover .spine__label,
+.spine:focus-within .spine__label { opacity: 0.45; transform: none; }
+
+.spine__link.is-active .spine__num { opacity: 1; }
+.spine:hover .spine__link.is-active .spine__label,
+.spine:focus-within .spine__link.is-active .spine__label { opacity: 0.9; }
+
+.spine__link::before {
+  content: "";
+  position: absolute;
+  left: -1.1rem;
+  width: 0.55rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0;
+  transition: opacity var(--ui);
+}
+.spine__link.is-active::before { opacity: 1; }
+
+.spine__link:hover .spine__num { opacity: 0.75; }
+
+
+/* ── 08 INDEX OVERLAY ────────────────────────────────────────────────── */
+
+.index {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: var(--ink);
+  color: var(--paper);
+  opacity: 0;
+  transition: opacity 200ms ease;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.index[hidden] { display: none; }
+.index.is-open { opacity: 1; }
+
+.index__inner {
+  min-height: 100%;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 5vw, 4rem);
+  padding: clamp(1.05rem, 2.1vw, 1.75rem) var(--pad-x) clamp(2rem, 4vw, 3.5rem);
+}
+
+.index__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.index__head .meta { color: color-mix(in srgb, var(--paper) 56%, transparent); }
+
+.index__close {
+  font-family: var(--f-mono);
+  font-size: var(--fs-meta);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  transition: opacity var(--ui);
+}
+.index__close:hover { opacity: 0.6; }
+
+.index__list {
+  margin-block: auto;
+  border-bottom: 1px solid color-mix(in srgb, var(--paper) 16%, transparent);
+}
+
+.index__list a {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: var(--gutter);
+  align-items: baseline;
+  padding-block: clamp(0.75rem, 1.5vw, 1.35rem);
+  border-top: 1px solid color-mix(in srgb, var(--paper) 16%, transparent);
+  text-decoration: none;
+  transition: opacity var(--ui);
+}
+.index__list a:hover { opacity: 0.55; }
+
+.index__num {
+  font-family: var(--f-mono);
+  font-size: var(--fs-meta);
+  letter-spacing: 0.14em;
+  color: color-mix(in srgb, var(--paper) 56%, transparent);
+}
+
+.index__title {
+  font-family: var(--f-sans);
+  font-weight: 400;
+  font-size: clamp(1.375rem, 0.9rem + 2.6vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+
+.index__foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 3vw, 3rem);
+  font-family: var(--f-mono);
+  font-size: var(--fs-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: color-mix(in srgb, var(--paper) 55%, transparent);
+}
+.index__foot a { text-decoration: none; transition: color var(--ui); }
+.index__foot a:hover { color: var(--paper); }
+
+@media (min-width: 64rem) {
+  .index__list a { grid-template-columns: 6rem 1fr; }
+}
+
+
+/* ── 09 00 — INTRO / HERO ────────────────────────────────────────────── */
+
+.hero__inner {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding-block: clamp(6.5rem, 16vh, 11rem) clamp(1.75rem, 4vh, 3rem);
+}
+
+.hero__name {
+  font-family: var(--f-sans);
+  font-weight: 500;
+  font-size: var(--fs-hero);
+  line-height: 0.85;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+}
+.hero__name-line { display: block; }
+
+.hero__body { display: flex; flex-direction: column; margin-top: auto; }
+
+.hero__statement {
+  margin-top: clamp(2.25rem, 5vh, 4.5rem);
+  margin-left: auto;
+  width: min(100%, 24ch);
+  font-family: var(--f-serif);
+  font-weight: 400;
+  font-size: clamp(1.375rem, 0.85rem + 2.3vw, 3rem);
+  line-height: 1.12;
+  letter-spacing: -0.005em;
+  color: var(--fg);
+  text-wrap: pretty;
+}
+
+@media (min-width: 64rem) {
+  .hero__body {
+    display: grid;
+    grid-template-columns: auto minmax(16rem, 26rem);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: end;
+  }
+  .hero__statement { margin-top: 0; margin-left: 0; width: 100%; }
+}
+
+@media (min-width: 40rem) and (max-height: 36rem) {
+  .hero__inner { padding-block: clamp(3.25rem, 14vh, 5rem) 1.25rem; }
+  .hero__top { padding-bottom: 1.25rem; }
+  .hero__body {
+    display: grid;
+    grid-template-columns: auto minmax(12rem, 22rem);
+    gap: 2rem;
+    align-items: end;
+  }
+  .hero__statement {
+    margin-top: 0;
+    margin-left: 0;
+    width: 100%;
+    font-size: clamp(1.125rem, 2.2vw, 1.5rem);
+  }
+  .hero__foot { padding-top: 1.25rem; }
+  .scroll-cue { height: 1.75rem; }
+}
+
+/* With the availability line moved to Contact, the hero holds two anchors:
+   the name and the positioning statement. They fall to the lower third and
+   the remaining space above them is the composition. */
+.hero__foot {
+  padding-top: clamp(2.25rem, 6vh, 4rem);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+/* A mark, not a label. */
+.scroll-cue {
+  flex: none;
+  display: block;
+  width: 1px;
+  height: clamp(2rem, 5vh, 3.5rem);
+  background: color-mix(in srgb, var(--fg) 32%, transparent);
+}
+
+
+/* ── 10 SECTION HEADERS ──────────────────────────────────────────────── */
+
+.section-head {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  gap: var(--gutter);
+  align-items: baseline;
+  padding-bottom: clamp(1.5rem, 3vw, 3rem);
+  margin-bottom: var(--space-head);
+  border-bottom: 1px solid var(--rule);
+}
+
+.section-head__num {
+  font-family: var(--f-mono);
+  font-size: var(--fs-sect-num);
+  line-height: 1;
+  letter-spacing: 0.14em;
+  color: var(--faint);
+}
+
+/* Local hierarchy: 02 sits beside a numbered list and needs to read a step
+   above it. This chapter only. */
+#focus .section-head__num { font-size: calc(var(--fs-sect-num) * 1.12); }
+
+.section-head__title {
+  font-family: var(--f-sans);
+  font-weight: 500;
+  font-size: var(--fs-sect);
+  line-height: 1.12;
+  text-transform: uppercase;
+  letter-spacing: 0.012em;
+}
+
+@media (min-width: 48rem) {
+  .section-head { grid-template-columns: 6rem 1fr; }
+}
+
+/* A ruled list directly under a section head supplies its own top rule. */
+.section-head:has(+ .indexed),
+.section-head:has(+ .framework) {
+  border-bottom: 0;
+  padding-bottom: 0;
+  margin-bottom: calc(var(--space-head) * 0.85);
+}
+
+.subsection { margin-top: var(--space-sub); }
+
+#workshops .subsection__title {
+  padding-top: clamp(1.75rem, 3.4vw, 3rem);
+  margin-bottom: clamp(2rem, 4vw, 4rem);
+}
+
+/* An argument has to finish before a structured list begins. */
+.reading + .subsection { margin-top: calc(var(--space-sub) * 1.45); }
+
+/* Subsection level — subordinate to a chapter heading, but still legible
+   as a heading while scrolling. Never metadata. */
+.subsection__title,
+.track__label {
+  font-family: var(--f-sans);
+  font-weight: 500;
+  font-size: var(--fs-sub);
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--fg);
+}
+
+.subsection__title {
+  padding-top: clamp(1rem, 1.9vw, 1.6rem);
+  border-top: 1px solid var(--rule);
+  margin-bottom: var(--space-subhead);
+}
+
+
+/* ── 11 01 — CORE: THE POSITIONING FIELD ─────────────────────────────────
+   Brand × Operations × Commercial Architecture × Market Expansion are four
+   parallel dimensions of one position — not four steps and not four ranks.
+   So: no numbers, no dividing rules, no order. All four are set at ONE size,
+   which is the literal statement of equal weight, and the type is scaled to
+   the field itself — the longest term measures the block, and the other
+   three range against it. Leading is tight enough that the four lines read
+   as a single mass rather than as four rows. Two rules bracket the field so
+   the rag is read as composition, not as an accident.
+
+   The size is derived from the container, not the viewport, so the field
+   fills its measure identically at every width.                           */
+
+.dimensions {
+  container-type: inline-size;
+  margin-top: clamp(0.5rem, 1vw, 0.9rem);
+  padding-block: clamp(2rem, 4vw, 3.75rem);
+  border-top: 1px solid var(--fg);
+  border-bottom: 1px solid var(--fg);
+}
+
+.dimensions__term {
+  font-family: var(--f-serif);
+  font-weight: 400;
+  /* 8.113em is the measure of the longest term at this tracking; dividing
+     90cqi by it makes that term span 90% of the field at any width. */
+  font-size: min(11.093cqi, 8.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.015em;
+  color: var(--fg);
+}
+
+@media (max-width: 29.99rem) {
+  .dimensions__term { line-height: 0.98; }
+}
+
+
+/* ── 12 INDEXED EDITORIAL LISTS (02 FOCUS · 04 SCOPE) ────────────────── */
+
+.indexed { border-bottom: 1px solid var(--rule); }
+
+.indexed__item {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  gap: var(--gutter);
+  align-items: baseline;
+  padding-block: var(--row-base);
+  border-top: 1px solid var(--rule);
+}
+
+.indexed__num {
+  font-family: var(--f-mono);
+  font-size: var(--fs-meta);
+  letter-spacing: 0.14em;
+  color: var(--faint);
+}
+
+.indexed__text {
+  font-size: var(--fs-body);
+  line-height: 1.45;
+  letter-spacing: 0.005em;
+  color: var(--muted);
+  max-width: var(--measure);
+}
+
+.indexed--lg .indexed__text {
+  font-size: var(--fs-list);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  max-width: 44ch;
+}
+
+@media (min-width: 48rem) {
+  .indexed__item { grid-template-columns: 6rem 1fr; }
+}
+
+
+/* ── 13 03 — TRACK RECORD ────────────────────────────────────────────── */
+
+.track {
+  margin-top: var(--space-statement);
+  padding-top: var(--space-head);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: clamp(3rem, 6vw, 6rem);
+}
+
+@media (min-width: 64rem) {
+  .track {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: clamp(3rem, 6vw, 7rem);
+  }
+}
+
+.track__names { display: flex; flex-direction: column; }
+.track__label { margin-bottom: var(--space-subhead); }
+
+.track__note {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1rem, 0.9rem + 0.45vw, 1.25rem);
+  line-height: 1.32;
+  color: var(--muted);
+  max-width: 100%;
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+}
+
+.credits { border-bottom: 1px solid var(--rule); }
+
+.credits__item {
+  padding-block: var(--row-tight);
+  border-top: 1px solid var(--rule);
+  font-family: var(--f-sans);
+  font-weight: 400;
+  font-size: var(--fs-credit);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+/* The field rule above already opens the evidence list. */
+.credits__item:first-child { border-top: 0; }
+
+/* The chapter's opening statement carries the whole of Track Record and is
+   given the horizontal authority to say so. */
+#track .lead { max-width: min(100%, 44ch); }
+
+.track__narrative > p {
+  color: var(--muted);
+  max-width: var(--measure);
+  font-size: var(--fs-read);
+  line-height: 1.62;
+}
+.track__narrative > p + p { margin-top: var(--space-para); }
+
+
+/* ── 14 04 — TRANSFORMATION: ANCHOR + LAYERS ─────────────────────────── */
+
+.anchor {
+  margin-block: clamp(3.5rem, 8.5vw, 9.5rem) var(--space-statement);
+  font-family: var(--f-serif);
+  font-weight: 400;
+  font-size: var(--fs-anchor);
+  line-height: 0.96;
+  letter-spacing: -0.025em;
+  max-width: 14ch;
+  text-wrap: balance;
+}
+
+/* Seven parts of one operating system. A single continuous rule carries
+   the sequence; a tick marks each node. No arrows, no boxes. */
+.layers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: 0;
+}
+
+.layers__item {
+  position: relative;
+  padding-block: clamp(0.85rem, 1.6vw, 1.25rem);
+  border-top: 1px solid var(--fg);
+  font-family: var(--f-sans);
+  font-weight: 400;
+  font-size: var(--fs-layer);
+  line-height: 1.25;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--fg);
+}
+
+.layers__item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: clamp(0.4rem, 0.8vw, 0.6rem);
+  background: var(--fg);
+  display: none;
+}
+
+@media (min-width: 48rem) {
+  .layers { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* At full width the seven steps resolve into one continuous rule with a
+   node at each label — the operating system read in a single line. */
+@media (min-width: 74rem) {
+  .layers {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    border-top: 1px solid var(--fg);
+  }
+  .layers__item {
+    padding-block: clamp(1rem, 1.8vw, 1.5rem) 0;
+    border-top: 0;
+  }
+  .layers__item::before { display: block; }
+
+  /* Closing tick — seven defined stages, bounded at both ends. */
+  .layers { position: relative; }
+  .layers::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: clamp(0.4rem, 0.8vw, 0.6rem);
+    background: var(--fg);
+  }
+}
+
+/* The layer system and the explanation that follows it are separate
+   levels of the same idea — connected, but not compressed together. */
+.layers + .reading { margin-top: clamp(3.25rem, 6.75vw, 7.5rem); }
+
+
+/* ── 15 05 — WORKSHOPS ───────────────────────────────────────────────── */
+
+.framework { border-bottom: 1px solid var(--rule); }
+
+.framework__item {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  gap: var(--gutter);
+  align-items: start;
+  padding-block: var(--row-loose);
+  border-top: 1px solid var(--rule);
+}
+
+.framework__num {
+  font-family: var(--f-mono);
+  font-size: var(--fs-meta);
+  line-height: 2.2;
+  letter-spacing: 0.14em;
+  color: var(--faint);
+}
+
+.framework__title {
+  font-family: var(--f-serif);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 1rem + 2vw, 2.875rem);
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  max-width: 22ch;
+}
+
+.framework__text {
+  margin-top: 1rem;
+  max-width: var(--measure);
+  color: var(--muted);
+}
+
+@media (min-width: 48rem) {
+  .framework__item { grid-template-columns: 6rem 1fr; }
+}
+@media (min-width: 64rem) {
+  .framework__body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: start;
+  }
+  .framework__text { margin-top: 0.45rem; }
+}
+
+.formats {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: clamp(1.75rem, 3vw, 2.5rem) var(--gutter);
+}
+@media (min-width: 34rem) { .formats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 60rem) { .formats { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+.formats__item {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-top: clamp(0.9rem, 1.6vw, 1.35rem);
+  border-top: 1px solid var(--fg);
+}
+
+.formats__label {
+  font-family: var(--f-mono);
+  font-weight: 400;
+  font-size: var(--fs-meta);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.formats__desc {
+  margin-top: clamp(1.5rem, 3vw, 2.75rem);
+  font-family: var(--f-serif);
+  font-weight: 400;
+  font-size: clamp(1.375rem, 1rem + 1.1vw, 2rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.formats__dur {
+  margin-top: auto;
+  padding-top: 0.85rem;
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: var(--fs-body);
+  line-height: 1.3;
+  color: var(--muted);
+}
+
+/* ── ENVIRONMENTS × AUDIENCE ─────────────────────────────────────────────
+   A change of mode, not another list. Two sets of typographic points face
+   each other across one vertical axis; a short tick carries each point to
+   the axis. Nothing is joined to anything else — the field states range and
+   meeting, not a mapping. Each entry keeps every approved word: the comma
+   becomes a line break, the leading term takes the weight, the remainder
+   sits quietly beneath it.                                                */
+
+.fieldmap {
+  --map-gap: clamp(2.5rem, 5vw, 5.5rem);
+  position: relative;
+  display: grid;
+  gap: clamp(3rem, 5vw, 4rem) var(--map-gap);
+}
+
+/* The axis. */
+.fieldmap::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  background: color-mix(in srgb, var(--fg) 30%, transparent);
+}
+
+.fieldmap__group {
+  font-family: var(--f-mono);
+  font-size: var(--fs-meta);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--faint);
+  margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem);
+}
+
+.fieldmap__set { display: grid; gap: clamp(1.75rem, 3.4vw, 2.75rem); }
+
+.fieldmap__node { position: relative; }
+
+/* Node tick — the point where an entry meets the axis. */
+.fieldmap__node::before {
+  content: "";
+  position: absolute;
+  top: 0.62em;
+  height: 1px;
+  background: color-mix(in srgb, var(--fg) 45%, transparent);
+}
+
+.fieldmap__term {
+  display: block;
+  font-family: var(--f-sans);
+  font-weight: 500;
+  font-size: clamp(1.0625rem, 0.9rem + 0.68vw, 1.5rem);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+
+.fieldmap__sub {
+  display: block;
+  margin-top: 0.42em;
+  font-size: clamp(0.875rem, 0.8rem + 0.32vw, 1rem);
+  line-height: 1.4;
+  color: var(--muted);
+  max-width: 34ch;
+}
+
+/* Small screens: the axis runs down the left edge and both sets hang from
+   it in one continuous relational field. */
+.fieldmap { padding-left: calc(var(--map-gap) * 0.75); }
+.fieldmap__node::before {
+  right: 100%;
+  width: calc(var(--map-gap) * 0.34);
+  margin-right: calc(var(--map-gap) * 0.16);
+}
+.fieldmap__side--aud { margin-top: clamp(2.5rem, 5vw, 4rem); }
+
+@media (min-width: 60rem) {
+  .fieldmap {
+    grid-template-columns: 1fr 1fr;
+    padding-left: 0;
+    align-items: start;
+  }
+  .fieldmap::before { left: 50%; }
+
+  /* The two sets are staggered so they read as one distributed field
+     rather than as paired rows. */
+  .fieldmap__side--aud { margin-top: clamp(4rem, 8vw, 7.5rem); }
+
+  .fieldmap__side--env { text-align: right; }
+  .fieldmap__side--env .fieldmap__sub { margin-left: auto; }
+  .fieldmap__side--env .fieldmap__node::before {
+    right: auto;
+    left: 100%;
+    width: calc(var(--map-gap) * 0.5);
+    margin-right: 0;
+  }
+}
+
+/* ── 20 05 — DELIVERY MODES ──────────────────────────────────────────────
+   Structured editorial information: an anchor label against the approved
+   description. Related to FORMATS, deliberately not a copy of it. */
+.modes { border-bottom: 1px solid var(--rule); }
+
+.modes__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem var(--gutter);
+  padding-block: var(--row-base);
+  border-top: 1px solid var(--rule);
+}
+
+.modes__label {
+  font-family: var(--f-serif);
+  font-weight: 400;
+  font-size: clamp(1.25rem, 1rem + 1.05vw, 1.875rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+
+.modes__text {
+  margin: 0;
+  max-width: 52ch;
+  font-size: var(--fs-body);
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+@media (min-width: 48rem) {
+  .modes__row { grid-template-columns: minmax(0, 19rem) minmax(0, 1fr); align-items: baseline; }
+}
+
+
+/* ── 16 06 — CONTACT ─────────────────────────────────────────────────── */
+
+.contact__availability {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.3125rem, 0.9rem + 1.5vw, 2.125rem);
+  line-height: 1.16;
+  letter-spacing: -0.005em;
+  max-width: min(100%, 34ch);
+  margin-bottom: clamp(2.25rem, 4.5vw, 4.5rem);
+  text-wrap: balance;
+}
+
+.contact__list {
+  max-width: min(100%, 34rem);
+  border-top: 1px solid var(--rule);
+}
+
+.contact__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(0.5rem, 1vw, 0.85rem);
+  padding-block: clamp(1.15rem, 2.2vw, 2rem);
+  border-bottom: 1px solid var(--rule);
+}
+
+.contact__link {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  font-family: var(--f-sans);
+  font-weight: 400;
+  font-size: clamp(1.125rem, 0.765rem + 1.395vw, 2.025rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--fg);
+  text-decoration: none;
+  transition: opacity var(--ui);
+}
+.contact__link::after {
+  content: "\2192";
+  flex: none;
+  font-size: 0.92em;
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--fg);
+}
+.contact__link:hover { opacity: 0.55; }
+
+/* The closing chapter settles rather than performs: no chapter-scale pause
+   below the last rule, so the whole of Contact resolves in one viewport. */
+.contact.section { padding-block: clamp(3.5rem, 6vw, 6.5rem) clamp(2.5rem, 4.5vw, 4.5rem); }
+
+
+/* ── 06 CONTACT — the closing identity signature ─────────────────────────
+   The left field keeps the approved composition and now owns its own rules;
+   the right field, previously empty, carries the mark. Same production
+   master, same nine verified components as the opening — one logo
+   implementation, used twice. */
+
+.contact__inner { display: grid; gap: clamp(3.5rem, 7vw, 5rem); }
+
+@media (min-width: 64rem) {
+  .contact__inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+    gap: clamp(3rem, 6vw, 7rem);
+    align-items: center;
+  }
+}
+
+.cmark {
+  position: relative;
+  width: min(60%, 13rem);
+  aspect-ratio: 1;
+  justify-self: start;
+}
+@media (min-width: 64rem) {
+  .cmark { width: min(100%, 21rem); justify-self: center; }
+}
+
+.cmark__master,
+.cmark__part { position: absolute; }
+.cmark__master { inset: 0; width: 100%; height: auto; opacity: 1; }
+.cmark__part {
+  left: var(--l); top: var(--t); width: var(--w); height: var(--h);
+  opacity: 0;
+}
+
+/* With JS the mark is engineered into place and then simply stays — this is
+   a signature, not an entrance, so nothing here ever fades back out. */
+.js .cmark__master { opacity: 0; }
+.js .cmark__part { transform: scale(0.965); }
+.js .cmark.is-in .cmark__part {
+  opacity: 1;
+  transform: none;
+  transition: opacity var(--m-fast) var(--m-ease) var(--m-delay),
+              transform var(--m-base) var(--m-ease) var(--m-delay);
+}
+
+/* Reduced motion: the completed production master, immediately. */
+@media (prefers-reduced-motion: reduce) {
+  .js .cmark__master { opacity: 1 !important; }
+  .js .cmark__part { opacity: 0 !important; transition: none !important; }
+}
+.js.no-motion .cmark__master { opacity: 1 !important; }
+.js.no-motion .cmark__part { opacity: 0 !important; transition: none !important; }
+
+
+/* ── 17 FOOTER ───────────────────────────────────────────────────────── */
+
+.footer { border-top: 1px solid var(--rule); }
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem clamp(1.75rem, 4vw, 3rem);
+  padding-block: clamp(1.5rem, 3vw, 2.25rem);
+  font-family: var(--f-mono);
+  font-size: var(--fs-meta);
+  line-height: 1.6;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--faint);
+}
+
+.footer__nav { display: flex; gap: clamp(1.25rem, 2.5vw, 2rem); }
+.footer__nav a { text-decoration: none; transition: color var(--ui); }
+.footer__nav a:hover { color: var(--fg); }
+
+
+/* ── 18 LEGAL PAGES ──────────────────────────────────────────────────── */
+
+.legal { padding-block: clamp(7rem, 14vh, 12rem) clamp(5rem, 10vw, 9rem); }
+.legal__title {
+  font-family: var(--f-serif);
+  font-weight: 400;
+  font-size: clamp(2.25rem, 1.2rem + 4vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+}
+.legal__body { max-width: var(--measure); color: var(--muted); }
+.legal__body h2 {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 1rem;
+  font-family: var(--f-sans);
+  font-weight: 500;
+  font-size: var(--fs-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--fg);
+}
+.legal__body p + p { margin-top: 1.2em; }
+.legal__body a { color: var(--fg); }
+.legal__todo {
+  font-family: var(--f-mono);
+  font-size: var(--fs-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--faint);
+}
+
+
+/* ── 19 REDUCED MOTION ───────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* ── 20 PRINT ────────────────────────────────────────────────────────── */
+
+@media print {
+  .chrome, .spine, .index, .scroll-cue, .skip-link { display: none !important; }
+  .field { background: #fff !important; color: #000 !important; }
+  .field--dark { --fg: #000; --muted: #333; --faint: #666; --rule: #ccc; }
+}
+
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   19  MOTION  ·  Stage 3
+   Three classes, deliberately different in kind:
+
+     A  SIGNATURE     the opening. Once per load.
+     B  READING       state derived continuously from scroll position, so a
+                      statement unfolds while it is read and never finishes.
+     C  CONSTRUCTION  arrival. Completes and rests; re-arms only after the
+                      reader has genuinely left the section.
+
+   None of it applies without html.js, and every resting state is the
+   approved Stage 2 composition.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --m-fast: 420ms;
+  --m-base: 640ms;
+  --m-slow: 900ms;
+  --m-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --m-rise: 0.85rem;
+  --m-step: 70ms;
+  --m-delay: 0ms;
+}
+
+/* Unlit reading text stays above 4.5:1 on its own field, so nothing is ever
+   hard to read — the progression is emphasis, not disclosure. */
+.field--dark     { --read-base: 0.55; }
+.field--charcoal { --read-base: 0.56; }
+.field--light    { --read-base: 0.62; }
+
+
+/* ── B · READING ─────────────────────────────────────────────────────── */
+
+/* Each unit carries its place; the container carries the reader's progress
+   through it. Opacity is computed, not transitioned, so it tracks scroll
+   in both directions and resolves instantly on a fast pass. */
+.js [data-read] .w,
+.js [data-read] .runit {
+  --t: calc((var(--p, 0) * (var(--n) + 2.4) - var(--wi)) / 2.2);
+  opacity: clamp(var(--read-base, 0.55), calc(var(--read-base, 0.55) + var(--t)), 1);
+}
+.js [data-read] .w { display: inline; }
+
+/* A single emphasised phrase inside a reading field lifts a little further. */
+.js [data-read] strong .w { --read-base: 0.6; }
+
+
+/* ── C · CONSTRUCTION ────────────────────────────────────────────────── */
+
+.js [data-m] {
+  opacity: 0;
+  transform: translate3d(0, var(--m-rise), 0);
+  transition: opacity var(--m-base) var(--m-ease) var(--m-delay),
+              transform var(--m-base) var(--m-ease) var(--m-delay);
+}
+.js [data-m].is-in { opacity: 1; transform: none; }
+.js [data-m].is-in.is-done { will-change: auto; }
+
+/* Masked line: the line rides up from behind its own edge. The clip is
+   released once it lands, so resting glyphs are never shaved. */
+.js .m-clip { display: block; overflow: hidden; }
+.js .m-clip > span {
+  display: block;
+  transform: translate3d(0, 105%, 0);
+  transition: transform var(--m-slow) var(--m-ease) var(--m-delay);
+}
+.js [data-m="mask"] { opacity: 1; transform: none; transition: none; }
+.js [data-m="mask"].is-in .m-clip > span { transform: none; }
+.js [data-m="mask"].is-done .m-clip { overflow: visible; }
+.js [data-m="mask"].is-done .m-clip > span {
+  will-change: auto; transform: none; transition: none;
+}
+
+.js [data-m-stagger] > * { --m-delay: calc(var(--i, 0) * var(--m-step)); }
+
+/* Chapter entry is the orientation motif: the number arrives, the title
+   rides up behind it, the chapter rule draws under both. */
+.js .section-head { position: relative; }
+.js .section-head.m-head { border-bottom-color: transparent; }
+.js .section-head.m-head::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+  background: var(--rule);
+  transform: scaleX(0); transform-origin: left center;
+  transition: transform var(--m-slow) var(--m-ease) 240ms;
+}
+.js .section-head.m-head.is-in::after { transform: none; }
+/* A head that hands straight to a ruled list has no rule of its own in the
+   approved design — the list's first row supplies it. Drawing one there
+   closed the gap under the chapter heading. */
+.js .section-head.m-head:has(+ .indexed)::after,
+.js .section-head.m-head:has(+ .framework)::after { content: none; }
+
+/* Fast scrolling resolves rather than queues. */
+.js.is-fast [data-m], .js.is-fast [data-m] *,
+.js.is-fast .m-draw, .js.is-fast .m-draw-y,
+.js.is-fast .section-head.m-head::after {
+  transition-duration: 1ms !important; transition-delay: 0ms !important;
+}
+.js [data-m].is-instant, .js [data-m].is-instant * { transition: none !important; }
+
+
+/* ── A · SIGNATURE ───────────────────────────────────────────────────── */
+
+/* The opening exists only where it can be dismissed. Without JS it must
+   never render, or it would stand in front of the whole site. */
+.opening { display: none; }
+.js .opening {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: var(--ink);
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.js .opening[hidden] { display: none; }
+
+.opening__mark {
+  position: relative;
+  width: min(46vw, 52vh, 30rem);
+  aspect-ratio: 1;
+}
+.opening__master, .opening__part { position: absolute; opacity: 0; }
+.opening__master { inset: 0; width: 100%; height: auto; }
+.opening__part {
+  left: var(--l); top: var(--t); width: var(--w); height: var(--h);
+  transform: scale(0.965);
+}
+.opening.is-armed .opening__part {
+  opacity: 1; transform: none;
+  transition: opacity var(--m-fast) var(--m-ease) var(--m-delay),
+              transform var(--m-base) var(--m-ease) var(--m-delay);
+}
+/* the production master becomes the resting mark before the field clears */
+.opening.is-set .opening__part { opacity: 0; transition: none; }
+.opening.is-set .opening__master { opacity: 1; }
+.opening.is-out { opacity: 0; transition: opacity 780ms var(--m-ease); }
+.opening.is-out .opening__mark { transform: scale(0.982); transition: transform 780ms var(--m-ease); }
+
+/* The Hero settles as the field clears — no displacement, only presence. */
+.js .hero__inner { position: relative; }
+.js.is-opening .hero__body, .js.is-opening .hero__foot { opacity: 0; }
+.js .hero__body, .js .hero__foot { transition: opacity var(--m-slow) var(--m-ease); }
+
+
+/* ── Hero scroll cue ─────────────────────────────────────────────────── */
+
+.scroll-cue { position: relative; }
+.js .scroll-cue::after {
+  content: "Scroll";
+  position: absolute;
+  right: 1.35rem;
+  bottom: 0;
+  font-family: var(--f-mono);
+  font-size: var(--fs-meta);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: color-mix(in srgb, var(--fg) 46%, transparent);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate3d(0, 0.4rem, 0);
+  transition: opacity var(--m-slow) var(--m-ease), transform var(--m-slow) var(--m-ease);
+}
+.js .scroll-cue.is-in::after { opacity: 1; transform: none; }
+/* it recedes the moment the reader takes it up */
+.js.has-scrolled .scroll-cue::after { opacity: 0; transform: translate3d(0, -0.3rem, 0); }
+.js [data-m="cue"] {
+  opacity: 0; transform: scaleY(0.15); transform-origin: center top;
+  transition: opacity var(--m-base) var(--m-ease), transform var(--m-slow) var(--m-ease);
+}
+.js [data-m="cue"].is-in { opacity: 1; transform: none; }
+.js.has-scrolled [data-m="cue"] { opacity: 0.45; }
+
+
+/* ── Structural constructions ────────────────────────────────────────── */
+
+.js .dimensions { position: relative; }
+.js .dimensions.m-built { border-top-color: transparent; border-bottom-color: transparent; }
+.js .dimensions.m-built::before,
+.js .dimensions.m-built::after {
+  content: ""; position: absolute; left: 0; right: 0; height: 1px;
+  background: var(--fg);
+  transform: scaleX(0); transform-origin: left center;
+  transition: transform var(--m-slow) var(--m-ease);
+}
+.js .dimensions.m-built::before { top: -1px; }
+.js .dimensions.m-built::after  { bottom: -1px; transition-delay: 90ms; }
+.js .dimensions.m-built.is-in::before,
+.js .dimensions.m-built.is-in::after { transform: none; }
+
+@media (min-width: 74rem) {
+  .js .layers.m-built { border-top-color: transparent; }
+  .js .layers.m-built::before {
+    content: ""; position: absolute; top: -1px; left: 0; right: 0; height: 1px;
+    background: var(--fg);
+    transform: scaleX(0); transform-origin: left center;
+    transition: transform 1150ms var(--m-ease);
+  }
+  .js .layers.m-built.is-in::before { transform: none; }
+  .js .layers.m-built .layers__item::before,
+  .js .layers.m-built::after {
+    transform: scaleY(0); transform-origin: center top;
+    transition: transform var(--m-fast) var(--m-ease);
+  }
+  .js .layers.m-built.is-in .layers__item::before,
+  .js .layers.m-built.is-in::after { transform: none; }
+  .js .layers.m-built .layers__item:nth-child(1)::before { transition-delay: 300ms; }
+  .js .layers.m-built .layers__item:nth-child(2)::before { transition-delay: 390ms; }
+  .js .layers.m-built .layers__item:nth-child(3)::before { transition-delay: 480ms; }
+  .js .layers.m-built .layers__item:nth-child(4)::before { transition-delay: 570ms; }
+  .js .layers.m-built .layers__item:nth-child(5)::before { transition-delay: 660ms; }
+  .js .layers.m-built .layers__item:nth-child(6)::before { transition-delay: 750ms; }
+  .js .layers.m-built .layers__item:nth-child(7)::before { transition-delay: 840ms; }
+  .js .layers.m-built.is-in::after { transition-delay: 990ms; }
+}
+
+.js .fieldmap.m-built::before {
+  transform: scaleY(0); transform-origin: center top;
+  transition: transform 1150ms var(--m-ease);
+}
+.js .fieldmap.m-built.is-in::before { transform: none; }
+.js .fieldmap.m-built .fieldmap__node::before {
+  transform: scaleX(0);
+  transition: transform var(--m-fast) var(--m-ease) var(--m-delay);
+}
+.js .fieldmap.m-built .fieldmap__side--env .fieldmap__node::before { transform-origin: left center; }
+.js .fieldmap.m-built .fieldmap__side--aud .fieldmap__node::before { transform-origin: right center; }
+.js .fieldmap.m-built.is-in .fieldmap__node::before { transform: none; }
+
+
+/* ── Reduced motion: the approved page, immediately ──────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .js [data-m], .js [data-m].is-in, .js .m-clip > span,
+  .js [data-read] .w, .js [data-read] .runit,
+  .js .section-head.m-head::after,
+  .js .dimensions.m-built::before, .js .dimensions.m-built::after,
+  .js .layers.m-built::before, .js .layers.m-built::after,
+  .js .layers.m-built .layers__item::before,
+  .js .fieldmap.m-built::before, .js .fieldmap.m-built .fieldmap__node::before,
+  .js .hero__body, .js .hero__foot, .js .scroll-cue::after {
+    opacity: 1 !important; transform: none !important; transition: none !important;
+  }
+  .js .section-head.m-head { border-bottom-color: var(--rule); }
+  .opening { display: none !important; }
+}
+.js.no-motion [data-m], .js.no-motion .m-clip > span,
+.js.no-motion [data-read] .w, .js.no-motion [data-read] .runit,
+.js.no-motion .section-head.m-head::after,
+.js.no-motion .dimensions.m-built::before, .js.no-motion .dimensions.m-built::after,
+.js.no-motion .layers.m-built::before, .js.no-motion .layers.m-built::after,
+.js.no-motion .layers.m-built .layers__item::before,
+.js.no-motion .fieldmap.m-built::before, .js.no-motion .fieldmap.m-built .fieldmap__node::before,
+.js.no-motion .hero__body, .js.no-motion .hero__foot, .js.no-motion .scroll-cue::after {
+  opacity: 1 !important; transform: none !important; transition: none !important;
+}
+.js.no-motion .section-head.m-head { border-bottom-color: var(--rule); }
+.js.no-motion .opening { display: none !important; }
