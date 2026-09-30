@@ -1,0 +1,144 @@
+/* LDT INC | the workshop layer on /workshops */
+
+.w-hero{position:relative;min-height:100vh;display:flex;flex-direction:column;padding:0 var(--m) 12vh;background:#fff}
+.w-hero .kick{margin:11vh 0 0}
+.w-lead{margin-top:auto;padding-top:10vh}
+#kq{font-size:clamp(34px,4.4vw,74px);line-height:1.06;letter-spacing:-.028em;max-width:21ch}
+#kq span{display:inline-block;margin-right:.24em}
+.js #kq .w{opacity:.08}
+/* the premise as the bridge between the question and where the frameworks come from */
+.w-bridge{padding:17vh var(--m) 5vh;background:#fff;text-align:center}
+.premise{margin:0 auto;font-size:clamp(28px,3.1vw,54px);line-height:1.1;letter-spacing:-.012em;max-width:20ch}
+
+.w-sec{position:relative;padding:12vh var(--m);background:#fff}
+.sec{font-stretch:125%;font-variation-settings:"wdth" 125;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:4vh}
+
+/* where the frameworks come from: the years first, then what kind of experience, then why it matters */
+.src-top{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:5vw;align-items:end}
+.src-yr{font-stretch:125%;font-variation-settings:"wdth" 125;font-weight:700;font-size:clamp(150px,19vw,300px);letter-spacing:-.06em;line-height:.74;margin-left:-.04em}
+.src-kw{padding-bottom:.4vh}
+.src-cap{font-stretch:125%;font-variation-settings:"wdth" 125;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:2.4vh}
+.src-k{font-size:clamp(30px,3.2vw,56px);line-height:1.04;letter-spacing:-.03em;max-width:16ch}
+.src-k .it{letter-spacing:-.01em}
+.src-led{margin-top:10vh}
+.src-led div{display:grid;grid-template-columns:140px minmax(0,1fr);align-items:baseline;padding:2.2vh 0;border-top:1px solid #000}
+.src-led div:last-child{border-bottom:1px solid #000}
+.src-led dt{font-family:var(--serif);font-style:italic;font-size:clamp(20px,1.6vw,26px)}
+.src-led dd{font-size:clamp(19px,1.7vw,28px);letter-spacing:-.02em;line-height:1.25}
+.src-led dd i{font-style:normal;font-weight:300;margin:0 .15em}
+.src-why{margin-top:4vh;padding-left:140px;font-size:clamp(16px,1.2vw,18px);line-height:1.55;max-width:calc(140px + 72ch)}
+.src-why b{font-stretch:125%;font-variation-settings:"wdth" 125;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-right:.3em}
+
+/* section statements, and the two-column sections (statement left, content right) */
+.fw-k{font-size:clamp(26px,2.6vw,44px);line-height:1.08;letter-spacing:-.025em;max-width:22ch;margin-bottom:6vh}
+.w-two{display:grid;grid-template-columns:36fr 64fr;column-gap:5vw;align-items:start}
+.w-two .fw-k{max-width:15ch;margin-bottom:0}
+
+/* five frameworks against the three words of the question. The legend stays under the site header while the table is in view */
+.fw{--cols:72px minmax(0,1fr) repeat(3,120px) 48px}
+.fw-head{position:sticky;top:84px;z-index:5;display:grid;grid-template-columns:var(--cols);align-items:center;padding:14px 0;background:#fff;border-bottom:1px solid #000}
+.fw-cap,.fw-v{font-stretch:125%;font-variation-settings:"wdth" 125;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.fw-cap{grid-column:1/3}
+.fw-v{text-align:center}
+.fwr{border-bottom:1px solid #000;background:linear-gradient(#000,#000) calc(100% - 108px) 0/1px 100% no-repeat,linear-gradient(#000,#000) calc(100% - 228px) 0/1px 100% no-repeat,linear-gradient(#000,#000) calc(100% - 348px) 0/1px 100% no-repeat}
+.fw-t{display:grid;grid-template-columns:var(--cols);align-items:center;width:100%;padding:3vh 0;text-align:left;color:inherit;cursor:pointer}
+.fw-t .pill{justify-self:start;align-self:start;margin-top:.35em}
+.fw-n{padding-right:3vw}
+.fw-n b{display:block;font-stretch:125%;font-variation-settings:"wdth" 125;font-weight:600;font-size:clamp(20px,1.8vw,30px);letter-spacing:-.03em;line-height:1.08}
+.fw-n em{display:block;margin-top:1vh;font-style:normal;font-size:clamp(15px,1.1vw,17px);line-height:1.4;max-width:52ch}
+.fw-d{position:relative;align-self:stretch;font-size:0;color:transparent}
+.fw-d.on::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:#000}
+.fw-x{justify-self:end;font-size:24px;font-weight:300;line-height:1;transition:transform .45s var(--ease)}
+.fw-t[aria-expanded="true"] .fw-x{transform:rotate(45deg)}
+.fw-t:hover .fw-n b,.fw-t:focus-visible .fw-n b{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px}
+.fw-t:focus-visible{outline-offset:-2px}
+.fw-p{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
+.fw-p>ul{min-height:0;overflow:hidden;display:flex;flex-wrap:wrap;column-gap:1.6em;row-gap:.5em;padding-left:72px;max-width:calc(100% - 420px)}
+.fwr.open .fw-p{grid-template-rows:1fr}
+.fwr.open .fw-p>ul{padding-bottom:3.4vh}
+.fw-p li{font-stretch:125%;font-variation-settings:"wdth" 125;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+
+/* formats: three ways in, read by their length first. The rule above each one grows with the depth of the engagement. Remote and combined sit beneath as flexibility, not as further levels */
+.w-fm{padding:14vh var(--m) 15vh}
+.term{display:block;font-stretch:125%;font-variation-settings:"wdth" 125;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.fm-top{display:flex;justify-content:space-between;align-items:baseline;gap:4vw}
+.fm-top .sec{margin-bottom:0}
+.fm-k{font-size:clamp(18px,1.5vw,24px);letter-spacing:-.015em}
+.ways{display:grid;grid-template-columns:repeat(3,1fr);column-gap:3.4vw;margin-top:9vh}
+.way{position:relative;padding-top:3vh}
+.way::before{content:"";position:absolute;left:0;right:0;top:0;height:var(--w);background:#fff}
+.big{margin-top:4.4vh;font-stretch:125%;font-variation-settings:"wdth" 125;font-weight:600;font-size:clamp(64px,7vw,124px);letter-spacing:-.05em;line-height:.86;white-space:nowrap}
+.big small{font-size:.28em;font-weight:300;letter-spacing:0;margin:0 .35em;vertical-align:.9em}
+.unit{margin-top:1.4vh;font-family:var(--serif);font-style:italic;font-size:clamp(22px,1.9vw,32px);line-height:1}
+.way b{display:block;margin-top:5vh;font-weight:500;font-size:clamp(18px,1.45vw,23px);letter-spacing:-.015em;line-height:1.25;max-width:18ch}
+.flex{display:grid;grid-template-columns:repeat(2,1fr);column-gap:3.4vw;margin-top:10vh;padding-top:2.4vh;border-top:1px dashed rgba(255,255,255,.55)}
+.flex div{display:grid;grid-template-columns:110px minmax(0,1fr);align-items:baseline}
+.flex dt{font-stretch:125%;font-variation-settings:"wdth" 125;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.flex dd{font-size:15px;line-height:1.45;max-width:46ch}
+.fm-go{margin-top:8vh;border-top-color:#fff;min-width:320px}
+.fm-go .plus{transition:transform .45s var(--ease)}
+.fm-go:hover .plus,.fm-go:focus-visible .plus{transform:rotate(90deg)}
+.fm-go:focus-visible{outline-color:#fff}
+
+/* environments: a calm, scannable list */
+.env{border-top:1px solid #000;counter-reset:env}
+.env li{display:grid;grid-template-columns:56px 1fr;align-items:baseline;padding:1.8vh 0;border-bottom:1px solid #000;font-size:clamp(17px,1.35vw,22px);line-height:1.25;letter-spacing:-.015em;counter-increment:env}
+.env li::before{content:"0" counter(env);font-size:12px;letter-spacing:.04em}
+
+/* the three words of the question stand out in the opening */
+#kq .key{font-family:var(--serif);font-style:italic;letter-spacing:-.01em}
+
+/* the black cut through the hero */
+.w-cut{position:absolute;top:0;bottom:0;left:61%;width:clamp(90px,8vw,130px);background:#000;overflow:hidden;pointer-events:none}
+
+/* closing */
+.w-sec.dark{background:#000;color:#fff}
+.w-close{min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding-top:18vh}
+.w-close .row{position:relative;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #fff;border-bottom:1px solid #fff;padding:2.6vh 1.2vw;cursor:pointer}
+.w-close .row:focus-visible{outline-offset:-2px}
+.w-close .word{font-stretch:125%;font-variation-settings:"wdth" 125;font-weight:700;font-size:clamp(44px,8.4vw,160px);letter-spacing:-.05em;line-height:.9}
+.w-close .row .plus{font-size:clamp(28px,3vw,48px);font-weight:300}
+.w-close .rows{margin-top:10vh;max-width:780px}
+.cl-k{color:#fff;font-size:clamp(24px,2.4vw,40px);line-height:1.15;letter-spacing:-.02em;max-width:30ch;margin-bottom:12vh}
+/* fewer lines, as on the landing contact (Lena, 27.09.2026): only the two lines around Contact remain; Email in the Boska italic of the landing */
+.w-close .crow{border-top:0;border-bottom:0;grid-template-columns:140px auto 1fr}
+.w-close .crow .plus{justify-self:start;margin-left:28px}
+@media (max-width:760px){.w-close .crow{grid-template-columns:90px auto 1fr}.w-close .crow .plus{margin-left:18px}}
+.w-close .crow .k{font-family:var(--serif);font-style:italic;font-weight:400;font-stretch:100%;font-variation-settings:normal;text-transform:none;letter-spacing:0;font-size:clamp(20px,1.6vw,24px)}
+
+@media (max-width:760px){
+  .w-cut{display:none}
+  .w-sec{padding:8vh var(--m)}.sec{margin-bottom:3vh}
+  .w-hero .kick{margin-top:9vh}
+  .w-hero{min-height:0;padding-bottom:0}.w-lead{margin-top:0;padding-top:8vh}
+  .w-bridge{padding:12vh var(--m) 4vh}.premise{font-size:28px;max-width:16ch}
+  .src-top{grid-template-columns:1fr;row-gap:3vh}.src-yr{font-size:132px}
+  .src-led{margin-top:6vh}.src-led div{grid-template-columns:1fr;row-gap:.6vh;padding:2vh 0}.src-led dd{font-size:19px}
+  .src-why{padding-left:0}
+  .fw-k{font-size:26px;margin-bottom:4vh}
+  .w-two{grid-template-columns:1fr}.w-two .fw-k{max-width:none;margin-bottom:4vh}
+  .fw-head{display:none}
+  .fwr{background:none}.fw-head+.fwr{border-top:1px solid #000}
+  .fw-t{display:flex;flex-wrap:wrap;align-items:center;column-gap:14px;row-gap:1.2vh;padding:2.6vh 0}
+  .fw-t .pill{margin-top:0}
+  .fw-x{order:2;margin-left:auto}
+  .fw-n{order:3;width:100%;padding-right:0}.fw-n b{font-size:22px}
+  .fw-d{order:4;display:none}
+  .fw-d.on{display:inline-flex;align-items:center;gap:7px;font-size:11px;color:inherit;font-stretch:125%;font-variation-settings:"wdth" 125;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+  .fw-d.on::after{position:static;order:-1;width:8px;height:8px;margin:0}
+  .fw-p>ul{padding-left:0;max-width:none}
+  .w-fm{padding:10vh var(--m)}
+  .fm-top{display:block}.fm-top .sec{margin-bottom:2vh}
+  .ways{grid-template-columns:1fr;row-gap:6vh;margin-top:6vh}
+  .way{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:12px;align-items:end}
+  .way .term{grid-column:1/-1}.big{grid-column:1;margin-top:2.4vh;font-size:64px}.unit{grid-column:2;margin:0 0 .3em}
+  .way b{grid-column:1/-1}.dk{display:none}.way b{margin-top:2.4vh;max-width:none}
+  .flex{grid-template-columns:1fr;row-gap:2.4vh;margin-top:7vh}.flex div{grid-template-columns:1fr;row-gap:4px}
+  .fm-go{margin-top:6vh;min-width:0;width:100%}
+  .env li{grid-template-columns:40px 1fr;font-size:18px;padding:1.6vh 0}
+  .cl-k{margin-bottom:8vh}
+}
+
+/* a workshop's number is a count, not an address: Boska italic, strong, upright figures, no bubble (Lena, 28.09.2026) */
+.fw-t .pill{border:0;border-radius:0;padding:0;background:none;font-family:var(--serif);font-style:italic;font-weight:400;font-size:24px;letter-spacing:.01em;font-variant-numeric:lining-nums;-webkit-text-stroke:.045em currentColor;line-height:1;margin-top:.1em}
+.env li::before{font-family:var(--serif);font-style:italic;font-weight:400;font-size:22px;letter-spacing:.01em;font-variant-numeric:lining-nums;-webkit-text-stroke:.045em currentColor;line-height:1}
