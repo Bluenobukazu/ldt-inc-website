@@ -351,7 +351,7 @@ function buildFlow(){
     ScrollTrigger.create({trigger:'#transformation',start:'top 55%',once:true,onEnter:()=>{ttShown=true;gsap.set('#tt .t',{opacity:1});emerge($('#tt .t'),5,tScale)}});
     gsap.from('#proof .grid > *',{opacity:0,y:40,stagger:.12,duration:1,ease:'expo.out',clearProps:'transform,opacity',scrollTrigger:{trigger:'#proof .grid',start:'top 80%'}});
     gsap.from('#proof .fig',{opacity:0,y:30,stagger:.1,duration:.9,ease:'expo.out',clearProps:'transform,opacity',scrollTrigger:{trigger:'.figs',start:'top 85%'}});
-    gsap.from('#markets li',{opacity:0,y:30,stagger:.1,duration:.9,ease:'expo.out',clearProps:'transform,opacity',scrollTrigger:{trigger:'#markets',start:'top 85%'}});
+    gsap.from('#mk-regions li',{opacity:0,y:30,stagger:.1,duration:.9,ease:'expo.out',clearProps:'transform,opacity',scrollTrigger:{trigger:'#mk-regions',start:'top 85%'}});
     gsap.from('#proof .og',{opacity:0,y:30,stagger:.08,duration:.9,ease:'expo.out',clearProps:'transform,opacity',scrollTrigger:{trigger:'#orgs',start:'top 80%'}});
     gsap.from('#ways .row',{opacity:0,y:40,stagger:.1,duration:.9,ease:'expo.out',clearProps:'transform,opacity',scrollTrigger:{trigger:'#ways',start:'top 70%'}});
     gsap.from('#contact .open',{opacity:0,y:40,duration:1,ease:'expo.out',clearProps:'transform,opacity',scrollTrigger:{trigger:'#contact',start:'top 60%'}});
@@ -1185,13 +1185,45 @@ LDT.fills.approach=()=>{const m=$('#xMap');if(!m)return;
   const b=$(f.type==='real'?`[data-dreal="${f.i}"]`:`[data-ddim="${f.i}"]`,m);if(!b)return;
   b.classList.add('here');b.setAttribute('aria-current','page');
   (b.querySelector('.n')||b.querySelector('span')||b).insertAdjacentHTML('afterend','<em class="yh">You are here</em>')};
-/* direct routes: #system/<area> opens that deep dive over the System chapter (earlier names are forwarded) */
-function routeDeep(h){if(!h.startsWith('system/'))return false;let sl=h.slice(7);sl=ALIAS[sl]||sl;
-  const di=DIMS.findIndex(d=>d.slug===sl),ri=REAL.findIndex(r=>r.slug===sl);if(di<0&&ri<0)return false;
-  LDT.goChapter(3,true);showDeep(di>=0?'dim':'real',di>=0?di:ri);
-  /* the address settles on the System chapter, so Back and a reload return there */
-  history.replaceState(null,'','#system');return true}
+/* direct links (30.09.2026): every deep dive has its own address, #<slug> (for example #markets or #commercial-architecture).
+   Earlier names (#system/<area>, #brand, #commercial ...) are forwarded to it. Opening or reloading the address opens that deep dive at its start;
+   moving between deep dives updates the address, and the browser Back and Forward follow it. Anything else in the address is left alone */
+const deepOf=h=>{try{h=decodeURIComponent(h||'')}catch(e){return null}
+  if(h.startsWith('system/'))h=h.slice(7);h=ALIAS[h]||h;
+  const di=DIMS.findIndex(d=>d.slug===h),ri=REAL.findIndex(r=>r.slug===h);
+  return di>=0?{type:'dim',i:di,slug:h}:ri>=0?{type:'real',i:ri,slug:h}:null};
+const slugOf=(type,i)=>(type==='real'?REAL:DIMS)[i].slug;
+/* the address keeps the path and every query parameter (a preview share key, for example): only the hash changes */
+const urlFor=s=>location.pathname+location.search+(s?'#'+s:'');
+/* each history entry made for a deep dive carries ddn (how many entries the visitor has stepped through since the page below it) and direct (the visitor arrived on a deep dive address) */
+let quiet=false,quietT=0;
+function routeDeep(h){const dv=deepOf(h);if(!dv)return false;
+  const st=history.state,ov=$('#deep');
+  history.replaceState(st&&st.ddn!=null?st:{ddn:0,direct:true},'',urlFor(dv.slug));
+  if(LDT.open===ov&&deepNow&&deepNow.type===dv.type&&deepNow.i===dv.i)return true;
+  /* stepping back to where a relationship control came from: the same as its return control */
+  const k=REL.reduce((a,r,ix)=>r.type===dv.type&&r.i===dv.i?ix:a,-1);
+  if(k>=0&&LDT.open===ov){REL.length=k+1;relReturn();return true}
+  if(REL.length){REL.length=0;relStrip({})}
+  if(LDT.open&&LDT.open!==ov)LDT.closeLayer(true);
+  if(!LDT.open)LDT.goChapter(3,true);
+  showDeep(dv.type,dv.i);return true}
+/* the address follows the deep dive that is shown */
+function deepUrl(type,i){const s=slugOf(type,i),cur=deepOf(location.hash.slice(1));
+  if(cur&&location.hash.slice(1)===s)return;
+  const st=history.state||{};
+  if(cur&&relBackNow)history.replaceState(st,'',urlFor(s));
+  else history.pushState(cur?{ddn:(st.ddn||0)+1,direct:!!st.direct}:{ddn:1,direct:false},'',urlFor(s))}
+/* leaving the deep dives (site Back, Escape, Start, browser Back): the address goes back to the page below them, without a stale deep dive address */
+document.addEventListener('ldt:layers',()=>{
+  if(LDT.layers.includes('deep')||quiet)return;
+  if(REL.length){REL.length=0;relStrip({})}
+  if(!deepOf(location.hash.slice(1)))return;
+  const st=history.state||{};
+  if(st.ddn>0&&!st.direct){quiet=true;clearTimeout(quietT);quietT=setTimeout(()=>{quiet=false},600);history.go(-st.ddn)}
+  else history.replaceState(null,'',urlFor('system'))});
 function showDeep(type,i,trigger,after){
+  deepUrl(type,i);
   if(LDT.open===$('#deep')){
     const ov=$('#deep'),parts=()=>$$('#deepRet:not([hidden]), .dd:not([hidden]) .ddl > *, .dd:not([hidden]) .ddr > *, .dpage:not([hidden]) > *, .dconn',ov);
     const done=()=>{ov.scrollTop=0;if(after)after();else $('#deep [data-close]').focus({preventScroll:true})};
@@ -1203,7 +1235,7 @@ function showDeep(type,i,trigger,after){
 }
 /* ---------- Layer 2 relationships (Lena, 27.09.2026): a deep dive opened through another one's relationship control (+)
    keeps that origin. Its − returns there, to the same place; the site Back leaves the layer; the browser Back follows the same history ---------- */
-let deepNow=null,relBackNow=false,relSkip=0;const REL=[];
+let deepNow=null,relBackNow=false;const REL=[];
 function relStrip(o){const el=$('#deepRet'),top=REL[REL.length-1];
   if(!top){el.hidden=true;el.innerHTML='';return}
   el.hidden=false;
@@ -1212,7 +1244,7 @@ function relStrip(o){const el=$('#deepRet'),top=REL[REL.length-1];
 function relOpen(t,type,i){
   const o=deepNow.type==='real'?REAL[deepNow.i]:DIMS[deepNow.i];
   REL.push({type:deepNow.type,i:deepNow.i,from:o.n,scroll:$('#deep').scrollTop,key:t.dataset.area||'',q:t.querySelector('.q')?t.querySelector('.q').textContent:''});
-  history.pushState({rel:REL.length},'',location.href);
+  const st=history.state||{};history.pushState({ddn:(st.ddn||0)+1,direct:!!st.direct,rel:REL.length},'',urlFor(slugOf(type,i)));
   showDeep(type,i,t);
 }
 function relReturn(){const r=REL.pop();if(!r)return;relBackNow=true;
@@ -1220,11 +1252,8 @@ function relReturn(){const r=REL.pop();if(!r)return;relBackNow=true;
     const b=r.key&&$(`#deep .dpage:not([hidden]) [data-rel][data-area="${r.key}"]`);(b||$('#deep [data-close]')).focus({preventScroll:true})})}
 /* − uses the browser history, so the browser Back and the − always agree */
 function relBack(){if(history.state&&history.state.rel===REL.length)history.back();else relReturn()}
-/* leaving the relationship another way (site Back, Escape, the system map) forgets it and removes its history steps */
-function relClear(){const n=REL.length;if(!n)return;REL.length=0;relSkip++;history.go(-n);relStrip({})}
-addEventListener('popstate',e=>{if(relSkip){relSkip--;return}
-  const n=(e.state&&e.state.rel)||0;if(!REL.length||n>=REL.length||LDT.open!==$('#deep'))return;
-  while(REL.length>n+1)REL.pop();relReturn()});
+/* leaving the relationship another way (site Back, Escape, the system map) forgets it; its history steps go with the deep dive address */
+function relClear(){if(!REL.length)return;REL.length=0;relStrip({})}
 document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('#deep .dret-b');if(t){e.preventDefault();relBack()}});
 document.addEventListener('click',e=>{if(!REL.length)return;
   if(e.target.closest&&e.target.closest('#deep [data-close]'))relClear()},true);
@@ -1254,10 +1283,13 @@ function init(){
   ScrollTrigger.sort();ScrollTrigger.refresh();
   if(first){first=false;setActive(0);hero(true);
     /* back from another page: the visitor returns to the same place, with the layers that were open */
-    const ret=LDT.ret;
+    const ret=LDT.ret,h0=location.hash.slice(1);
     if(ret){if(LDT.lenis&&LDT.lenis.resize)LDT.lenis.resize();scrollTo(0,ret.y);go(ret.y,true);ScrollTrigger.update();resolveChapter();if(ret.y>30)hero(false);
-      J[0].intro(ret.y>30);ret.layers.forEach(id=>LDT.openLayer(id,LDT.fills[id],null,true));LDT.reveal();return}
-    const h=decodeURIComponent(location.hash.slice(1));const ci=HASH.indexOf(h);
+      J[0].intro(ret.y>30);ret.layers.forEach(id=>LDT.openLayer(id,LDT.fills[id],null,true));
+      /* back from another page to a deep dive address: the deep dive returns with it */
+      const rd=deepOf(h0);if(rd){history.replaceState(history.state&&history.state.ddn!=null?history.state:{ddn:0,direct:true},'',urlFor(rd.slug));showDeep(rd.type,rd.i,null)}
+      LDT.reveal();return}
+    let h='';try{h=decodeURIComponent(location.hash.slice(1))}catch(e){}const ci=HASH.indexOf(h);
     if(ci>0){LDT.goChapter(ci,true);ScrollTrigger.update();hero(false);
       /* the browser may still apply its own anchor jump after load: confirm the target until the visitor moves */
       let moved=false;const stop=()=>{moved=true};['wheel','touchstart','keydown','pointerdown'].forEach(ev=>addEventListener(ev,stop,{once:true,passive:true}));
@@ -1271,7 +1303,11 @@ function init(){
 }
 /* fonts first (the wordmark is measured), then the monolith; if three.js cannot load at all the page still starts */
 Promise.all([document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve(),Promise.race([monoReady,new Promise(r=>setTimeout(r,4000))])]).then(()=>requestAnimationFrame(init));
-addEventListener('hashchange',()=>{const h=location.hash.slice(1),ci=HASH.indexOf(h);if(ci>=0){if(LDT.open)LDT.closeLayer(true);LDT.goChapter(ci)}else if(['experience','approach','engage','lead'].includes(h))LDT.openLayer(h);else routeDeep(h)});
+addEventListener('hashchange',()=>{if(quiet){quiet=false;clearTimeout(quietT);return}
+  const h=location.hash.slice(1),ci=HASH.indexOf(h);
+  /* an address that is no longer a deep dive (browser Back to the page below): the deep dive closes with it */
+  if(!deepOf(h)&&LDT.open===$('#deep')&&ci<0&&!['experience','approach','engage','lead'].includes(h)){LDT.closeLayer(true);return}
+  if(ci>=0){if(LDT.open)LDT.closeLayer(true);LDT.goChapter(ci)}else if(['experience','approach','engage','lead'].includes(h))LDT.openLayer(h);else routeDeep(h)});
 /* on a size change (window, phone rotation) the page keeps its place: chapter and distance into it are restored after the rebuild */
 let rt,lw=innerWidth,lh=innerHeight,keep=null;
 addEventListener('resize',()=>{if(MOB()&&innerWidth===lw)return;lw=innerWidth;

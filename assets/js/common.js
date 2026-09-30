@@ -107,13 +107,15 @@ const keyX=el=>{const r=el.getBoundingClientRect();lastX=r.left+r.width/2};
 /* the open layer is always released: when one layer leads straight into another (Index to Approach), the new one was still locked from before */
 function setInert(on,keep){$$('body > *').forEach(e=>{if(e===keep){e.inert=false;return}if(e===op||e===cur||e===ring||e===totop||e.tagName==='SCRIPT')return;e.inert=on})}
 function focusables(r){return $$('a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"])',r).filter(e=>e.offsetParent!==null||e.getClientRects().length)}
+/* pages that keep an address for an open layer (the deep dives) listen for this */
+const layersChanged=()=>d.dispatchEvent(new CustomEvent('ldt:layers'));
 function openLayer(id,fill,trigger,now){
   const ov=d.getElementById(id);if(!ov)return;
   if(openOv&&openOv!==ov){stack.push({ov:openOv,from:trigger||d.activeElement,scroll:openOv.scrollTop});closeLayer(true,true)}else if(!openOv){returnFocus=trigger||d.activeElement;stack=[]}
   if(fill)fill();
   gsap.killTweensOf(ov);openOv=ov;lenis&&lenis.stop();html.style.overflow='hidden';ov.scrollTop=0;setInert(true,ov);
   const focusIn=()=>{const f=$('[data-close]',ov);f&&f.focus({preventScroll:true})};
-  d.dispatchEvent(new CustomEvent('ldt:open',{detail:id}));syncTop();
+  d.dispatchEvent(new CustomEvent('ldt:open',{detail:id}));layersChanged();syncTop();
   if(RM||now){gsap.set(ov,{visibility:'visible',opacity:1});focusIn();return}
   gsap.timeline().set(op,{left:lastX,width:0,opacity:1}).to(op,{left:0,width:innerWidth,duration:.55,ease:'expo.inOut'})
     .set(ov,{visibility:'visible',opacity:1}).call(focusIn).to(op,{opacity:0,duration:.35,ease:'power2.out'})
@@ -125,13 +127,14 @@ function closeLayer(instant,switching){
   if(switching)return;
   stack=[];fromPage=false;setInert(false);syncTop();html.style.overflow='';lenis&&lenis.start();
   if(returnFocus&&returnFocus.focus&&d.contains(returnFocus))returnFocus.focus({preventScroll:true});returnFocus=null;
+  layersChanged();
 }
 function back(){
   if(!openOv)return;const prev=stack.pop();if(!prev){if(fromPage&&pageBack())return;closeLayer();return}
   const cur=openOv;openOv=prev.ov;
   gsap.killTweensOf(prev.ov);gsap.set(prev.ov,{visibility:'visible',opacity:1});prev.ov.scrollTop=prev.scroll;setInert(true,prev.ov);
   if(RM)gsap.set(cur,{visibility:'hidden'});else gsap.to(cur,{opacity:0,duration:.35,ease:'power2.in',onComplete:()=>gsap.set(cur,{visibility:'hidden',opacity:1})});
-  const f=prev.from&&prev.ov.contains(prev.from)?prev.from:$('[data-close]',prev.ov);f&&f.focus({preventScroll:true});syncTop();
+  const f=prev.from&&prev.ov.contains(prev.from)?prev.from:$('[data-close]',prev.ov);f&&f.focus({preventScroll:true});syncTop();layersChanged();
 }
 addEventListener('keydown',e=>{
   if(!openOv)return;
@@ -155,7 +158,7 @@ function reveal(){
 addEventListener('pageshow',e=>{if(e.persisted){gsap.killTweensOf(op);gsap.set(op,{width:0,opacity:0});html.classList.remove('cut-in');lenis&&lenis.start()}});
 
 /* ---------- one click handler for every page ---------- */
-const LDT={ROOT,PAGE,HOME,RM,MOB,$,$$,lenis,go,openLayer,closeLayer,cutTo,reveal,fills:{},goChapter:null,get open(){return openOv},keyX,ret,
+const LDT={ROOT,PAGE,HOME,RM,MOB,$,$$,lenis,go,openLayer,closeLayer,cutTo,reveal,fills:{},goChapter:null,get open(){return openOv},get layers(){return [...stack.map(x=>x.ov.id),openOv&&openOv.id].filter(Boolean)},keyX,ret,
   /* a layer opened because the visitor arrived from another page (for example Index on /workshops to Approach): its Back returns to that page */
   arrivedInLayer(){const tr=readS(TRAIL)||[];fromPage=!!(tr.length&&tr[tr.length-1].url!==hereUrl())}};
 d.addEventListener('click',e=>{

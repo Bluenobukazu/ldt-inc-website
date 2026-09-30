@@ -134,8 +134,8 @@ svg.sys .cross{stroke:#fff;stroke-width:1}
 .fig{display:flex;flex-direction:column-reverse;justify-content:flex-end;border-top:1px solid #000;padding-top:16px}
 .fig dt{font-stretch:125%;font-variation-settings:"wdth" 125;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-top:14px}
 .fig dd{font-weight:600;font-size:clamp(30px,2.6vw,46px);letter-spacing:-.035em;line-height:1;white-space:nowrap}
-#markets{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 2vw;margin-top:9vh}
-#markets li{font-stretch:125%;font-variation-settings:"wdth" 125;font-weight:500;font-size:clamp(26px,3.4vw,60px);letter-spacing:-.035em;line-height:1;text-transform:uppercase;border-top:1px solid;border-image:linear-gradient(90deg,#747a80,#fff 50%,#8b9197) 1;padding-top:16px}
+#mk-regions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 2vw;margin-top:9vh}
+#mk-regions li{font-stretch:125%;font-variation-settings:"wdth" 125;font-weight:500;font-size:clamp(26px,3.4vw,60px);letter-spacing:-.035em;line-height:1;text-transform:uppercase;border-top:1px solid;border-image:linear-gradient(90deg,#747a80,#fff 50%,#8b9197) 1;padding-top:16px}
 #orgs{position:relative;margin:14vh calc(var(--m) * -1) 0;overflow:hidden;border-top:1px solid #000;isolation:isolate;background:#fff}
 #orgList{padding:0 var(--m)}
 .og{display:grid;grid-template-columns:260px 1fr;align-items:baseline;column-gap:calc(clamp(64px,6vw,100px) + 6vw);row-gap:2vw;border-bottom:1px solid #000;padding:2.6vh 0}
@@ -352,7 +352,7 @@ body.at-end #rail button:not(.on){opacity:.32}body.at-end #rail button:hover,bod
 
 @media (max-width:760px){
   #proof .grid{grid-template-columns:1fr}
-  #markets{grid-template-columns:1fr;row-gap:2vh}
+  #mk-regions{grid-template-columns:1fr;row-gap:2vh}
   .og{grid-template-columns:1fr;row-gap:10px}
   #orgCut,#orgShine{display:none}
   #ways .row{grid-template-columns:1fr 36px}
