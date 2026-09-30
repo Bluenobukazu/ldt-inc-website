@@ -12,6 +12,7 @@
 <link rel="preload" href="assets/fonts/boska-400-italic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/site.css?v=48">
 <link rel="stylesheet" href="assets/css/home.css?v=296">
+<link rel="stylesheet" href="assets/css/proposition.css?v=1">
 <script src="assets/js/head.js?v=14"></script>
 <script type="importmap">{"imports":{"three":"./assets/vendor/three.module.min.js","three/addons/geometries/RoundedBoxGeometry.js":"./assets/vendor/RoundedBoxGeometry.js"}}</script>
 <link rel="modulepreload" href="assets/vendor/three.module.min.js">
@@ -252,94 +253,142 @@
     <div class="dret" id="deepRet" hidden></div>
     <!-- Deep Dive 01 Proposition (Lena, 27.09.2026): its own page inside the shared deep dive layer -->
     <div class="dpage pp" data-page="proposition" hidden>
-      <header class="pp-hero">
-        <div class="pp-or dkick"><h2 class="t" id="ppT">Proposition</h2></div>
-        <p class="pp-k">An offer is only as strong as the business built to <span class="it">keep it.</span></p>
-        <p class="pp-sub"><span>Not what the business says.</span><span>What it can actually sell, deliver and sustain.</span></p>
+      <header class="pz-f pz-w pz-hero">
+        <h2 class="pz-word" id="ppT" data-t="Proposition">Proposition</h2>
+        <p class="pz-k">An offer is only as strong as the business built to <span class="it">keep it.</span></p>
+        <p class="pz-sub"><span>Not what the business says.</span><span>What it can actually sell, deliver and sustain.</span></p>
+        <svg class="pz-seed" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle cx="60" cy="60" r="44" fill="none" stroke="#ececec" stroke-width="14"/><circle cx="60" cy="60" r="16"/></svg>
       </header>
 
-      <section class="pp-ins" aria-labelledby="ppInsH">
-        <div class="pp-ia">
-          <h3 class="pp-st" id="ppInsH">Every business exists three times.</h3>
-          <p class="pp-stx"><span>What it <b>sells</b>.</span><span>What it can <b>deliver</b>.</span><span>What its economics can <b>sustain</b>.</span></p>
-          <div class="pp-tg" role="group" aria-label="One business that holds, and five ways it drifts apart">
-            <p class="pp-gh" aria-hidden="true">Aligned</p>
-            <div class="pp-row"><button type="button" class="pp-tab on" data-s="0" aria-pressed="true" aria-controls="ppOut" data-act><span class="gl" aria-hidden="true"></span><span class="nm" aria-hidden="true">It holds</span><span class="t">It holds</span><span class="x" aria-hidden="true">+</span></button><div class="pp-d"></div></div>
-            <p class="pp-gh" aria-hidden="true">Drifted</p>
-            <div class="pp-row"><button type="button" class="pp-tab" data-s="1" aria-pressed="false" aria-controls="ppOut" data-act><span class="gl" aria-hidden="true"></span><span class="nm" aria-hidden="true">01</span><span class="t">Too much built around the idea</span><span class="x" aria-hidden="true">+</span></button><div class="pp-d"></div></div>
-            <div class="pp-row"><button type="button" class="pp-tab" data-s="2" aria-pressed="false" aria-controls="ppOut" data-act><span class="gl" aria-hidden="true"></span><span class="nm" aria-hidden="true">02</span><span class="t">The promise runs ahead</span><span class="x" aria-hidden="true">+</span></button><div class="pp-d"></div></div>
-            <div class="pp-row"><button type="button" class="pp-tab" data-s="3" aria-pressed="false" aria-controls="ppOut" data-act><span class="gl" aria-hidden="true"></span><span class="nm" aria-hidden="true">03</span><span class="t">Growth has moved the centre</span><span class="x" aria-hidden="true">+</span></button><div class="pp-d"></div></div>
-            <div class="pp-row"><button type="button" class="pp-tab" data-s="4" aria-pressed="false" aria-controls="ppOut" data-act><span class="gl" aria-hidden="true"></span><span class="nm" aria-hidden="true">04</span><span class="t">Loved, but it does not pay</span><span class="x" aria-hidden="true">+</span></button><div class="pp-d"></div></div>
-            <div class="pp-row"><button type="button" class="pp-tab" data-s="5" aria-pressed="false" aria-controls="ppOut" data-act><span class="gl" aria-hidden="true"></span><span class="nm" aria-hidden="true">05</span><span class="t">Every team has its own version</span><span class="x" aria-hidden="true">+</span></button><div class="pp-d"></div></div>
-          </div>
-        </div>
-        <div class="pp-ib">
-          <div class="pp-rails" aria-hidden="true">
-            <p class="pp-lab" style="grid-row:2"><b>Offer</b><span>What it says it is.</span></p><div class="pp-track" style="grid-row:2"></div>
-            <p class="pp-lab" style="grid-row:3"><b>Organisation</b><span>What it actually delivers.</span></p><div class="pp-track" style="grid-row:3"></div>
-            <p class="pp-lab" style="grid-row:4"><b>Economics</b><span>What price, cost and margin allow.</span></p><div class="pp-track" style="grid-row:4"></div>
-            <div class="pp-colw"><span class="pp-colt">The idea</span><span class="pp-col"></span></div>
-          </div>
-          <div class="pp-out" id="ppOut" aria-live="polite">
-            <div class="pp-o on" data-s="0"><p class="h">It holds</p><div class="b"><p class="i">When the offer, the organisation and the economics line up, the proposition holds.</p><p class="c">Drift starts when they stop lining up.</p></div></div>
-            <div class="pp-o" data-s="1"><p class="h"><span class="pill">01</span>Too much built around the idea</p><div class="b"><p class="i">The offer keeps growing: more products, formats and revenue lines around one idea.</p><p class="c">Not all of them make it stronger, and the organisation and the margin have to carry every one.</p></div><p class="q"><span class="xh">The question I ask</span>Which of these carry the business, and which only complicate it?</p></div>
-            <div class="pp-o" data-s="2"><p class="h"><span class="pill">02</span>The promise runs ahead</p><div class="b"><p class="i">The offer promises more than the organisation can deliver on an ordinary day.</p><p class="c">It works when the best people push it through, not as a routine.</p></div><p class="q"><span class="xh">The question I ask</span>Could this be delivered on an ordinary Tuesday, without heroics?</p></div>
-            <div class="pp-o" data-s="3"><p class="h"><span class="pill">03</span>Growth has moved the centre</p><div class="b"><p class="i">The business has grown into new markets, customers and formats.</p><p class="c">Growth is not the problem.<br>Losing what made the business strong&nbsp;is.</p></div><p class="q"><span class="xh">The question I ask</span>What is the business at its core, and does growth still serve it?</p></div>
-            <div class="pp-o" data-s="4"><p class="h"><span class="pill">04</span>Loved, but it does not pay</p><div class="b"><p class="i">Customers want it and the team can deliver it.</p><p class="c">But price, cost and margin do not add up, so the business pays for its own success.</p></div><p class="q"><span class="xh">The question I ask</span>What would have to change for this offer to carry itself?</p></div>
-            <div class="pp-o" data-s="5"><p class="h"><span class="pill">05</span>Every team has its own version</p><div class="b"><p class="i">Sales promises one version, operations delivers a second, leadership plans for a third.</p><p class="c">Each part works hard, but not on the same business.</p></div><p class="q"><span class="xh">The question I ask</span>Would everyone in the business describe the same offer?</p></div>
-          </div>
-        </div>
+      <section class="pz-f pz-w pz-three" aria-labelledby="pzH1">
+        <h3 class="pz-h1" id="pzH1">Every business exists <span class="pz-tt" data-t="three times.">three times.</span></h3>
+        <div class="pz-r pz-r1"><p class="pz-s"><span>What it </span><b>sells</b><span>.</span></p><p class="pz-df"><b>Offer</b><span>What it says it is.</span></p></div>
+        <div class="pz-r pz-r2"><p class="pz-s"><span>What it can </span><b>deliver</b><span>.</span></p><p class="pz-df"><b>Organisation</b><span>What it actually delivers.</span></p></div>
+        <div class="pz-r pz-r3"><p class="pz-s"><span>What its economics can </span><b>sustain</b><span>.</span></p><p class="pz-df"><b>Economics</b><span>What price, cost and margin allow.</span></p></div>
       </section>
 
-      <section class="pp-work" aria-labelledby="ppWorkH">
-        <h3 class="xh" id="ppWorkH">What changes</h3>
-        <p class="pp-big">The work is rarely to find a new idea. It is to protect a strong one from the business that has grown around it.</p>
-        <ol class="pp-flow">
-          <li class="f1">
-            <h4><span class="pill">01</span>Look underneath</h4>
-            <div class="fg" aria-hidden="true"><i class="bar"></i><i class="sf"></i><i class="d d1"></i><i class="d d2"></i><i class="d d3"></i></div>
-            <ul class="fr"><li>Where the margin actually comes from</li><li>What the team spends its week on</li><li>Which products carry the business, and which only keep it busy</li></ul>
-          </li>
-          <li class="f2">
-            <h4><span class="pill">02</span>Make the trade-off</h4>
-            <div class="fg" aria-hidden="true"><i class="fk"></i><i class="fk"></i><i class="fs"></i><i class="fl"></i><i class="fl"></i></div>
-            <dl class="fr">
-              <div><dt><i class="g g1" aria-hidden="true"></i>Keep</dt><dd>What makes the idea strong, and what customers actually pay for</dd></div>
-              <div><dt><i class="g g2" aria-hidden="true"></i>Sharpen</dt><dd>What is right, but too broad, too costly or too hard to deliver</dd></div>
-              <div><dt><i class="g g3" aria-hidden="true"></i>Let go</dt><dd>What keeps the business busy without making it stronger</dd></div>
-            </dl>
-          </li>
-          <li class="f3">
-            <h4><span class="pill">03</span>Build it to hold</h4>
-            <div class="fg" aria-hidden="true"><i></i><i></i><i></i></div>
-            <ul class="fr"><li>The trade-offs are leadership decisions.</li><li>I make them clear, then build the operating conditions that make them hold.</li></ul>
-          </li>
+      <section class="pz-f pz-w pz-holds" aria-labelledby="pzH2">
+        <p class="pz-lab">Aligned</p>
+        <div class="pz-ill" data-draw="f0" role="img" aria-label="Three strands, Offer, Organisation and Economics, meet at one point inside a ring"></div>
+        <h3 class="pz-h2" id="pzH2">It holds</h3>
+        <p class="pz-i">When the offer, the organisation and the economics line up, the proposition holds.</p>
+        <p class="pz-c bos">Drift starts when they stop lining up.</p>
+      </section>
+
+      <section class="pz-f pz-b pz-list" aria-label="Five ways the business drifts apart">
+        <p class="pz-lab">Aligned</p>
+        <p class="pz-big">It holds</p>
+        <p class="pz-lab">Drifted</p>
+        <ol class="pz-ls">
+          <li style="--k:0"><i class="num">01</i><span>Too much built around the idea</span><em aria-hidden="true">+</em></li>
+          <li style="--k:1"><i class="num">02</i><span>The promise runs ahead</span><em aria-hidden="true">+</em></li>
+          <li style="--k:2"><i class="num">03</i><span>Growth has moved the centre</span><em aria-hidden="true">+</em></li>
+          <li style="--k:3"><i class="num">04</i><span>Loved, but it does not pay</span><em aria-hidden="true">+</em></li>
+          <li style="--k:4"><i class="num">05</i><span>Every team has its own version</span><em aria-hidden="true">+</em></li>
         </ol>
       </section>
 
-      <section class="pp-ev" aria-labelledby="ppEvH">
-        <div class="pp-evh"><h3 class="xh" id="ppEvH">In practice</h3><p class="pp-evn">MaHalla</p></div>
-        <dl class="pp-evs">
+      <section class="pz-f pz-b pz-d pz-d1" data-st="1" aria-labelledby="pzD1">
+        <p class="pz-rail" aria-hidden="true"><span class="pz-lab">Drifted</span><i class="on">01</i><i>02</i><i>03</i><i>04</i><i>05</i></p>
+        <div class="pz-txt"><p class="num">01</p><p class="pz-i">The offer keeps growing: more products, formats and revenue lines around one idea.</p><p class="pz-c">Not all of them make it stronger, and the organisation and the margin have to carry every one.</p></div>
+        <h3 class="pz-dh" id="pzD1">Too much built around the idea</h3>
+        <div class="pz-ill" data-draw="d1" role="img" aria-label="Dots spread in rings around one small circle"></div>
+        <p class="pz-q"><span class="pz-lab">The question I ask</span><span class="bos">Which of these carry the business, and which only complicate it?</span></p>
+      </section>
+      <section class="pz-f pz-b pz-d pz-d2" data-st="2" aria-labelledby="pzD2">
+        <p class="pz-rail" aria-hidden="true"><span class="pz-lab">Drifted</span><i>01</i><i class="on">02</i><i>03</i><i>04</i><i>05</i></p>
+        <div class="pz-txt"><p class="num">02</p><p class="pz-i">The offer promises more than the organisation can deliver on an ordinary day.</p><p class="pz-c">It works when the best people push it through, not as a routine.</p></div>
+        <h3 class="pz-dh" id="pzD2">The promise runs ahead</h3>
+        <div class="pz-ill" data-draw="d2" role="img" aria-label="One large dot far ahead of a ring, with organisation and economics still at the ring"></div>
+        <p class="pz-q"><span class="pz-lab">The question I ask</span><span class="bos">Could this be delivered on an ordinary Tuesday, without heroics?</span></p>
+      </section>
+      <section class="pz-f pz-b pz-d pz-d3" data-st="3" aria-labelledby="pzD3">
+        <p class="pz-rail" aria-hidden="true"><span class="pz-lab">Drifted</span><i>01</i><i>02</i><i class="on">03</i><i>04</i><i>05</i></p>
+        <div class="pz-txt"><p class="num">03</p><p class="pz-i">The business has grown into new markets, customers and formats.</p><p class="pz-c">Growth is not the problem.<br>Losing what made the business strong&nbsp;is.</p></div>
+        <h3 class="pz-dh" id="pzD3">Growth has moved the centre</h3>
+        <div class="pz-ill" data-draw="d3" role="img" aria-label="A ring on the left and a large dot with a cloud of dots far to the right"></div>
+        <p class="pz-q"><span class="pz-lab">The question I ask</span><span class="bos">What is the business at its core, and does growth still serve it?</span></p>
+      </section>
+      <section class="pz-f pz-b pz-d pz-d4" data-st="4" aria-labelledby="pzD4">
+        <p class="pz-rail" aria-hidden="true"><span class="pz-lab">Drifted</span><i>01</i><i>02</i><i>03</i><i class="on">04</i><i>05</i></p>
+        <div class="pz-txt"><p class="num">04</p><p class="pz-i"><svg class="pz-mk" viewBox="0 0 70 60" aria-hidden="true" focusable="false"><path pathLength="1" d="M6 32 L24 50 L64 8"/></svg>Customers want it and the team can deliver it.</p><p class="pz-c"><svg class="pz-mk" viewBox="0 0 60 60" aria-hidden="true" focusable="false"><path pathLength="1" d="M8 8 L52 52 M52 8 L8 52"/></svg>But price, cost and margin do not add up, so the business pays for its own success.</p></div>
+        <h3 class="pz-dh" id="pzD4">Loved, but it does not pay</h3>
+        <p class="pz-q"><span class="pz-lab">The question I ask</span><span class="bos">What would have to change for this offer to carry itself?</span></p>
+      </section>
+      <section class="pz-f pz-b pz-d pz-d5" data-st="5" aria-labelledby="pzD5">
+        <p class="pz-rail" aria-hidden="true"><span class="pz-lab">Drifted</span><i>01</i><i>02</i><i>03</i><i>04</i><i class="on">05</i></p>
+        <div class="pz-txt"><p class="num">05</p><p class="pz-i">Sales promises one version, operations delivers a second, leadership plans for a third.</p><p class="pz-c">Each part works hard, but not on the same business.</p></div>
+        <h3 class="pz-dh" id="pzD5">Every team has its own version</h3>
+        <div class="pz-ill" data-draw="d5" role="img" aria-label="Three separate rings, each with its own strand, with no common meeting point"></div>
+        <p class="pz-q"><span class="pz-lab">The question I ask</span><span class="bos">Would everyone in the business describe the same offer?</span></p>
+      </section>
+
+      <section class="pz-f pz-b pz-lead" data-st="6" aria-labelledby="pzWc">
+        <h3 class="pz-lab" id="pzWc">What changes</h3>
+        <div class="pz-ill" data-draw="lead" role="img" aria-label="A small ring with a dot inside a wide field of loosened dots"></div>
+        <p class="pz-bg"><span class="bos">The work is rarely to find a new idea. </span><span class="sn">It is to protect a strong one from the business that has grown around it.</span></p>
+      </section>
+
+      <section class="pz-f pz-b pz-look" aria-labelledby="pzHk">
+        <p class="num">01</p>
+        <h3 class="pz-dh" id="pzHk">Look underneath</h3>
+        <div class="pz-ill" data-draw="lens" role="img" aria-label="A lens over the field of dots, showing three kinds of finding"></div>
+        <ul class="pz-rows">
+          <li><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true" focusable="false"><circle cx="15" cy="15" r="14" fill="#fff"/></svg><span>Where the margin actually comes from</span></li>
+          <li><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true" focusable="false"><g fill="#fff"><circle cx="5" cy="15" r="4"/><circle cx="15" cy="15" r="4"/><circle cx="25" cy="15" r="4"/></g></svg><span>What the team spends its week on</span></li>
+          <li><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true" focusable="false"><circle cx="8" cy="15" r="7" fill="#fff"/><circle cx="23" cy="15" r="6" fill="none" stroke="#fff" stroke-width="2.4"/></svg><span>Which products carry the business, and which only keep it busy</span></li>
+        </ul>
+        <div class="pz-marks" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 30 30"><circle cx="15" cy="15" r="14" fill="#fff"/></svg><svg width="44" height="44" viewBox="0 0 44 44"><circle cx="22" cy="22" r="20" fill="none" stroke="#fff" stroke-width="2.4"/><circle cx="22" cy="22" r="7" fill="#fff"/></svg><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="8" fill="#555"/></svg></div>
+      </section>
+
+      <section class="pz-f pz-g pz-trade" aria-labelledby="pzHt">
+        <h3 class="pz-th" id="pzHt"><span class="num">02</span>Make the trade-off</h3>
+        <dl class="pz-tr">
+          <div class="pz-t1"><dt>Keep</dt><dd>What makes the idea strong, and what customers actually pay for</dd><i class="pz-keep" aria-hidden="true"></i></div>
+          <div class="pz-t2"><dt><span class="pz-sh" data-t="Sharpen"><span>Sharpen</span></span></dt><dd>What is right, but too broad, too costly or too hard to deliver</dd><svg class="pz-sm2" viewBox="0 0 76 76" aria-hidden="true" focusable="false"><circle cx="38" cy="38" r="36" fill="none" stroke="#000" stroke-width="2.4"/><circle cx="38" cy="38" r="14" fill="#000"/></svg></div>
+          <div class="pz-t3"><dt>Let go</dt><dd>What keeps the business busy without making it stronger</dd><span class="pz-lg" aria-hidden="true"><i style="left:0;top:10%;width:9px;height:9px"></i><i style="left:16%;top:55%;width:6px;height:6px"></i><i style="left:34%;top:20%;width:4px;height:4px"></i><i style="left:52%;top:65%;width:3px;height:3px"></i></span></div>
+        </dl>
+      </section>
+
+      <section class="pz-f pz-w pz-hold" aria-labelledby="pzHh">
+        <p class="num">03</p>
+        <h3 class="pz-dh2" id="pzHh">Build it to hold</h3>
+        <p class="pz-i">The trade-offs are leadership decisions.</p>
+        <p class="pz-c bos">I make them clear, then build the operating conditions that make them hold.</p>
+        <div class="pz-ill" data-draw="hold" role="img" aria-label="Three strands braided together, bound by pins into one line that ends in a ring"></div>
+      </section>
+
+      <section class="pz-f pz-w pz-ev" aria-labelledby="ppEvH">
+        <h3 class="pz-lab" id="ppEvH">In practice</h3>
+        <p class="pz-mh">MaHalla</p>
+        <dl class="pz-evs">
           <div class="e1"><dt>Scale</dt><dd><b>9,000 sqm</b><span>Former industrial power plant</span></dd></div>
           <div class="e2"><dt>Responsibility</dt><dd><b>Chief Operating Officer</b><span>P&amp;L responsibility</span></dd></div>
           <div class="e3"><dt>Transformation</dt><dd><b>Into a functioning cultural and event destination</b><span>Concept, programming, operations, partnerships and revenue-generating formats</span></dd></div>
           <div class="e4"><dt>Result</dt><dd><b class="it">From complex concept to functioning business.</b></dd></div>
         </dl>
-        <p class="pp-also"><span class="xh">The same question elsewhere</span><span><b>Schloss Elmau <i>/</i> Orania Berlin</b>Brand, operating and commercial concepts in hospitality</span><span><b>Reebok</b>Licensing, designer collaboration and product partnership</span></p>
+        <div class="pz-ill" data-draw="mh" role="img" aria-label="Five circles that merge into one solid circle"></div>
       </section>
 
-      <nav class="pp-nb" aria-labelledby="ppNbH">
-        <h3 class="xh" id="ppNbH">Where Proposition connects</h3>
-        <p class="pp-nbk">An offer raises three further questions.</p>
+      <section class="pz-f pz-w pz-else" aria-labelledby="pzHs">
+        <h3 class="pz-lab" id="pzHs">The same question elsewhere</h3>
+        <p class="pz-es pz-e2"><b>Schloss Elmau <i>/</i> Orania Berlin</b><span>Brand, operating and commercial concepts in hospitality</span></p>
+        <p class="pz-es pz-e1"><b>Reebok</b><span>Licensing, designer collaboration and product partnership</span></p>
+      </section>
+
+      <nav class="pz-f pz-w pz-nb" aria-labelledby="ppNbH">
+        <h3 class="pz-lab" id="ppNbH">Where Proposition connects</h3>
+        <p class="pz-nk">An offer raises three further questions.</p>
         <ul>
-          <li><button type="button" data-area="Advantage" data-rel data-act aria-haspopup="dialog"><span class="n">Advantage</span><span class="q">Why can this business matter more than the alternatives?</span><span class="plus" aria-hidden="true">+</span></button></li>
-          <li><button type="button" data-area="Positioning" data-rel data-act aria-haspopup="dialog"><span class="n">Positioning</span><span class="q">Where does it sit in its market, and against what?</span><span class="plus" aria-hidden="true">+</span></button></li>
-          <li><button type="button" data-area="Delivery" data-rel data-act aria-haspopup="dialog"><span class="n">Delivery</span><span class="q">How does the organisation fulfil what was promised?</span><span class="plus" aria-hidden="true">+</span></button></li>
+          <li class="n1"><button type="button" data-area="Advantage" data-rel data-act aria-haspopup="dialog"><span class="n">Advantage</span><span class="q">Why can this business matter more than the alternatives?</span><span class="plus" aria-hidden="true">+</span></button></li>
+          <li class="n2"><button type="button" data-area="Positioning" data-rel data-act aria-haspopup="dialog"><span class="n">Positioning</span><span class="q">Where does it sit in its market, and against what?</span><span class="plus" aria-hidden="true">+</span></button></li>
+          <li class="n3"><button type="button" data-area="Delivery" data-rel data-act aria-haspopup="dialog"><span class="n">Delivery</span><span class="q">How does the organisation fulfil what was promised?</span><span class="plus" aria-hidden="true">+</span></button></li>
         </ul>
       </nav>
 
-      <div class="pp-cta">
-        <p>When the offer and the business behind it stop matching, the trade-offs become unavoidable.</p>
+      <div class="pz-f pz-b pz-end">
+        <p class="pz-cs">When the offer and the business behind it stop matching, <span class="bos">the trade-offs become unavoidable.</span></p>
+        <div class="pz-ill" data-draw="end" role="img" aria-label="Layers of dots and rings, all registered around one idea"></div>
         <button class="act" type="button" data-go="7" data-act><span><b class="pill">08</b>Contact</span><span class="plus" aria-hidden="true">+</span></button>
       </div>
     </div>
@@ -1919,7 +1968,8 @@
 <script src="assets/vendor/ScrollTrigger.min.js?v=14"></script>
 <script src="assets/vendor/lenis.min.js?v=14"></script>
 <script src="assets/js/common.js?v=47"></script>
-<script src="assets/js/home.js?v=163"></script>
+<script src="assets/js/proposition.js?v=1"></script>
+<script src="assets/js/home.js?v=164"></script>
 <script type="module" src="assets/js/monolith.js?v=21"></script>
 </body>
 </html>

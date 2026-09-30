@@ -585,52 +585,12 @@ function mkInit(root){
   };
   mkReset();
 }
-/* Proposition: every business exists three times. One rule for the picture: the dashed column is the idea, the white blocks are where
-   the offer, the organisation and the economics actually are. Inside the column in all three rows, the business holds.
-   A segment is [left %, width %]; the column runs from 34 to 66 %. State 0 holds, 1 to 5 are the drifts */
-const PP=[
- [[[34,32]],[[34,32]],[[34,32]]],
- [[[34,32],[3,10],[18,10],[72,10],[87,10]],[[34,32],[18,10],[72,10]],[[34,32]]],
- [[[8,84]],[[41,18]],[[34,32]]],
- [[[48,48]],[[52,44]],[[56,40]]],
- [[[34,32]],[[34,32]],[[34,12]]],
- [[[6,30]],[[35,30]],[[64,30]]]
-];
 let ppReset=null;
 function ppInit(root){
-  /* the page is built once; a new visit starts again from the business that holds */
+  /* Proposition is drawn by assets/js/proposition.js; a new visit replays its states from the business that holds */
   if(ppReset)return relBackNow?undefined:ppReset();
-  const tracks=$$('.pp-track',root),tabs=$$('.pp-tab',root),outs=$$('.pp-o',root),rails=$('.pp-rails',root);
-  const seg=x=>`<i class="${x[2]==='h'?'h':''}" style="left:${x[0]}%;width:${x[1]}%"></i>`;
-  tracks.forEach(t=>{t.innerHTML='<i></i>'.repeat(6)});
-  /* every choice carries its own small picture of the three versions, so the pattern reads before it is opened */
-  tabs.forEach(b=>{$('.gl',b).innerHTML=PP[+b.dataset.s].map(g=>`<span>${g.map(seg).join('')}</span>`).join('')+'<em></em>'});
+  ppReset=window.LDT_PP.init(root);
   $$('[data-area]',root).forEach(b=>b.dataset.dreal=RI(b.dataset.area));
-  /* on a phone the reading opens under the chosen line (one source text; the desktop reading place is not shown there) */
-  tabs.forEach(b=>{b.nextElementSibling.innerHTML=`<div>${outs.find(o=>o.dataset.s===b.dataset.s).innerHTML}</div>`});
-  let sel=0,io;
-  const show=s=>{
-    rails.dataset.state=s;
-    tracks.forEach((t,r)=>{const g=PP[s][r];[...t.children].forEach((el,k)=>{const x=g[Math.min(k,g.length-1)];el.style.left=x[0]+'%';el.style.width=x[1]+'%';el.classList.toggle('h',x[2]==='h')})});
-  };
-  const select=s=>{sel=s;
-    tabs.forEach(b=>{const on=+b.dataset.s===s;b.classList.toggle('on',on);b.parentNode.classList.toggle('on',on);b.setAttribute('aria-pressed',on)});
-    outs.forEach(o=>o.classList.toggle('on',+o.dataset.s===s));show(s)};
-  /* a second press on a drift returns to the business that holds */
-  tabs.forEach(b=>b.addEventListener('click',()=>select(+b.dataset.s===sel?0:+b.dataset.s)));
-  /* the three versions arrive as one business: from the idea line outwards, when the rails come into view */
-  /* the entry is one landing: it ends where the dark field begins, measured from where the page starts in the layer */
-  const hero=$('.pp-hero',root),fit=()=>root.style.setProperty('--h0',Math.max(0,hero.getBoundingClientRect().top-$('#deep').getBoundingClientRect().top+$('#deep').scrollTop)+'px');
-  addEventListener('resize',fit);
-  ppReset=()=>{
-    fit();select(0);
-    if(RM)return;
-    tracks.forEach(t=>[...t.children].forEach(el=>{el.style.transition='none';el.style.left='50%';el.style.width='0%';el.classList.remove('h')}));
-    rails.getBoundingClientRect();tracks.forEach(t=>[...t.children].forEach(el=>{el.style.transition=''}));
-    if(io)io.disconnect();
-    io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();show(sel)}},{threshold:.35});io.observe(rails);
-  };
-  ppReset();
 }
 /* Operations: the business in motion. One material for the page, the running week: every part of the business is a lane with its own rhythm.
    The entry shows the lanes all at once; a signal is a change in the rhythm; structure is what carries the load while work keeps moving */
