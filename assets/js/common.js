@@ -19,7 +19,7 @@ d.body.prepend(hdr);
 
 /* ---------- index layer: numbers follow the chapters they belong to ---------- */
 const IX=[
- ['04.1','System','Explore',HOME?'data-open="approach"':`href="${ROOT}#approach" data-cut`],
+ ['04.1','System','Explore',HOME?'data-open="approach"':`href="${ROOT}#explore" data-cut`],
  ['05.1','Evidence','Experience',HOME?'data-open="experience"':`href="${ROOT}#experience" data-cut`],
  ['07.2','Knowledge','Workshops',PAGE==='workshops'?'data-close':`href="${ROOT}workshops/" data-cut`],
  ['08','Direct','Contact',HOME?'data-go="7"':`href="${ROOT}#contact" data-cut`]
@@ -109,9 +109,9 @@ function setInert(on,keep){$$('body > *').forEach(e=>{if(e===keep){e.inert=false
 function focusables(r){return $$('a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"])',r).filter(e=>e.offsetParent!==null||e.getClientRects().length)}
 /* pages that keep an address for an open layer (the deep dives) listen for this */
 const layersChanged=()=>d.dispatchEvent(new CustomEvent('ldt:layers'));
-function openLayer(id,fill,trigger,now){
+function openLayer(id,fill,trigger,now,fresh){
   const ov=d.getElementById(id);if(!ov)return;
-  if(openOv&&openOv!==ov){stack.push({ov:openOv,from:trigger||d.activeElement,scroll:openOv.scrollTop});closeLayer(true,true)}else if(!openOv){returnFocus=trigger||d.activeElement;stack=[]}
+  if(openOv&&openOv!==ov){stack.push({ov:openOv,from:trigger||d.activeElement,scroll:openOv.scrollTop});closeLayer(true,true);if(fresh)stack=[]}else if(!openOv){returnFocus=trigger||d.activeElement;stack=[]}
   if(fill)fill();
   gsap.killTweensOf(ov);openOv=ov;lenis&&lenis.stop();html.style.overflow='hidden';ov.scrollTop=0;setInert(true,ov);
   const focusIn=()=>{const f=$('[data-close]',ov);f&&f.focus({preventScroll:true})};
@@ -145,6 +145,8 @@ addEventListener('keydown',e=>{
 
 /* ---------- between pages: the same cut, then the next page loads ---------- */
 function cutTo(href){
+  /* the address keeps its query parameters across pages (a preview share key, for example) */
+  try{const u=new URL(href,location.href);if(u.origin===location.origin){if(!u.search)u.search=location.search;href=u.pathname+u.search+u.hash}}catch(e){}
   if(RM){location.href=href;return}
   try{sessionStorage.setItem('ldt-cut','1')}catch(e){}
   lenis&&lenis.stop();
@@ -170,7 +172,7 @@ d.addEventListener('click',e=>{
     else if(!cut.matches('.subbar .back')){const tr=readS(TRAIL)||[];tr.push(here());writeS(TRAIL,tr.slice(-10))}
     cutTo(cut.getAttribute('href'));return}
   const o=t.closest('[data-open]');
-  if(o){e.preventDefault();if(e.detail===0)keyX(o);openLayer(o.dataset.open,LDT.fills[o.dataset.open],o);return}
+  if(o){e.preventDefault();if(e.detail===0)keyX(o);openLayer(o.dataset.open,LDT.fills[o.dataset.open],o,false,!!o.closest('#index'));return}
   const g=t.closest('[data-go]');
   if(g&&LDT.goChapter){e.preventDefault();if(openOv)closeLayer(true);LDT.goChapter(+g.dataset.go);return}
   if(t.closest('[data-close]')){e.preventDefault();back();return}
