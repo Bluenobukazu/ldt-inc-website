@@ -95,11 +95,12 @@ const DRAW={
     [0.8,0.85,0.9].forEach((f,i)=>{const x=w*f;mk('circle',{cx:x,cy:y,r:15,fill:'#fff',stroke:'#000','stroke-width':3,class:'pz-pin',style:`--i:${i}`},g);mk('circle',{cx:x,cy:y,r:5,fill:'#000',class:'pz-pin',style:`--i:${i}`},g)})},
   /* MaHalla: five parts merge into one business, in the same ring as the idea */
   mh(el,w,h){const g=canvas(el,w,h),m=narrow(),words=['Concept','Programming','Operations','Partnerships','Revenue-generating formats'];
-    const n=5,step=(w*(m?.82:.66))/n,r0=Math.min(step*.32,50),cy=h/2+(m?0:6);
-    words.forEach((t,i)=>{const x=w*.06+r0+i*step,r=r0+i*(m?2:5);
-      mk('circle',{cx:x,cy:cy+(i%2?-1:1)*(4-i)*(m?3:7),r,fill:'none',stroke:'#000','stroke-width':2.2,class:'pz-mc',style:`--i:${i}`},g);
-      if(!m){const lbl=T(g,x,i%2?cy-r-18:cy+r+26,t,'#000','middle',13);lbl.classList.add('pz-ml')}});
-    const R=Math.min(w*(m?.11:.072),92);mk('circle',{cx:w-R-14,cy,r:R*1.36,fill:'none',stroke:CW.r,'stroke-width':R*.3},g);mk('circle',{cx:w-R-14,cy,r:R,fill:'#000',class:'pz-mf'},g)},
+    const n=5,step=(w*(m?.82:.66))/n,r0=Math.min(step*.32,50,h*.25),cy=h/2+(m?0:4),GAP=16;
+    words.forEach((t,i)=>{const x=w*.06+r0+i*step,r=r0+i*(m?2:Math.min(5,h*.03)),y=cy+(i%2?-1:1)*(4-i)*(m?3:Math.min(7,h*.04));
+      mk('circle',{cx:x,cy:y,r,fill:'none',stroke:'#000','stroke-width':2.2,class:'pz-mc',style:`--i:${i}`},g);
+      /* same clear gap from every circle edge: labels above sit GAP over the edge, labels below sit GAP under it (cap height ~10) */
+      if(!m){const up=i%2===1,lbl=T(g,x,up?y-r-GAP:y+r+GAP+10,t,'#000','middle',13);lbl.classList.add('pz-ml')}});
+    const R=Math.min(w*(m?.11:.072),92,h*.4);mk('circle',{cx:w-R-14,cy,r:R*1.36,fill:'none',stroke:CW.r,'stroke-width':R*.3},g);mk('circle',{cx:w-R-14,cy,r:R,fill:'#000',class:'pz-mf'},g)},
   /* ending: every earlier state sits registered around one idea */
   end(el,w,h){const g=canvas(el,w,h),c=CK,cx=w*.5,cy=h*.5,R=Math.min(w,h)/2*.96;
     for(let i=0;i<54;i++){const a=i/54*6.283;mk('circle',{cx:cx+Math.cos(a)*R,cy:cy+Math.sin(a)*R,r:3.2,fill:'#6a6a6a',class:'pz-l1'},g)}
