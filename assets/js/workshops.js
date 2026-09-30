@@ -26,6 +26,24 @@ const words=$$('#kq .w');
   gsap.from('.w-close .row',{opacity:0,y:40,duration:1,ease:'expo.out',clearProps:'transform,opacity',scrollTrigger:{trigger:'.w-close',start:'top 65%'}});
 });
 
+/* direct addresses on /workshops (30.09.2026): #practice, #frameworks, #formats, #environments and #talk scroll to their section;
+   #fwp1 to #fwp5 open that framework in place. The address is followed on Back and Forward; the fixed header never covers the target */
+const SEC=['practice','frameworks','formats','environments','talk'];
+function routeW(now){let h='';try{h=decodeURIComponent(location.hash.slice(1))}catch(e){}
+  let el=null,pad=0;
+  if(SEC.includes(h))el=$('#'+h);
+  else if(/^fwp[1-5]$/.test(h)){const p=$('#'+h),r=p&&p.closest('.fwr');
+    if(r){r.classList.add('open');const b=$('.fw-t',r);b&&b.setAttribute('aria-expanded','true');el=r;pad=110}}
+  if(!el)return;
+  LDT.go(el.getBoundingClientRect().top+scrollY-pad,now)}
+if(location.hash){
+  /* the browser may still apply its own anchor jump after load: confirm the target until the visitor moves */
+  let moved=false;['wheel','touchstart','keydown','pointerdown'].forEach(ev=>addEventListener(ev,()=>{moved=true},{once:true,passive:true}));
+  const again=()=>{if(!moved)routeW(true)};
+  (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>requestAnimationFrame(again));
+  addEventListener('load',()=>setTimeout(again,60),{once:true});setTimeout(again,500);setTimeout(again,1400)}
+addEventListener('hashchange',()=>routeW(false));
+
 /* from the offer straight to the conversation at the end of the page */
 $('.fm-go').addEventListener('click',e=>{e.preventDefault();LDT.go($('#talk').getBoundingClientRect().top+scrollY)});
 

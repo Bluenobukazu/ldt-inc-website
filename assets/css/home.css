@@ -160,7 +160,7 @@ svg.sys .cross{stroke:#fff;stroke-width:1}
 
 /* contact */
 /* 08 contact: the destination. The address itself is the largest thing on the black field; one line beneath it fills on hover. LinkedIn follows as the second, quieter way */
-#contact{min-height:100vh;padding-top:14vh;display:flex;flex-direction:column;justify-content:space-between}
+#contact{min-height:100vh;padding-top:max(14vh,104px);display:flex;flex-direction:column;justify-content:space-between}
 #contact .c-in{display:flex;flex-direction:column;flex:1}
 #contact .kick{flex-direction:row;align-items:center;gap:16px;margin-bottom:6vh}#contact .kick .pill{margin:0}
 #contact .kick .t{font-family:var(--serif);font-style:italic;font-weight:400;font-stretch:100%;font-variation-settings:normal;font-size:clamp(34px,2.8vw,48px);letter-spacing:-.01em;line-height:1}

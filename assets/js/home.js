@@ -13,6 +13,27 @@ if(RM)document.documentElement.classList.add('rm');
 /* ---------- content: Master Handover and Lena's decisions ---------- */
 const CH=['Arrive','Complexity','Connect','System','Proof','Transformation','Ways to Work','Contact'];
 const HASH=['arrive','complexity','connect','system','proof','transformation','ways','contact'];
+/* addresses of Layer 1 (30.09.2026): every chapter is #<chapter> (no hash on the landing). The four secondary views (#experience, #approach, #engage, #lead)
+   open over the chapter they belong to. Choosing a chapter adds a history step; scrolling only keeps the address in step with the chapter in view */
+const LAYER_AT={experience:4,approach:3,engage:5,lead:6};
+const LAYERS=Object.keys(LAYER_AT);
+const chHash=i=>i>0?HASH[i]:'';
+let urlT=0,pendingNav=null;
+/* the chapter in view; with reduced motion no scene reports it, so it is read from where the chapters stand on the page */
+function curChapter(){if(!RM)return active;
+  const ys=[0,1,2,3].map(i=>topOf(stages[i])).concat(['#proof','#transformation','#ways','#contact'].map(id=>topOf($(id))));
+  let c=0;ys.forEach((y,i)=>{if(y<=scrollY+innerHeight*.4)c=i});return c}
+function syncChapterUrl(){
+  if(quiet||LDT.layers.length||active<0)return;
+  const h=location.hash.slice(1);
+  if(deepOf(h)||LAYER_AT[h]!=null)return;
+  const c=curChapter(),want=chHash(c);
+  if(h===want||(c===0&&h==='arrive'))return;
+  history.replaceState(history.state,'',urlFor(want))}
+function applyNav(want){const h=location.hash.slice(1);
+  if(h===want||(want===''&&h==='arrive'))return;
+  history.pushState(null,'',urlFor(want))}
+function flushNav(){if(pendingNav!==null){const w=pendingNav;pendingNav=null;applyNav(w)}}
 /* Operating dimensions: how Lena organises a business. k = primary message, ap = Approach line, detail = Master Handover wording */
 const DIMS=[
  {n:'Proposition',slug:'proposition',k:'An offer is only as strong as the business built to keep it.',
@@ -107,6 +128,7 @@ const P=(el,x,y,w,h)=>gsap.set(el,Object.assign({left:x,top:y},w!=null?{width:w}
 
 /* ---------- chapter rail: quiet on the landing, present once the visitor moves ---------- */
 if(!RM){const jt=$('#journey .j-title');jt.setAttribute('aria-hidden','true');jt.insertAdjacentHTML('beforebegin',[1,2,3].map(i=>`<h2 class="sr">${JT[i][2]?JT[i][2]+' ':''}${JT[i][1]}</h2>`).join('')+`<p class="sr">${SYS_LINE}</p>`)}
+if(RM)addEventListener('scroll',()=>{clearTimeout(urlT);urlT=setTimeout(syncChapterUrl,350)},{passive:true});
 CH.forEach((c,i)=>{const b=document.createElement('button');b.type='button';b.dataset.go=i;b.dataset.act='';b.innerHTML=`<span>0${i+1} ${c}</span><i></i>`;$('#rail').appendChild(b)});
 /* header safe band: a pinned scene gets the band of its end state only once it scrolls away; while it stands, nothing covers it */
 const bandAfter=(el,c)=>self=>{if(self.progress>=1)el.dataset.band=c;else delete el.dataset.band;LDT.syncBand()};
@@ -122,7 +144,7 @@ let active=-1;
   rail.addEventListener('mouseenter',()=>{inside=true;wake()});rail.addEventListener('mouseleave',()=>{inside=false;wake()});
   rail.addEventListener('focusin',wake);rail.addEventListener('focusout',()=>setTimeout(wake,0));
   wake()})();
-function setActive(i){if(i===active)return;active=i;LDT.chapterNow=i;$$('#rail button').forEach((b,j)=>{b.classList.toggle('on',j===i);if(j===i)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current')});$('#railM').innerHTML=`<span class="pill">0${i+1}</span><span class="dcur">${CH[i]}</span>`;document.body.classList.toggle('at-end',i===7)}
+function setActive(i){if(i===active)return;active=i;LDT.chapterNow=i;clearTimeout(urlT);urlT=setTimeout(syncChapterUrl,350);$$('#rail button').forEach((b,j)=>{b.classList.toggle('on',j===i);if(j===i)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current')});$('#railM').innerHTML=`<span class="pill">0${i+1}</span><span class="dcur">${CH[i]}</span>`;document.body.classList.toggle('at-end',i===7)}
 function railRect(i){const b=$$('#rail button')[i];return b&&b.offsetParent?b.querySelector('span').getBoundingClientRect():null}
 function emerge(el,i,scale=1){
   if(RM){gsap.set(el,{opacity:1,x:0,y:0,scale:1});return}
@@ -1216,12 +1238,18 @@ function deepUrl(type,i){const s=slugOf(type,i),cur=deepOf(location.hash.slice(1
   else history.pushState(cur?{ddn:(st.ddn||0)+1,direct:!!st.direct}:{ddn:1,direct:false},'',urlFor(s))}
 /* leaving the deep dives (site Back, Escape, Start, browser Back): the address goes back to the page below them, without a stale deep dive address */
 document.addEventListener('ldt:layers',()=>{
-  if(LDT.layers.includes('deep')||quiet)return;
-  if(REL.length){REL.length=0;relStrip({})}
-  if(!deepOf(location.hash.slice(1)))return;
-  const st=history.state||{};
-  if(st.ddn>0&&!st.direct){quiet=true;clearTimeout(quietT);quietT=setTimeout(()=>{quiet=false},600);history.go(-st.ddn)}
-  else history.replaceState(null,'',urlFor('system'))});
+  if(quiet)return;
+  if(!LDT.layers.includes('deep')){
+    if(REL.length){REL.length=0;relStrip({})}
+    if(deepOf(location.hash.slice(1))){
+      const st=history.state||{};
+      if(st.ddn>0&&!st.direct){quiet=true;clearTimeout(quietT);quietT=setTimeout(()=>{quiet=false;flushNav()},600);history.go(-st.ddn);return}
+      history.replaceState(null,'',urlFor('system'))}}
+  /* a secondary view that is closed leaves no address of its own behind */
+  if(!LDT.layers.length&&LAYER_AT[location.hash.slice(1)]!=null)history.replaceState(history.state,'',urlFor(chHash(curChapter())))});
+/* choosing a chapter (rail, Index, Start, the buttons that lead to Contact) adds one history step */
+document.addEventListener('click',e=>{const g=e.target.closest&&e.target.closest('[data-go]');if(!g||!LDT.goChapter)return;
+  const want=chHash(+g.dataset.go);if(quiet)pendingNav=want;else applyNav(want)});
 function showDeep(type,i,trigger,after){
   deepUrl(type,i);
   if(LDT.open===$('#deep')){
@@ -1289,13 +1317,15 @@ function init(){
       /* back from another page to a deep dive address: the deep dive returns with it */
       const rd=deepOf(h0);if(rd){history.replaceState(history.state&&history.state.ddn!=null?history.state:{ddn:0,direct:true},'',urlFor(rd.slug));showDeep(rd.type,rd.i,null)}
       LDT.reveal();return}
-    let h='';try{h=decodeURIComponent(location.hash.slice(1))}catch(e){}const ci=HASH.indexOf(h);
+    let h='';try{h=decodeURIComponent(location.hash.slice(1))}catch(e){}const ci=HASH.indexOf(h)>=0?HASH.indexOf(h):(LAYER_AT[h]||-1);
     if(ci>0){LDT.goChapter(ci,true);ScrollTrigger.update();hero(false);
       /* the browser may still apply its own anchor jump after load: confirm the target until the visitor moves */
       let moved=false;const stop=()=>{moved=true};['wheel','touchstart','keydown','pointerdown'].forEach(ev=>addEventListener(ev,stop,{once:true,passive:true}));
-      const again=()=>{if(!moved&&!LDT.open){ScrollTrigger.refresh();LDT.goChapter(ci,true);ScrollTrigger.update()}};
+      /* a secondary view (#experience ...) opens over its chapter: the chapter is confirmed underneath it as well */
+      const under=LAYERS.includes(h);
+      const again=()=>{if(!moved&&(!LDT.open||under)){ScrollTrigger.refresh();LDT.goChapter(ci,true);ScrollTrigger.update()}};
       addEventListener('load',()=>setTimeout(again,60),{once:true});setTimeout(again,500);setTimeout(again,1400)}
-    if(['experience','approach','engage','lead'].includes(h)){LDT.openLayer(h);LDT.arrivedInLayer()}
+    if(LAYERS.includes(h)){LDT.openLayer(h,LDT.fills[h]);LDT.arrivedInLayer()}
     else if(routeDeep(h))LDT.arrivedInLayer();
     J[0].intro(ci>0);
     LDT.reveal();
@@ -1303,11 +1333,13 @@ function init(){
 }
 /* fonts first (the wordmark is measured), then the monolith; if three.js cannot load at all the page still starts */
 Promise.all([document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve(),Promise.race([monoReady,new Promise(r=>setTimeout(r,4000))])]).then(()=>requestAnimationFrame(init));
-addEventListener('hashchange',()=>{if(quiet){quiet=false;clearTimeout(quietT);return}
-  const h=location.hash.slice(1),ci=HASH.indexOf(h);
+addEventListener('hashchange',()=>{if(quiet){quiet=false;clearTimeout(quietT);flushNav();return}
+  const h=location.hash.slice(1),ci=h===''?0:HASH.indexOf(h);
   /* an address that is no longer a deep dive (browser Back to the page below): the deep dive closes with it */
-  if(!deepOf(h)&&LDT.open===$('#deep')&&ci<0&&!['experience','approach','engage','lead'].includes(h)){LDT.closeLayer(true);return}
-  if(ci>=0){if(LDT.open)LDT.closeLayer(true);LDT.goChapter(ci)}else if(['experience','approach','engage','lead'].includes(h))LDT.openLayer(h);else routeDeep(h)});
+  if(!deepOf(h)&&LDT.open===$('#deep')&&ci<0&&!LAYERS.includes(h)){LDT.closeLayer(true);return}
+  if(ci>=0){if(LDT.open)LDT.closeLayer(true);LDT.goChapter(ci)}
+  else if(LAYERS.includes(h)){if(!LDT.open&&LDT.chapterNow!==LAYER_AT[h])LDT.goChapter(LAYER_AT[h],true);LDT.openLayer(h,LDT.fills[h])}
+  else routeDeep(h)});
 /* on a size change (window, phone rotation) the page keeps its place: chapter and distance into it are restored after the rebuild */
 let rt,lw=innerWidth,lh=innerHeight,keep=null;
 addEventListener('resize',()=>{if(MOB()&&innerWidth===lw)return;lw=innerWidth;
