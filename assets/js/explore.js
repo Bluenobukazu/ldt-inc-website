@@ -39,7 +39,7 @@ function build(root,mode){
     return e*m+ad};
   function draw(t){if(!W||!pts.length)return;const step=W>900?7:6,amp=H*.5,cy=H/2,xs=[];for(let x=0;x<W+step;x+=step)xs.push(Math.min(x,W));
     const E=xs.map(env),WB=xs.map(x=>H*.05*Math.sin(x/W*Math.PI*3.1+1.3));
-    for(let j=0;j<M;j++){const f=j/(M-1),r=.46+.54*Math.pow(f,1.15);let dt='',db='';
+    for(let j=0;j<M;j++){const f=j/(M-1),r=(mode==='ft'?.62:.46)+(mode==='ft'?.38:.54)*Math.pow(f,1.15);let dt='',db='';
       for(let k=0;k<xs.length;k++){const x=xs[k],u=x/W,dr=(f-.5)*E[k]*H*.07*Math.sin(u*17+j*.3),sk=1+.15*Math.sin(u*9+1.1),sb=1-.12*Math.sin(u*11+.4),sw=1+.07*Math.sin(u*47+j*.55),y0=cy+WB[k]*E[k];
         dt+=(k?'L':'M')+x.toFixed(1)+' '+(y0-amp*E[k]*r*sk*sw+dr).toFixed(1);db+=(k?'L':'M')+x.toFixed(1)+' '+(y0+amp*E[k]*r*sb*sw+dr).toFixed(1)}
       P1[j].setAttribute('d',dt);P2[j].setAttribute('d',dt);P1[M+j].setAttribute('d',db);P2[M+j].setAttribute('d',db)}}
@@ -123,7 +123,7 @@ function footer(f){
 }
 /* the page the visitor is on: its column carries "You are here" */
 function mark(type,i){
-  document.querySelectorAll('.sy .here,.sy .yh').forEach(e=>{e.classList.remove('here');if(e.classList.contains('yh'))e.remove()});
+  document.querySelectorAll('.sy .here,.sy .yh').forEach(e=>{e.classList.remove('here','here-dim');if(e.classList.contains('yh'))e.remove()});
   document.querySelectorAll('.sy [aria-current]').forEach(e=>e.removeAttribute('aria-current'));
   const dm=type==='dim'?[i]:D.REAL[i].d;
   document.querySelectorAll('#deepFoot .df-nav [data-ddim]').forEach(n=>n.classList.toggle('cur',dm.includes(+n.dataset.ddim)));
@@ -134,7 +134,8 @@ function mark(type,i){
     if(!col){root._sy.setHere(null);return}
     col.classList.add('here');btn.setAttribute('aria-current','page');
     const y='<em class="yh">You are here</em>',n=btn.querySelector('.n');
-    if(n)n.insertAdjacentHTML('afterend',y);else{const ic=btn.querySelector('i');if(ic)ic.insertAdjacentHTML('beforebegin',y);else btn.insertAdjacentHTML('beforeend',y)}
+    if(type==='dim'){col.classList.add('here-dim');col.insertAdjacentHTML('afterbegin',y)}
+    else if(n)n.insertAdjacentHTML('afterend',y);else{const ic=btn.querySelector('i');if(ic)ic.insertAdjacentHTML('beforebegin',y);else btn.insertAdjacentHTML('beforeend',y)}
     root._sy.setHere([root._sy.cols.indexOf(col)]);
   });
 }

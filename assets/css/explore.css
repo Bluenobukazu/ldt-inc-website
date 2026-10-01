@@ -218,3 +218,11 @@
   .sy .sy-x .sy-k{padding:10px 0 62px}
 }
 .sy-x .sy-k .ab,.sy-x .sy-k .n{white-space:nowrap}
+@media (min-width:761px){
+  .sy-ex .sy-x{min-height:320px}.sy-ft .sy-x{min-height:220px}.sy-l1 .sy-x{min-height:230px}
+  .sy .sy-x .sy-k{padding:12px 0 74px}
+  .sy-x .sy-k .ab{margin-top:.2em}
+  .sy-d.here-dim{box-shadow:inset 0 2px 0 #000}
+  .sy-d>.yh{display:flex;margin:calc(var(--sp)*.6) 0 calc(var(--sp)*.2)}
+  .sy-ft{--fh:9.5cqw}
+}
