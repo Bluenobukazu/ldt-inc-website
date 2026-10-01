@@ -117,7 +117,7 @@ const GD={W:1440,H:900,m:48,
  connect:[270,372,900,44],
  C0:[[640,290],[1060,290],[640,660],[1060,660]],r0:150,
  C1:[[804,286],[1054,286],[804,660],[1054,660]],r1:176,
- divider:[520,92],os:[48,292,1190,590]
+ divider:[520,92]
 };
 const GM={W:430,H:860,m:22,
  caps:[22,21],rule:[22,96],wmW:386,wmB:330,desc:{left:22,top:586,fs:24},hint:{right:22,bottom:26},core:[22,250,340,30],barAfter:[372,36],
@@ -126,7 +126,7 @@ const GM={W:430,H:860,m:22,
  connect:[22,300,386,27],
  C0:[[118,520],[312,520],[118,730],[312,730]],r0:84,
  C1:[[136,462],[294,462],[136,692],[294,692]],r1:110,
- divider:[-10,0],os:[22,326,386,530]
+ divider:[-10,0]
 };
 const G=()=>MOB()?GM:GD;
 /* reading holds (Lena, scroll QA 26.09.2026): the proposition and the Connect sentence stand a little longer, the finished System a little shorter.
@@ -203,18 +203,15 @@ function Journey(st,inst){
   /* the + at the centre of each circle opens its dimension: on this site + always means open (Lena, 27.09.2026) */
   const cEls=DIMS.map((d,i)=>mk('button','cplus','<i></i>',{'data-dim':i,'data-act':'','aria-haspopup':'dialog','aria-label':`Open ${d.n}`}));
   const vB=mk('button','vlab','Delivery',{'data-real':RI('Delivery'),'data-act':'','aria-haspopup':'dialog'});
-  /* the Venn labels are replaced by the Operating System drawing (visual rebuild 01.10.2026): the circles hand over to it */
-  const osEl=document.createElement('div');osEl.className='j-os os';osEl.innerHTML=`<p class="os-lead">${SYS_LINE}</p><div class="os-fig"></div><div class="os-cta"><p class="os-cl">Every part of the system opens its own page.</p><button class="os-ex" type="button" data-open="approach" data-act aria-haspopup="dialog"><span>Explore the system</span><b aria-hidden="true">+</b></button></div>`;sl.appendChild(osEl);
-  [...dimEls,...Object.values(tickEls),vA,vB,...cEls,cue].forEach(e=>e.remove());
   let tl=null,master=null,trig=null,jState=-1,G0=G();
 
   function fitText(el,w){el.style.fontSize='100px';const r=el.getBoundingClientRect().width/S;el.style.fontSize=(100*w/r)+'px'}
   /* the thread: the cut starts exactly on the line the monolith contracts into, between LDT and INC */
   function monoCut(g){const m=LDT.mono,l=m&&inst===0?m.line():{left:innerWidth/2-2,width:4};const offX=(innerWidth-g.W*S)/2;return{x:(l.left-offX)/S,w:l.width/S}}
   function jTitle(i){if(i===jState)return;const prev=jState;jState=i;const el=q('.j-title');gsap.killTweensOf(el);
-    const show=()=>{if(!JT[jState]){gsap.set(el,{opacity:0});return}let [n,t,s,x]=JT[jState];if(jState===3&&!MOB())x='';el.querySelector('.pill').textContent=n;el.querySelector('.t').textContent=t;el.querySelector('.s').innerHTML=s;el.querySelector('.s').style.display=s?'':'none';el.querySelector('.x').textContent=x;el.querySelector('.x').style.display=x?'':'none';
+    const show=()=>{if(!JT[jState]){gsap.set(el,{opacity:0});return}const [n,t,s,x]=JT[jState];el.querySelector('.pill').textContent=n;el.querySelector('.t').textContent=t;el.querySelector('.s').innerHTML=s;el.querySelector('.s').style.display=s?'':'none';el.querySelector('.x').textContent=x;el.querySelector('.x').style.display=x?'':'none';
       /* System is the anchor of the site: its title stands larger than Complexity and Connect */
-      const big=jState===3,M=MOB();gsap.set(el.querySelector('.t'),{fontSize:big?(M?56:84):G0.jtS});gsap.set(el.querySelector('.s'),{fontSize:big?(M?32:44):(M?26:40)});gsap.set(el.querySelector('.x'),{fontSize:big?(M?15:21):(M?14:19),width:big?(M?380:440):(M?370:410)});
+      const big=jState===3,M=MOB();gsap.set(el.querySelector('.t'),{fontSize:big?(M?56:104):G0.jtS});gsap.set(el.querySelector('.s'),{fontSize:big?(M?32:60):(M?26:40)});gsap.set(el.querySelector('.x'),{fontSize:big?(M?15:21):(M?14:19),width:big?(M?380:440):(M?370:410)});
       emerge(el,jState,S)};
     if(JT[prev])retreat(el,prev,S,show);else show()}
 
@@ -237,7 +234,6 @@ function Journey(st,inst){
     /* system */
     P(q('.j-divider'),g.divider[0],g.divider[1],1,g.H);gsap.set(q('.j-divider'),{opacity:0,display:M?'none':''});
     gsap.set(sys,{attr:{width:g.W,height:g.H,viewBox:`0 0 ${g.W} ${g.H}`}});
-    gsap.set(sys,{opacity:1});gsap.set(osEl,{left:g.os[0],top:g.os[1],width:g.os[2],height:g.os[3],opacity:0});osEl.style.setProperty('--ou',(g.os[2]/90)+'px');osEl.style.height=g.os[3]+'px';osEl.classList.toggle('os-m',M);
     const C=i=>q('.c'+i),F=i=>q('.f'+i),CL=i=>q('.clc'+i);
     [0,1,2,3].forEach(i=>{const [x,y]=g.C0[i];gsap.set([C(i),F(i),CL(i)],{attr:{cx:x,cy:y,r:g.r0}});gsap.set(C(i),{attr:{'stroke-dashoffset':1},visibility:'hidden'});gsap.set(F(i),{opacity:0})});
     gsap.set(q('.lensA'),{attr:{cx:g.C1[0][0],cy:g.C1[0][1],r:g.r1},opacity:0});gsap.set(q('.lensB'),{attr:{cx:g.C1[2][0],cy:g.C1[2][1],r:g.r1},opacity:0});
@@ -289,14 +285,15 @@ function Journey(st,inst){
     /* 04 System: light returns, circles move into each other, shared realities appear */
     tl.to(q('.j-black'),{opacity:0,duration:.001},at(.62));
     [0,1,2,3].forEach(i=>{const [x,y]=g.C1[i];tl.to([C(i),F(i),CL(i)],{attr:{cx:x,cy:y,r:g.r1},duration:.08,ease:'power3.inOut'},at(.635))});
-    tl.to(sys,{opacity:0,duration:.03,ease:'power1.inOut'},at(.715)).to(osEl,{opacity:1,duration:.035},at(.735))
-
+    tl.to([q('.lensA'),q('.lensB')],{opacity:1,duration:.02},at(.72)).to([vA,vB],{opacity:1,duration:.02},at(.735))
+      .to(dimEls,{opacity:1,duration:.02,stagger:.005},at(.745)).to(Object.values(tickEls),{opacity:1,duration:.02,stagger:.004},at(.76))
+      .to([cross,...cEls],{opacity:1,duration:.02},at(.78)).to(cue,{opacity:1,duration:.02},at(.785)).to(q('.j-divider'),{opacity:1,duration:.02},at(.78))
       .to({},{duration:SYS_HOLD},at(.8));
 
     if(RM){
       const p=STILL[inst];tl.time(Math.min(p,tl.duration()));
       st.classList.toggle('cxOn',inst===1);st.classList.toggle('sysOn',inst===3);
-      if(JT[inst]){let [n,t,s,x]=JT[inst];if(inst===3&&!MOB())x='';jt.querySelector('.pill').textContent=n;jt.querySelector('.t').textContent=t;jt.querySelector('.s').innerHTML=s;jt.querySelector('.s').style.display=s?'':'none';jt.querySelector('.x').textContent=x;jt.querySelector('.x').style.display=x?'':'none';gsap.set(jt,{opacity:1})}
+      if(JT[inst]){const [n,t,s,x]=JT[inst];jt.querySelector('.pill').textContent=n;jt.querySelector('.t').textContent=t;jt.querySelector('.s').innerHTML=s;jt.querySelector('.s').style.display=s?'':'none';jt.querySelector('.x').textContent=x;jt.querySelector('.x').style.display=x?'':'none';gsap.set(jt,{opacity:1})}
       else gsap.set(jt,{opacity:0});
       /* hide what is not visible in this still, from assistive technology and the keyboard */
       [...cv.children,...q('.j-blocks').children,...sl.children].forEach(e=>{const o=+gsap.getProperty(e,'opacity');if(o<.05){e.setAttribute('aria-hidden','true');if(e.tagName==='BUTTON')e.tabIndex=-1}});
@@ -371,7 +368,7 @@ function buildTransform(){
 const orgHTML=()=>{let oi=0;return OG.map(([c,ns])=>`<div class="og"><h3>${c}</h3><ul>${ns.map(n=>`<li><span class="${(oi++)%2?'it':'g'}">${n}</span></li>`).join('')}</ul></div>`).join('')};
 $('#orgList').innerHTML=orgHTML();
 /* Explore the system: the map follows the diagram. Four dimensions with their areas, Positioning and Delivery between the pairs */
-window.LDT_XI.build($('#xMap'),{DIMS,REAL,SYS,DL,RI,ADDR});$$('.j-os .os-fig').forEach(f=>window.LDT_XI.landing(f,f.closest('.stage')));window.LDT_XI.footer($('#deepFoot'));
+window.LDT_XI.build($('#xMap'),{DIMS,REAL,SYS,DL,RI,ADDR});window.LDT_XI.footer($('#deepFoot'));
 if($('#states'))$('#states').innerHTML=STATES.map(([l,t,rs])=>`<div class="st"><div class="g" aria-hidden="true">${rs.map(r=>`<i style="left:${r[0]}%;top:${r[1]}%;width:${r[2]}%;height:${r[3]}%"></i>`).join('')}</div><h3 class="l">${l}</h3><p>${t}</p></div>`).join('');
 
 function buildFlow(){
