@@ -207,7 +207,7 @@ function Journey(st,inst){
   const osEl=document.createElement('div');osEl.className='j-os';osEl.innerHTML=`<p class="os-lead">${SYS_LINE}</p><div class="sy-host"></div><div class="os-cta"><p class="os-cl">Every part of the system opens its own page.</p><button class="os-ex" type="button" data-open="approach" data-act aria-haspopup="dialog"><span>Explore the system</span><b aria-hidden="true">+</b></button></div>`;sl.appendChild(osEl);
   /* desktop: the whole stage is one composition that the scroll builds (explore.js, compose) */
   const cmEl=document.createElement('div');cmEl.className='j-cm sy';
-  cmEl.innerHTML=`<div class="cm-dyn"></div><span class="pill cm-a cm-pill" aria-hidden="true">04</span><p class="cm-a cm-title" aria-hidden="true">One operating</p><p class="cm-a cm-sub" aria-hidden="true">${SYS_LINE}</p><p class="cm-a cm-sys" aria-hidden="true">System</p><blockquote class="cm-a cm-quote"><p>\u201cThis is often where I enter: when growth, execution or commercial performance begin to outpace the structure holding the business together.\u201d</p></blockquote><button class="cm-a cm-go" type="button" data-open="approach" data-act aria-haspopup="dialog"><span class="cm-gq">Every part of the system opens its own page.</span><span class="cm-gl">Explore the system<b aria-hidden="true">+</b></span></button>`;
+  cmEl.innerHTML=`<div class="cm-dyn"></div><span class="pill cm-a cm-pill" aria-hidden="true">04</span>${RM?'<h2 class="sr">One operating System</h2>':''}<blockquote class="cm-a cm-quote"><p>\u201cThis is often where I enter: when growth, execution or commercial performance begin to outpace the structure holding the business together.\u201d</p></blockquote><p class="cm-a cm-lock" aria-hidden="true"><em>One operating</em><b>System</b></p><button class="cm-a cm-go" type="button" data-open="approach" data-act aria-haspopup="dialog"><span class="cm-gq">Every part of the system opens its own page.</span><span class="cm-gl">Explore the system<b aria-hidden="true">+</b></span></button>`;
   sl.appendChild(cmEl);sys.style.display='none';const cp={p:0},cmq=s=>cmEl.querySelector(s);
   [...dimEls,...Object.values(tickEls),vA,vB,...cEls,cue].forEach(e=>e.remove());
   let tl=null,master=null,trig=null,jState=-1,G0=G();
@@ -243,7 +243,9 @@ function Journey(st,inst){
     gsap.set(sys,{attr:{width:g.W,height:g.H,viewBox:`0 0 ${g.W} ${g.H}`}});
     gsap.set(sys,{opacity:1});gsap.set(osEl,{left:g.os[0],top:g.os[1],width:g.os[2],opacity:0});osEl.style.height=g.os[3]+'px';
     cp.p=0;if(cmEl._cm)cmEl._cm.setP(0);
-    gsap.set([cmq('.cm-pill'),cmq('.cm-title'),cmq('.cm-sub'),cmq('.cm-quote')],{opacity:0,y:16});gsap.set(cmq('.cm-sys'),{opacity:0,y:140});gsap.set(cmq('.cm-go'),{opacity:0,y:60});
+    /* on narrower screens the chapter rail would run into the right end of the drawing: the composition is scaled to the room that is left */
+    gsap.set(cmEl,{transformOrigin:'0% 100%',scale:M?1:Math.min(1,Math.max(.7,(innerWidth-190-(innerWidth-g.W*S)/2)/(1372*S)))});
+    gsap.set([cmq('.cm-pill'),cmq('.cm-quote')],{opacity:0,y:16});gsap.set(cmq('.cm-lock'),{opacity:0,y:60});gsap.set(cmq('.cm-go'),{opacity:0,y:40});
     const C=i=>q('.c'+i),F=i=>q('.f'+i),CL=i=>q('.clc'+i);
     [0,1,2,3].forEach(i=>{const [x,y]=g.C0[i];gsap.set([C(i),F(i),CL(i)],{attr:{cx:x,cy:y,r:g.r0}});gsap.set(C(i),{attr:{'stroke-dashoffset':1},visibility:'hidden'});gsap.set(F(i),{opacity:0})});
     gsap.set(q('.lensA'),{attr:{cx:g.C1[0][0],cy:g.C1[0][1],r:g.r1},opacity:0});gsap.set(q('.lensB'),{attr:{cx:g.C1[2][0],cy:g.C1[2][1],r:g.r1},opacity:0});
@@ -298,9 +300,8 @@ function Journey(st,inst){
     if(M)tl.to(osEl,{opacity:1,duration:.035},at(.735));
     else{
       tl.to(cp,{p:1,duration:.15,ease:'none',onUpdate:()=>{if(cmEl._cm)cmEl._cm.setP(cp.p)}},at(.545))
-        .to([cmq('.cm-pill'),cmq('.cm-title')],{opacity:1,y:0,duration:.03,stagger:.008},at(.625))
-        .to(cmq('.cm-sub'),{opacity:1,y:0,duration:.03},at(.655))
-        .to(cmq('.cm-sys'),{opacity:1,y:0,duration:.07,ease:'power3.out'},at(.635))
+        .to(cmq('.cm-pill'),{opacity:1,y:0,duration:.03},at(.625))
+        .to(cmq('.cm-lock'),{opacity:1,y:0,duration:.07,ease:'power3.out'},at(.635))
         .to(cmq('.cm-quote'),{opacity:1,y:0,duration:.04},at(.7))
         .to(cmq('.cm-go'),{opacity:1,y:0,duration:.05,ease:'power3.out'},at(.735));
     }

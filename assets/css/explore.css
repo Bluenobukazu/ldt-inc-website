@@ -175,3 +175,20 @@
   .yh{display:inline-flex;align-items:center;margin:0 0 0 12px;padding:0;background:none;color:inherit;font:700 10px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase}.yh::before{content:"";width:5px;height:5px;background:currentColor;margin-right:.7em}
   #approach .dkick{margin-bottom:18px}
 }
+
+/* ---- Layer 1 chapter 04, composition refinement: one frame, one voice, four equal names ---- */
+.cv .j-cm .cm-pill{left:48px;top:64px}
+.cv .j-cm .cm-quote{left:48px;top:108px;width:400px}.cm-quote p{font-size:27px;line-height:1.2}
+.cv .j-cm .cm-lock{left:48px;bottom:48px;margin:0;display:flex;align-items:baseline;gap:.2em;white-space:nowrap}
+.cv .j-cm .cm-lock em{font-family:var(--serif);font-style:italic;font-weight:400;font-size:66px;letter-spacing:-.02em;line-height:1}
+.cv .j-cm .cm-lock b{font-weight:850;font-stretch:108%;font-size:152px;letter-spacing:-.06em;line-height:.8}
+.cm-lb[data-d="0"],.cm-lb[data-d="1"],.cm-lb[data-d="2"],.cm-lb[data-d="3"]{--hn:26px}
+.cm-ln,.cm-lh{stroke-width:.9}.cm-lh{stroke-width:1.8}
+.cv .j-cm .cm-go{left:1092px;top:728px;width:300px;height:124px;padding:20px 24px 22px}
+.cm-gq{font-size:19px;line-height:1.18}.cm-gl{font-size:11.5px}.cm-gl b{font-size:24px}
+.cv .j-cm .cm-lb .sy-h{flex-direction:column;gap:.55em}.cm-lb .sy-h .plus{display:none}.cm-lb .sy-h .sy-l{margin:0}
+.cv .j-cm .cm-k .n{margin-top:50px}
+.cv .j-cm .cm-lock{gap:.3em}
+.cm-quote p{font-size:25px}
+.cv .j-cm .cm-lb{height:68px;align-items:center}
+.cm-lb[data-d="0"],.cm-lb[data-d="1"],.cm-lb[data-d="2"],.cm-lb[data-d="3"]{--hn:24px}.cm-lb .sy-h .n{letter-spacing:-.04em}
