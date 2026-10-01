@@ -21,7 +21,7 @@ function build(root,mode){
   root.innerHTML=`<div class="sy-form"><svg class="sy-svg" aria-hidden="true" focusable="false"><defs><clipPath id="${id}"><rect class="sy-clip" x="0" y="0" width="0" height="4000"/></clipPath></defs><g class="sy-base"></g><g class="sy-hl" clip-path="url(#${id})"></g></svg></div>
   <div class="sy-tab">${cols.map(c=>c.areas?`<div class="sy-c sy-d" data-d="${c.i}">${head(c)}${mode==='ex'?`<p class="sy-ap">${c.ap}</p>`:''}<ul>${c.areas.map(area).join('')}</ul></div>`:`<div class="sy-c sy-x" data-k="${c.k}">${conn(c)}</div>`).join('')}</div>`;
   const svg=root.querySelector('.sy-svg'),tab=root.querySelector('.sy-tab'),base=svg.querySelector('.sy-base'),hl=svg.querySelector('.sy-hl'),clip=svg.querySelector('.sy-clip'),cEls=[...tab.children];
-  const M=mode==='ft'?9:15,N=M*2,P1=[],P2=[];
+  const M=mode==='ft'?8:mode==='ex'?13:15,N=M*2,P1=[],P2=[];
   for(let i=0;i<N;i++){const a=document.createElementNS(NS,'path'),b=document.createElementNS(NS,'path');[a,b].forEach(p=>{p.setAttribute('pathLength','1');p.style.setProperty('--i',i)});a.setAttribute('class','sy-ln');b.setAttribute('class','sy-lh');base.appendChild(a);hl.appendChild(b);P1.push(a);P2.push(b)}
   let W=0,H=0,rng=[],pts=[],T=0,here=null;
   const mobile=()=>innerWidth<=760;
@@ -29,16 +29,19 @@ function build(root,mode){
     const f=svg.getBoundingClientRect(),sc=f.width/W||1;
     rng=cEls.map(c=>{const b=c.getBoundingClientRect();return[(b.left-f.left)/sc,(b.right-f.left)/sc]});
     if(mobile()){pts=[[0,.2],[.125,1],[.25,.03],[.375,.95],[.5,.4],[.625,.95],[.75,.03],[.875,1],[1,.2]].map(([u,e])=>[u*W,e]);rng=cEls.map((c,i)=>[W*i/6,W*(i+1)/6])}
-    else{const c=rng.map(r=>(r[0]+r[1])/2);pts=[[0,.2],[c[0],1],[c[1],.03],[c[2],.95],[(rng[2][1]+rng[3][0])/2,.4],[c[3],.95],[c[4],.03],[c[5],1],[W,.2]]}
+    else{const c=rng.map(r=>(r[0]+r[1])/2),V=mode==='ft'?[.16,.78,.03,.6,.3,.74,.03,.88,.14]:mode==='ex'?[.14,.96,.03,.72,.32,.9,.03,1,.13]:[.2,1,.03,.95,.4,.95,.03,1,.2];
+      pts=[[0,V[0]],[c[0],V[1]],[c[1],V[2]],[c[2],V[3]],[(rng[2][1]+rng[3][0])/2,V[4]],[c[3],V[5]],[c[4],V[6]],[c[5],V[7]],[W,V[8]]];
+      root.style.setProperty('--neckx',((rng[2][1]+rng[3][0])/2)+'px')}
     draw(T);if(here)zone(here)};
   const wt=[0,0,0,0,0,0],tw=[0,0,0,0,0,0];
   const env=x=>{let i=0;while(i<pts.length-2&&x>pts[i+1][0])i++;const a=pts[i],b=pts[i+1],t=Math.min(1,Math.max(0,(x-a[0])/((b[0]-a[0])||1))),s=(1-Math.cos(t*Math.PI))/2;let e=a[1]+(b[1]-a[1])*s,m=1,ad=0;
     for(let k=0;k<6;k++){if(wt[k]<.002)continue;const c=(rng[k][0]+rng[k][1])/2,sg=(rng[k][1]-rng[k][0])*.6,g=Math.exp(-((x-c)/sg)*((x-c)/sg));if(k===1||k===4)ad+=.09*wt[k]*g;else m+=.13*wt[k]*g}
     return e*m+ad};
   function draw(t){if(!W||!pts.length)return;const step=W>900?7:6,amp=H*.5,cy=H/2,xs=[];for(let x=0;x<W+step;x+=step)xs.push(Math.min(x,W));
-    const E=xs.map(env),WB=xs.map(x=>H*.04*Math.sin(x/W*Math.PI*3.1+t*.22));
-    for(let j=0;j<M;j++){const f=j/(M-1),r=.5+.5*Math.pow(f,1.1);let dt='',db='';
-      for(let k=0;k<xs.length;k++){const x=xs[k],sw=1+.07*Math.sin(x*.016+j*.55+t*.45),y0=cy+WB[k]*E[k],h=amp*E[k]*r*sw;dt+=(k?'L':'M')+x.toFixed(1)+' '+(y0-h).toFixed(1);db+=(k?'L':'M')+x.toFixed(1)+' '+(y0+h).toFixed(1)}
+    const E=xs.map(env),WB=xs.map(x=>H*.05*Math.sin(x/W*Math.PI*3.1+1.3));
+    for(let j=0;j<M;j++){const f=j/(M-1),r=.46+.54*Math.pow(f,1.15);let dt='',db='';
+      for(let k=0;k<xs.length;k++){const x=xs[k],u=x/W,dr=(f-.5)*E[k]*H*.07*Math.sin(u*17+j*.3),sk=1+.15*Math.sin(u*9+1.1),sb=1-.12*Math.sin(u*11+.4),sw=1+.07*Math.sin(u*47+j*.55),y0=cy+WB[k]*E[k];
+        dt+=(k?'L':'M')+x.toFixed(1)+' '+(y0-amp*E[k]*r*sk*sw+dr).toFixed(1);db+=(k?'L':'M')+x.toFixed(1)+' '+(y0+amp*E[k]*r*sb*sw+dr).toFixed(1)}
       P1[j].setAttribute('d',dt);P2[j].setAttribute('d',dt);P1[M+j].setAttribute('d',db);P2[M+j].setAttribute('d',db)}}
   /* hover and focus: a dimension brings forward itself and its connector, a connector both of its dimensions */
   const zone=ix=>{if(!rng.length)return;const l=Math.min(...ix.map(i=>rng[i][0])),r=Math.max(...ix.map(i=>rng[i][1]));clip.setAttribute('x',l);clip.setAttribute('width',r-l)};
@@ -55,8 +58,8 @@ function build(root,mode){
   let go=false;const upd=()=>{const g=isGo();if(g===go)return;go=g;root.classList.toggle('go',g);root.classList.remove('done');stopSweep();if(g){layout();setTimeout(()=>{if(go)root.classList.add('done')},4300);sweep()}else{show(null);rest()}};
   const mo=new MutationObserver(upd);if(host||ov)mo.observe(host||ov,{attributes:true,attributeFilter:['class']});
   new ResizeObserver(layout).observe(root);addEventListener('load',layout);
-  /* slow breathing; paused when hidden, still with reduced motion */
-  let last=0;const tick=ts=>{requestAnimationFrame(tick);if(RMq.matches||!go||ts-last<33)return;if(getComputedStyle(root).visibility==='hidden'||!root.getClientRects().length)return;last=ts;T=ts/1000;for(let k=0;k<6;k++)wt[k]+=(tw[k]-wt[k])*.16;draw(T)};requestAnimationFrame(tick);
+  /* still unless a part is hovered: the swell moves, then everything rests */
+  let last=0;const tick=ts=>{requestAnimationFrame(tick);if(RMq.matches||!go||ts-last<24)return;let mv=false;for(let k=0;k<6;k++){const d=tw[k]-wt[k];if(Math.abs(d)>.004){wt[k]+=d*.2;mv=true}else if(wt[k]!==tw[k]){wt[k]=tw[k];mv=true}}if(!mv)return;last=ts;draw(T)};requestAnimationFrame(tick);
   root._sy={cols:cEls,setHere:ix=>{here=ix;rest()},layout};
   layout();upd();
   if(!host&&!ov)root.classList.add('go','done');
@@ -104,7 +107,7 @@ function compose(root){
 }
 
 /* ---- Explore ---- */
-function explore(m){build(m,'ex')}
+function explore(m){build(m,'ex');const q=document.querySelector('#approach .aentry'),f=m.querySelector('.sy-form');if(q&&f&&innerWidth>760){if(!q.dataset.qm){q.innerHTML='\u201c'+q.innerHTML+'\u201d';q.dataset.qm='1'}f.appendChild(q)}}
 /* ---- Layer 1 chapter 04: the drawing and the table inside the pinned stage ---- */
 function landing(el){build(el,'l1')}
 /* ---- footer ---- */
@@ -126,7 +129,8 @@ function mark(type,i){
     else{btn=root.querySelector(`[data-dreal="${i}"]`);col=btn&&btn.closest('.sy-c')}
     if(!col){root._sy.setHere(null);return}
     col.classList.add('here');btn.setAttribute('aria-current','page');
-    col.insertAdjacentHTML('afterbegin','<em class="yh">You are here</em>');
+    const y='<em class="yh">You are here</em>',n=btn.querySelector('.n');
+    if(n)n.insertAdjacentHTML('afterend',y);else{const ic=btn.querySelector('i');if(ic)ic.insertAdjacentHTML('beforebegin',y);else btn.insertAdjacentHTML('beforeend',y)}
     root._sy.setHere([root._sy.cols.indexOf(col)]);
   });
 }

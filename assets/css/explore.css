@@ -121,3 +121,57 @@
 .stage.sysOn .j-cm button{pointer-events:auto}
 @media (min-width:761px){.cv .j-os{display:none}}
 @media (max-width:760px){.cv .j-cm{display:none}}
+
+/* ---- refine pass (02.10.2026): Explore and footer. Systemlines expressive, navigation lines quiet; connectors are joints, not blocks ---- */
+@media (min-width:761px){
+  .sy-ln,.sy-lh{stroke-width:.6}.sy-lh{stroke-width:1.3}
+  .sy-tab{grid-template-columns:minmax(0,1fr) minmax(0,.17fr) minmax(0,1fr) minmax(0,1fr) minmax(0,.17fr) minmax(0,1.24fr);border-top:1px solid #000;border-bottom:0}
+  .sy-c{border-left:0}
+  .sy-d{padding:calc(var(--sp)*.7) calc(var(--sp)*1.1) 0}
+  .sy ul{margin-top:calc(var(--sp)*1.5)}
+  .sy li button{grid-template-columns:2.5em minmax(0,1fr) auto auto;width:calc(100% + var(--sp)*2.2);margin:0 calc(var(--sp)*-1.1);padding:.78em calc(var(--sp)*1.1);border-top:.5px solid #000;font-weight:650}
+  .sy li button .ad{font-size:.42em;font-weight:500;letter-spacing:.14em}
+  .sy li button i{font-size:.8em;font-weight:200}
+  .sy li button[aria-current]{border-top:2px solid #000}.sy li button[aria-current] span{text-decoration:none}
+  .sy li button:has(.yh) i{display:none}
+  .yh{position:static;display:inline-flex;align-items:center;margin:0 0 0 .8em;padding:0;background:none;color:inherit;font:700 9.5px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
+  .yh::before{content:"";width:5px;height:5px;background:currentColor;margin-right:.7em}
+  .sy-h .yh{flex-basis:100%;justify-content:center;margin:.6em 0 0}.sy-k .yh{margin:1em 0 0}
+  .sy-ap{max-width:19em;margin:calc(var(--sp)*.55) 0 0;line-height:1.5;font-size:max(13px,var(--an))}
+  .sy-ex{--rn:1.8cqw;--an:.98cqw}
+  .sy-ex ul{margin-top:calc(var(--sp)*1.9)}
+  /* connectors: a hairline joint with a small circle, the label interrupts the line */
+  .sy-x,.sy-x.on,.sy-x:hover{background:none;color:#000;padding:0;display:flex;justify-content:center;align-items:flex-start}
+  .sy-x::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:#000}
+  .sy-x::after{left:50%;top:12px;transform:translateX(-50%);width:24px;height:24px;font:300 17px/1 var(--sans);background:#fff;color:#000;z-index:1}
+  .sy-x:hover::after,.sy-x.on::after{background:#000;color:#fff;transform:translateX(-50%) rotate(90deg)}
+  .sy .sy-x .sy-k{position:relative;z-index:1;margin-top:58px;padding:.9em 0;background:#fff;font-size:var(--kn)}
+  .sy-x .sy-k .n{letter-spacing:.22em;font-weight:700}
+  /* Explore composition */
+  #approach .inner{grid-template-columns:1fr;grid-template-areas:"t" "m"}
+  #approach .dkick{margin:0 0 clamp(40px,8vh,92px)}
+  #approach .dkick .t{font-size:clamp(40px,min(4.8vw,calc((100svh - 330px)/6)),96px);letter-spacing:-.05em;line-height:.95}
+  .sy-ex .sy-form>.aentry{position:absolute;left:var(--neckx,50%);bottom:calc(100% + 1.2cqw);width:25cqw;max-width:none;margin:0;padding:0;font-family:var(--serif);font-style:italic;font-size:clamp(17px,1.5cqw,28px);line-height:1.22;letter-spacing:-.01em;color:#000}
+  .sy-ex .sy-form>.aentry em{font-style:italic;color:#000}
+  .sy-ex .sy-form>.aentry::after{content:"";position:absolute;left:0;top:calc(100% + .7em);width:1px;height:calc(var(--fh)*.3 + 1.2cqw);background:#000}
+  #approach .bar .back,#approach .bar .lbl{font:600 11px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase}
+  #approach .bar .dctx{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:0;font-size:15px}
+  /* footer */
+  .df-head{align-items:flex-end;margin-bottom:calc(1.2*var(--fu))}
+  .df-t{font-size:calc(3.4*var(--fu));letter-spacing:-.045em}.df-s{font-size:calc(1.8*var(--fu))}
+  .df-sy{padding-top:calc(2.8*var(--fu))}
+  .sy-ft{--hn:1.45cqw;--rn:1.2cqw;--fh:8.5cqw;--kn:.85cqw}
+  .sy-ft li button{padding:.95em calc(var(--sp)*1.1)}
+}
+@media (max-width:760px){.sy li button,.sy-h{min-height:44px;align-items:center}.sy-x{min-height:44px}}
+@media (min-width:761px){
+  .sy-ex{--fh:13cqw;--rn:1.6cqw;--hn:2cqw}
+  .sy-ex li button{padding:.66em calc(var(--sp)*1.1)}
+  .sy-ex ul{margin-top:calc(var(--sp)*1.5)}
+  .sy-ft .sy-d{padding-top:0}.sy-ft ul{margin-top:calc(var(--sp)*.6)}
+  .sy-ft li:first-child button:not([aria-current]){border-top-color:transparent}
+}
+@media (max-width:760px){
+  .yh{display:inline-flex;align-items:center;margin:0 0 0 12px;padding:0;background:none;color:inherit;font:700 10px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase}.yh::before{content:"";width:5px;height:5px;background:currentColor;margin-right:.7em}
+  #approach .dkick{margin-bottom:18px}
+}
