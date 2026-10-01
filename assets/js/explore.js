@@ -70,9 +70,9 @@ function build(root,mode){
    names, deep dives and connectors appear where the lines have reached them. Drawn in white, the stage blends it (difference): white on black, then black on white. ---- */
 function compose(root){
   const {dims,con}=model(),NSV=NS;
-  const K=[[-700,505,80,.58],[-40,495,100,.58],[270,470,155,.6],[505,415,5,.2],[668,398,150,.58],[818,372,52,.82],[960,345,140,.62],[1100,312,5,.2],[1240,300,165,.64],[1368,282,0,.2]];
-  const LB=[{d:0,x:270,cy:470,A:155},{d:1,x:668,cy:398,A:150},{d:2,x:960,cy:345,A:140},{d:3,x:1240,cy:300,A:165}];
-  const PN=[{k:0,x:505,y:415},{k:1,x:1100,y:312}];
+  const K=[[-700,505,80,.58],[-40,495,100,.58],[270,470,155,.6],[505,415,5,.2],[668,398,150,.58],[818,372,52,.82],[960,345,140,.62],[1088,312,5,.2],[1225,300,160,.8],[1384,282,0,.2]];
+  const LB=[{d:0,x:270,cy:470,A:155},{d:1,x:668,cy:398,A:150},{d:2,x:960,cy:345,A:140},{d:3,x:1225,cy:300,A:160}];
+  const PN=[{k:0,x:505,y:415},{k:1,x:1088,y:312}];
   const dyn=root.querySelector('.cm-dyn');
   const lobeHtml=LB.map((b,i)=>{const d=dims[b.d],bottom=b.cy+b.A*.97;return`<div class="cm-a cm-lb" data-d="${d.i}" data-e="${[0,2,3,5][i]}" style="left:${b.x-130}px;top:${b.cy-34}px;width:260px"><button type="button" class="sy-h cm-h" data-ddim="${d.i}" data-act aria-haspopup="dialog"><span class="sy-l" aria-hidden="true">${L[d.i]}</span><span class="n">${d.n}</span><span class="plus" aria-hidden="true">+</span></button></div><ul class="cm-a cm-ls" data-d="${d.i}" data-e="${[0,2,3,5][i]}" style="left:${b.x-100}px;top:${bottom+18}px;width:210px">${d.areas.map(area).join('')}</ul>`}).join('');
   const pinHtml=PN.map(p=>{const c=con[p.k];return`<div class="cm-a cm-pn" data-k="${p.k}" data-e="${p.k?4:1}" style="left:${p.x-16}px;top:${p.y-62}px"><button type="button" class="cm-k" data-dreal="${c.r}" data-act aria-haspopup="dialog" aria-label="${c.n}, connects ${c.from.n} and ${c.to.n}"><span class="cm-pl" aria-hidden="true">+</span><span class="n">${c.n}</span></button></div>`}).join('');
@@ -81,8 +81,8 @@ function compose(root){
   const M=19,P1=[],P2=[];
   for(let i=0;i<M*2;i++){const a=document.createElementNS(NSV,'path'),b=document.createElementNS(NSV,'path');a.setAttribute('class','cm-ln');b.setAttribute('class','cm-lh');base.appendChild(a);hl.appendChild(b);P1.push(a);P2.push(b)}
   const itp=(x,ix)=>{let i=0;while(i<K.length-2&&x>K[i+1][0])i++;const a=K[i],b=K[i+1],t=Math.min(1,Math.max(0,(x-a[0])/((b[0]-a[0])||1))),s=(1-Math.cos(t*Math.PI))/2;return a[ix]+(b[ix]-a[ix])*s};
-  const ZN={0:[-700,540],1:[420,590],2:[440,860],3:[780,1130],4:[1030,1160],5:[1050,1390]};
-  const wt=[0,0,0,0,0,0],tw=[0,0,0,0,0,0],CE=[270,505,668,960,1100,1240];
+  const ZN={0:[-700,540],1:[420,590],2:[440,860],3:[780,1130],4:[1030,1160],5:[1050,1400]};
+  const wt=[0,0,0,0,0,0],tw=[0,0,0,0,0,0],CE=[270,505,668,960,1088,1225];
   let T=0,front0=0,vis=false;
   const lbE=[...dyn.querySelectorAll('.cm-lb')],lsE=[...dyn.querySelectorAll('.cm-ls')];
   function draw(t){const xs=[];for(let x=-700;x<=1365;x+=7)xs.push(x);

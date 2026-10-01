@@ -192,3 +192,29 @@
 .cm-quote p{font-size:25px}
 .cv .j-cm .cm-lb{height:68px;align-items:center}
 .cm-lb[data-d="0"],.cm-lb[data-d="1"],.cm-lb[data-d="2"],.cm-lb[data-d="3"]{--hn:24px}.cm-lb .sy-h .n{letter-spacing:-.04em}
+
+/* connectors as slim modules of their own: framed, a clear plus, a stronger label, the whole module clickable */
+@media (min-width:761px){
+  .sy-tab{grid-template-columns:minmax(0,1fr) minmax(0,.23fr) minmax(0,1fr) minmax(0,1fr) minmax(0,.23fr) minmax(0,1.24fr)}
+  .sy-x{border:1px solid #000;margin:0 calc(var(--sp)*.45) calc(var(--sp)*.5);transition:background .4s,color .4s}
+  .sy-x::before{display:none}
+  .sy-x::after{top:14px;width:32px;height:32px;font:300 22px/1 var(--sans);background:transparent;color:inherit;border:1.4px solid currentColor}
+  .sy .sy-x .sy-k{position:absolute;inset:0;margin:0;padding:64px 0 18px;background:none;justify-content:center;align-items:center;color:inherit;font-size:max(12.5px,var(--kn))}
+  .sy-x .sy-k .n{font-weight:800;letter-spacing:.2em}
+  .sy-ex .sy-x .sy-k .ab,.sy-ft .sy-x .sy-k .ab{display:inline-block;font-size:.78em;font-weight:600;letter-spacing:.18em}
+  .sy-x:hover,.sy-x:focus-within,.sy-x.on{background:#000;color:#fff}
+  .sy-x:hover::after,.sy-x:focus-within::after,.sy-x.on::after{background:#fff;color:#000;border-color:#fff;transform:translateX(-50%) rotate(90deg)}
+  .sy-ex{--kn:1.25cqw}.sy-ft{--kn:.95cqw}
+  .sy-x .yh{margin:1em 0 0}
+}
+/* Layer 1: the connector label a little stronger as well */
+.cv .j-cm .cm-pl{width:36px;height:36px;font-size:24px}.cv .j-cm .cm-k{width:36px}.cv .j-cm .cm-k .n{font-size:13px;letter-spacing:.26em}
+.cv .j-cm .cm-pn[data-k]{margin-left:-2px}
+@media (min-width:761px){.sy .sy-x .sy-k{padding:18px 0 64px}}
+@media (min-width:761px){
+  .sy-ft .sy-x .sy-k .ab{display:none}.sy-ft .sy-x .sy-k .n{letter-spacing:.14em;font-size:.92em}
+  .sy-ft{--kn:.85cqw}
+  .sy-ft .sy-x{margin-bottom:0}
+  .sy .sy-x .sy-k{padding:10px 0 62px}
+}
+.sy-x .sy-k .ab,.sy-x .sy-k .n{white-space:nowrap}
