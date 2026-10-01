@@ -104,7 +104,8 @@ const STATES=[
  ['Established organisation','The business is running, but brand, operations, commercial priorities and decision structures are no longer working together cleanly.',[[6,20,8,64],[20,20,8,64],[34,20,8,64],[48,20,8,64]]],
  ['Fragmented growth','Growth has created complexity across markets, teams, partners or revenue structures and the organisation needs a system that can hold it together.',[[4,22,16,24],[26,56,10,18],[42,16,18,26],[62,46,12,22],[30,34,7,10]]]];
 const CORE='Turning complex creative and commercial environments into',CORE_IT='structured, scalable systems.';
-const SYS_LINE='I connect proposition, expansion, operations and commercial architecture so the business can operate as one.';
+const SYS_LINE='I connect proposition, expansion, operations & commercial architecture so the business can operate as one.';
+const SYS_LINE_HTML='<span>I connect proposition, expansion, operations &amp; commercial architecture</span><span>so the business can operate as one.</span>';
 const JT={1:['02','Complexity','',''],2:['03','Connect','',''],3:['04','System','One operating',SYS_LINE]};
 /* System (Lena, 27.09.2026): "One operating" in the serif stands above the title, so the heading reads One operating System without repeating the word */
 
@@ -208,7 +209,7 @@ function Journey(st,inst){
   const entry=document.createElement('p');entry.className='j-entry-note';entry.textContent='This is often where I enter: when growth, execution or commercial performance begin to outpace the structure holding the business together.';sl.appendChild(entry);
   /* desktop: the whole stage is one composition that the scroll builds (explore.js, compose) */
   const cmEl=document.createElement('div');cmEl.className='j-cm sy';
-  cmEl.innerHTML=`<div class="cm-dyn"></div><span class="pill cm-a cm-pill" aria-hidden="true">04</span>${RM?'<h2 class="sr">One Operating System</h2>':''}<h2 class="cm-a cm-lock"><span>One</span><span>Operating</span><span>System</span></h2><p class="cm-a cm-sys">${SYS_LINE}</p><button class="cm-a cm-go" type="button" data-open="approach" data-act aria-haspopup="dialog"><span class="cm-gl">Explore the System<b aria-hidden="true">+</b></span><span class="cm-gq">Every part of the system opens its own page.</span></button>`;
+  cmEl.innerHTML=`<div class="cm-dyn"></div><span class="pill cm-a cm-pill" aria-hidden="true">04</span>${RM?'<h2 class="sr">One Operating System</h2>':''}<h2 class="cm-a cm-lock"><span>One</span><span>Operating</span><span>System</span></h2><p class="cm-a cm-sys">${SYS_LINE_HTML}</p><button class="cm-a cm-go" type="button" data-open="approach" data-act aria-haspopup="dialog"><span class="cm-gl">Explore the System<b aria-hidden="true">+</b></span><span class="cm-gq">Every part of the system opens its own page.</span></button>`;
   sl.appendChild(cmEl);sys.style.display='none';const cp={p:0},cmq=s=>cmEl.querySelector(s);
   [...dimEls,...Object.values(tickEls),vA,vB,...cEls,cue].forEach(e=>e.remove());
   let tl=null,master=null,trig=null,jState=-1,G0=G();
@@ -304,8 +305,8 @@ function Journey(st,inst){
     tl.to(cp,{p:1,duration:.15,ease:'none'},at(.565))
       .to(cmq('.cm-pill'),{opacity:1,y:0,duration:.03},at(.625))
       .to(cmq('.cm-lock'),{opacity:1,y:0,duration:.07,ease:'power3.out'},at(.635))
-      .to(cmq('.cm-sys'),{opacity:1,y:0,duration:.04,ease:'power3.out'},at(.69))
-      .to(cmq('.cm-go'),{opacity:1,y:0,duration:.05,ease:'power3.out'},at(.715));
+      .to(cmq('.cm-sys'),{opacity:1,y:0,duration:.04,ease:'power3.out'},at(.665))
+      .to(cmq('.cm-go'),{opacity:1,y:0,duration:.045,ease:'power3.out'},at(.685));
     tl.to({},{duration:SYS_HOLD},at(.8));
 
     if(RM){

@@ -85,6 +85,13 @@ Run browser QA on the deployed candidate at 970×510, 1280×720, 1440×900 and r
 - “One” is the italic accent; “Operating System” uses the stronger upright serif voice. The wider CTA retains both lines inside one button.
 - The shortened Connect → System → Proof timeline, full Explore navigation, accepted footer and absence of Layer 1 subtopic lists remain unchanged.
 
+## Central opening and reveal correction
+
+- Baseline for this pass: branch `work`, commit `409967177996f53a04760823f4a3f77cc388fba8`.
+- Removed the central text knockout that rendered as a hard-edged white rectangle. The explanation now has a transparent background; an angle-localised contour expansion creates the clear reading area and brings the closed paths back together below the CTA.
+- The authorised sentence is set as two explicit desktop lines: “I connect proposition, expansion, operations & commercial architecture” / “so the business can operate as one.” Narrow screens may wrap further.
+- Explanation and CTA now enter with a short overlap in timing, while their absolute positions are reserved from initial layout. Existing target plates, Explore navigation, shortened journey and footer remain unchanged.
+
 ## V3 remainder — unchanged
 
 The application release does not replace the V3 remainder: open line design for Explore/System footer; further visual and narrative refinement; all 133 frames against seven contract fields; remaining frame findings and full V3 QA; shared frame-by-frame review and surgical corrections. ADD-01–04, workshop-result drafts and other copy awaiting approval were not silently implemented.

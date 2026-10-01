@@ -92,7 +92,8 @@ function compose(root){
         twist=f*(.3*Math.sin(q*2-.4)+.13*Math.sin(q*5+.7)),ang=q+twist,
         lobe=1+.16*Math.sin(q*3+.25)+.08*Math.sin(q*5-1.15),
         fan=f*(92+118*Math.sin(q*3-.7)+46*Math.cos(q*6+.35)),
-        rx=470*lobe+fan,ry=286*(1+.17*Math.cos(q*4-.5))+f*(72+88*Math.cos(q*3+.5)),
+        clear=112*Math.pow(Math.max(0,Math.sin(q)),8),
+        rx=470*lobe+fan,ry=286*(1+.17*Math.cos(q*4-.5))+f*(72+88*Math.cos(q*3+.5))+clear,
         fold=f*(72*Math.sin(q*2+.6)+34*Math.sin(q*7-.2)),
         x=720+rx*Math.cos(ang)+fold*Math.sin(q),
         y=465+ry*Math.sin(ang)+f*58*Math.sin(q*3+.85)+20*Math.cos(q*2.2);
