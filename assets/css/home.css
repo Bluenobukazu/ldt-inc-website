@@ -3856,3 +3856,32 @@ body.at-end #rail button:not(.on){opacity:.32}body.at-end #rail button:hover,bod
 .pa-br{padding-top:30px}
 }
 @media (max-width:360px){.pa-m .pm-pill{padding:8px 11px;letter-spacing:.03em}.pa-m .pm-pr{font-size:13.5px}}
+
+/* QA-01 v3: the late approval stays attached to the remaining scope only; core first has its own released path */
+.dl-brk{position:relative}
+.dl-brk::after{content:"";position:absolute;left:calc(clamp(46px,6.6vw,128px)*4.5);top:calc(clamp(22px,3vh,34px) + clamp(46px,6.6vw,128px)*.9 - 6px);width:0;height:clamp(26px,5.6vh,54px);border-left:1px solid #fff}
+.dl-dp{display:grid;row-gap:clamp(10px,2vh,20px);margin-top:clamp(18px,3.4vh,34px);padding-top:clamp(14px,2.6vh,26px);border-top:1px solid #000}
+.dl-ln{display:grid;grid-template-columns:auto auto 1fr auto;align-items:center;column-gap:12px;font-size:clamp(17px,1.35vw,21px)}
+.dl-ln.core{grid-template-columns:auto 1fr auto}
+.dl-ln i{display:block;height:0;border-top:1px solid #000;min-width:40px}
+.dl-ln.rest i{border-top-style:dashed}
+.dl-ln b{font-weight:700;letter-spacing:-.01em}
+.dl-ln.core b::before,.dl-ln.rest b::before{content:"";display:inline-block;width:11px;height:11px;border-radius:50%;background:#000;margin-right:10px;vertical-align:-1px}
+.dl-ln.rest b::before{background:#fff;border:1px solid #000;box-sizing:border-box}
+.dl-ln em{font-style:normal;font-weight:700}
+@media (max-width:760px){.dl-ln{grid-template-columns:auto auto 1fr auto}.dl-ln .dl-mi{grid-column:auto}}
+
+/* v3 M06: 44px touch targets for the controls inside the deep dives on phones */
+@media (max-width:760px),(pointer:coarse){
+  .dpage :is(button,a[href],[role=button]),.sy-k,.sy-tab :is(a,button){min-height:44px}
+  .pl-n,.mr-s,.ox-p,.ox-x{min-height:44px}
+}
+@media (max-width:760px),(pointer:coarse){
+  .ov button,.df-nav button,.ox-x{min-height:44px}
+  .ox-x{min-width:44px}
+  .ov input[type=range]{min-height:44px}
+}
+@media (max-width:760px),(pointer:coarse){
+  .ov [data-go],.ov [role=tab],.ox .ox-x{min-height:44px!important}
+  .ox .ox-x{min-width:44px!important;display:inline-flex;align-items:center;justify-content:center}
+}

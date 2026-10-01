@@ -49,6 +49,7 @@ $('.fm-go').addEventListener('click',e=>{e.preventDefault();LDT.go($('#talk').ge
 
 /* frameworks open in place: what each one works through */
 $$('.fw-t').forEach(b=>{
+  const r0=b.closest('.fwr');r0.classList.add('open');b.setAttribute('aria-expanded','true');
   $$('.fw-d:not(.on)',b).forEach(d=>d.setAttribute('aria-hidden','true'));
   b.addEventListener('click',()=>{const r=b.closest('.fwr'),o=!r.classList.contains('open');r.classList.toggle('open',o);b.setAttribute('aria-expanded',o)});
 });

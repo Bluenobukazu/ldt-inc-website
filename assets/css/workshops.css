@@ -142,3 +142,8 @@
 /* a workshop's number is a count, not an address: Boska italic, strong, upright figures, no bubble (Lena, 28.09.2026) */
 .fw-t .pill{border:0;border-radius:0;padding:0;background:none;font-family:var(--serif);font-style:italic;font-weight:400;font-size:24px;letter-spacing:.01em;font-variant-numeric:lining-nums;-webkit-text-stroke:.045em currentColor;line-height:1;margin-top:.1em}
 .env li::before{font-family:var(--serif);font-style:italic;font-weight:400;font-size:22px;letter-spacing:.01em;font-variant-numeric:lining-nums;-webkit-text-stroke:.045em currentColor;line-height:1}
+
+/* v3: the three words of the question as one connected line; the chain Experience, Structure, Judgement; topics visible from the start */
+.w-trio{display:flex;align-items:center;gap:14px;margin-top:4vh;font-stretch:125%;font-variation-settings:"wdth" 125;font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.w-trio i{display:block;flex:0 1 clamp(40px,8vw,140px);height:0;border-top:1px solid #000}
+.src-why .ar{font-style:normal;margin:0 .5em 0 .1em;font-size:1.1em}

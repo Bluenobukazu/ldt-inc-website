@@ -195,3 +195,17 @@ a.crow:hover .v,a.crow:focus-visible .v{text-decoration:underline;text-underline
 .dark .loc .dctx,.ov.dark .loc .dctx{color:rgba(255,255,255,.7)}
 .loc .dcur{font-weight:600}
 @media (max-width:760px){.loc{column-gap:8px}.loc .dctx{font-size:14px}}
+
+/* v3 M06: touch targets of at least 44px for the shell controls on phones and touch screens */
+@media (max-width:760px),(pointer:coarse){
+  .ovtop :is(a,button),.ovsub :is(a,button),.ov .bar .back,.subbar .back,.subbar a,.ov .back{display:inline-flex;align-items:center;min-height:44px;min-width:44px}
+}
+
+/* v3 M06: one visible keyboard focus on every control, black or white background (two tone ring, beats the resets of the single pages) */
+:is(a,button,[role=button],[role=tab],input,summary,[tabindex="0"]):focus-visible{outline:2px solid #fff!important;outline-offset:0!important;box-shadow:0 0 0 4px #000!important}
+html:not(.kbd) .ov [data-close]:focus-visible{outline:none!important;box-shadow:none!important}
+
+/* v3 M01: codes read clearly. Page pill in the layer header is a black pill with white type; chapter rail and pills are larger and heavier */
+.pill{font-size:13px;font-weight:600}
+:is(.ov .bar,.ovsub,.subbar) .lbl .pill{background:#000;color:#fff;border-color:#000;padding:3px 10px}
+#rail button{font-size:11px;font-weight:600;opacity:.82}

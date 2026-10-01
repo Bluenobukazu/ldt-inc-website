@@ -242,9 +242,10 @@ function Journey(st,inst){
     P(q('.j-divider'),g.divider[0],g.divider[1],1,g.H);gsap.set(q('.j-divider'),{opacity:0,display:M?'none':''});
     gsap.set(sys,{attr:{width:g.W,height:g.H,viewBox:`0 0 ${g.W} ${g.H}`}});
     gsap.set(sys,{opacity:1});gsap.set(osEl,{left:g.os[0],top:g.os[1],width:g.os[2],opacity:0});osEl.style.height=g.os[3]+'px';
-    cp.p=0;if(cmEl._cm)cmEl._cm.setP(0);
+    cp.p=0;cmEl._cp=0;if(cmEl._cm)cmEl._cm.setP(0);
+    if(cmEl._tk){gsap.ticker.remove(cmEl._tk);cmEl._tk=null}
     /* on narrower screens the chapter rail would run into the right end of the drawing: the composition is scaled to the room that is left */
-    gsap.set(cmEl,{transformOrigin:'0% 100%',scale:M?1:Math.min(1,Math.max(.7,(innerWidth-190-(innerWidth-g.W*S)/2)/(1372*S)))});
+    gsap.set(cmEl,{transformOrigin:'0% 100%',scale:M?1:Math.min(1,Math.max(.66,(innerWidth-246-(innerWidth-g.W*S)/2)/(1372*S)))});
     gsap.set([cmq('.cm-pill'),cmq('.cm-quote')],{opacity:0,y:16});gsap.set(cmq('.cm-lock'),{opacity:0,y:60});gsap.set(cmq('.cm-go'),{opacity:0,y:40});
     const C=i=>q('.c'+i),F=i=>q('.f'+i),CL=i=>q('.clc'+i);
     [0,1,2,3].forEach(i=>{const [x,y]=g.C0[i];gsap.set([C(i),F(i),CL(i)],{attr:{cx:x,cy:y,r:g.r0}});gsap.set(C(i),{attr:{'stroke-dashoffset':1},visibility:'hidden'});gsap.set(F(i),{opacity:0})});
@@ -299,7 +300,7 @@ function Journey(st,inst){
     [0,1,2,3].forEach(i=>{const [x,y]=g.C1[i];tl.to([C(i),F(i),CL(i)],{attr:{cx:x,cy:y,r:g.r1},duration:.08,ease:'power3.inOut'},at(.635))});
     if(M)tl.to(osEl,{opacity:1,duration:.035},at(.735));
     else{
-      tl.to(cp,{p:1,duration:.15,ease:'none',onUpdate:()=>{if(cmEl._cm)cmEl._cm.setP(cp.p)}},at(.545))
+      tl.to(cp,{p:1,duration:.15,ease:'none'},at(.545))
         .to(cmq('.cm-pill'),{opacity:1,y:0,duration:.03},at(.625))
         .to(cmq('.cm-lock'),{opacity:1,y:0,duration:.07,ease:'power3.out'},at(.635))
         .to(cmq('.cm-quote'),{opacity:1,y:0,duration:.04},at(.7))
@@ -331,6 +332,8 @@ function Journey(st,inst){
     trig=ScrollTrigger.create({trigger:'#journey',start:'top top',onRefresh:jBand,onToggle:jBand,end:()=>'+='+innerHeight*base*(T0+TL),pin:st,refreshPriority:2,scrub:.6,animation:master,invalidateOnRefresh:true,
       onUpdate:self=>{const p=self.progress*(T0+TL)-T0,hp=Math.min(1,self.progress*(T0+TL)/H0)*END;const s=p<SEG[0]?0:p<SEG[1]?1:p<SEG[2]?2:3;setActive(s);jTitle(s===0?-1:s);hero(hp<.72);
         st.classList.toggle('sysOn',p>at(.72));st.classList.toggle('cxOn',p>at(.3)&&p<at(.42));jBand(self)}});
+    /* the line drawing is a pure function of the scroll position: it is right after a direct address, a resize or a rebuild as well */
+    if(!M){const tk=()=>{if(!cmEl._cm||!trig)return;const w=Math.max(0,Math.min(1,((trig.progress*(T0+TL)-T0)-at(.545))/.15));if(cmEl._cp!==w||cmEl._ci!==cmEl._cm){cmEl._cp=w;cmEl._ci=cmEl._cm;cmEl._cm.setP(w)}};cmEl._tk=tk;gsap.ticker.add(tk)}
   }
   /* complexity: a touched reality settles into place, the others stay in tension */
   blocks.forEach(({b,l},i)=>{
