@@ -73,12 +73,12 @@ function compose(root){
      the line field; semantic relationships are expressed only by interaction. */
   const {dims,con}=model(),dyn=root.querySelector('.cm-dyn');
   const targets=[
-    {e:0,code:'A',name:dims[0].n,attr:`data-ddim="${dims[0].i}"`,x:52,y:154,w:300},
-    {e:1,code:'A + B',name:con[0].n,attr:`data-dreal="${con[0].r}"`,x:42,y:424,w:330},
-    {e:2,code:'B',name:dims[1].n,attr:`data-ddim="${dims[1].i}"`,x:52,y:704,w:300},
-    {e:3,code:'C',name:dims[2].n,attr:`data-ddim="${dims[2].i}"`,x:1090,y:154,w:310},
-    {e:4,code:'C + D',name:con[1].n,attr:`data-dreal="${con[1].r}"`,x:1080,y:424,w:330},
-    {e:5,code:'D',name:dims[3].n,attr:`data-ddim="${dims[3].i}"`,x:1090,y:704,w:330}
+    {e:0,code:'A',name:dims[0].n,attr:`data-ddim="${dims[0].i}"`,x:48,y:164,w:330},
+    {e:1,code:'A + B',name:con[0].n,attr:`data-dreal="${con[0].r}"`,x:48,y:410,w:330},
+    {e:2,code:'B',name:dims[1].n,attr:`data-ddim="${dims[1].i}"`,x:48,y:656,w:330},
+    {e:3,code:'C',name:dims[2].n,attr:`data-ddim="${dims[2].i}"`,x:1062,y:164,w:330},
+    {e:4,code:'C + D',name:con[1].n,attr:`data-dreal="${con[1].r}"`,x:1062,y:410,w:330},
+    {e:5,code:'D',name:dims[3].n,attr:`data-ddim="${dims[3].i}"`,x:1062,y:656,w:330}
   ];
   dyn.innerHTML=`<svg class="cm-svg" viewBox="0 0 1440 900" aria-hidden="true" focusable="false"><defs><clipPath id="cmf"><rect class="cm-front" x="0" y="0" width="0" height="900"/></clipPath><clipPath id="cmz"><rect class="cm-zone" x="0" y="0" width="0" height="0"/></clipPath></defs><g clip-path="url(#cmf)"><g class="cm-base"></g><g class="cm-hl" clip-path="url(#cmz)"></g></g></svg>`+
     targets.map(t=>`<button type="button" class="cm-a cm-target" data-e="${t.e}" ${t.attr} data-act aria-haspopup="dialog" style="left:${t.x}px;top:${t.y}px;width:${t.w}px"><span class="cm-code">${t.code}</span><span class="n">${t.name}</span><span class="cm-pl" aria-hidden="true">+</span></button>`).join('');
@@ -88,12 +88,14 @@ function compose(root){
     const f=(j-(COUNT-1)/2)/((COUNT-1)/2),a=document.createElementNS(NS,'path'),b=document.createElementNS(NS,'path');
     let d='';
     for(let k=0;k<=STEPS;k++){
-      const q=k/STEPS*Math.PI*2,ang=q+.17*f*Math.sin(q*3-.35),
-        swell=1+.12*Math.sin(q*3+.35)+.07*Math.sin(q*5-1.1),
-        rx=(470+f*105)*swell,ry=(315+f*82)*(1+.13*Math.cos(q*4-.45)),
-        fold=58*Math.sin(q*2+.65)+28*Math.sin(q*6-.4),
-        x=720+rx*Math.cos(ang)+f*fold*Math.sin(q),
-        y=445+ry*Math.sin(ang)+f*42*Math.sin(q*3+.8)+24*Math.cos(q*2.2);
+      const q=k/STEPS*Math.PI*2,
+        twist=f*(.3*Math.sin(q*2-.4)+.13*Math.sin(q*5+.7)),ang=q+twist,
+        lobe=1+.16*Math.sin(q*3+.25)+.08*Math.sin(q*5-1.15),
+        fan=f*(92+118*Math.sin(q*3-.7)+46*Math.cos(q*6+.35)),
+        rx=470*lobe+fan,ry=286*(1+.17*Math.cos(q*4-.5))+f*(72+88*Math.cos(q*3+.5)),
+        fold=f*(72*Math.sin(q*2+.6)+34*Math.sin(q*7-.2)),
+        x=720+rx*Math.cos(ang)+fold*Math.sin(q),
+        y=465+ry*Math.sin(ang)+f*58*Math.sin(q*3+.85)+20*Math.cos(q*2.2);
       d+=(k?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)
     }
     d+='Z';

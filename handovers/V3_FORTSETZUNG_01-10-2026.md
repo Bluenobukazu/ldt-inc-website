@@ -76,6 +76,15 @@ Run browser QA on the deployed candidate at 970×510, 1280×720, 1440×900 and r
 - Mobile uses the same vector field but independently reflows all live text and controls rather than scaling desktop typography. Reduced Motion reveals the complete static state.
 - The previously documented shortened journey remains approximately 4.2 viewport heights on desktop and 4.4 on mobile.
 
+## Spatial refinement of the System moment
+
+- Baseline for this pass: branch `work`, commit `98eae78737acd3fe8c4ec010733cfd178ef1685d`.
+- The common contour field now varies angular twist, local fan width, radius and fold displacement along every curve. This creates controlled crossings and changing density without adding a second figure or continuous idle motion.
+- All six navigation plates use the same 330 × 78 desktop box and 202 × 66 mobile box, identical padding and a one-pixel outline. Their paths continue behind a white knockout rather than terminating at a label edge.
+- The approved system sentence is now “I connect proposition, expansion, operations and commercial architecture so the business can operate as one.” No other copy changed.
+- “One” is the italic accent; “Operating System” uses the stronger upright serif voice. The wider CTA retains both lines inside one button.
+- The shortened Connect → System → Proof timeline, full Explore navigation, accepted footer and absence of Layer 1 subtopic lists remain unchanged.
+
 ## V3 remainder — unchanged
 
 The application release does not replace the V3 remainder: open line design for Explore/System footer; further visual and narrative refinement; all 133 frames against seven contract fields; remaining frame findings and full V3 QA; shared frame-by-frame review and surgical corrections. ADD-01–04, workshop-result drafts and other copy awaiting approval were not silently implemented.
