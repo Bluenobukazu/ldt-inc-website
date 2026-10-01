@@ -19,7 +19,7 @@ function build(root,mode){
   root.classList.add('sy','sy-'+mode);
   const cols=[dims[0],con[0],dims[1],dims[2],con[1],dims[3]];
   root.innerHTML=`<div class="sy-form"><svg class="sy-svg" aria-hidden="true" focusable="false"><defs><clipPath id="${id}"><rect class="sy-clip" x="0" y="0" width="0" height="4000"/></clipPath></defs><g class="sy-base"></g><g class="sy-hl" clip-path="url(#${id})"></g></svg></div>
-  <div class="sy-tab">${cols.map(c=>c.areas?`<div class="sy-c sy-d" data-d="${c.i}">${head(c)}${mode==='ex'?`<p class="sy-ap">${c.ap}</p>`:''}<ul>${c.areas.map(area).join('')}</ul></div>`:`<div class="sy-c sy-x" data-k="${c.k}">${conn(c)}</div>`).join('')}</div>`;
+  <div class="sy-tab">${cols.map(c=>c.areas?`<div class="sy-c sy-d" data-d="${c.i}">${mode!=='l1'?`<p class="sy-dh" aria-hidden="true"><span class="sy-l">${L[c.i]}</span><b>${c.n}</b></p>`:''}${head(c)}${mode==='ex'?`<p class="sy-ap">${c.ap}</p>`:''}<ul>${c.areas.map(area).join('')}</ul></div>`:`<div class="sy-c sy-x" data-k="${c.k}">${conn(c)}</div>`).join('')}</div>`;
   const svg=root.querySelector('.sy-svg'),tab=root.querySelector('.sy-tab'),base=svg.querySelector('.sy-base'),hl=svg.querySelector('.sy-hl'),clip=svg.querySelector('.sy-clip'),cEls=[...tab.children];
   const M=mode==='ft'?8:mode==='ex'?13:15,N=M*2,P1=[],P2=[];
   for(let i=0;i<N;i++){const a=document.createElementNS(NS,'path'),b=document.createElementNS(NS,'path');[a,b].forEach(p=>{p.setAttribute('pathLength','1');p.style.setProperty('--i',i)});a.setAttribute('class','sy-ln');b.setAttribute('class','sy-lh');base.appendChild(a);hl.appendChild(b);P1.push(a);P2.push(b)}

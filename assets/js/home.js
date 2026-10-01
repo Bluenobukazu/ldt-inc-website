@@ -143,7 +143,7 @@ const P=(el,x,y,w,h)=>gsap.set(el,Object.assign({left:x,top:y},w!=null?{width:w}
 /* ---------- chapter rail: quiet on the landing, present once the visitor moves ---------- */
 if(!RM){const jt=$('#journey .j-title');jt.setAttribute('aria-hidden','true');jt.insertAdjacentHTML('beforebegin',[1,2,3].map(i=>`<h2 class="sr">${JT[i][2]?JT[i][2]+' ':''}${JT[i][1]}</h2>`).join('')+`<p class="sr">${SYS_LINE}</p>`)}
 if(RM)addEventListener('scroll',()=>{clearTimeout(urlT);urlT=setTimeout(syncChapterUrl,350)},{passive:true});
-CH.forEach((c,i)=>{const b=document.createElement('button');b.type='button';b.dataset.go=i;b.dataset.act='';b.innerHTML=`<span>0${i+1} ${c}</span><i></i>`;$('#rail').appendChild(b)});
+CH.forEach((c,i)=>{const b=document.createElement('button');b.type='button';b.dataset.go=i;b.dataset.act='';b.innerHTML=`<span><b>0${i+1}</b> ${c}</span><i></i>`;$('#rail').appendChild(b)});
 /* header safe band: a pinned scene gets the band of its end state only once it scrolls away; while it stands, nothing covers it */
 const bandAfter=(el,c)=>self=>{if(self.progress>=1)el.dataset.band=c;else delete el.dataset.band;LDT.syncBand()};
 const hero=on=>{document.body.classList.toggle('hero',on);

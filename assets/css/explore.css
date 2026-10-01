@@ -248,3 +248,26 @@
 .sy-l{-webkit-text-fill-color:#fff}
 .j-cm .sy-l{background:#fff;color:#000;-webkit-text-fill-color:#000}
 .yh{font-size:max(12px,1em)!important}.sy-k .n{font-size:max(12px,1em)}
+
+/* ===== v3 hierarchy pass: points 8 to 11 ===== */
+/* 8 codes: every sub code is an outlined pill, chapter numbers in the rail are heavy */
+.sy li button{grid-template-columns:4.2em minmax(0,1fr) auto!important}
+.sy li button .ad{display:inline-block;width:max-content;border:1.5px solid currentColor;border-radius:20px;padding:2px 9px!important;font-size:13px!important;font-weight:700!important;letter-spacing:.06em!important;opacity:1!important;line-height:1.3}
+.j-cm li button .ad{border-color:#fff}
+#rail button b{font-weight:800;font-size:14px;letter-spacing:.1em}
+/* 10 + 11 each dimension opens its column with a black field, the full explanation and its sub targets sit directly beneath */
+.sy-dh{display:flex;align-items:center;gap:.7em;margin:0 0 .2em;padding:.62em var(--sp,1em);background:#000;color:#fff;font-size:max(15px,1.45cqw)}
+.sy-dh b{font-weight:800;letter-spacing:-.01em}
+.sy-dh .sy-l{background:#fff!important;color:#000!important;-webkit-text-fill-color:#000!important;font-size:.72em!important;width:1.7em;height:1.7em}
+.sy-ft .sy-dh{font-size:max(13px,1.15cqw);padding:.5em var(--sp,1em)}
+.sy-ex .sy-dh{margin-top:1.8cqw}
+.sy-ex .sy-ap{margin-top:1em;padding-bottom:.4em}
+/* current location: the whole row turns black, unmistakable */
+.sy li button[aria-current]{background:#000!important;color:#fff!important}
+.sy li button[aria-current] .ad{border-color:#fff}
+.sy li button[aria-current] .yh{color:#fff!important;background:none!important}
+.sy-d.here-dim .sy-dh{outline:3px solid #000;outline-offset:3px}
+#approach #xMap .sy li button .yh,.sy li button .yh{grid-column:3;grid-row:1;justify-self:end;margin:0!important;font-size:12px!important}
+.sy-ex .sy-dh,.sy-ft .sy-dh{white-space:nowrap}.sy-ex .sy-dh{font-size:max(14px,1.2cqw)}
+.j-cm li button{grid-template-columns:3.1em minmax(0,1fr) auto!important}
+.j-cm li button .ad{font-size:12px!important;padding:1px 7px!important}

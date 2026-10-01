@@ -36,3 +36,5 @@
   .xp .xp-ring li{position:static;width:auto;height:auto;border-top:1px solid #000}.xp .xp-ring li span{position:static;transform:none!important;display:block;padding:10px 0;white-space:normal;text-align:left!important;font-size:20px}
   .xp .xp-nx .n{font-size:clamp(44px,15vw,70px)}.xp .xp-nx .q{font-size:20px}.xp .xp-open{opacity:.0}
 }
+/* v3 B-F06: the ring line stays behind the question */
+.xp .xp-nx{position:relative;z-index:60}.xp .xp-nx .q{position:relative;z-index:61;background:#000;display:inline-block;padding:0 .35em;margin-left:-.35em}

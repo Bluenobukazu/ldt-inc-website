@@ -94,3 +94,5 @@
 .pl .pl-nfig{position:absolute;right:0;top:31%;width:36%}.pl .pl-nfig svg{width:100%;height:auto}
 .pl .pl-nfig .oc{fill:none!important;stroke:#fff;stroke-width:2.4}.pl .pl-nfig .few,.pl .pl-nfig .bk,.pl .pl-nfig circle:not(.oc){fill:#fff}
 @media (max-width:760px){.pl .pl-nfig{position:static;width:100%;margin-top:3vh}}
+/* v3 C.1-F11: the two targets fit their columns, codes keep clear of the plus */
+@media (min-width:761px){.pl .pl-br .l2-rel .n{font-size:clamp(34px,5.1vw,84px)}.pl .pl-br .l2-rel .ad{margin:0 .6em 0 .2em}}
