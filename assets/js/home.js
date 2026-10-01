@@ -133,7 +133,7 @@ const G=()=>MOB()?GM:GD;
    at() maps the original V5 timeline positions onto the adjusted timeline */
 const HOLDS=[[.19,.05],[.51,.05]],SYS_HOLD=.34;
 const at=x=>HOLDS.reduce((v,[t,a])=>x>=t?v+a:v,x);
-const SEG=[at(.2),at(.42),at(.62),1];
+const SEG=[at(.2),at(.42),at(.515),1];
 /* reduced motion: the finished state of each chapter on the journey timeline */
 const STILL=[0,at(.4),at(.505),9];
 let S=1;
@@ -279,6 +279,7 @@ function Journey(st,inst){
     /* 01 Arrive: the line from the monolith widens into the cut and moves, proposition word by word */
     tl.to(B,Object.assign({left:g.barAfter[0],width:g.barAfter[1],duration:.04,ease:'power3.inOut',autoRound:false},M?{top:120,height:g.H-150}:{}),.085)
       .set(core,{opacity:1},at(.125))
+      .set(B,{opacity:0},at(.125))
       .to(words,{opacity:1,stagger:.0045,duration:.01},at(.125));
     /* 02 Complexity: the cut breaks into a composed field of realities */
     tl.to(core,{opacity:0,duration:.02},at(.2));

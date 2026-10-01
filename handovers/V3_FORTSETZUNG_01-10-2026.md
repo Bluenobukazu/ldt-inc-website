@@ -51,6 +51,13 @@ Run browser QA on the deployed candidate at 970×510, 1280×720, 1440×900 and r
 7. Smoke-test canonical URLs, legal/contact/footer/sitemap/archive, assets and response headers on the domain.
 8. If a release check fails, immediately promote/reassign the recorded previous production deployment. Preserve the failed deployment for diagnosis.
 
+## Screenshot correction pass
+
+- The Layer 1 Turning copy no longer shares its frame with the transition cut line. Connect retires before the Operating System composition begins, using the same reversible scroll timeline.
+- Layer 1, Workshops, Sitemap, Imprint and Privacy now use one full-viewport black footer with the required content order, IBM Plex Mono stack, 44 px targets and responsive grouping.
+- The Sitemap archive rule now shares the content width of the rows above; its label is bold and its right label aligns to the row edge.
+- Browser viewport and deployed-preview QA remain required wherever the environment has no browser, remote, Vercel project metadata or deployment credentials.
+
 ## V3 remainder — unchanged
 
 The application release does not replace the V3 remainder: open line design for Explore/System footer; further visual and narrative refinement; all 133 frames against seven contract fields; remaining frame findings and full V3 QA; shared frame-by-frame review and surgical corrections. ADD-01–04, workshop-result drafts and other copy awaiting approval were not silently implemented.
