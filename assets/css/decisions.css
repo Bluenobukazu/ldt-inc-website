@@ -1,0 +1,81 @@
+/* Decisions (visual rebuild 30.09.2026), scoped .de on l2.css. Device: options fall away until one direction is committed. Type does it: weight, outline and size. One hairline only, the threshold. */
+.de .l2-f{--hv:55}.de .de-hero{--hv:63}.de .de-df{--hv:58}.de .de-wg{--hv:71}.de .de-in{--hv:62}.de .de-th{--hv:54}.de .de-cl{--hv:57}.de .de-pr{--hv:68}.de .de-br{--hv:48}
+.de .de-word{grid-column:1/-1;font-weight:850;font-stretch:108%;font-size:calc(15*var(--u));letter-spacing:-.045em;line-height:.9;margin-left:calc(-.4*var(--u))}
+.de .de-k{grid-column:1/8;grid-row:2;font-size:calc(4.4*var(--u));font-weight:800;font-stretch:108%;letter-spacing:-.04em;line-height:1.04;margin-top:calc(2*var(--u))}
+.de .de-or{grid-column:8/-1;grid-row:2;text-align:right;font-size:clamp(17px,calc(2.2*var(--u)),34px);font-weight:300;letter-spacing:-.02em;line-height:1.2;margin-top:calc(2.6*var(--u))}
+.de .de-fan{grid-column:1/-1;grid-row:3;margin:calc(3*var(--u)) 0 0}.de .de-ol{margin:0 0 calc(1*var(--u))}
+.de .de-fl{margin:0;padding:calc(.8*var(--u)) 0;border-top:1px solid #000;font-size:calc(4*var(--u));font-weight:850;font-stretch:108%;letter-spacing:-.04em;line-height:1;color:transparent;-webkit-text-stroke:1.3px #000;opacity:0;transition:opacity .8s calc(var(--n)*.4s)}.de .de-fl:last-child{border-bottom:1px solid #000}
+.de .de-fl:nth-of-type(1){--n:1}.de .de-fl:nth-of-type(2){--n:2}.de .de-fl:nth-of-type(3){--n:3}.de .de-fl:nth-of-type(4){--n:4}.de .in .de-fl{opacity:1}
+.de .de-fl:nth-of-type(odd){margin-left:calc(6*var(--u))}
+
+.de .de-cap{grid-column:1/-1;grid-row:1}
+.de .de-iss{grid-column:1/-1;grid-row:2;margin:calc(1.4*var(--u)) 0 0;font-size:calc(7.4*var(--u));font-weight:100;font-stretch:108%;letter-spacing:-.05em;line-height:1}.de .de-iss .l2-lab{display:block;font-weight:600;margin-bottom:calc(.8*var(--u));letter-spacing:.16em}
+.de .de-dfl{grid-column:1/6;grid-row:3;margin-top:calc(3*var(--u))}.de .de-q{font-family:var(--serif);font-style:italic;font-size:clamp(22px,calc(4*var(--u)),60px);line-height:1.08;-webkit-text-stroke:.4px currentColor}.de .de-q .l2-lab{display:block;font-family:var(--sans);font-style:normal;-webkit-text-stroke:0;margin-bottom:calc(.8*var(--u))}
+.de .de-tx{font-size:clamp(15px,calc(1.8*var(--u)),28px);line-height:1.3;margin-top:calc(1.4*var(--u))}.de .l2-b .de-tx{color:#bdbdbd}
+.de .de-box{grid-column:7/-1;grid-row:3;margin-top:calc(3*var(--u));border-top:2px solid #fff;padding-top:calc(1.4*var(--u))}
+.de .de-dq{font-size:calc(5*var(--u));font-weight:900;font-stretch:108%;letter-spacing:-.045em;line-height:1.02;margin-top:calc(.8*var(--u));text-wrap:balance}
+.de .de-box dl{margin:calc(2*var(--u)) 0 0;display:grid;grid-template-columns:1fr 1fr;column-gap:calc(2*var(--u))}.de .de-box dt{color:#bdbdbd}.de .de-box dd{margin:calc(.6*var(--u)) 0 0;font-size:clamp(15px,calc(1.9*var(--u)),28px);font-weight:600;line-height:1.2}
+
+.de .de-h{grid-column:1/-1;grid-row:1;font-size:calc(6.4*var(--u));font-weight:850;font-stretch:108%;letter-spacing:-.045em;line-height:1.02;max-width:16em;text-wrap:balance}
+.de .de-wg .de-q.r{grid-column:1/-1;grid-row:2;margin-top:calc(1.6*var(--u));font-size:clamp(22px,calc(3.4*var(--u)),52px)}
+.de .de-trk{grid-column:1/-1;grid-row:3;margin-top:calc(2.4*var(--u));display:grid}
+.de .de-top{margin:0 0 calc(.4*var(--u));text-align:right}.de .de-base{margin:calc(.4*var(--u)) 0 0}
+.de .de-st{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:calc(2*var(--u));align-items:baseline;padding:calc(.6*var(--u)) 0;border-top:1px solid #000}
+.de .de-st .c{grid-column:1/4;margin:0}.de .de-st .d{grid-column:4/-1;margin:0;letter-spacing:-.04em;line-height:1.02}
+.de .s3 .d{font-size:calc(5.4*var(--u));font-weight:900;font-stretch:108%}.de .s2 .d{font-size:calc(4.2*var(--u));font-weight:700;font-stretch:108%}.de .s1 .d{font-size:calc(3.2*var(--u));font-weight:500}.de .s0 .d{font-size:calc(2.4*var(--u));font-weight:300}
+.de .de-just{grid-column:1/9;grid-row:4;margin-top:calc(2*var(--u));font-size:clamp(15px,calc(2*var(--u)),30px)}
+
+.de .de-eq{grid-column:1/-1;grid-row:1;display:flex;align-items:baseline;gap:calc(2.4*var(--u));font-size:calc(8.6*var(--u));font-weight:900;font-stretch:108%;letter-spacing:-.05em;line-height:1}
+.de .de-eq .o{color:transparent;-webkit-text-stroke:1.5px #fff}.de .de-eq .ne{font-weight:200;font-size:.9em}
+.de .de-inr{grid-column:1/-1;grid-row:2;margin-top:calc(2*var(--u))}
+.de .de-flt{grid-column:1/-1;grid-row:3;margin-top:calc(1.2*var(--u));display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:calc(2*var(--u))}
+.de .de-flt ul{grid-column:1/9;list-style:none;padding:0;margin:0}
+.de .de-flt li{display:grid;grid-template-columns:minmax(0,.4fr) minmax(0,.4fr) auto;column-gap:calc(1.6*var(--u));align-items:baseline;padding:calc(.8*var(--u)) 0;border-top:1px solid #fff}.de .de-flt li:last-child{border-bottom:1px solid #fff}
+.de .de-flt .p{font-size:calc(3.2*var(--u));letter-spacing:-.04em;line-height:1.04;font-weight:200;color:transparent;-webkit-text-stroke:1.1px #fff}.de .de-flt li.m .p{font-weight:900;color:#fff;-webkit-text-stroke:0}
+.de .de-flt .w{font-size:clamp(14px,calc(1.7*var(--u)),26px);line-height:1.25}.de .de-flt .t{justify-self:end;text-align:right}
+.de .de-auth{grid-column:10/-1;align-self:stretch;display:flex;flex-direction:column;justify-content:space-between;border-left:2px solid #fff;padding-left:calc(2*var(--u))}
+.de .de-auth .de-q{font-size:clamp(18px,calc(2.4*var(--u)),36px)}.de .de-dec{font-size:calc(5*var(--u));font-weight:900;font-stretch:108%;letter-spacing:-.05em;line-height:1;margin:0}.de .de-man{font-family:var(--serif);font-style:italic;font-size:clamp(17px,calc(2.2*var(--u)),32px);margin:0}
+.de .de-auth>.l2-lab{margin:0}
+.de .de-inx{grid-column:1/9;grid-row:4;margin-top:calc(2*var(--u))}
+
+.de .de-th .de-thq{grid-column:1/-1;grid-row:2;margin-top:calc(1.6*var(--u))}
+.de .de-thf{grid-column:1/-1;grid-row:3;margin-top:calc(2.4*var(--u))}
+.de .de-up,.de .de-dn{display:grid;grid-template-columns:repeat(2,1fr);column-gap:calc(3*var(--u))}.de .de-up{padding-bottom:calc(1.6*var(--u))}.de .de-dn{padding-top:calc(1.6*var(--u))}
+.de .de-pl{margin:0;font-size:clamp(15px,calc(1.8*var(--u)),28px);line-height:1.25}.de .de-pl b{display:block;font-size:calc(3.6*var(--u));font-weight:900;font-stretch:108%;letter-spacing:-.045em;line-height:1.02;margin-bottom:calc(.4*var(--u))}
+.de .de-pl.e b{font-weight:200;text-decoration:line-through;text-decoration-thickness:2px}.de .de-pl.e.lo b{text-decoration:none;color:transparent;-webkit-text-stroke:1.3px #000;font-weight:900}
+.de .de-up .de-pl:first-child{grid-column:2}.de .de-up .de-pl:last-child{grid-column:1;grid-row:1}
+.de .de-tl{margin:0;border-top:3px solid #000;padding-top:calc(.6*var(--u))}
+
+.de .de-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.de .de-cm{grid-column:1/-1;grid-row:1;position:relative}.de .de-mg{position:absolute;inset:0;pointer-events:none;display:block}.de .de-mg svg{display:block;width:100%;height:100%}.de .de-mo{display:none}
+.de .de-ww{margin:0;display:grid;row-gap:calc(2.6*var(--u))}.de .de-w{display:block;letter-spacing:-.055em;line-height:.9;font-stretch:108%}
+.de .w0{font-size:calc(9.5*var(--u));font-weight:100;color:transparent;-webkit-text-stroke:1.3px #fff}.de .w1{font-size:calc(9.5*var(--u));font-weight:500;padding-left:calc(10*var(--u));transition:opacity 1s}.de .w2{font-size:calc(9.5*var(--u));font-weight:900;padding-left:calc(20*var(--u));transition:opacity 1s}.de .de-cl[data-st="0"] .w1,.de .de-cl[data-st="0"] .w2,.de .de-cl[data-st="1"] .w2{opacity:0}.de .de-ptl{transition:opacity 1s}.de .de-cl[data-st="0"] .de-ptl,.de .de-cl[data-st="1"] .de-ptl{opacity:0}
+.de .de-ptl{margin:calc(1.4*var(--u)) 0 0;padding-left:calc(20*var(--u))}
+.de .de-cl .de-clf{grid-column:1/-1;grid-row:2;margin-top:calc(3*var(--u));display:grid;grid-template-columns:repeat(12,1fr);column-gap:calc(2*var(--u));align-items:end}.de .de-clf .de-tx{grid-column:1/6;margin:0}.de .de-clf .de-q{grid-column:7/-1;font-size:clamp(22px,calc(3.6*var(--u)),54px)}
+
+.de .de-pr .de-prt{grid-column:1/8;grid-row:2;font-size:clamp(17px,calc(2.2*var(--u)),34px);font-weight:300;letter-spacing:-.02em;margin-top:calc(1.4*var(--u))}
+.de .de-fld{grid-column:1/-1;grid-row:3;margin-top:calc(2.4*var(--u));display:grid;grid-template-columns:5fr 3fr 2fr;column-gap:calc(3*var(--u))}
+.de .de-z{border-top:2px solid #000;padding-top:calc(1*var(--u))}.de .de-z.z2{border-top:1.5px dashed #000}.de .de-z.z3{border-top:1px dotted #000}
+.de .de-zw{margin:calc(1*var(--u)) 0;display:flex;flex-wrap:wrap;gap:calc(.2*var(--u)) calc(1.6*var(--u))}.de .de-zw span{font-size:calc(3.6*var(--u));font-weight:900;font-stretch:108%;letter-spacing:-.045em;line-height:1.05}
+.de .de-zw.o span{font-weight:200;color:transparent;-webkit-text-stroke:1.2px #000;font-weight:900}
+.de .de-zs{font-size:clamp(14px,calc(1.6*var(--u)),24px);line-height:1.3;margin:0}
+.de .de-prf{grid-column:1/-1;grid-row:4;margin-top:calc(2.4*var(--u));display:grid;grid-template-columns:repeat(12,1fr);column-gap:calc(2*var(--u));align-items:end}
+.de .de-ws{grid-column:1/6;margin:0}.de .de-ws .l2-lab{display:block;margin-bottom:calc(.6*var(--u))}.de .de-ws span:last-child{font-size:clamp(15px,calc(1.8*var(--u)),28px);font-weight:600;line-height:1.3}
+.de .de-prf .de-q{grid-column:7/-1;font-size:clamp(20px,calc(3*var(--u)),46px)}
+
+.de .de-brk{grid-column:1/9;grid-row:2;font-size:calc(5*var(--u));font-weight:850;font-stretch:108%;letter-spacing:-.04em;line-height:1.04;margin-top:calc(1*var(--u));text-wrap:balance}
+.de .de-dx{grid-column:1/-1;grid-row:3;margin-top:calc(5*var(--u));display:grid;grid-template-columns:auto auto 1fr auto;column-gap:calc(2*var(--u));align-items:baseline;border-top:2px solid #fff;padding-top:calc(2*var(--u))}
+.de .de-dx .ad{font-family:var(--serif);font-style:italic;font-size:calc(3*var(--u))}.de .de-dx .n{font-size:calc(11*var(--u));font-weight:900;font-stretch:108%;letter-spacing:-.05em;line-height:1}.de .de-dx .q{font-family:var(--serif);font-style:italic;font-size:clamp(18px,calc(2.6*var(--u)),40px);justify-self:end;align-self:end;max-width:14em;text-align:right}.de .de-dx .l2-plus{align-self:center}
+
+@media (max-width:760px){
+  .de .de-word{font-size:15vw;margin-left:-.02em}.de .de-k{font-size:clamp(28px,8.4vw,40px)}.de .de-or{text-align:left;font-size:19px}.de .de-fl{font-size:clamp(24px,7.4vw,32px)}.de .de-fl:nth-of-type(odd){margin-left:0}
+  .de .de-iss{font-size:clamp(34px,10.4vw,46px)}.de .de-q{font-size:26px}.de .de-tx{font-size:16px}.de .de-dq{font-size:clamp(28px,8.2vw,36px)}.de .de-box dl{grid-template-columns:1fr}
+  .de .de-h{font-size:clamp(30px,9vw,42px)}.de .de-st{display:block}.de .s3 .d{font-size:clamp(28px,8.4vw,36px)}.de .s2 .d{font-size:26px}.de .s1 .d{font-size:22px}.de .s0 .d{font-size:19px}
+  .de .de-eq{font-size:clamp(34px,10.4vw,48px);flex-wrap:wrap;gap:8px 16px}.de .de-flt{display:block}.de .de-flt li{display:block}.de .de-flt .p{font-size:30px}.de .de-flt .t{text-align:left;display:block;margin-top:4px}.de .de-auth{border-left:0;border-top:2px solid #fff;padding:16px 0 0;margin-top:16px}.de .de-dec{font-size:40px;margin:14px 0}
+  .de .de-up,.de .de-dn{display:block}.de .de-up .de-pl,.de .de-dn .de-pl{margin-bottom:16px}.de .de-pl b{font-size:28px}
+  .de .w0,.de .w1,.de .w2{font-size:clamp(40px,12vw,56px);padding-left:0}.de .de-pl.e.lo{display:none}.de .de-mo{display:inline}.de .de-dk{display:none}.de .de-ptl{padding-left:0}.de .de-cl .de-clf{display:block}.de .de-clf .de-tx,.de .de-clf .de-q{grid-column:auto}.de .de-clf .de-q{margin-top:16px}
+  .de .de-fld{display:block}.de .de-z{margin-bottom:20px}.de .de-zw span{font-size:28px}.de .de-prf{display:block}.de .de-prf .de-q{margin-top:18px}.de .de-ws span:last-child{font-size:17px}
+  .de .de-brk{font-size:clamp(26px,7.6vw,36px)}.de .de-dx{grid-template-columns:auto 1fr auto}.de .de-dx .n{font-size:clamp(36px,11vw,50px)}.de .de-dx .q{grid-column:1/-1;justify-self:start;text-align:left;font-size:19px}
+}
+.de .de-fl,.de .de-zw.o span,.de .de-eq .o,.de .de-pl.e.lo b,.de .w0{font-stretch:100%;font-weight:800;letter-spacing:-.035em}.de .w0{font-weight:100}
+@media (max-width:760px){.de .de-dx .ad{font-size:18px}}

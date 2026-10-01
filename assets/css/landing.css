@@ -1,0 +1,13 @@
+/* Landing refinements (01.10.2026): thread through the chapters, twenty marks in Proof, rings in Contact. Black and white; difference blend keeps them readable on both. */
+#thread{left:calc(var(--m) / 2 - 3px);top:0;bottom:0;width:7px;pointer-events:none;opacity:0;transition:opacity .8s}#thread.on{opacity:1}
+#thread .ln{position:absolute;left:3px;top:0;bottom:0;width:1px;background:currentColor;opacity:.28}
+#thread .tk{position:absolute;left:0;width:7px;height:1px;background:currentColor;opacity:.9}
+#thread .pt{position:absolute;left:0;width:7px;height:7px;margin-top:-3px;border-radius:50%;background:currentColor;transition:top .25s linear}
+.lx-years{display:flex;align-items:flex-end;gap:clamp(6px,.8vw,14px);height:clamp(26px,3vw,48px);margin-top:clamp(18px,3vh,36px)}
+.lx-years i{display:block;width:2px;height:34%;background:#000;transform:scaleY(0);transform-origin:bottom;transition:transform .8s cubic-bezier(.2,.7,.1,1) calc(var(--k)*.07s)}.lx-years i:nth-child(5n){height:100%}.lx-years.go i{transform:none}
+#contact .c-in{position:relative}.lx-rings{position:absolute;right:clamp(0px,5vw,120px);top:-4%;width:clamp(240px,26vw,420px);aspect-ratio:1;pointer-events:none;z-index:0}.lx-rings svg{width:100%;height:100%;overflow:visible}
+.lx-rings circle{fill:none;stroke:#fff;stroke-width:1.2;vector-effect:non-scaling-stroke;transform-box:fill-box;transform-origin:center;transform:scale(.15);opacity:0;transition:transform 2.4s cubic-bezier(.2,.7,.1,1) calc(var(--k)*.28s),opacity 1.6s calc(var(--k)*.28s)}.lx-rings.go circle{transform:none;opacity:.5}.lx-rings circle:nth-child(n+2){stroke-dasharray:2 8}.lx-rings .c{fill:#fff;stroke:none;opacity:0;transition:opacity 1s}.lx-rings.go .c{opacity:1;transform:none}
+.c-in>*{position:relative;z-index:1}.c-in>.lx-rings{position:absolute}
+@media (max-width:760px){#thread{left:6px}.lx-years{gap:5px;height:28px}.lx-rings{display:none}}
+@media (prefers-reduced-motion:reduce){.lx-years i,.lx-rings circle{transition:none}}
+.pa-m .pm-lena{position:relative;z-index:6}.pa-m .pm-s6b{position:relative;z-index:2}

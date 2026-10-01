@@ -1,0 +1,76 @@
+/* Advantage (visual rebuild 30.09.2026), scoped .ad on top of l2.css. One device: a circle that passes four tests and ends with an edge over its copy. Type leads. */
+.ad .l2-f{--hv:55}.ad .ad-hero{--hv:58}.ad .ad-st{--hv:46}.ad .ad-qf{--hv:54}.ad .ad-gw{--hv:50}.ad .ad-op{--hv:56}.ad .ad-ev{--hv:68}.ad .ad-br{--hv:50}.ad .ad-end{--hv:44}
+.ad .ad-word{grid-column:1/-1;font-weight:850;font-stretch:108%;font-size:calc(16.5*var(--u));letter-spacing:-.045em;line-height:.9;margin-left:calc(-.4*var(--u))}
+.ad .ad-fld{grid-column:1/-1;grid-row:2;height:calc(17*var(--u));margin-top:calc(1.6*var(--u))}
+.ad .ad-k{grid-column:6/-1;grid-row:3;text-align:right;font-size:calc(3.7*var(--u));font-weight:500;letter-spacing:-.025em;line-height:1.06;margin-top:calc(2.4*var(--u))}
+.ad .ad-sub{grid-column:1/6;grid-row:3;align-self:end;font-size:clamp(17px,calc(1.7*var(--u)),26px);line-height:1.3;font-weight:600;letter-spacing:-.01em}
+.ad .ad-gl{font-family:var(--sans);font-weight:300;fill:#000;fill-opacity:.22;opacity:0;transition:opacity .8s var(--d,0s)}
+.ad .in .ad-gl{opacity:1}
+.ad .ad-hv{fill-opacity:1;font-weight:300;transition:opacity .8s var(--d,0s),font-weight 1.6s var(--ez) 1.2s}
+.ad .in .ad-hv{font-weight:900}
+
+.ad .ad-stm{grid-column:1/10;grid-row:1;font-size:calc(6.4*var(--u));font-weight:650;font-stretch:108%;letter-spacing:-.04em;line-height:1.02;text-wrap:balance}
+.ad .ad-ql{grid-column:1/6;grid-row:2;margin-top:calc(4*var(--u))}
+.ad .ad-qs{grid-column:1/-1;list-style:none;padding:0;display:grid;row-gap:calc(4.5*var(--u))}
+.ad .ad-q{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:calc(2*var(--u));padding-right:22%}
+.ad .ad-qh{grid-column:1/-1;display:flex;align-items:baseline;gap:calc(1.4*var(--u));line-height:.92;letter-spacing:-.05em}
+.ad .ad-qh .n{font-family:var(--serif);font-style:italic;font-weight:400;font-size:calc(3.2*var(--u));letter-spacing:0;-webkit-text-stroke:.6px currentColor}
+.ad .ad-qh .nm{font-stretch:108%;font-size:calc(9.6*var(--u))}
+.ad .ad-q .d{grid-column:1/6;font-size:clamp(16px,calc(1.9*var(--u)),30px);font-weight:600;letter-spacing:-.02em;line-height:1.2;margin-top:calc(1.2*var(--u))}
+.ad .ad-q .x{grid-column:1/6;font-size:clamp(15px,calc(1.4*var(--u)),21px);line-height:1.35;color:#bdbdbd;margin-top:calc(.8*var(--u))}
+.ad .ad-q .qq{grid-column:7/-1;grid-row:2/4;align-self:end;font-family:var(--serif);font-style:italic;font-size:clamp(19px,calc(2.5*var(--u)),38px);line-height:1.12;-webkit-text-stroke:.4px #fff}
+.ad .q1 .nm{font-weight:200}.ad .q2 .nm{font-weight:900}
+.ad .q3 .nm{font-weight:900;-webkit-text-stroke:.03em #fff}
+.ad .q4 .nm{position:relative;font-weight:900;font-size:calc(8.4*var(--u));isolation:isolate}
+.ad .q4 .nm::after{content:attr(data-t);position:absolute;left:.06em;top:.05em;z-index:-1;color:transparent;-webkit-text-stroke:1.2px #fff;font-weight:900}
+
+.ad .ad-opk{grid-column:1/-1;grid-row:1;font-weight:700;font-stretch:108%;letter-spacing:-.045em;line-height:1}
+.ad .ad-opk span{display:block}.ad .ad-opk .a{font-size:calc(3.8*var(--u));font-weight:300}.ad .ad-opk .b{font-size:calc(5.6*var(--u));font-weight:600}.ad .ad-opk .c{font-size:calc(8.2*var(--u));font-weight:900}
+.ad .ad-opg{grid-column:7/-1;grid-row:2;text-align:right;font-size:clamp(16px,calc(2*var(--u)),30px);font-weight:500;letter-spacing:-.02em;line-height:1.2;margin-top:calc(3*var(--u))}
+.ad .ad-c2{grid-column:1/6;grid-row:1;font-size:clamp(16px,calc(2.2*var(--u)),34px);font-weight:600;letter-spacing:-.02em;line-height:1.2}
+.ad .ad-c3{grid-column:8/-1;grid-row:1;text-align:right;font-size:clamp(16px,calc(2.2*var(--u)),34px);font-weight:300;letter-spacing:-.02em;line-height:1.2}
+.ad .ad-o1{grid-column:6/-1;grid-row:2;margin-top:calc(3*var(--u))}
+.ad .ad-o2{grid-column:1/6;grid-row:2/4;list-style:none;padding:0;margin-top:calc(3*var(--u));display:grid;row-gap:calc(.6*var(--u))}
+.ad .ad-o2 li{font-size:calc(6.2*var(--u));font-weight:800;font-stretch:108%;letter-spacing:-.045em;line-height:1}
+.ad .ad-trk{grid-column:6/8;grid-row:2/4;margin-top:calc(3*var(--u));height:auto}
+.ad .ad-outs{grid-column:8/-1;grid-row:3;list-style:none;padding:0;align-self:end;display:grid;row-gap:calc(1*var(--u));text-align:right}
+.ad .ad-outs li{font-size:calc(5*var(--u));letter-spacing:-.04em;line-height:1}
+.ad .ad-outs .s{font-weight:900}.ad .ad-outs .d{font-weight:200}.ad .ad-outs .t{font-weight:900;color:transparent;-webkit-text-stroke:1.3px #000}
+
+.ad .ad-xh{grid-column:1/-1}
+.ad .ad-evk{grid-column:1/9;grid-row:2;font-size:calc(4.4*var(--u));font-weight:700;font-stretch:108%;letter-spacing:-.04em;line-height:1.04;margin-top:calc(1*var(--u));text-wrap:balance}
+.ad .ad-cases{grid-column:1/-1;grid-row:3;list-style:none;padding:0;margin-top:calc(3*var(--u))}
+.ad .ad-cases li{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:calc(2*var(--u));padding:calc(1.8*var(--u)) 0;border-top:1px solid #000;align-items:baseline}
+.ad .ad-cases li:last-child{border-bottom:1px solid #000}
+.ad .ad-cases .cat{grid-column:1/4;grid-row:1;font:600 13px/1.25 var(--sans);letter-spacing:.14em;text-transform:uppercase}.ad .ad-cases i{font-style:normal;font-weight:300}
+.ad .ad-cases .nm{grid-column:4/-1;grid-row:1;font-size:calc(5*var(--u));font-weight:850;font-stretch:108%;letter-spacing:-.045em;line-height:1}
+.ad .ad-cases .c1 .nm{font-family:var(--serif);font-style:italic;font-weight:400;font-stretch:100%;letter-spacing:-.02em;font-size:calc(5.4*var(--u))}
+.ad .ad-cases .ds{grid-column:4/10;grid-row:2;font-size:clamp(15px,calc(1.6*var(--u)),24px);line-height:1.3;margin-top:calc(.8*var(--u))}
+
+.ad .ad-brk{grid-column:1/9;grid-row:2;font-size:calc(4.4*var(--u));font-weight:700;font-stretch:108%;letter-spacing:-.04em;line-height:1.04;margin-top:calc(1*var(--u));text-wrap:balance}
+.ad .ad-br .rl{grid-column:1/6;grid-row:3;margin-top:calc(5*var(--u))}.ad .ad-br .rr{grid-column:8/-1;grid-row:3;margin-top:calc(8*var(--u));text-align:right}
+.ad .ad-br .rn .n,.ad .ad-br .rl .n,.ad .ad-br .rr .n{display:block;font-size:calc(6*var(--u));font-stretch:108%;letter-spacing:-.045em;line-height:1}
+.ad .ad-br .rl .n{font-weight:200}.ad .ad-br .rr .n{font-weight:900}
+.ad .ad-br .q{display:block;font-family:var(--serif);font-style:italic;font-size:clamp(17px,calc(2.1*var(--u)),32px);line-height:1.15;margin-top:calc(1*var(--u))}
+.ad .ad-br .l2-plus{margin-top:calc(1.4*var(--u))}
+.ad .ad-br .rc{grid-column:6/8;grid-row:3;margin-top:calc(5*var(--u));display:flex;flex-direction:column;align-items:center;justify-self:center}
+.ad .ad-br .rc .cr{display:block;width:calc(8*var(--u));height:calc(8*var(--u))}.ad .ad-br .rc .n{font:600 13px/1.25 var(--sans);letter-spacing:.16em;text-transform:uppercase;margin-top:calc(.8*var(--u))}
+.ad .ad-cs{grid-column:1/9;font-size:calc(5.6*var(--u));font-weight:700;letter-spacing:-.04em;line-height:1.02;text-wrap:balance}
+.ad .ad-end .l2-act{grid-column:1/6;margin-top:calc(6*var(--u))}
+
+@media (max-width:760px){
+  .ad .ad-word{font-size:14.6vw;margin-left:-.02em}.ad .ad-fld{height:48vw}.ad .ad-k{font-size:clamp(26px,7.6vw,36px);order:3}.ad .ad-sub{font-size:19px;order:4;margin-top:18px!important}
+  .ad .ad-stm{font-size:clamp(30px,9vw,42px)}
+  .ad .ad-q{padding-right:0;display:flex;flex-direction:column;gap:6px}.ad .ad-qh .nm{font-size:clamp(38px,12vw,54px)!important}.ad .ad-q .d{font-size:21px}.ad .ad-q .x{font-size:16px}.ad .ad-q .qq{font-size:24px;margin-top:8px}
+  .ad .ad-opk .a{font-size:7vw}.ad .ad-opk .b{font-size:9.6vw}.ad .ad-opk .c{font-size:11.6vw}.ad .ad-opg,.ad .ad-c2,.ad .ad-c3{font-size:20px}
+  .ad .ad-o2 li{font-size:clamp(34px,11vw,48px)}.ad .ad-trk{display:none}.ad .ad-outs li{font-size:clamp(28px,9vw,38px)}.ad .ad-outs{justify-items:start}
+  .ad .ad-evk,.ad .ad-brk{font-size:clamp(26px,7.6vw,36px)}.ad .ad-cases .cat,.ad .ad-cases .nm,.ad .ad-cases .ds{grid-column:1/-1!important;grid-row:auto!important}.ad .ad-cases .nm{font-size:clamp(28px,8.4vw,36px)!important}
+  .ad .ad-br .rc{justify-self:start;align-items:flex-start}.ad .ad-br .rr,.ad .ad-br .rl{text-align:left}.ad .ad-br .rn .n,.ad .ad-br .rl .n,.ad .ad-br .rr .n{font-size:clamp(36px,11.5vw,52px)}.ad .ad-br .q{font-size:19px}
+  .ad .ad-cs{font-size:clamp(30px,9vw,42px)}
+}
+.ad .ad-dev{position:absolute;inset:0}
+.ad .ad-tf{fill-opacity:0;transition:fill-opacity .5s var(--d,0s)}.ad .in .ad-tf{fill-opacity:1}
+.ad .ad-mv{transform:none;transition:transform 3.6s cubic-bezier(.5,0,.2,1) .4s}.ad .in .ad-mv{transform:translateY(var(--dy))}
+.ad .ad-qh .nm{white-space:nowrap}.ad .q4 .nm::after{white-space:nowrap}
+@media (max-width:760px){.ad .ad-qh .nm{white-space:normal}.ad .ad-qh .n{font-size:22px}.ad .q4 .nm::after{display:none}.ad .ad-q{max-width:100%}}
+.ad .ad-outs .t,.ad .q4 .nm::after{font-stretch:100%}

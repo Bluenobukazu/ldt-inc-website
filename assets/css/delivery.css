@@ -1,0 +1,6 @@
+/* Delivery (refine only, 01.10.2026): the page keeps its own typographic language. One addition: a ring that arrives at the line where each promise has to land (hollow: not yet arrived). */
+.dl-row .dl-gap{position:relative}
+.dl-row .dl-gap::after{content:"";position:absolute;right:-7px;top:50%;width:14px;height:14px;margin-top:-7px;border:2px solid currentColor;border-radius:50%;background:#fff;animation:dl-land 1.6s var(--ease,cubic-bezier(.2,.7,.1,1)) both}
+.dl-row:nth-child(2) .dl-gap::after{animation-delay:.25s}.dl-row:nth-child(3) .dl-gap::after{animation-delay:.5s}
+@keyframes dl-land{from{transform:translateX(-46px);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.dl-row .dl-gap::after{animation:none}}

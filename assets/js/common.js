@@ -17,6 +17,25 @@ hdr.innerHTML=(HOME
  '<nav aria-label="Main"><button type="button" data-open="index" data-act aria-haspopup="dialog">Index</button></nav>';
 d.body.prepend(hdr);
 
+/* the map of the site: the journey (01 to 08) as one line, and where each view opens off it. Hovering an entry brings its part forward. Numbers only, as the site numbers them */
+function ixMap(){
+  const Y=i=>50+i*88,ring=(x,y,r,k,dly)=>`<circle class="rg k-${k}" style="--d:${dly}s" cx="${x}" cy="${y}" r="${r}"/>`,dt=(x,y,r,k,dly)=>`<circle class="dt k-${k}" style="--d:${dly}s" cx="${x}" cy="${y}" r="${r}"/>`,tx=(x,y,t,k,dly,a)=>`<text class="nm k-${k}" style="--d:${dly}s" x="${x}" y="${y}"${a?` text-anchor="${a}"`:''}>${t}</text>`;
+  let h='<svg viewBox="0 0 500 720" focusable="false"><path class="ax" d="M70 50V666" pathLength="1"/>';
+  for(let i=0;i<8;i++)h+=dt(70,Y(i),i===7?10:5,i===3?'explore':i===4?'experience':i===6?'workshops':i===7?'contact':'j',.2+i*.12)+tx(92,Y(i)+6,'0'+(i+1),i===3?'explore':i===4?'experience':i===6?'workshops':i===7?'contact':'j',.25+i*.12);
+  /* 04.1 Explore: the operating system as two pairs of overlapping circles, fourteen points in reading order */
+  const cy=Y(3);h+=`<path class="br k-explore" d="M128 ${cy}H196" pathLength="1"/>`+tx(130,cy-14,'04.1','explore',1.1);
+  [[250,0],[392,1]].forEach(([x,g])=>{h+=ring(x,cy,40,'explore',1.2+g*.15)+ring(x+54,cy,40,'explore',1.3+g*.15)});
+  const P=[[232,cy-8,3.4],[232,cy+10,3],[276,cy,3.4],[326,cy-8,3.4],[326,cy+10,3],[374,cy-14,3.4],[374,cy+2,3],[374,cy+18,3],[420,cy,3.4],[446,cy-14,3.4],[446,cy+2,3],[446,cy+18,3],[464,cy,3],[424,cy+30,3]];
+  P.forEach(([x,y,r],i)=>{h+=dt(x,y,r,'explore',1.5+i*.04)});
+  /* 05.1 Experience */
+  h+=`<path class="br k-experience" d="M128 ${Y(4)}H164" pathLength="1"/>`+ring(190,Y(4),22,'experience',1.4)+dt(190,Y(4),4,'experience',1.5)+tx(222,Y(4)+6,'05.1','experience',1.55);
+  /* 06.1 and 07.1: the other two views off their chapters */
+  h+=`<path class="br k-j" d="M128 ${Y(5)}H164" pathLength="1"/>`+ring(190,Y(5),16,'j',1.6)+tx(222,Y(5)+6,'06.1','j',1.65)+`<path class="br k-j" d="M128 ${Y(6)-14}H140L156 ${Y(6)-40}" pathLength="1"/>`+ring(172,Y(6)-52,16,'j',1.7)+tx(204,Y(6)-46,'07.1','j',1.75);
+  /* 07.2 Workshops: a page of its own, five frameworks */
+  const wy=Y(6)+30;h+=`<path class="br k-workshops" d="M128 ${wy-30}H142L156 ${wy+10}H262" pathLength="1"/>`+ring(330,wy+10,66,'workshops',1.8).replace('class="rg','class="rg ds')+tx(330,wy-76,'07.2','workshops',2,'middle');
+  [0,1,2,3,4].forEach(i=>{h+=dt(288+i*21,wy+10,3.6,'workshops',2+i*.05)});
+  return h+'</svg>';
+}
 /* ---------- index layer: numbers follow the chapters they belong to ---------- */
 const IX=[
  ['04.1','System','Explore',HOME?'data-open="approach"':`href="${ROOT}#explore" data-cut`],
@@ -27,8 +46,10 @@ const IX=[
 const ix=d.createElement('div');ix.className='ov';ix.id='index';ix.setAttribute('role','dialog');ix.setAttribute('aria-modal','true');ix.setAttribute('aria-label','Index');ix.dataset.lenisPrevent='';
 ix.innerHTML='<div class="bar"><button class="back" type="button" data-close data-act><i></i>Close</button><span class="lbl" aria-hidden="true">Index</span></div>'+
  '<div class="inner"><ol>'+IX.map(([n,lg,en,a])=>{const tag=a.startsWith('href')?'a':'button';return `<li><${tag} class="ix" ${tag==='button'?'type="button" ':''}${a} data-act><span class="n">${n}</span><span class="lg">${lg}</span><span class="en">${en}</span><i class="sweep"></i></${tag}></li>`}).join('')+
- '</ol><div class="pillar" aria-hidden="true"><div class="shine" style="left:30%"></div></div></div>';
+ '</ol><div class="ixm" aria-hidden="true">'+ixMap()+'</div></div>';
 d.body.appendChild(ix);
+{const m=ix.querySelector('.ixm'),K=['explore','experience','workshops','contact'];
+ ix.querySelectorAll('.ix').forEach((a,i)=>{const on=()=>m.dataset.f=K[i],off=()=>delete m.dataset.f;['mouseenter','focus'].forEach(e=>a.addEventListener(e,on));['mouseleave','blur'].forEach(e=>a.addEventListener(e,off))})}
 
 /* ---------- every layer carries the same header as the pages (Lena, 27.09.2026): LDT INC and Index on top,
    Back with the location beneath it, as on /workshops. In the Index itself Close takes the place of Index ---------- */
@@ -108,7 +129,7 @@ const keyX=el=>{const r=el.getBoundingClientRect();lastX=r.left+r.width/2};
 function setInert(on,keep){$$('body > *').forEach(e=>{if(e===keep){e.inert=false;return}if(e===op||e===cur||e===ring||e===totop||e.tagName==='SCRIPT')return;e.inert=on})}
 function focusables(r){return $$('a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"])',r).filter(e=>e.offsetParent!==null||e.getClientRects().length)}
 /* pages that keep an address for an open layer (the deep dives) listen for this */
-const layersChanged=()=>d.dispatchEvent(new CustomEvent('ldt:layers'));
+const layersChanged=()=>{d.dispatchEvent(new CustomEvent('ldt:layers'));d.querySelectorAll('.ov').forEach(o=>o.classList.toggle('play',openOv===o))};
 function openLayer(id,fill,trigger,now,fresh){
   const ov=d.getElementById(id);if(!ov)return;
   if(openOv&&openOv!==ov){stack.push({ov:openOv,from:trigger||d.activeElement,scroll:openOv.scrollTop});closeLayer(true,true);if(fresh)stack=[]}else if(!openOv){returnFocus=trigger||d.activeElement;stack=[]}
@@ -172,7 +193,7 @@ d.addEventListener('click',e=>{
     else if(!cut.matches('.subbar .back')){const tr=readS(TRAIL)||[];tr.push(here());writeS(TRAIL,tr.slice(-10))}
     cutTo(cut.getAttribute('href'));return}
   const o=t.closest('[data-open]');
-  if(o){e.preventDefault();if(e.detail===0)keyX(o);openLayer(o.dataset.open,LDT.fills[o.dataset.open],o,false,!!o.closest('#index'));return}
+  if(o){e.preventDefault();if(e.detail===0)keyX(o);openLayer(o.dataset.open,LDT.fills[o.dataset.open],o,false,false);return}
   const g=t.closest('[data-go]');
   if(g&&LDT.goChapter){e.preventDefault();if(openOv)closeLayer(true);LDT.goChapter(+g.dataset.go);return}
   if(t.closest('[data-close]')){e.preventDefault();back();return}
