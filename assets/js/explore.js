@@ -37,22 +37,23 @@ function build(root,mode){
   const env=x=>{let i=0;while(i<pts.length-2&&x>pts[i+1][0])i++;const a=pts[i],b=pts[i+1],t=Math.min(1,Math.max(0,(x-a[0])/((b[0]-a[0])||1))),s=(1-Math.cos(t*Math.PI))/2;let e=a[1]+(b[1]-a[1])*s,m=1,ad=0;
     for(let k=0;k<6;k++){if(wt[k]<.002)continue;const c=(rng[k][0]+rng[k][1])/2,sg=(rng[k][1]-rng[k][0])*.6,g=Math.exp(-((x-c)/sg)*((x-c)/sg));if(k===1||k===4)ad+=.09*wt[k]*g;else m+=.13*wt[k]*g}
     return e*m+ad};
+  const exX=(f,u)=>{const q=u*Math.PI*2,edge=Math.sign(f)*Math.pow(Math.abs(f),1.14),
+    centre=W*.5+W*(.028*Math.sin(q*1.12-.45)+.018*Math.sin(q*3.25+.8)),
+    breath=.038+.078*(.5+.5*Math.sin(q*2.15-.72))+.034*(.5+.5*Math.cos(q*4.4+.2)),
+    pinch=.42+.58*Math.abs(Math.sin(q*1.58+.42)),
+    weave=Math.sin(q*3.05-.5)*(.52+.48*Math.cos(q*.74)),
+    fan=W*edge*breath*pinch,
+    fold=W*f*(.031*Math.sin(q*2.55+f*.9)+.017*Math.sin(q*6.1-f)),
+    cross=W*edge*.036*weave;
+    return centre+fan+fold+cross};
   function draw(t){if(!W||!pts.length)return;
     if(mode==='ex'){
       /* A tall, woven ribbon rather than a scaled horizontal loop.  Its width
          repeatedly opens and pinches, while its centre line drifts independently;
          this creates the fan, crossing and depth of the supplied line reference. */
       const C=P1.length,ST=220;
-      for(let j=0;j<C;j++){const f=(j-(C-1)/2)/((C-1)/2),edge=Math.sign(f)*Math.pow(Math.abs(f),1.14);let d='';
-        for(let k=0;k<=ST;k++){const u=k/ST,y=-18+u*(H+36),q=u*Math.PI*2,
-          centre=W*.5+W*(.028*Math.sin(q*1.12-.45)+.018*Math.sin(q*3.25+.8)),
-          breath=.032+.082*(.5+.5*Math.sin(q*2.15-.72))+.038*(.5+.5*Math.cos(q*4.4+.2)),
-          pinch=.24+.76*Math.abs(Math.sin(q*1.58+.42)),
-          weave=Math.sin(q*3.05-.5)*(.52+.48*Math.cos(q*.74)),
-          fan=W*edge*breath*pinch,
-          fold=W*f*(.034*Math.sin(q*2.55+f*.9)+.02*Math.sin(q*6.1-f)),
-          cross=W*edge*.044*weave,
-          x=centre+fan+fold+cross;
+      for(let j=0;j<C;j++){const f=(j-(C-1)/2)/((C-1)/2);let d='';
+        for(let k=0;k<=ST;k++){const u=k/ST,y=-18+u*(H+36),x=exX(f,u);
           d+=(k?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}
         P1[j].setAttribute('d',d);P2[j].setAttribute('d',d)}return}
     const step=W>900?7:6,amp=H*.5,cy=H/2,xs=[];for(let x=0;x<W+step;x+=step)xs.push(Math.min(x,W));
@@ -63,13 +64,12 @@ function build(root,mode){
       P1[j].setAttribute('d',dt);P2[j].setAttribute('d',dt);P1[M+j].setAttribute('d',db);P2[M+j].setAttribute('d',db)}}
   function drawLinks(frame,scale){
     if(mode!=='ex')return;links.replaceChildren();
-    const mid=W/2;
     cEls.forEach((card,i)=>{const b=card.getBoundingClientRect(),left=i<3,
       x1=left?(b.right-frame.left)/scale:(b.left-frame.left)/scale,
       y=(b.top+b.height*.5-frame.top)/scale,
-      x2=mid+(left?-1:1)*W*(.082+.012*Math.sin(i*1.7)),
-      bend=x1+(x2-x1)*.58,p=document.createElementNS(NS,'path');
-      p.setAttribute('class','sy-link');p.setAttribute('d',`M${x1.toFixed(1)} ${y.toFixed(1)} C${bend.toFixed(1)} ${y.toFixed(1)},${(x2+(left?18:-18)).toFixed(1)} ${y.toFixed(1)},${x2.toFixed(1)} ${y.toFixed(1)}`);links.appendChild(p)
+      u=Math.max(0,Math.min(1,(y+18)/(H+36))),x2=exX(left?-1:1,u),
+      bend=x1+(x2-x1)*.62,p=document.createElementNS(NS,'path');
+      p.setAttribute('class','sy-link');p.setAttribute('pathLength','1');p.setAttribute('d',`M${x1.toFixed(1)} ${y.toFixed(1)} C${bend.toFixed(1)} ${y.toFixed(1)},${(x2+(left?10:-10)).toFixed(1)} ${(y+(i%2?.8:-.8)).toFixed(1)},${x2.toFixed(1)} ${y.toFixed(1)}`);links.appendChild(p)
     })
   }
   /* hover and focus: a dimension brings forward itself and its connector, a connector both of its dimensions */

@@ -120,6 +120,15 @@ Run browser QA on the deployed candidate at 970×510, 1280×720, 1440×900 and r
 - Common card heights and calmer header metrics keep Positioning and Delivery readable on desktop. Narrow layouts restore natural name wrapping and prioritise the card content over the illustration.
 - Full deployed-preview visual, interaction and viewport QA remains required before production approval.
 
+## Explore black-field correction
+
+- Baseline: branch `work`, commit `d7ae833aeb062b7f72bf1c8a9b9bb75a6c4f3794`.
+- Explore now uses the established site black throughout the overlay and sticky navigation. Its heading, entry note, navigation and SVG lines are white; the six content cards remain white with black type and the approved fixed code-pill colours.
+- A final Explore-scoped style layer neutralises the older vertical connector rules. Positioning and Delivery now use the same horizontal code/name/plus header and full-width explanation layout as the four dimensions.
+- Desktop columns share the width required by Commercial Architecture, while card heights follow their content. The layout switches to a natural single-column sequence before those widths can collide; mobile names may wrap without scaling the whole view.
+- Connector endpoints are calculated from the same outside contour function used to draw the organic field, so the short curves stop at its edge instead of piercing the interior.
+- Layer 1, all fourteen Explore destinations, semantic current-location handling, the accepted footer and the production boundary remain unchanged.
+
 ## V3 remainder — unchanged
 
 The application release does not replace the V3 remainder: open line design for Explore/System footer; further visual and narrative refinement; all 133 frames against seven contract fields; remaining frame findings and full V3 QA; shared frame-by-frame review and surgical corrections. ADD-01–04, workshop-result drafts and other copy awaiting approval were not silently implemented.

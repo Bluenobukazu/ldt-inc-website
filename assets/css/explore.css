@@ -427,3 +427,45 @@ body.system-moment #railM{opacity:0;visibility:hidden}
 /* Layer 1 preselection: visually strong, deliberately distinct from YOU ARE HERE. */
 .sy-ex .sy-c.picked{outline:3px solid #000!important;outline-offset:4px}
 .sy-ex .sy-c.picked :is(.sy-h,.sy-k) .plus{transform:rotate(90deg)}
+
+/* ===== Explore black-field correction =====
+   This final, view-scoped layer deliberately neutralises the historic connector
+   writing modes without changing Layer 1 or the Deep Dive footer. */
+#approach,#approach .bar{background:#000;color:#fff}
+#approach .bar{border-bottom:1px solid rgba(255,255,255,.32)}
+#approach .bar :is(.back,.lbl,.dctx,.dcur){color:#fff}
+#approach .bar .pill{background:transparent;color:#fff;border-color:#fff}
+#approach .dkick .t,#approach .dkick .t strong{color:#fff}
+#approach .sy-ex>.aentry.ax-top{box-sizing:border-box;margin-bottom:clamp(42px,6vh,76px);padding:0 0 0 1.5rem;border:0;border-left:2px solid #fff;background:transparent;color:#fff}
+#approach .sy-ex>.aentry.ax-top em{color:#fff}
+
+.sy-ex .sy-ln,.sy-ex .sy-lh,.sy-ex .sy-link{stroke:#fff}
+.sy-ex .sy-link{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.2s cubic-bezier(.2,.7,.1,1) .45s}
+.sy-ex.go .sy-link{stroke-dashoffset:0}
+.sy-ex .sy-tab{grid-template-columns:minmax(390px,430px) minmax(180px,1fr) minmax(390px,430px)!important;column-gap:clamp(28px,3.4vw,54px);row-gap:clamp(36px,5vw,72px)}
+.sy-ex .sy-c{box-sizing:border-box;min-height:0;padding:1.15rem 1.25rem 1.25rem!important;border:1px solid #000!important;background:#fff!important;color:#000!important;align-self:start;overflow:visible}
+.sy-ex .sy-x{display:block!important;margin:0!important;background:#fff!important;color:#000!important}
+.sy-ex .sy-x:is(:hover,:focus-within,.on){background:#fff!important;color:#000!important}
+.sy-ex .sy-x::before,.sy-ex .sy-x::after{display:none!important}
+.sy-ex .sy-h,.sy-ex .sy-k{position:relative!important;inset:auto!important;display:grid!important;grid-template-columns:auto minmax(0,1fr) auto!important;align-items:center!important;gap:.75rem!important;width:100%!important;min-height:48px!important;margin:0!important;padding:0!important;background:#fff!important;color:#000!important;writing-mode:horizontal-tb!important;transform:none!important}
+.sy-ex .sy-h .sy-l,.sy-ex .sy-k .ab{display:inline-flex!important;align-items:center;justify-content:center;min-width:50px;height:30px;margin:0!important;padding:0 10px!important;border:0!important;border-radius:18px;background:#000!important;color:#fff!important;-webkit-text-fill-color:#fff!important;font:700 12px/1 var(--sans)!important;letter-spacing:.08em!important;white-space:nowrap}
+.sy-ex .sy-h .n,.sy-ex .sy-k .n{min-width:0;margin:0!important;color:#000!important;font:700 clamp(20px,1.55vw,24px)/1.05 var(--sans)!important;letter-spacing:-.035em!important;text-align:left!important;text-transform:none!important;white-space:nowrap!important;writing-mode:horizontal-tb!important;transform:none!important}
+.sy-ex :is(.sy-h,.sy-k) .plus{display:block!important;margin:0!important;color:#000!important;font:300 27px/1 var(--sans)!important}
+.sy-ex .sy-ap{width:100%;max-width:none;margin:.85rem 0 0!important;padding:0!important;color:#000!important;font:400 15px/1.48 var(--sans)!important;text-align:left;overflow:visible}
+.sy-ex ul{width:100%;margin:1rem 0 0!important;padding:.65rem 0 0!important;border-top:1px solid #000!important}
+.sy-ex li button{color:#000!important;background:#fff!important}
+.sy-ex li button .ad{background:#fff!important;color:#000!important;border:1px solid #000!important;border-radius:18px!important}
+.sy-ex .yh{background:#000!important;color:#fff!important}
+.sy-ex .sy-c.on{outline:1px solid #fff;outline-offset:5px}
+.sy-ex .sy-c.picked{outline-color:#fff!important}
+
+@media (max-width:1180px){
+  .sy-ex .sy-tab{display:block!important}.sy-ex .sy-c{width:100%;margin:0 0 1.25rem!important}
+  .sy-ex .sy-link{display:none}
+}
+@media (max-width:760px){
+  #approach .sy-ex>.aentry.ax-top{padding-left:1.15rem}
+  .sy-ex .sy-h .n,.sy-ex .sy-k .n{font-size:clamp(21px,7vw,29px)!important;white-space:normal!important}
+  .sy-ex .sy-c{padding:1rem!important}
+}
+@media (prefers-reduced-motion:reduce){.sy-ex .sy-link{stroke-dasharray:none!important;stroke-dashoffset:0!important}}
