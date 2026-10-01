@@ -69,41 +69,47 @@ function build(root,mode){
 /* ---- Layer 1 chapter 04, desktop: one composition on the whole stage (1440 x 900). The scroll builds it: lines grow out of the black chapter,
    names, deep dives and connectors appear where the lines have reached them. Drawn in white, the stage blends it (difference): white on black, then black on white. ---- */
 function compose(root){
+  /* Layer 1 chapter 04, v3 rebuild: two ribbons of fine lines. The first joins Proposition and Expansion through Positioning, the second joins Operations and Commercial Architecture through Delivery.
+     No line runs between Expansion and Operations, because the system does not claim a relation there. The connectors are black modules that the ribbons plug into. */
   const {dims,con}=model(),NSV=NS;
-  const K=[[-700,505,80,.58],[-40,495,100,.58],[270,470,155,.6],[505,415,5,.2],[668,398,150,.58],[818,372,52,.82],[960,345,140,.62],[1088,312,5,.2],[1225,300,160,.8],[1384,282,0,.2]];
-  const LB=[{d:0,x:270,cy:470,A:155},{d:1,x:668,cy:398,A:150},{d:2,x:960,cy:345,A:140},{d:3,x:1225,cy:300,A:160}];
-  const PN=[{k:0,x:505,y:415},{k:1,x:1088,y:312}];
+  const RB=[{x0:90,x1:850,K:[[90,445,0,.2],[250,440,142,.62],[450,430,5,.2],[660,420,136,.62],[850,415,0,.2]]},
+            {x0:720,x1:1390,K:[[720,572,0,.2],[880,566,134,.62],[1040,558,5,.2],[1230,550,136,.62],[1390,544,0,.2]]}];
+  const LB=[{d:0,x:250,cy:440,A:142,r:0},{d:1,x:660,cy:420,A:136,r:0},{d:2,x:880,cy:566,A:134,r:1},{d:3,x:1230,cy:550,A:136,r:1}];
+  const PN=[{k:0,x:450,y:430},{k:1,x:1040,y:558}];
   const dyn=root.querySelector('.cm-dyn');
-  const lobeHtml=LB.map((b,i)=>{const d=dims[b.d],bottom=b.cy+b.A*.97;return`<div class="cm-a cm-lb" data-d="${d.i}" data-e="${[0,2,3,5][i]}" style="left:${b.x-130}px;top:${b.cy-34}px;width:260px"><button type="button" class="sy-h cm-h" data-ddim="${d.i}" data-act aria-haspopup="dialog"><span class="sy-l" aria-hidden="true">${L[d.i]}</span><span class="n">${d.n}</span><span class="plus" aria-hidden="true">+</span></button></div><ul class="cm-a cm-ls" data-d="${d.i}" data-e="${[0,2,3,5][i]}" style="left:${b.x-100}px;top:${bottom+18}px;width:210px">${d.areas.map(area).join('')}</ul>`}).join('');
-  const pinHtml=PN.map(p=>{const c=con[p.k];return`<div class="cm-a cm-pn" data-k="${p.k}" data-e="${p.k?4:1}" style="left:${p.x-16}px;top:${p.y-62}px"><button type="button" class="cm-k" data-dreal="${c.r}" data-act aria-haspopup="dialog" aria-label="${c.n}, connects ${c.from.n} and ${c.to.n}"><span class="cm-pl" aria-hidden="true">+</span><span class="n">${c.n}</span></button></div>`}).join('');
-  dyn.innerHTML=`<svg class="cm-svg" viewBox="0 0 1440 900" aria-hidden="true" focusable="false"><defs><clipPath id="cmf"><rect class="cm-front" x="-700" y="-100" width="0" height="1100"/></clipPath><clipPath id="cmz"><rect class="cm-zone" x="0" y="0" width="0" height="900"/></clipPath></defs><g clip-path="url(#cmf)"><g class="cm-base"></g><g class="cm-hl" clip-path="url(#cmz)"></g></g></svg>`+lobeHtml+pinHtml;
+  const lobeHtml=LB.map((b,i)=>{const d=dims[b.d],bottom=b.cy+b.A*.97;return`<div class="cm-a cm-lb" data-d="${d.i}" data-e="${[0,2,3,5][i]}" style="left:${b.x-130}px;top:${b.cy-34}px;width:260px"><button type="button" class="sy-h cm-h" data-ddim="${d.i}" data-act aria-haspopup="dialog"><span class="sy-l" aria-hidden="true">${L[d.i]}</span><span class="n">${d.n}</span><span class="plus" aria-hidden="true">+</span></button></div><ul class="cm-a cm-ls" data-d="${d.i}" data-e="${[0,2,3,5][i]}" style="left:${b.x-105}px;top:${bottom+18}px;width:210px">${d.areas.map(area).join('')}</ul>`}).join('');
+  const CODES=['A + B','C + D'];
+  const pinHtml=PN.map(p=>{const c=con[p.k];return`<div class="cm-a cm-pn" data-k="${p.k}" data-e="${p.k?4:1}" style="left:${p.x-78}px;top:${p.y-34}px"><button type="button" class="cm-k" data-dreal="${c.r}" data-act aria-haspopup="dialog" aria-label="${c.n}, connects ${c.from.n} and ${c.to.n}"><span class="cm-code" aria-hidden="true">${CODES[p.k]}</span><span class="n">${c.n}</span><span class="cm-pl" aria-hidden="true">+</span></button></div>`}).join('');
+  dyn.innerHTML=`<svg class="cm-svg" viewBox="0 0 1440 900" aria-hidden="true" focusable="false"><defs><clipPath id="cmf"><rect class="cm-front" x="0" y="-100" width="0" height="1100"/></clipPath><clipPath id="cmz"><rect class="cm-zone" x="0" y="0" width="0" height="900"/></clipPath></defs><g clip-path="url(#cmf)"><g class="cm-base"></g><g class="cm-hl" clip-path="url(#cmz)"></g></g></svg>`+lobeHtml+pinHtml;
   const svg=dyn.querySelector('.cm-svg'),base=svg.querySelector('.cm-base'),hl=svg.querySelector('.cm-hl'),front=svg.querySelector('.cm-front'),zone=svg.querySelector('.cm-zone');
-  const M=19,P1=[],P2=[];
-  for(let i=0;i<M*2;i++){const a=document.createElementNS(NSV,'path'),b=document.createElementNS(NSV,'path');a.setAttribute('class','cm-ln');b.setAttribute('class','cm-lh');base.appendChild(a);hl.appendChild(b);P1.push(a);P2.push(b)}
-  const itp=(x,ix)=>{let i=0;while(i<K.length-2&&x>K[i+1][0])i++;const a=K[i],b=K[i+1],t=Math.min(1,Math.max(0,(x-a[0])/((b[0]-a[0])||1))),s=(1-Math.cos(t*Math.PI))/2;return a[ix]+(b[ix]-a[ix])*s};
-  const ZN={0:[-700,540],1:[420,590],2:[440,860],3:[780,1130],4:[1030,1160],5:[1050,1400]};
-  const wt=[0,0,0,0,0,0],tw=[0,0,0,0,0,0],CE=[270,505,668,960,1088,1225];
+  const M=15;
+  RB.forEach(r=>{r.P1=[];r.P2=[];for(let i=0;i<M*2;i++){const a=document.createElementNS(NSV,'path'),b=document.createElementNS(NSV,'path');a.setAttribute('class','cm-ln');b.setAttribute('class','cm-lh');base.appendChild(a);hl.appendChild(b);r.P1.push(a);r.P2.push(b)}
+    r.xs=[];for(let x=r.x0;x<=r.x1;x+=7)r.xs.push(x)});
+  const itp=(K,x,ix)=>{let i=0;while(i<K.length-2&&x>K[i+1][0])i++;const a=K[i],b=K[i+1],t=Math.min(1,Math.max(0,(x-a[0])/((b[0]-a[0])||1))),s=(1-Math.cos(t*Math.PI))/2;return a[ix]+(b[ix]-a[ix])*s};
+  const ZN={0:[90,360],1:[350,550],2:[530,860],3:[720,980],4:[960,1140],5:[1120,1395]};
+  const wt=[0,0,0,0,0,0],tw=[0,0,0,0,0,0],CE=[250,450,660,880,1040,1230];
   let T=0,front0=0,vis=false;
   const lbE=[...dyn.querySelectorAll('.cm-lb')],lsE=[...dyn.querySelectorAll('.cm-ls')];
-  function draw(t){const xs=[];for(let x=-700;x<=1365;x+=7)xs.push(x);
-    const cy=xs.map(x=>itp(x,1)),A=xs.map((x,k)=>{let a=itp(x,2),m=1;for(let e=0;e<6;e++){if(wt[e]<.002)continue;const g=Math.exp(-Math.pow((x-CE[e])/90,2));if(e===1||e===4)a+=9*wt[e]*g;else m+=.14*wt[e]*g}return a*m}),H=xs.map(x=>itp(x,3));
-    const top0=[],bot0=[],botO=[];
-    for(let j=0;j<M;j++){const f=j/(M-1);let dt='',db='';
-      for(let k=0;k<xs.length;k++){const x=xs[k],h=H[k],r=h+(1-h)*Math.pow(f,1.25),dr=(f-.5)*A[k]*.16*Math.sin(x*.0062+t*.18+j*.2),sk=1+.13*Math.sin(x*.0043+1.2),sb=1-.11*Math.sin(x*.0051+.4),sw=1+.08*Math.sin(x*.015+j*.55+t*.4),yy=cy[k]+14*Math.sin(x*.004+t*.16),yt=yy-A[k]*r*sk*sw+dr,yb=yy+A[k]*r*sb*sw+dr;
-        dt+=(k?'L':'M')+x+' '+yt.toFixed(1);db+=(k?'L':'M')+x+' '+yb.toFixed(1);if(j===0){top0[k]=yt;bot0[k]=yb}if(j===M-1)botO[k]=yb}
-      P1[j].setAttribute('d',dt);P2[j].setAttribute('d',dt);P1[M+j].setAttribute('d',db);P2[M+j].setAttribute('d',db)}
+  function draw(t){
+    RB.forEach(r=>{const xs=r.xs,K=r.K;
+      const cy=xs.map(x=>itp(K,x,1)),A=xs.map(x=>{let a=itp(K,x,2),m=1;for(let e=0;e<6;e++){if(wt[e]<.002)continue;const g=Math.exp(-Math.pow((x-CE[e])/90,2));if(e===1||e===4)a+=9*wt[e]*g;else m+=.14*wt[e]*g}return a*m}),H=xs.map(x=>itp(K,x,3));
+      r.top0=[];r.bot0=[];r.botO=[];
+      for(let j=0;j<M;j++){const f=j/(M-1);let dt='',db='';
+        for(let k=0;k<xs.length;k++){const x=xs[k],h=H[k],q=h+(1-h)*Math.pow(f,1.25),dr=(f-.5)*A[k]*.16*Math.sin(x*.0062+t*.18+j*.2),sk=1+.13*Math.sin(x*.0043+1.2),sb=1-.11*Math.sin(x*.0051+.4),sw=1+.08*Math.sin(x*.015+j*.55+t*.4),yy=cy[k]+10*Math.sin(x*.004+t*.16),yt=yy-A[k]*q*sk*sw+dr,yb=yy+A[k]*q*sb*sw+dr;
+          dt+=(k?'L':'M')+x+' '+yt.toFixed(1);db+=(k?'L':'M')+x+' '+yb.toFixed(1);if(j===0){r.top0[k]=yt;r.bot0[k]=yb}if(j===M-1)r.botO[k]=yb}
+        r.P1[j].setAttribute('d',dt);r.P2[j].setAttribute('d',dt);r.P1[M+j].setAttribute('d',db);r.P2[M+j].setAttribute('d',db)}});
     /* names sit in the middle of their opening, deep dives hang from the lower edge of their body */
-    LB.forEach((b,i)=>{const k=Math.round((b.x-xs[0])/7),c=(top0[k]+bot0[k])/2;if(lbE[i])lbE[i].style.top=(c-34)+'px';if(lsE[i])lsE[i].style.top=(botO[k]+20)+'px'})}
+    LB.forEach((b,i)=>{const r=RB[b.r],k=Math.round((b.x-r.x0)/7),c=(r.top0[k]+r.bot0[k])/2;if(lbE[i])lbE[i].style.top=(c-34)+'px';if(lsE[i])lsE[i].style.top=(r.botO[k]+20)+'px'})}
   const ss=v=>{v=Math.min(1,Math.max(0,v));return v*v*(3-2*v)};
   /* p: 0 to 1, how far the drawing has grown from left to right */
-  function setP(p){const fx=-700+p*2140;front0=fx;front.setAttribute('width',Math.max(0,fx+700));vis=p>0;
+  function setP(p){const fx=90+p*1520;front0=fx;front.setAttribute('width',Math.max(0,fx));vis=p>0;
     dyn.querySelectorAll('.cm-lb').forEach((e,i)=>{const o=ss((fx-(LB[i].x-60))/260);e.style.opacity=o;e.style.transform=`translateY(${(1-o)*14}px)`});
     dyn.querySelectorAll('.cm-ls').forEach((e,i)=>{[...e.children].forEach((li,r)=>{const o=ss((fx-(LB[i].x+30+r*36))/200);li.style.opacity=o;li.style.transform=`translateY(${(1-o)*10}px)`})});
     dyn.querySelectorAll('.cm-pn').forEach((e,i)=>{const o=ss((fx-(PN[i].x+20))/160);e.style.opacity=o;e.style.transform=`translateY(${(1-o)*10}px)`});
     if(!vis||RMq.matches)draw(T)}
-  /* hover and focus: a part brings forward itself and what it connects */
+  /* hover and focus: a part brings forward itself and what it connects (no link between Expansion and Operations) */
   const show=ix=>{for(let k=0;k<6;k++)tw[k]=ix&&ix.includes(k)?1:0;root.classList.toggle('f',!!ix);root.querySelectorAll('[data-e]').forEach(e=>e.classList.toggle('on',!!ix&&ix.includes(+e.dataset.e)));if(ix){const l=Math.min(...ix.map(i=>ZN[i][0])),r=Math.max(...ix.map(i=>ZN[i][1]));zone.setAttribute('x',l);zone.setAttribute('width',r-l)}};
-  const grp=e=>({0:[0,1],1:[0,1,2],2:[1,2,3],3:[3,4],4:[3,4,5],5:[4,5]}[e]);
+  const grp=e=>({0:[0,1],1:[0,1,2],2:[1,2],3:[3,4],4:[3,4,5],5:[4,5]}[e]);
   root.querySelectorAll('[data-e]').forEach(el=>{const e=+el.dataset.e;['mouseenter','focusin'].forEach(ev=>el.addEventListener(ev,()=>show(grp(e))));['mouseleave','focusout'].forEach(ev=>el.addEventListener(ev,()=>show(null)))});
   draw(0);setP(0);
   let last=0;const tick=ts=>{requestAnimationFrame(tick);if(RMq.matches||!vis||ts-last<33)return;if(!root.getClientRects().length||getComputedStyle(root).visibility==='hidden')return;last=ts;T=ts/1000;for(let k=0;k<6;k++)wt[k]+=(tw[k]-wt[k])*.16;draw(T)};requestAnimationFrame(tick);
