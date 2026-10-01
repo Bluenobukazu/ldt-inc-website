@@ -73,9 +73,9 @@ function compose(root){
      The left arc joins Proposition (top) and Expansion (bottom) through Positioning, the right arc joins Operations (top) and Commercial Architecture (bottom) through Delivery.
      The arcs never touch: closeness makes no relation. The interior holds the title, the sub targets and the way into Explore. */
   const {dims,con}=model(),NSV=NS;
-  const CX=1310,SP=[[420,170],[40,300],[40,640],[420,770]],W=150,H0=.6;
-  const LB=[{d:0,x:206,y:300,lx:372,ly:268,side:0,hx:[40,150,330,300]},{d:1,x:206,y:640,lx:372,ly:612,side:0,hx:[40,490,330,300]},{d:2,x:1104,y:300,lx:706,ly:196,side:1,hx:[930,150,330,300]},{d:3,x:1104,y:640,lx:706,ly:610,side:1,hx:[930,490,330,300]}];
-  const PN=[{k:0,x:135,y:470,hx:[30,400,230,140]},{k:1,x:1175,y:470,hx:[1080,400,230,140]}];
+  const CX=1440,SP=[[610,150],[-90,230],[-90,690],[610,780]],W=225,H0=.28;
+  const LB=[{d:0,x:245,y:205,lx:310,ly:260,side:0,hx:[18,95,520,330]},{d:1,x:245,y:700,lx:310,ly:616,side:0,hx:[18,500,520,330]},{d:2,x:1195,y:205,lx:934,ly:260,side:1,hx:[902,95,520,330]},{d:3,x:1195,y:700,lx:934,ly:616,side:1,hx:[902,500,520,330]}];
+  const PN=[{k:0,x:100,y:452,hx:[18,370,260,170]},{k:1,x:1340,y:452,hx:[1162,370,260,170]}];
   const dyn=root.querySelector('.cm-dyn');
   const lobeHtml=LB.map((b,i)=>{const d=dims[b.d];return`<div class="cm-a cm-lb" data-d="${d.i}" data-e="${[0,2,3,5][i]}" style="left:${b.x-130}px;top:${b.y-34}px;width:260px"><button type="button" class="sy-h cm-h" data-ddim="${d.i}" data-act aria-haspopup="dialog"><span class="sy-l" aria-hidden="true">${L[d.i]}</span><span class="n">${d.n}</span><span class="plus" aria-hidden="true">+</span></button></div><ul class="cm-a cm-ls" data-d="${d.i}" data-e="${[0,2,3,5][i]}" style="left:${b.lx}px;top:${b.ly}px;width:196px">${d.areas.map(area).join('')}</ul>`}).join('');
   const CODES=['A + B','C + D'];
@@ -85,11 +85,11 @@ function compose(root){
   /* the motif continues to the note: a few fine lines fan out downwards from the interior */
   for(let k=0;k<7;k++){const e=document.createElementNS(NSV,'path'),dx=(k-3)*5;e.setAttribute('class','cm-ln');e.setAttribute('d',`M${655+dx*.3} 760C${655+dx*.6} 782 ${655+dx} 790 ${655+dx*2.2} 806`);mot.appendChild(e)}
   /* the spine of the left arc, a cubic curve that swings out to the left; the right arc mirrors it */
-  const N=150,K0=9,spine=[];
+  const N=190,K0=5,spine=[];
   for(let k=0;k<=N;k++){const t=k/N,u=1-t,x=u*u*u*SP[0][0]+3*u*u*t*SP[1][0]+3*u*t*t*SP[2][0]+t*t*t*SP[3][0],y=u*u*u*SP[0][1]+3*u*u*t*SP[1][1]+3*u*t*t*SP[2][1]+t*t*t*SP[3][1],
     dx=3*u*u*(SP[1][0]-SP[0][0])+6*u*t*(SP[2][0]-SP[1][0])+3*t*t*(SP[3][0]-SP[2][0]),dy=3*u*u*(SP[1][1]-SP[0][1])+6*u*t*(SP[2][1]-SP[1][1])+3*t*t*(SP[3][1]-SP[2][1]),l=Math.hypot(dx,dy)||1;
     spine.push({t,x,y,nx:-dy/l,ny:dx/l})}
-  const M=13,arcs=[0,1].map(side=>{const P1=[],P2=[];for(let i=0;i<M*2;i++){const a=document.createElementNS(NSV,'path'),b=document.createElementNS(NSV,'path');a.setAttribute('class','cm-ln');b.setAttribute('class','cm-lh');base.appendChild(a);hl.appendChild(b);P1.push(a);P2.push(b)}return{side,P1,P2}});
+  const M=24,arcs=[0,1].map(side=>{const P1=[],P2=[];for(let i=0;i<M*2;i++){const a=document.createElementNS(NSV,'path'),b=document.createElementNS(NSV,'path');a.setAttribute('class','cm-ln');b.setAttribute('class','cm-lh');base.appendChild(a);hl.appendChild(b);P1.push(a);P2.push(b)}return{side,P1,P2}});
   const wt=[0,0,0,0,0,0],tw=[0,0,0,0,0,0];
   /* swell weights per arc: [lobe top, pinch, lobe bottom] */
   const SW=[[0,1,2],[3,4,5]],TC=[.25,.5,.75];
@@ -105,9 +105,8 @@ function compose(root){
           const idx=sg*M+j;ar.P1[idx].setAttribute('d',d);ar.P2[idx].setAttribute('d',d)}}})}
   const ss=v=>{v=Math.min(1,Math.max(0,v));return v*v*(3-2*v)};
   /* p: 0 to 1, how far the drawing has grown from left to right */
-  function setP(p){const fx=90+p*1520;front.setAttribute('width',Math.max(0,fx));vis=p>0;
+  function setP(p){const fx=p*1540;front.setAttribute('width',Math.max(0,fx));vis=p>0;
     dyn.querySelectorAll('.cm-lb').forEach((e,i)=>{const o=ss((fx-(LB[i].x-60))/260);e.style.opacity=o;e.style.transform=`translateY(${(1-o)*14}px)`});
-    dyn.querySelectorAll('.cm-ls').forEach((e,i)=>{[...e.children].forEach((li,r)=>{const o=ss((fx-(LB[i].lx+30+r*36))/200);li.style.opacity=o;li.style.transform=`translateY(${(1-o)*10}px)`})});
     dyn.querySelectorAll('.cm-pn').forEach((e,i)=>{const o=ss((fx-(PN[i].x+20))/160);e.style.opacity=o;e.style.transform=`translateY(${(1-o)*10}px)`});
     if(!vis||RMq.matches)draw(T)}
   /* hover and focus: a part brings forward itself and what it connects. Order of the six: lobe A, Positioning, lobe B, lobe C, Delivery, lobe D */

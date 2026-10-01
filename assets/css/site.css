@@ -228,3 +228,4 @@ html:not(.kbd) .ov [data-close]:focus-visible{outline:none!important;box-shadow:
 /* v3 M06: location label and codes never below 12px */
 .lbl,.dcur,.loc .dcur{font-size:max(12px,11px)}
 .dcur,.lbl{font-size:12.5px}
+.sitemap-body .archive-link strong{font-size:clamp(1.25rem,2vw,1.75rem);line-height:1.15}

@@ -58,6 +58,15 @@ Run browser QA on the deployed candidate at 970×510, 1280×720, 1440×900 and r
 - The Sitemap archive rule now shares the content width of the rows above; its label is bold and its right label aligns to the row edge.
 - Browser viewport and deployed-preview QA remain required wherever the environment has no browser, remote, Vercel project metadata or deployment credentials.
 
+## Layer 1 system recomposition
+
+- Baseline for this pass: branch `work`, commit `de8241cf075f87bae70e5ba2a4f25a8b55714fe9`. Existing accepted legal, sitemap and closing-footer work was retained.
+- All Layer 1 system artwork now has a zero-width reveal in the white entry frames. Its first reveal begins after the black Connect copy and entry note; the same drawing then reverses cleanly with scroll.
+- The system uses two independent, high-density curved line families with an open centre. The left family contains Proposition → Positioning → Expansion; the right contains Operations → Delivery → Commercial Architecture. No cross-family relationship was added.
+- “One Operating System” is a single central title. The introduction and explanation remain outside the CTA; the eight subtopics enter in the immediately following scroll phase. The chapter rail and its reserved width are released only during this system moment.
+- Scroll extent before this pass was approximately 7.7 viewport heights on desktop and 7.0 on mobile (previous timeline/hold constants). It is now approximately 4.2 viewport heights on desktop and 4.4 on mobile. Exact perceived wheel/touch gestures remain device-dependent.
+- Required deployed-browser QA remains: 970×510, 1280×720, 1440×900 and mobile; forward/reverse scrub; `#system` direct load/reload/history; keyboard, touch, contrast and reduced motion.
+
 ## V3 remainder — unchanged
 
 The application release does not replace the V3 remainder: open line design for Explore/System footer; further visual and narrative refinement; all 133 frames against seven contract fields; remaining frame findings and full V3 QA; shared frame-by-frame review and surgical corrections. ADD-01–04, workshop-result drafts and other copy awaiting approval were not silently implemented.

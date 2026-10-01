@@ -131,11 +131,11 @@ const GM={W:430,H:860,m:22,
 const G=()=>MOB()?GM:GD;
 /* reading holds (Lena, scroll QA 26.09.2026): the proposition and the Connect sentence stand a little longer, the finished System a little shorter.
    at() maps the original V5 timeline positions onto the adjusted timeline */
-const HOLDS=[[.19,.05],[.51,.05]],SYS_HOLD=.34;
+const HOLDS=[[.19,.04],[.51,.025]],SYS_HOLD=.12;
 const at=x=>HOLDS.reduce((v,[t,a])=>x>=t?v+a:v,x);
 const SEG=[at(.2),at(.42),at(.515),1];
 /* reduced motion: the finished state of each chapter on the journey timeline */
-const STILL=[0,at(.4),at(.505),9];
+const STILL=[0,at(.4),at(.54),9];
 let S=1;
 function fitCanvas(cv,W,H){cv.style.width=W+'px';cv.style.height=H+'px';S=Math.min(innerWidth/W,innerHeight/H);gsap.set(cv,{xPercent:-50,yPercent:-50,scale:S})}
 const P=(el,x,y,w,h)=>gsap.set(el,Object.assign({left:x,top:y},w!=null?{width:w}:{},h!=null?{height:h}:{}));
@@ -204,10 +204,11 @@ function Journey(st,inst){
   const cEls=DIMS.map((d,i)=>mk('button','cplus','<i></i>',{'data-dim':i,'data-act':'','aria-haspopup':'dialog','aria-label':`Open ${d.n}`}));
   const vB=mk('button','vlab','Delivery',{'data-real':RI('Delivery'),'data-act':'','aria-haspopup':'dialog'});
   /* the Venn is replaced by the Operating System drawing (rebuild 02.10.2026): the circles hand over to it */
-  const osEl=document.createElement('div');osEl.className='j-os';osEl.innerHTML=`<p class="os-lead">${SYS_LINE}</p><div class="sy-host"></div><div class="os-cta"><p class="os-cl">Every part of the system opens its own page.</p><button class="os-ex" type="button" data-open="approach" data-act aria-haspopup="dialog"><span>Explore the system</span><b aria-hidden="true">+</b></button></div><p class="os-note">\u201cThis is often where I enter: when growth, execution or commercial performance begin to outpace the structure holding the business together.\u201d</p>`;sl.appendChild(osEl);
+  const osEl=document.createElement('div');osEl.className='j-os';osEl.innerHTML=`<p class="os-lead">${SYS_LINE}</p><div class="sy-host"></div><div class="os-cta"><p class="os-cl">Every part of the system opens its own page.</p><button class="os-ex" type="button" data-open="approach" data-act aria-haspopup="dialog"><span>Explore the system</span><b aria-hidden="true">+</b></button></div>`;sl.appendChild(osEl);
+  const entry=document.createElement('p');entry.className='j-entry-note';entry.textContent='This is often where I enter: when growth, execution or commercial performance begin to outpace the structure holding the business together.';sl.appendChild(entry);
   /* desktop: the whole stage is one composition that the scroll builds (explore.js, compose) */
   const cmEl=document.createElement('div');cmEl.className='j-cm sy';
-  cmEl.innerHTML=`<div class="cm-dyn"></div><span class="pill cm-a cm-pill" aria-hidden="true">04</span>${RM?'<h2 class="sr">One operating System</h2>':''}<p class="cm-a cm-sys">${SYS_LINE}</p><blockquote class="cm-a cm-quote"><p>\u201cThis is often where I enter: when growth, execution or commercial performance begin to outpace the structure holding the business together.\u201d</p></blockquote><p class="cm-a cm-lock" aria-hidden="true"><em>One operating</em><b>System</b></p><button class="cm-a cm-go" type="button" data-open="approach" data-act aria-haspopup="dialog"><span class="cm-gq">Every part of the system opens its own page.</span><span class="cm-gl">Explore the system<b aria-hidden="true">+</b></span></button>`;
+  cmEl.innerHTML=`<div class="cm-dyn"></div><span class="pill cm-a cm-pill" aria-hidden="true">04</span>${RM?'<h2 class="sr">One Operating System</h2>':''}<p class="cm-a cm-sys">${SYS_LINE}</p><h2 class="cm-a cm-lock"><span>One Operating</span> <b>System</b></h2><p class="cm-a cm-gq">Every part of the system opens its own page.</p><button class="cm-a cm-go" type="button" data-open="approach" data-act aria-haspopup="dialog"><span class="cm-gl">Explore the System<b aria-hidden="true">+</b></span></button>`;
   sl.appendChild(cmEl);sys.style.display='none';const cp={p:0},cmq=s=>cmEl.querySelector(s);
   [...dimEls,...Object.values(tickEls),vA,vB,...cEls,cue].forEach(e=>e.remove());
   let tl=null,master=null,trig=null,jState=-1,G0=G();
@@ -216,9 +217,9 @@ function Journey(st,inst){
   /* the thread: the cut starts exactly on the line the monolith contracts into, between LDT and INC */
   function monoCut(g){const m=LDT.mono,l=m&&inst===0?m.line():{left:innerWidth/2-2,width:4};const offX=(innerWidth-g.W*S)/2;return{x:(l.left-offX)/S,w:l.width/S}}
   function jTitle(i){if(i===jState)return;const prev=jState;jState=i;const el=q('.j-title');gsap.killTweensOf(el);
-    const show=()=>{if(!JT[jState]||(jState===3&&!MOB())){gsap.set(el,{opacity:0});return}let [n,t,s,x]=JT[jState];if(jState===3&&!MOB())x='';el.querySelector('.pill').textContent=n;el.querySelector('.t').textContent=t;el.querySelector('.s').innerHTML=s;el.querySelector('.s').style.display=s?'':'none';el.querySelector('.x').textContent=x;el.querySelector('.x').style.display=x?'':'none';
+    const show=()=>{if(!JT[jState]||(jState===3&&!MOB())){gsap.set(el,{opacity:0});return}let [n,t,s,x]=JT[jState];if(jState===3){x='';if(MOB()){t='One Operating System';s=''}}el.querySelector('.pill').textContent=n;el.querySelector('.t').textContent=t;el.querySelector('.s').innerHTML=s;el.querySelector('.s').style.display=s?'':'none';el.querySelector('.x').textContent=x;el.querySelector('.x').style.display=x?'':'none';
       /* System is the anchor of the site: its title stands larger than Complexity and Connect */
-      const big=jState===3,M=MOB();gsap.set(el.querySelector('.t'),{fontSize:big?(M?56:104):G0.jtS});gsap.set(el.querySelector('.s'),{fontSize:big?(M?32:60):(M?26:40)});gsap.set(el.querySelector('.x'),{fontSize:big?(M?15:21):(M?14:19),width:big?(M?380:440):(M?370:410)});
+      const big=jState===3,M=MOB();gsap.set(el.querySelector('.t'),{fontSize:big?(M?43:104):G0.jtS});gsap.set(el.querySelector('.s'),{fontSize:big?(M?32:60):(M?26:40)});gsap.set(el.querySelector('.x'),{fontSize:big?(M?15:21):(M?14:19),width:big?(M?380:440):(M?370:410)});
       emerge(el,jState,S)};
     if(JT[prev])retreat(el,prev,S,show);else show()}
 
@@ -245,8 +246,8 @@ function Journey(st,inst){
     cp.p=0;cmEl._cp=0;if(cmEl._cm)cmEl._cm.setP(RM?1:0);
     if(cmEl._tk){gsap.ticker.remove(cmEl._tk);cmEl._tk=null}
     /* on narrower screens the chapter rail would run into the right end of the drawing: the composition is scaled to the room that is left */
-    gsap.set(cmEl,{transformOrigin:'0% 100%',scale:M?1:Math.min(1,Math.max(.66,(innerWidth-246-(innerWidth-g.W*S)/2)/(1372*S)))});
-    gsap.set([cmq('.cm-pill'),cmq('.cm-sys'),cmq('.cm-quote')],{opacity:0,y:16});gsap.set(cmq('.cm-lock'),{opacity:0,y:60});gsap.set(cmq('.cm-go'),{opacity:0,y:40});gsap.set(cmq('.cm-mot'),{opacity:0});
+    gsap.set(cmEl,{transformOrigin:'0% 100%',scale:M?1:Math.min(1,Math.max(.72,(innerWidth-2*48-(innerWidth-g.W*S)/2)/(1372*S)))});
+    gsap.set([cmq('.cm-pill'),cmq('.cm-sys')],{opacity:0,y:16});gsap.set(entry,{left:M?22:360,top:M?230:300,width:M?386:720,opacity:0,y:18});gsap.set(cmq('.cm-lock'),{opacity:0,y:50});gsap.set(cmq('.cm-gq'),{opacity:0,y:18});gsap.set(cmq('.cm-go'),{opacity:0,y:24});gsap.set(cmq('.cm-mot'),{opacity:0});
     const C=i=>q('.c'+i),F=i=>q('.f'+i),CL=i=>q('.clc'+i);
     [0,1,2,3].forEach(i=>{const [x,y]=g.C0[i];gsap.set([C(i),F(i),CL(i)],{attr:{cx:x,cy:y,r:g.r0}});gsap.set(C(i),{attr:{'stroke-dashoffset':1},visibility:'hidden'});gsap.set(F(i),{opacity:0})});
     gsap.set(q('.lensA'),{attr:{cx:g.C1[0][0],cy:g.C1[0][1],r:g.r1},opacity:0});gsap.set(q('.lensB'),{attr:{cx:g.C1[2][0],cy:g.C1[2][1],r:g.r1},opacity:0});
@@ -293,32 +294,32 @@ function Journey(st,inst){
       .set(q('.j-black'),{opacity:1},at(.465)).set(Z,{opacity:0},at(.466))
       .set([...blocks.map(o=>o.b),...blocks.map(o=>o.l),serif],{opacity:0},at(.466))
       .to(q('.j-connect'),{opacity:1,y:0,duration:.03},at(.475))
-      .to(q('.j-connect'),{opacity:0,y:-20,duration:.02},at(.53));
+      .to(q('.j-connect'),{opacity:0,y:-20,duration:.02},at(.505));
     /* an undrawn ring still leaves a faint dot at its dash start: it stays hidden until its line begins */
     [0,1,2,3].forEach(i=>tl.set(C(i),{visibility:'visible'},at(.55+i*.01)).to(C(i),{attr:{'stroke-dashoffset':0},duration:.05,ease:'power2.inOut'},at(.55+i*.01)));
     /* 04 System: light returns, circles move into each other, shared realities appear */
     tl.to(q('.j-black'),{opacity:0,duration:.001},at(.62));
     [0,1,2,3].forEach(i=>{const [x,y]=g.C1[i];tl.to([C(i),F(i),CL(i)],{attr:{cx:x,cy:y,r:g.r1},duration:.08,ease:'power3.inOut'},at(.635))});
-    if(M){tl.to(osEl,{opacity:1,duration:.035},at(.735));
+    tl.to(entry,{opacity:1,y:0,duration:.03,ease:'power2.out'},at(.515)).to(entry,{opacity:0,y:-14,duration:.025},at(.565));
+    if(M){tl.to(osEl,{opacity:1,duration:.035},at(.575));
       /* on phones the list is longer than the screen: it moves up through the scroll that follows, so the way into Explore and the entry note are reached */
       if(!RM)tl.to(osEl,{y:()=>-(Math.max(0,osEl.scrollHeight-osEl.clientHeight)+28),duration:.28,ease:'none'},at(.8)+.03);
       if(!RM)tl.to([jt,osEl.querySelector('.os-lead')],{opacity:0,duration:.05,ease:'none'},at(.8)+.03)}
     else{
-      tl.to(cp,{p:1,duration:.15,ease:'none'},at(.545))
+      tl.to(cp,{p:1,duration:.15,ease:'none'},at(.565))
         .to(cmq('.cm-pill'),{opacity:1,y:0,duration:.03},at(.625))
         .to(cmq('.cm-lock'),{opacity:1,y:0,duration:.07,ease:'power3.out'},at(.635))
-        .to(cmq('.cm-go'),{opacity:1,y:0,duration:.05,ease:'power3.out'},at(.735))
-        /* scroll beyond the main moment: first the sentence on its own calm area, then the entry note, and the line motif carries on to it */
-        .to(cmq('.cm-sys'),{opacity:1,y:0,duration:.06},at(.8)+.06)
-        .to(cmq('.cm-quote'),{opacity:1,y:0,duration:.06},at(.8)+.19)
-        .to(cmq('.cm-mot'),{opacity:1,duration:.08},at(.8)+.17);
+        .to(cmq('.cm-gq'),{opacity:1,y:0,duration:.04,ease:'power3.out'},at(.69))
+        .to(cmq('.cm-go'),{opacity:1,y:0,duration:.05,ease:'power3.out'},at(.705))
+        .to(cmq('.cm-sys'),{opacity:1,y:0,duration:.05},at(.745))
+        .to(cmq('.cm-mot'),{opacity:1,duration:.06},at(.77));
     }
     tl.to({},{duration:SYS_HOLD},at(.8));
 
     if(RM){
       const p=STILL[inst];tl.time(Math.min(p,tl.duration()));if(inst===3){cmEl.dataset.rm='1';if(cmEl._cm)cmEl._cm.setP(1)}
       st.classList.toggle('cxOn',inst===1);st.classList.toggle('sysOn',inst===3);
-      if(JT[inst]&&!(inst===3&&!MOB())){let [n,t,s,x]=JT[inst];if(inst===3&&!MOB())x='';jt.querySelector('.pill').textContent=n;jt.querySelector('.t').textContent=t;jt.querySelector('.s').innerHTML=s;jt.querySelector('.s').style.display=s?'':'none';jt.querySelector('.x').textContent=x;jt.querySelector('.x').style.display=x?'':'none';gsap.set(jt,{opacity:1})}
+      if(JT[inst]&&!(inst===3&&!MOB())){let [n,t,s,x]=JT[inst];if(inst===3){x='';if(MOB()){t='One Operating System';s=''}}jt.querySelector('.pill').textContent=n;jt.querySelector('.t').textContent=t;jt.querySelector('.s').innerHTML=s;jt.querySelector('.s').style.display=s?'':'none';jt.querySelector('.x').textContent=x;jt.querySelector('.x').style.display=x?'':'none';gsap.set(jt,{opacity:1})}
       else gsap.set(jt,{opacity:0});
       /* hide what is not visible in this still, from assistive technology and the keyboard */
       [...cv.children,...q('.j-blocks').children,...sl.children].forEach(e=>{const o=+gsap.getProperty(e,'opacity');if(o<.05){e.setAttribute('aria-hidden','true');if(e.tagName==='BUTTON')e.tabIndex=-1}});
@@ -329,7 +330,7 @@ function Journey(st,inst){
     }
     /* the landing comes first: one screen of scroll in which the monolith contracts into its line (motion as in the prototype, faster),
        the cut takes over on that line the moment it is complete and widens at once; the chapters follow with their lengths */
-    const base=M?4.8:5.4,END=LDT.heroEnd,H0=1/base,T0=H0-.082,TL=tl.duration();LDT.heroT=[H0,T0,TL];
+    const base=M?3.8:3.5,END=LDT.heroEnd,H0=1/base,T0=H0-.082,TL=tl.duration();LDT.heroT=[H0,T0,TL];
     const hs=LDT.heroS;hs.s=0;
     master=gsap.timeline({defaults:{ease:'none'}});
     /* the cut appears a moment before the canvas steps back, on identical geometry, so the thread is never missing */
@@ -338,9 +339,9 @@ function Journey(st,inst){
     const jBand=bandAfter($('#journey'),'white');
     trig=ScrollTrigger.create({trigger:'#journey',start:'top top',onRefresh:jBand,onToggle:jBand,end:()=>'+='+innerHeight*base*(T0+TL),pin:st,refreshPriority:2,scrub:.6,animation:master,invalidateOnRefresh:true,
       onUpdate:self=>{const p=self.progress*(T0+TL)-T0,hp=Math.min(1,self.progress*(T0+TL)/H0)*END;const s=p<SEG[0]?0:p<SEG[1]?1:p<SEG[2]?2:3;setActive(s);jTitle(s===0?-1:s);hero(hp<.72);
-        st.classList.toggle('sysOn',p>at(.72));st.classList.toggle('cxOn',p>at(.3)&&p<at(.42));jBand(self)}});
+        st.classList.toggle('sysOn',p>at(.515));cmEl.classList.toggle('topicsOn',p>at(.735));document.body.classList.toggle('system-moment',self.isActive&&self.progress<.995&&p>at(.515));st.classList.toggle('cxOn',p>at(.3)&&p<at(.42));jBand(self)}});
     /* the line drawing is a pure function of the scroll position: it is right after a direct address, a resize or a rebuild as well */
-    if(!M){const tk=()=>{if(!cmEl._cm||!trig)return;const w=Math.max(0,Math.min(1,((trig.progress*(T0+TL)-T0)-at(.545))/.15));if(cmEl._cp!==w||cmEl._ci!==cmEl._cm){cmEl._cp=w;cmEl._ci=cmEl._cm;cmEl._cm.setP(w)}};cmEl._tk=tk;gsap.ticker.add(tk)}
+    if(!M){const tk=()=>{if(!cmEl._cm||!trig)return;const w=Math.max(0,Math.min(1,((trig.progress*(T0+TL)-T0)-at(.565))/.15));if(cmEl._cp!==w||cmEl._ci!==cmEl._cm){cmEl._cp=w;cmEl._ci=cmEl._cm;cmEl._cm.setP(w)}};cmEl._tk=tk;gsap.ticker.add(tk)}
   }
   /* complexity: a touched reality settles into place, the others stay in tension */
   blocks.forEach(({b,l},i)=>{
