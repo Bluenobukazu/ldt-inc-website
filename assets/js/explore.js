@@ -4,7 +4,7 @@
    Hover or focus brings a part and what it connects forward; "You are here" marks the page the visitor is on. Reduced motion draws the form once, still. */
 (function(){
 const NS='http://www.w3.org/2000/svg',RMq=matchMedia('(prefers-reduced-motion: reduce)'),L='ABCD';
-let D=null,uid=0;
+let D=null,uid=0,lastMark=null;
 const model=()=>{const {DIMS,REAL,SYS,DL,RI,ADDR}=D;
   const dims=[0,1,2,3].map(i=>{const g=SYS.find(x=>x.d===i);return{i,l:DL[i],n:DIMS[i].n,ap:DIMS[i].ap,areas:g.a.map(n=>({n,r:RI(n),a:ADDR('real',RI(n))}))}});
   const con=[['Positioning',0,1],['Delivery',2,3]].map(([n,a,b],k)=>({k,n,r:RI(n),a:ADDR('real',RI(n)),from:dims[a],to:dims[b]}));
@@ -111,7 +111,7 @@ function compose(root){
 }
 
 /* ---- Explore ---- */
-function explore(m){build(m,'ex');const q=document.querySelector('#approach .aentry'),f=m.querySelector('.sy-form');if(q&&f&&innerWidth>760){if(!q.dataset.qm){q.innerHTML='\u201c'+q.innerHTML+'\u201d';q.dataset.qm='1'}f.appendChild(q)}}
+function explore(m){build(m,'ex');if(lastMark)mark(lastMark[0],lastMark[1]);const q=document.querySelector('#approach .aentry'),f=m.querySelector('.sy-form');if(q&&f&&innerWidth>760){if(!q.dataset.qm){q.innerHTML='\u201c'+q.innerHTML+'\u201d';q.dataset.qm='1'}f.appendChild(q)}}
 /* ---- Layer 1 chapter 04: the drawing and the table inside the pinned stage ---- */
 function landing(el){build(el,'l1')}
 /* ---- footer ---- */
@@ -123,6 +123,7 @@ function footer(f){
 }
 /* the page the visitor is on: its column carries "You are here" */
 function mark(type,i){
+  lastMark=[type,i];
   document.querySelectorAll('.sy .here,.sy .yh').forEach(e=>{e.classList.remove('here','here-dim');if(e.classList.contains('yh'))e.remove()});
   document.querySelectorAll('.sy [aria-current]').forEach(e=>e.removeAttribute('aria-current'));
   const dm=type==='dim'?[i]:D.REAL[i].d;
@@ -139,5 +140,6 @@ function mark(type,i){
     root._sy.setHere([root._sy.cols.indexOf(col)]);
   });
 }
-window.LDT_XI={compose:el=>{if(D)compose(el)},build(m,data){D=data;explore(m)},landing:(el,st)=>{if(D)landing(el,st)},footer:el=>{if(D)footer(el)},mark};
+function clear(root){root.querySelectorAll('.here,.yh').forEach(e=>{e.classList.remove('here','here-dim');if(e.classList.contains('yh'))e.remove()});root.querySelectorAll('[aria-current]').forEach(e=>e.removeAttribute('aria-current'));const sy=root.classList.contains('sy')?root:root.querySelector('.sy');if(sy&&sy._sy)sy._sy.setHere(null)}
+window.LDT_XI={clear,compose:el=>{if(D)compose(el)},build(m,data){D=data;explore(m)},landing:(el,st)=>{if(D)landing(el,st)},footer:el=>{if(D)footer(el)},mark};
 })();

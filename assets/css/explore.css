@@ -226,3 +226,10 @@
   .sy-d>.yh{display:flex;margin:calc(var(--sp)*.6) 0 calc(var(--sp)*.2)}
   .sy-ft{--fh:9.5cqw}
 }
+/* the old Explore label style in home.css (#xMap .yh) must not win here */
+#approach #xMap .yh{display:inline-flex;align-items:center;padding:0;border-radius:0;background:none;color:inherit;outline:0;font:700 9.5px/1 var(--sans);font-stretch:100%;font-variation-settings:normal;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;writing-mode:horizontal-tb;transform:none;position:static}
+#approach #xMap .yh::before{content:"";width:5px;height:5px;background:currentColor;margin-right:.7em}
+#approach #xMap .sy-d>.yh{display:flex;margin:calc(var(--sp)*.6) 0 calc(var(--sp)*.2)}
+#approach #xMap .sy li .yh{margin:0 0 0 .8em}
+#approach #xMap .sy-x .sy-k .yh{writing-mode:vertical-rl;margin:1em 0 0}
+#approach #xMap .sy li .yh,.sy li .yh{margin-left:1.5em}

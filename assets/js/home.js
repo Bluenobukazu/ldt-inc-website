@@ -665,11 +665,8 @@ function crumb(real,i){const bar=$('#deep .bar');if(!bar)return;let c=$('#dCrumb
 let hereFrom=null;
 document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#deep .dexp'))hereFrom=deepNow&&{...deepNow}},true);
 LDT.fills.approach=()=>{const m=$('#xMap');if(!m)return;
-  $$('.here',m).forEach(b=>{b.classList.remove('here');b.removeAttribute('aria-current');const y=$('.yh',b);y&&y.remove()});
-  const f=hereFrom;hereFrom=null;if(!f)return;
-  const b=$(f.type==='real'?`[data-dreal="${f.i}"]`:`[data-ddim="${f.i}"]`,m);if(!b)return;
-  b.classList.add('here');b.setAttribute('aria-current','page');
-  (b.querySelector('.n')||b.querySelector('span')||b).insertAdjacentHTML('afterend','<em class="yh">You are here</em>')};
+  const f=hereFrom;hereFrom=null;
+  if(f)LDT_XI.mark(f.type,f.i);else LDT_XI.clear(m)};
 /* direct links (30.09.2026): every deep dive has its own address, #<slug> (for example #markets or #commercial-architecture).
    Earlier names (#system/<area>, #brand, #commercial ...) are forwarded to it. Opening or reloading the address opens that deep dive at its start;
    moving between deep dives updates the address, and the browser Back and Forward follow it. Anything else in the address is left alone */
