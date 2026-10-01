@@ -205,6 +205,10 @@ function Journey(st,inst){
   const vB=mk('button','vlab','Delivery',{'data-real':RI('Delivery'),'data-act':'','aria-haspopup':'dialog'});
   /* the Venn is replaced by the Operating System drawing (rebuild 02.10.2026): the circles hand over to it */
   const osEl=document.createElement('div');osEl.className='j-os';osEl.innerHTML=`<p class="os-lead">${SYS_LINE}</p><div class="sy-host"></div><div class="os-cta"><p class="os-cl">Every part of the system opens its own page.</p><button class="os-ex" type="button" data-open="approach" data-act aria-haspopup="dialog"><span>Explore the system</span><b aria-hidden="true">+</b></button></div>`;sl.appendChild(osEl);
+  /* desktop: the whole stage is one composition that the scroll builds (explore.js, compose) */
+  const cmEl=document.createElement('div');cmEl.className='j-cm sy';
+  cmEl.innerHTML=`<div class="cm-dyn"></div><span class="pill cm-a cm-pill" aria-hidden="true">04</span><p class="cm-a cm-title" aria-hidden="true">One operating</p><p class="cm-a cm-sub" aria-hidden="true">${SYS_LINE}</p><p class="cm-a cm-sys" aria-hidden="true">System</p><blockquote class="cm-a cm-quote"><p>\u201cThis is often where I enter: when growth, execution or commercial performance begin to outpace the structure holding the business together.\u201d</p></blockquote><button class="cm-a cm-go" type="button" data-open="approach" data-act aria-haspopup="dialog"><span class="cm-gq">Every part of the system opens its own page.</span><span class="cm-gl">Explore the system<b aria-hidden="true">+</b></span></button>`;
+  sl.appendChild(cmEl);sys.style.display='none';const cp={p:0},cmq=s=>cmEl.querySelector(s);
   [...dimEls,...Object.values(tickEls),vA,vB,...cEls,cue].forEach(e=>e.remove());
   let tl=null,master=null,trig=null,jState=-1,G0=G();
 
@@ -212,7 +216,7 @@ function Journey(st,inst){
   /* the thread: the cut starts exactly on the line the monolith contracts into, between LDT and INC */
   function monoCut(g){const m=LDT.mono,l=m&&inst===0?m.line():{left:innerWidth/2-2,width:4};const offX=(innerWidth-g.W*S)/2;return{x:(l.left-offX)/S,w:l.width/S}}
   function jTitle(i){if(i===jState)return;const prev=jState;jState=i;const el=q('.j-title');gsap.killTweensOf(el);
-    const show=()=>{if(!JT[jState]){gsap.set(el,{opacity:0});return}let [n,t,s,x]=JT[jState];if(jState===3&&!MOB())x='';el.querySelector('.pill').textContent=n;el.querySelector('.t').textContent=t;el.querySelector('.s').innerHTML=s;el.querySelector('.s').style.display=s?'':'none';el.querySelector('.x').textContent=x;el.querySelector('.x').style.display=x?'':'none';
+    const show=()=>{if(!JT[jState]||(jState===3&&!MOB())){gsap.set(el,{opacity:0});return}let [n,t,s,x]=JT[jState];if(jState===3&&!MOB())x='';el.querySelector('.pill').textContent=n;el.querySelector('.t').textContent=t;el.querySelector('.s').innerHTML=s;el.querySelector('.s').style.display=s?'':'none';el.querySelector('.x').textContent=x;el.querySelector('.x').style.display=x?'':'none';
       /* System is the anchor of the site: its title stands larger than Complexity and Connect */
       const big=jState===3,M=MOB();gsap.set(el.querySelector('.t'),{fontSize:big?(M?56:104):G0.jtS});gsap.set(el.querySelector('.s'),{fontSize:big?(M?32:60):(M?26:40)});gsap.set(el.querySelector('.x'),{fontSize:big?(M?15:21):(M?14:19),width:big?(M?380:440):(M?370:410)});
       emerge(el,jState,S)};
@@ -238,6 +242,8 @@ function Journey(st,inst){
     P(q('.j-divider'),g.divider[0],g.divider[1],1,g.H);gsap.set(q('.j-divider'),{opacity:0,display:M?'none':''});
     gsap.set(sys,{attr:{width:g.W,height:g.H,viewBox:`0 0 ${g.W} ${g.H}`}});
     gsap.set(sys,{opacity:1});gsap.set(osEl,{left:g.os[0],top:g.os[1],width:g.os[2],opacity:0});osEl.style.height=g.os[3]+'px';
+    cp.p=0;if(cmEl._cm)cmEl._cm.setP(0);
+    gsap.set([cmq('.cm-pill'),cmq('.cm-title'),cmq('.cm-sub'),cmq('.cm-quote')],{opacity:0,y:16});gsap.set(cmq('.cm-sys'),{opacity:0,y:140});gsap.set(cmq('.cm-go'),{opacity:0,y:60});
     const C=i=>q('.c'+i),F=i=>q('.f'+i),CL=i=>q('.clc'+i);
     [0,1,2,3].forEach(i=>{const [x,y]=g.C0[i];gsap.set([C(i),F(i),CL(i)],{attr:{cx:x,cy:y,r:g.r0}});gsap.set(C(i),{attr:{'stroke-dashoffset':1},visibility:'hidden'});gsap.set(F(i),{opacity:0})});
     gsap.set(q('.lensA'),{attr:{cx:g.C1[0][0],cy:g.C1[0][1],r:g.r1},opacity:0});gsap.set(q('.lensB'),{attr:{cx:g.C1[2][0],cy:g.C1[2][1],r:g.r1},opacity:0});
@@ -289,13 +295,21 @@ function Journey(st,inst){
     /* 04 System: light returns, circles move into each other, shared realities appear */
     tl.to(q('.j-black'),{opacity:0,duration:.001},at(.62));
     [0,1,2,3].forEach(i=>{const [x,y]=g.C1[i];tl.to([C(i),F(i),CL(i)],{attr:{cx:x,cy:y,r:g.r1},duration:.08,ease:'power3.inOut'},at(.635))});
-    tl.to(sys,{opacity:0,duration:.03,ease:'power1.inOut'},at(.715)).to(osEl,{opacity:1,duration:.035},at(.735))
-      .to({},{duration:SYS_HOLD},at(.8));
+    if(M)tl.to(osEl,{opacity:1,duration:.035},at(.735));
+    else{
+      tl.to(cp,{p:1,duration:.15,ease:'none',onUpdate:()=>{if(cmEl._cm)cmEl._cm.setP(cp.p)}},at(.545))
+        .to([cmq('.cm-pill'),cmq('.cm-title')],{opacity:1,y:0,duration:.03,stagger:.008},at(.625))
+        .to(cmq('.cm-sub'),{opacity:1,y:0,duration:.03},at(.655))
+        .to(cmq('.cm-sys'),{opacity:1,y:0,duration:.07,ease:'power3.out'},at(.635))
+        .to(cmq('.cm-quote'),{opacity:1,y:0,duration:.04},at(.7))
+        .to(cmq('.cm-go'),{opacity:1,y:0,duration:.05,ease:'power3.out'},at(.735));
+    }
+    tl.to({},{duration:SYS_HOLD},at(.8));
 
     if(RM){
-      const p=STILL[inst];tl.time(Math.min(p,tl.duration()));
+      const p=STILL[inst];tl.time(Math.min(p,tl.duration()));if(inst===3){cmEl.dataset.rm='1';if(cmEl._cm)cmEl._cm.setP(1)}
       st.classList.toggle('cxOn',inst===1);st.classList.toggle('sysOn',inst===3);
-      if(JT[inst]){let [n,t,s,x]=JT[inst];if(inst===3&&!MOB())x='';jt.querySelector('.pill').textContent=n;jt.querySelector('.t').textContent=t;jt.querySelector('.s').innerHTML=s;jt.querySelector('.s').style.display=s?'':'none';jt.querySelector('.x').textContent=x;jt.querySelector('.x').style.display=x?'':'none';gsap.set(jt,{opacity:1})}
+      if(JT[inst]&&!(inst===3&&!MOB())){let [n,t,s,x]=JT[inst];if(inst===3&&!MOB())x='';jt.querySelector('.pill').textContent=n;jt.querySelector('.t').textContent=t;jt.querySelector('.s').innerHTML=s;jt.querySelector('.s').style.display=s?'':'none';jt.querySelector('.x').textContent=x;jt.querySelector('.x').style.display=x?'':'none';gsap.set(jt,{opacity:1})}
       else gsap.set(jt,{opacity:0});
       /* hide what is not visible in this still, from assistive technology and the keyboard */
       [...cv.children,...q('.j-blocks').children,...sl.children].forEach(e=>{const o=+gsap.getProperty(e,'opacity');if(o<.05){e.setAttribute('aria-hidden','true');if(e.tagName==='BUTTON')e.tabIndex=-1}});
@@ -370,7 +384,7 @@ function buildTransform(){
 const orgHTML=()=>{let oi=0;return OG.map(([c,ns])=>`<div class="og"><h3>${c}</h3><ul>${ns.map(n=>`<li><span class="${(oi++)%2?'it':'g'}">${n}</span></li>`).join('')}</ul></div>`).join('')};
 $('#orgList').innerHTML=orgHTML();
 /* Explore the system: the map follows the diagram. Four dimensions with their areas, Positioning and Delivery between the pairs */
-window.LDT_XI.build($('#xMap'),{DIMS,REAL,SYS,DL,RI,ADDR});window.LDT_XI.footer($('#deepFoot'));$$('.j-os .sy-host').forEach(h=>window.LDT_XI.landing(h));
+window.LDT_XI.build($('#xMap'),{DIMS,REAL,SYS,DL,RI,ADDR});window.LDT_XI.footer($('#deepFoot'));$$('.j-os .sy-host').forEach(h=>window.LDT_XI.landing(h));$$('.j-cm').forEach(h=>window.LDT_XI.compose(h));
 if($('#states'))$('#states').innerHTML=STATES.map(([l,t,rs])=>`<div class="st"><div class="g" aria-hidden="true">${rs.map(r=>`<i style="left:${r[0]}%;top:${r[1]}%;width:${r[2]}%;height:${r[3]}%"></i>`).join('')}</div><h3 class="l">${l}</h3><p>${t}</p></div>`).join('');
 
 function buildFlow(){

@@ -62,6 +62,47 @@ function build(root,mode){
   if(!host&&!ov)root.classList.add('go','done');
 }
 
+
+/* ---- Layer 1 chapter 04, desktop: one composition on the whole stage (1440 x 900). The scroll builds it: lines grow out of the black chapter,
+   names, deep dives and connectors appear where the lines have reached them. Drawn in white, the stage blends it (difference): white on black, then black on white. ---- */
+function compose(root){
+  const {dims,con}=model(),NSV=NS;
+  const K=[[-700,500,70,.5],[-40,490,80,.5],[285,478,165,.56],[510,425,5,.2],[690,392,136,.52],[835,372,50,.8],[965,342,125,.5],[1095,318,5,.2],[1225,290,145,.56],[1332,268,0,.2]];
+  const LB=[{d:0,x:285,cy:478,A:165},{d:1,x:690,cy:392,A:136},{d:2,x:965,cy:342,A:125},{d:3,x:1225,cy:290,A:145}];
+  const PN=[{k:0,x:510,y:425},{k:1,x:1095,y:318}];
+  const dyn=root.querySelector('.cm-dyn');
+  const lobeHtml=LB.map((b,i)=>{const d=dims[b.d],bottom=b.cy+b.A*.97;return`<div class="cm-a cm-lb" data-d="${d.i}" data-e="${[0,2,3,5][i]}" style="left:${b.x-130}px;top:${b.cy-34}px;width:260px"><button type="button" class="sy-h cm-h" data-ddim="${d.i}" data-act aria-haspopup="dialog"><span class="sy-l" aria-hidden="true">${L[d.i]}</span><span class="n">${d.n}</span><span class="plus" aria-hidden="true">+</span></button></div><ul class="cm-a cm-ls" data-d="${d.i}" data-e="${[0,2,3,5][i]}" style="left:${b.x-100}px;top:${bottom+18}px;width:210px">${d.areas.map(area).join('')}</ul>`}).join('');
+  const pinHtml=PN.map(p=>{const c=con[p.k];return`<div class="cm-a cm-pn" data-k="${p.k}" data-e="${p.k?4:1}" style="left:${p.x-16}px;top:${p.y-110}px"><button type="button" class="cm-k" data-dreal="${c.r}" data-act aria-haspopup="dialog" aria-label="${c.n}, connects ${c.from.n} and ${c.to.n}"><span class="cm-pl" aria-hidden="true">+</span><span class="n">${c.n}</span></button></div>`}).join('');
+  dyn.innerHTML=`<svg class="cm-svg" viewBox="0 0 1440 900" aria-hidden="true" focusable="false"><defs><clipPath id="cmf"><rect class="cm-front" x="-700" y="-100" width="0" height="1100"/></clipPath><clipPath id="cmz"><rect class="cm-zone" x="0" y="0" width="0" height="900"/></clipPath></defs><g clip-path="url(#cmf)"><g class="cm-base"></g><g class="cm-hl" clip-path="url(#cmz)"></g></g></svg>`+lobeHtml+pinHtml;
+  const svg=dyn.querySelector('.cm-svg'),base=svg.querySelector('.cm-base'),hl=svg.querySelector('.cm-hl'),front=svg.querySelector('.cm-front'),zone=svg.querySelector('.cm-zone');
+  const M=17,P1=[],P2=[];
+  for(let i=0;i<M*2;i++){const a=document.createElementNS(NSV,'path'),b=document.createElementNS(NSV,'path');a.setAttribute('class','cm-ln');b.setAttribute('class','cm-lh');base.appendChild(a);hl.appendChild(b);P1.push(a);P2.push(b)}
+  const itp=(x,ix)=>{let i=0;while(i<K.length-2&&x>K[i+1][0])i++;const a=K[i],b=K[i+1],t=Math.min(1,Math.max(0,(x-a[0])/((b[0]-a[0])||1))),s=(1-Math.cos(t*Math.PI))/2;return a[ix]+(b[ix]-a[ix])*s};
+  const ZN={0:[-700,545],1:[430,590],2:[450,880],3:[790,1130],4:[1030,1160],5:[1050,1350]};
+  const wt=[0,0,0,0,0,0],tw=[0,0,0,0,0,0],CE=[285,510,690,965,1095,1225];
+  let T=0,front0=0,vis=false;
+  function draw(t){const xs=[];for(let x=-700;x<=1365;x+=7)xs.push(x);
+    const cy=xs.map(x=>itp(x,1)),A=xs.map((x,k)=>{let a=itp(x,2),m=1;for(let e=0;e<6;e++){if(wt[e]<.002)continue;const g=Math.exp(-Math.pow((x-CE[e])/90,2));if(e===1||e===4)a+=9*wt[e]*g;else m+=.14*wt[e]*g}return a*m}),H=xs.map(x=>itp(x,3));
+    for(let j=0;j<M;j++){const f=j/(M-1);let dt='',db='';
+      for(let k=0;k<xs.length;k++){const x=xs[k],h=H[k],r=h+(1-h)*Math.pow(f,1.25),dr=(f-.5)*A[k]*.16*Math.sin(x*.0062+t*.18+j*.2),sk=1+.13*Math.sin(x*.0043+1.2),sb=1-.11*Math.sin(x*.0051+.4),sw=1+.08*Math.sin(x*.015+j*.55+t*.4),yy=cy[k]+14*Math.sin(x*.004+t*.16);
+        dt+=(k?'L':'M')+x+' '+(yy-A[k]*r*sk*sw+dr).toFixed(1);db+=(k?'L':'M')+x+' '+(yy+A[k]*r*sb*sw+dr).toFixed(1)}
+      P1[j].setAttribute('d',dt);P2[j].setAttribute('d',dt);P1[M+j].setAttribute('d',db);P2[M+j].setAttribute('d',db)}}
+  const ss=v=>{v=Math.min(1,Math.max(0,v));return v*v*(3-2*v)};
+  /* p: 0 to 1, how far the drawing has grown from left to right */
+  function setP(p){const fx=-700+p*2140;front0=fx;front.setAttribute('width',Math.max(0,fx+700));vis=p>0;
+    dyn.querySelectorAll('.cm-lb').forEach((e,i)=>{const o=ss((fx-(LB[i].x-60))/260);e.style.opacity=o;e.style.transform=`translateY(${(1-o)*14}px)`});
+    dyn.querySelectorAll('.cm-ls').forEach((e,i)=>{[...e.children].forEach((li,r)=>{const o=ss((fx-(LB[i].x+30+r*36))/200);li.style.opacity=o;li.style.transform=`translateY(${(1-o)*10}px)`})});
+    dyn.querySelectorAll('.cm-pn').forEach((e,i)=>{const o=ss((fx-(PN[i].x+20))/160);e.style.opacity=o;e.style.transform=`translateY(${(1-o)*10}px)`});
+    if(!vis||RMq.matches)draw(T)}
+  /* hover and focus: a part brings forward itself and what it connects */
+  const show=ix=>{for(let k=0;k<6;k++)tw[k]=ix&&ix.includes(k)?1:0;root.classList.toggle('f',!!ix);root.querySelectorAll('[data-e]').forEach(e=>e.classList.toggle('on',!!ix&&ix.includes(+e.dataset.e)));if(ix){const l=Math.min(...ix.map(i=>ZN[i][0])),r=Math.max(...ix.map(i=>ZN[i][1]));zone.setAttribute('x',l);zone.setAttribute('width',r-l)}};
+  const grp=e=>({0:[0,1],1:[0,1,2],2:[1,2,3],3:[3,4],4:[3,4,5],5:[4,5]}[e]);
+  root.querySelectorAll('[data-e]').forEach(el=>{const e=+el.dataset.e;['mouseenter','focusin'].forEach(ev=>el.addEventListener(ev,()=>show(grp(e))));['mouseleave','focusout'].forEach(ev=>el.addEventListener(ev,()=>show(null)))});
+  draw(0);setP(0);
+  let last=0;const tick=ts=>{requestAnimationFrame(tick);if(RMq.matches||!vis||ts-last<33)return;if(!root.getClientRects().length||getComputedStyle(root).visibility==='hidden')return;last=ts;T=ts/1000;for(let k=0;k<6;k++)wt[k]+=(tw[k]-wt[k])*.16;draw(T)};requestAnimationFrame(tick);
+  root._cm={setP,show};if(root.dataset.rm==='1')setP(1);
+}
+
 /* ---- Explore ---- */
 function explore(m){build(m,'ex')}
 /* ---- Layer 1 chapter 04: the drawing and the table inside the pinned stage ---- */
@@ -89,5 +130,5 @@ function mark(type,i){
     root._sy.setHere([root._sy.cols.indexOf(col)]);
   });
 }
-window.LDT_XI={build(m,data){D=data;explore(m)},landing:(el,st)=>{if(D)landing(el,st)},footer:el=>{if(D)footer(el)},mark};
+window.LDT_XI={compose:el=>{if(D)compose(el)},build(m,data){D=data;explore(m)},landing:(el,st)=>{if(D)landing(el,st)},footer:el=>{if(D)footer(el)},mark};
 })();
