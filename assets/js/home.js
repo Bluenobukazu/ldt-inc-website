@@ -131,7 +131,7 @@ const GM={W:430,H:860,m:22,
 const G=()=>MOB()?GM:GD;
 /* reading holds (Lena, scroll QA 26.09.2026): the proposition and the Connect sentence stand a little longer, the finished System a little shorter.
    at() maps the original V5 timeline positions onto the adjusted timeline */
-const HOLDS=[[.19,.05],[.51,.05]],SYS_HOLD=.07;
+const HOLDS=[[.19,.05],[.51,.05]],SYS_HOLD=.34;
 const at=x=>HOLDS.reduce((v,[t,a])=>x>=t?v+a:v,x);
 const SEG=[at(.2),at(.42),at(.62),1];
 /* reduced motion: the finished state of each chapter on the journey timeline */
@@ -204,7 +204,7 @@ function Journey(st,inst){
   const cEls=DIMS.map((d,i)=>mk('button','cplus','<i></i>',{'data-dim':i,'data-act':'','aria-haspopup':'dialog','aria-label':`Open ${d.n}`}));
   const vB=mk('button','vlab','Delivery',{'data-real':RI('Delivery'),'data-act':'','aria-haspopup':'dialog'});
   /* the Venn is replaced by the Operating System drawing (rebuild 02.10.2026): the circles hand over to it */
-  const osEl=document.createElement('div');osEl.className='j-os';osEl.innerHTML=`<p class="os-lead">${SYS_LINE}</p><div class="sy-host"></div><div class="os-cta"><p class="os-cl">Every part of the system opens its own page.</p><button class="os-ex" type="button" data-open="approach" data-act aria-haspopup="dialog"><span>Explore the system</span><b aria-hidden="true">+</b></button></div>`;sl.appendChild(osEl);
+  const osEl=document.createElement('div');osEl.className='j-os';osEl.innerHTML=`<p class="os-lead">${SYS_LINE}</p><div class="sy-host"></div><div class="os-cta"><p class="os-cl">Every part of the system opens its own page.</p><button class="os-ex" type="button" data-open="approach" data-act aria-haspopup="dialog"><span>Explore the system</span><b aria-hidden="true">+</b></button></div><p class="os-note">\u201cThis is often where I enter: when growth, execution or commercial performance begin to outpace the structure holding the business together.\u201d</p>`;sl.appendChild(osEl);
   /* desktop: the whole stage is one composition that the scroll builds (explore.js, compose) */
   const cmEl=document.createElement('div');cmEl.className='j-cm sy';
   cmEl.innerHTML=`<div class="cm-dyn"></div><span class="pill cm-a cm-pill" aria-hidden="true">04</span>${RM?'<h2 class="sr">One operating System</h2>':''}<p class="cm-a cm-sys">${SYS_LINE}</p><blockquote class="cm-a cm-quote"><p>\u201cThis is often where I enter: when growth, execution or commercial performance begin to outpace the structure holding the business together.\u201d</p></blockquote><p class="cm-a cm-lock" aria-hidden="true"><em>One operating</em><b>System</b></p><button class="cm-a cm-go" type="button" data-open="approach" data-act aria-haspopup="dialog"><span class="cm-gq">Every part of the system opens its own page.</span><span class="cm-gl">Explore the system<b aria-hidden="true">+</b></span></button>`;
@@ -242,11 +242,11 @@ function Journey(st,inst){
     P(q('.j-divider'),g.divider[0],g.divider[1],1,g.H);gsap.set(q('.j-divider'),{opacity:0,display:M?'none':''});
     gsap.set(sys,{attr:{width:g.W,height:g.H,viewBox:`0 0 ${g.W} ${g.H}`}});
     gsap.set(sys,{opacity:1});gsap.set(osEl,{left:g.os[0],top:g.os[1],width:g.os[2],opacity:0});osEl.style.height=g.os[3]+'px';
-    cp.p=0;cmEl._cp=0;if(cmEl._cm)cmEl._cm.setP(0);
+    cp.p=0;cmEl._cp=0;if(cmEl._cm)cmEl._cm.setP(RM?1:0);
     if(cmEl._tk){gsap.ticker.remove(cmEl._tk);cmEl._tk=null}
     /* on narrower screens the chapter rail would run into the right end of the drawing: the composition is scaled to the room that is left */
     gsap.set(cmEl,{transformOrigin:'0% 100%',scale:M?1:Math.min(1,Math.max(.66,(innerWidth-246-(innerWidth-g.W*S)/2)/(1372*S)))});
-    gsap.set([cmq('.cm-pill'),cmq('.cm-sys'),cmq('.cm-quote')],{opacity:0,y:16});gsap.set(cmq('.cm-lock'),{opacity:0,y:60});gsap.set(cmq('.cm-go'),{opacity:0,y:40});
+    gsap.set([cmq('.cm-pill'),cmq('.cm-sys'),cmq('.cm-quote')],{opacity:0,y:16});gsap.set(cmq('.cm-lock'),{opacity:0,y:60});gsap.set(cmq('.cm-go'),{opacity:0,y:40});gsap.set(cmq('.cm-mot'),{opacity:0});
     const C=i=>q('.c'+i),F=i=>q('.f'+i),CL=i=>q('.clc'+i);
     [0,1,2,3].forEach(i=>{const [x,y]=g.C0[i];gsap.set([C(i),F(i),CL(i)],{attr:{cx:x,cy:y,r:g.r0}});gsap.set(C(i),{attr:{'stroke-dashoffset':1},visibility:'hidden'});gsap.set(F(i),{opacity:0})});
     gsap.set(q('.lensA'),{attr:{cx:g.C1[0][0],cy:g.C1[0][1],r:g.r1},opacity:0});gsap.set(q('.lensB'),{attr:{cx:g.C1[2][0],cy:g.C1[2][1],r:g.r1},opacity:0});
@@ -298,14 +298,19 @@ function Journey(st,inst){
     /* 04 System: light returns, circles move into each other, shared realities appear */
     tl.to(q('.j-black'),{opacity:0,duration:.001},at(.62));
     [0,1,2,3].forEach(i=>{const [x,y]=g.C1[i];tl.to([C(i),F(i),CL(i)],{attr:{cx:x,cy:y,r:g.r1},duration:.08,ease:'power3.inOut'},at(.635))});
-    if(M)tl.to(osEl,{opacity:1,duration:.035},at(.735));
+    if(M){tl.to(osEl,{opacity:1,duration:.035},at(.735));
+      /* on phones the list is longer than the screen: it moves up through the scroll that follows, so the way into Explore and the entry note are reached */
+      if(!RM)tl.to(osEl,{y:()=>-(Math.max(0,osEl.scrollHeight-osEl.clientHeight)+28),duration:.28,ease:'none'},at(.8)+.03);
+      if(!RM)tl.to([jt,osEl.querySelector('.os-lead')],{opacity:0,duration:.05,ease:'none'},at(.8)+.03)}
     else{
       tl.to(cp,{p:1,duration:.15,ease:'none'},at(.545))
         .to(cmq('.cm-pill'),{opacity:1,y:0,duration:.03},at(.625))
         .to(cmq('.cm-lock'),{opacity:1,y:0,duration:.07,ease:'power3.out'},at(.635))
-        .to(cmq('.cm-sys'),{opacity:1,y:0,duration:.04},at(.7))
-        .to(cmq('.cm-quote'),{opacity:1,y:0,duration:.04},at(.735))
-        .to(cmq('.cm-go'),{opacity:1,y:0,duration:.05,ease:'power3.out'},at(.735));
+        .to(cmq('.cm-go'),{opacity:1,y:0,duration:.05,ease:'power3.out'},at(.735))
+        /* scroll beyond the main moment: first the sentence on its own calm area, then the entry note, and the line motif carries on to it */
+        .to(cmq('.cm-sys'),{opacity:1,y:0,duration:.06},at(.8)+.06)
+        .to(cmq('.cm-quote'),{opacity:1,y:0,duration:.06},at(.8)+.19)
+        .to(cmq('.cm-mot'),{opacity:1,duration:.08},at(.8)+.17);
     }
     tl.to({},{duration:SYS_HOLD},at(.8));
 

@@ -272,22 +272,24 @@
 .j-cm li button{grid-template-columns:3.1em minmax(0,1fr) auto!important}
 .j-cm li button .ad{font-size:12px!important;padding:1px 7px!important}
 
-/* ===== v3 rebuild, Layer 1 chapter 04: two ribbons, black connector modules, open space between ===== */
+/* ===== v3 rebuild 2, Layer 1 chapter 04: one central composition, open interior ===== */
+.cv .j-cm .cm-dyn{transform:translateX(52px)}
 .cv .j-cm .cm-pill{left:48px;top:62px}
-.cv .j-cm .cm-lock{left:48px;top:64px;bottom:auto;margin:0;display:flex;align-items:baseline;gap:.3em;white-space:nowrap}
-.cv .j-cm .cm-lock em{font-size:52px}.cv .j-cm .cm-lock b{font-size:104px}
-.cv .j-cm .cm-sys{left:48px;top:182px;width:800px;white-space:normal;margin:0;font-size:28px;line-height:1.14;letter-spacing:-.02em;font-weight:300;color:#fff}
-.cv .j-cm .cm-go{left:48px;top:744px}
-.cv .j-cm .cm-quote{left:392px;top:754px;width:320px;white-space:normal}
-.cm-quote p{font-size:16px;line-height:1.26;letter-spacing:0}
-.cm-lb[data-d="0"],.cm-lb[data-d="1"],.cm-lb[data-d="2"],.cm-lb[data-d="3"]{--hn:28px}
+.cv .j-cm .cm-svg{-webkit-mask-image:linear-gradient(180deg,transparent 190px,#000 252px,#000 690px,transparent 752px),linear-gradient(90deg,#000 0,#000 292px,transparent 376px,transparent 930px,#000 1014px,#000 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(180deg,transparent 190px,#000 252px,#000 690px,transparent 752px),linear-gradient(90deg,#000 0,#000 292px,transparent 376px,transparent 930px,#000 1014px,#000 100%);mask-composite:intersect}
+.cv .j-cm .cm-lock{left:462px;width:490px;top:392px;bottom:auto;margin:0;display:flex;justify-content:center;align-items:baseline;gap:.28em;white-space:nowrap}
+.cv .j-cm .cm-lock em{font-size:44px}.cv .j-cm .cm-lock b{font-size:88px}
+.cv .j-cm .cm-go{left:572px;top:506px;width:270px;height:100px;padding:16px 22px 18px}
+.cv .j-cm .cm-sys{left:352px;top:64px;width:740px;white-space:normal;text-align:center;margin:0;font-size:25px;line-height:1.2;letter-spacing:-.015em;font-weight:300;color:#fff}
+.cv .j-cm .cm-quote{left:382px;top:812px;width:650px;white-space:normal;text-align:center}
+.cm-quote p{font-size:17px;line-height:1.28;letter-spacing:0}
+.cm-lb[data-d="0"],.cm-lb[data-d="1"],.cm-lb[data-d="2"],.cm-lb[data-d="3"]{--hn:26px}
 .cv .j-cm .cm-k{display:grid;grid-template-columns:1fr auto;align-items:center;justify-items:center;column-gap:9px;row-gap:5px;width:156px;height:68px;padding:6px 10px;background:#fff;color:#000}
 .cv .j-cm .cm-k .n{grid-column:1;grid-row:2;justify-self:end;writing-mode:horizontal-tb;transform:none;margin:0!important;font:800 20px/1 var(--sans);letter-spacing:-.015em;text-transform:none;color:#000}
 .cv .j-cm .cm-code{grid-column:1/-1;grid-row:1;border:1.4px solid #000;border-radius:20px;padding:1px 9px;font:700 11px/1.3 var(--sans);letter-spacing:.12em;color:#000}
 .cv .j-cm .cm-pl{grid-column:2;grid-row:2;width:24px;height:24px;font-size:18px;border:1.4px solid #000;color:#000;background:#fff}
 .cv .j-cm .cm-k:hover .cm-pl,.cv .j-cm .cm-k:focus-visible .cm-pl,.cm-pn.on .cm-pl{background:#000;color:#fff}
-.cm-lb[data-d="2"],.cm-lb[data-d="3"]{--hn:26px}
 .j-cm{--rn:22px}
+.cm-ln{stroke-width:.8}.cm-lh{stroke-width:1.6}
 
 /* ===== v3 rebuild, Explore and footer: the same system logic ===== */
 /* no line runs between Expansion and Operations */
@@ -304,3 +306,5 @@
   .sy-l1 .sy-x .sy-k,.sy-ex .sy-x .sy-k,.sy-ft .sy-x .sy-k{color:#fff;background:transparent!important}
   .sy .sy-x .sy-k{background:transparent!important}
   .sy-x::after{border-color:#fff;color:#fff}}
+
+.cv .j-os .os-note{position:relative;margin:20px 0 0;font:italic 400 16px/1.35 var(--serif);letter-spacing:0}
