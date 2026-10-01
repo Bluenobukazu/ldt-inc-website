@@ -789,7 +789,7 @@ document.addEventListener('click',e=>{if(!REL.length)return;
   if(e.target.closest&&e.target.closest('#deep [data-close]'))relClear()},true);
 addEventListener('keydown',e=>{if(e.key==='Escape'&&REL.length&&LDT.open===$('#deep'))relClear()},true);
 document.addEventListener('click',e=>{
-  const t=e.target.closest&&e.target.closest('#journey [data-real],#journey [data-dim],#deep [data-dreal],#deep [data-ddim],#approach [data-ddim],#approach [data-dreal]');if(!t)return;
+  const t=e.target.closest&&e.target.closest('#journey [data-real],#journey [data-dim],#journey [data-dreal],#journey [data-ddim],#deep [data-dreal],#deep [data-ddim],#approach [data-ddim],#approach [data-dreal]');if(!t)return;
   if(e.detail===0)LDT.keyX(t);
   /* every link inside a deep dive (its relationship controls, the connected system, the small map) keeps the way back (Lena, 27.09.2026) */
   if((t.hasAttribute('data-rel')||t.closest('#deep .dconn, #deep .mini'))&&deepNow&&LDT.open===$('#deep')){

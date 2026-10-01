@@ -97,6 +97,14 @@ Run browser QA on the deployed candidate at 970×510, 1280×720, 1440×900 and r
 - Baseline for this copy-only pass: branch `work`, commit `187a071eb3bad665dbb8a16d5abcd887630ac157`.
 - The System explanation is now “I connect these dimensions” / “so the business can operate as one.” with an explicit desktop break after “dimensions”. No visual, animation, navigation or footer code changed in this pass.
 
+## Layer 1 link repair and Explore rebuild
+
+- Baseline: branch `work`, commit `8f2058218359605c95ca3ea93067f2d36502cbe3`.
+- The six Layer 1 controls used `data-ddim` / `data-dreal`, but the delegated journey selector listened only for the older `data-dim` / `data-real` attributes. The selector now supports both forms and continues through the existing `showDeep` router.
+- Explore keeps the source model as authority: A Proposition → A.1 Advantage; A + B Positioning; B Expansion → B.1 Markets; C Operations → C.1 People, C.2 Technology, C.3 Decisions; C + D Delivery; D Commercial Architecture → D.1 Revenue, D.2 Customers, D.3 Partnerships.
+- Explore is rebuilt as a wide three-column desktop system with a central responsive contour field and six real navigation cards; mobile stacks the same six groups vertically. All approved descriptions remain model-driven and left aligned.
+- The current target receives exactly one semantic `aria-current` and a separate “YOU ARE HERE” status pill beneath its name. The same marker generator continues to serve Explore and the Deep Dive footer.
+
 ## V3 remainder — unchanged
 
 The application release does not replace the V3 remainder: open line design for Explore/System footer; further visual and narrative refinement; all 133 frames against seven contract fields; remaining frame findings and full V3 QA; shared frame-by-frame review and surgical corrections. ADD-01–04, workshop-result drafts and other copy awaiting approval were not silently implemented.
