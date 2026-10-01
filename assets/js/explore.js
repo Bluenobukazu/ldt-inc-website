@@ -121,7 +121,7 @@ function compose(root){
 }
 
 /* ---- Explore ---- */
-function explore(m){build(m,'ex');if(lastMark)mark(lastMark[0],lastMark[1]);const q=document.querySelector('#approach .aentry'),f=m.querySelector('.sy-form');if(q&&f&&innerWidth>760){if(!q.dataset.qm){q.innerHTML='\u201c'+q.innerHTML+'\u201d';q.dataset.qm='1'}f.appendChild(q)}}
+function explore(m){build(m,'ex');if(lastMark)mark(lastMark[0],lastMark[1]);const q=document.querySelector('#approach .aentry'),f=m.querySelector('.sy-form');if(q&&f&&innerWidth>760){if(!q.dataset.qm){q.innerHTML='\u201c'+q.innerHTML+'\u201d';q.dataset.qm='1'}f.parentNode.insertBefore(q,f);q.classList.add('ax-top')}}
 /* ---- Layer 1 chapter 04: the drawing and the table inside the pinned stage ---- */
 function landing(el){build(el,'l1')}
 /* ---- footer ---- */

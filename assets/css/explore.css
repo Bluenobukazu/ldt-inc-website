@@ -308,3 +308,12 @@
   .sy-x::after{border-color:#fff;color:#fff}}
 
 .cv .j-os .os-note{position:relative;margin:20px 0 0;font:italic 400 16px/1.35 var(--serif);letter-spacing:0}
+
+/* v3 point 10: the entry note keeps its own line above the map, never over it */
+#approach .aentry.ax-top{position:static;width:auto;max-width:34em;margin:1.4vw 0 calc(var(--fh,12cqw)*.38);font-family:var(--serif);font-style:italic;font-size:clamp(17px,1.45vw,26px);line-height:1.22;letter-spacing:-.01em;color:#000;padding:0}
+#approach .aentry.ax-top em{font-style:italic;color:#000}
+/* current row in the footer: the label sits on its own line under the name */
+.sy-ft li button[aria-current]{grid-template-columns:4.2em minmax(0,1fr) auto!important;row-gap:.15em}
+.sy-ft li button[aria-current] .yh{grid-column:2/-1!important;grid-row:2!important;justify-self:start!important;font-size:11px!important;letter-spacing:.14em}
+.sy-ex .sy-dh b{white-space:normal}
+.sy li button .ad{color:inherit!important;opacity:1!important}
