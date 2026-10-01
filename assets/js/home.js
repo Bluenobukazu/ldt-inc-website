@@ -208,7 +208,7 @@ function Journey(st,inst){
   const entry=document.createElement('p');entry.className='j-entry-note';entry.textContent='This is often where I enter: when growth, execution or commercial performance begin to outpace the structure holding the business together.';sl.appendChild(entry);
   /* desktop: the whole stage is one composition that the scroll builds (explore.js, compose) */
   const cmEl=document.createElement('div');cmEl.className='j-cm sy';
-  cmEl.innerHTML=`<div class="cm-dyn"></div><span class="pill cm-a cm-pill" aria-hidden="true">04</span>${RM?'<h2 class="sr">One Operating System</h2>':''}<p class="cm-a cm-sys">${SYS_LINE}</p><h2 class="cm-a cm-lock"><span>One Operating</span> <b>System</b></h2><p class="cm-a cm-gq">Every part of the system opens its own page.</p><button class="cm-a cm-go" type="button" data-open="approach" data-act aria-haspopup="dialog"><span class="cm-gl">Explore the System<b aria-hidden="true">+</b></span></button>`;
+  cmEl.innerHTML=`<div class="cm-dyn"></div><span class="pill cm-a cm-pill" aria-hidden="true">04</span>${RM?'<h2 class="sr">One Operating System</h2>':''}<h2 class="cm-a cm-lock"><span>One</span><span>Operating</span><span>System</span></h2><p class="cm-a cm-sys">${SYS_LINE}</p><button class="cm-a cm-go" type="button" data-open="approach" data-act aria-haspopup="dialog"><span class="cm-gl">Explore the System<b aria-hidden="true">+</b></span><span class="cm-gq">Every part of the system opens its own page.</span></button>`;
   sl.appendChild(cmEl);sys.style.display='none';const cp={p:0},cmq=s=>cmEl.querySelector(s);
   [...dimEls,...Object.values(tickEls),vA,vB,...cEls,cue].forEach(e=>e.remove());
   let tl=null,master=null,trig=null,jState=-1,G0=G();
@@ -217,7 +217,7 @@ function Journey(st,inst){
   /* the thread: the cut starts exactly on the line the monolith contracts into, between LDT and INC */
   function monoCut(g){const m=LDT.mono,l=m&&inst===0?m.line():{left:innerWidth/2-2,width:4};const offX=(innerWidth-g.W*S)/2;return{x:(l.left-offX)/S,w:l.width/S}}
   function jTitle(i){if(i===jState)return;const prev=jState;jState=i;const el=q('.j-title');gsap.killTweensOf(el);
-    const show=()=>{if(!JT[jState]||(jState===3&&!MOB())){gsap.set(el,{opacity:0});return}let [n,t,s,x]=JT[jState];if(jState===3){x='';if(MOB()){t='One Operating System';s=''}}el.querySelector('.pill').textContent=n;el.querySelector('.t').textContent=t;el.querySelector('.s').innerHTML=s;el.querySelector('.s').style.display=s?'':'none';el.querySelector('.x').textContent=x;el.querySelector('.x').style.display=x?'':'none';
+    const show=()=>{if(!JT[jState]||jState===3){gsap.set(el,{opacity:0});return}let [n,t,s,x]=JT[jState];el.querySelector('.pill').textContent=n;el.querySelector('.t').textContent=t;el.querySelector('.s').innerHTML=s;el.querySelector('.s').style.display=s?'':'none';el.querySelector('.x').textContent=x;el.querySelector('.x').style.display=x?'':'none';
       /* System is the anchor of the site: its title stands larger than Complexity and Connect */
       const big=jState===3,M=MOB();gsap.set(el.querySelector('.t'),{fontSize:big?(M?43:104):G0.jtS});gsap.set(el.querySelector('.s'),{fontSize:big?(M?32:60):(M?26:40)});gsap.set(el.querySelector('.x'),{fontSize:big?(M?15:21):(M?14:19),width:big?(M?380:440):(M?370:410)});
       emerge(el,jState,S)};
@@ -247,7 +247,7 @@ function Journey(st,inst){
     if(cmEl._tk){gsap.ticker.remove(cmEl._tk);cmEl._tk=null}
     /* on narrower screens the chapter rail would run into the right end of the drawing: the composition is scaled to the room that is left */
     gsap.set(cmEl,{transformOrigin:'0% 100%',scale:M?1:Math.min(1,Math.max(.72,(innerWidth-2*48-(innerWidth-g.W*S)/2)/(1372*S)))});
-    gsap.set([cmq('.cm-pill'),cmq('.cm-sys')],{opacity:0,y:16});gsap.set(entry,{left:M?22:360,top:M?230:300,width:M?386:720,opacity:0,y:18});gsap.set(cmq('.cm-lock'),{opacity:0,y:50});gsap.set(cmq('.cm-gq'),{opacity:0,y:18});gsap.set(cmq('.cm-go'),{opacity:0,y:24});gsap.set(cmq('.cm-mot'),{opacity:0});
+    gsap.set([cmq('.cm-pill'),cmq('.cm-sys')],{opacity:0,y:16});gsap.set(entry,{left:M?22:360,top:M?230:300,width:M?386:720,opacity:0,y:18});gsap.set(cmq('.cm-lock'),{opacity:0,y:50});gsap.set(cmq('.cm-go'),{opacity:0,y:24});gsap.set(cmq('.cm-mot'),{opacity:0});
     const C=i=>q('.c'+i),F=i=>q('.f'+i),CL=i=>q('.clc'+i);
     [0,1,2,3].forEach(i=>{const [x,y]=g.C0[i];gsap.set([C(i),F(i),CL(i)],{attr:{cx:x,cy:y,r:g.r0}});gsap.set(C(i),{attr:{'stroke-dashoffset':1},visibility:'hidden'});gsap.set(F(i),{opacity:0})});
     gsap.set(q('.lensA'),{attr:{cx:g.C1[0][0],cy:g.C1[0][1],r:g.r1},opacity:0});gsap.set(q('.lensB'),{attr:{cx:g.C1[2][0],cy:g.C1[2][1],r:g.r1},opacity:0});
@@ -301,25 +301,17 @@ function Journey(st,inst){
     tl.to(q('.j-black'),{opacity:0,duration:.001},at(.62));
     [0,1,2,3].forEach(i=>{const [x,y]=g.C1[i];tl.to([C(i),F(i),CL(i)],{attr:{cx:x,cy:y,r:g.r1},duration:.08,ease:'power3.inOut'},at(.635))});
     tl.to(entry,{opacity:1,y:0,duration:.03,ease:'power2.out'},at(.515)).to(entry,{opacity:0,y:-14,duration:.025},at(.565));
-    if(M){tl.to(osEl,{opacity:1,duration:.035},at(.575));
-      /* on phones the list is longer than the screen: it moves up through the scroll that follows, so the way into Explore and the entry note are reached */
-      if(!RM)tl.to(osEl,{y:()=>-(Math.max(0,osEl.scrollHeight-osEl.clientHeight)+28),duration:.28,ease:'none'},at(.8)+.03);
-      if(!RM)tl.to([jt,osEl.querySelector('.os-lead')],{opacity:0,duration:.05,ease:'none'},at(.8)+.03)}
-    else{
-      tl.to(cp,{p:1,duration:.15,ease:'none'},at(.565))
-        .to(cmq('.cm-pill'),{opacity:1,y:0,duration:.03},at(.625))
-        .to(cmq('.cm-lock'),{opacity:1,y:0,duration:.07,ease:'power3.out'},at(.635))
-        .to(cmq('.cm-gq'),{opacity:1,y:0,duration:.04,ease:'power3.out'},at(.69))
-        .to(cmq('.cm-go'),{opacity:1,y:0,duration:.05,ease:'power3.out'},at(.705))
-        .to(cmq('.cm-sys'),{opacity:1,y:0,duration:.05},at(.745))
-        .to(cmq('.cm-mot'),{opacity:1,duration:.06},at(.77));
-    }
+    tl.to(cp,{p:1,duration:.15,ease:'none'},at(.565))
+      .to(cmq('.cm-pill'),{opacity:1,y:0,duration:.03},at(.625))
+      .to(cmq('.cm-lock'),{opacity:1,y:0,duration:.07,ease:'power3.out'},at(.635))
+      .to(cmq('.cm-sys'),{opacity:1,y:0,duration:.04,ease:'power3.out'},at(.69))
+      .to(cmq('.cm-go'),{opacity:1,y:0,duration:.05,ease:'power3.out'},at(.715));
     tl.to({},{duration:SYS_HOLD},at(.8));
 
     if(RM){
       const p=STILL[inst];tl.time(Math.min(p,tl.duration()));if(inst===3){cmEl.dataset.rm='1';if(cmEl._cm)cmEl._cm.setP(1)}
       st.classList.toggle('cxOn',inst===1);st.classList.toggle('sysOn',inst===3);
-      if(JT[inst]&&!(inst===3&&!MOB())){let [n,t,s,x]=JT[inst];if(inst===3){x='';if(MOB()){t='One Operating System';s=''}}jt.querySelector('.pill').textContent=n;jt.querySelector('.t').textContent=t;jt.querySelector('.s').innerHTML=s;jt.querySelector('.s').style.display=s?'':'none';jt.querySelector('.x').textContent=x;jt.querySelector('.x').style.display=x?'':'none';gsap.set(jt,{opacity:1})}
+      if(JT[inst]&&inst!==3){let [n,t,s,x]=JT[inst];jt.querySelector('.pill').textContent=n;jt.querySelector('.t').textContent=t;jt.querySelector('.s').innerHTML=s;jt.querySelector('.s').style.display=s?'':'none';jt.querySelector('.x').textContent=x;jt.querySelector('.x').style.display=x?'':'none';gsap.set(jt,{opacity:1})}
       else gsap.set(jt,{opacity:0});
       /* hide what is not visible in this still, from assistive technology and the keyboard */
       [...cv.children,...q('.j-blocks').children,...sl.children].forEach(e=>{const o=+gsap.getProperty(e,'opacity');if(o<.05){e.setAttribute('aria-hidden','true');if(e.tagName==='BUTTON')e.tabIndex=-1}});
@@ -338,10 +330,10 @@ function Journey(st,inst){
     master.fromTo(hs,{s:0},{s:END,duration:H0},0).add(tl,T0);
     const jBand=bandAfter($('#journey'),'white');
     trig=ScrollTrigger.create({trigger:'#journey',start:'top top',onRefresh:jBand,onToggle:jBand,end:()=>'+='+innerHeight*base*(T0+TL),pin:st,refreshPriority:2,scrub:.6,animation:master,invalidateOnRefresh:true,
-      onUpdate:self=>{const p=self.progress*(T0+TL)-T0,hp=Math.min(1,self.progress*(T0+TL)/H0)*END;const s=p<SEG[0]?0:p<SEG[1]?1:p<SEG[2]?2:3;setActive(s);jTitle(s===0?-1:s);hero(hp<.72);
-        st.classList.toggle('sysOn',p>at(.515));cmEl.classList.toggle('topicsOn',p>at(.735));document.body.classList.toggle('system-moment',self.isActive&&self.progress<.995&&p>at(.515));st.classList.toggle('cxOn',p>at(.3)&&p<at(.42));jBand(self)}});
+      onUpdate:self=>{const p=self.progress*(T0+TL)-T0,hp=Math.min(1,self.progress*(T0+TL)/H0)*END;const s=p<SEG[0]?0:p<SEG[1]?1:p<SEG[2]?2:3;setActive(s);jTitle(s===0?-1:s);if(p>at(.565))gsap.set(jt,{opacity:0});hero(hp<.72);
+        st.classList.toggle('sysOn',p>at(.515));document.body.classList.toggle('system-moment',self.isActive&&self.progress<.995&&p>at(.515));st.classList.toggle('cxOn',p>at(.3)&&p<at(.42));jBand(self)}});
     /* the line drawing is a pure function of the scroll position: it is right after a direct address, a resize or a rebuild as well */
-    if(!M){const tk=()=>{if(!cmEl._cm||!trig)return;const w=Math.max(0,Math.min(1,((trig.progress*(T0+TL)-T0)-at(.565))/.15));if(cmEl._cp!==w||cmEl._ci!==cmEl._cm){cmEl._cp=w;cmEl._ci=cmEl._cm;cmEl._cm.setP(w)}};cmEl._tk=tk;gsap.ticker.add(tk)}
+    {const tk=()=>{if(!cmEl._cm||!trig)return;const w=Math.max(0,Math.min(1,((trig.progress*(T0+TL)-T0)-at(.565))/.15));if(cmEl._cp!==w||cmEl._ci!==cmEl._cm){cmEl._cp=w;cmEl._ci=cmEl._cm;cmEl._cm.setP(w)}};cmEl._tk=tk;gsap.ticker.add(tk)}
   }
   /* complexity: a touched reality settles into place, the others stay in tension */
   blocks.forEach(({b,l},i)=>{

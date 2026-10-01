@@ -318,35 +318,41 @@
 .sy-ex .sy-dh b{white-space:normal}
 .sy li button .ad{color:inherit!important;opacity:1!important}
 
-/* ===== application release: full-width Layer 1 operating-system moment ===== */
+/* ===== application release: reference-led Layer 1 operating-system moment ===== */
 body.system-moment #rail{opacity:0;visibility:hidden;pointer-events:none}
 body.system-moment #railM{opacity:0;visibility:hidden}
 .j-entry-note{z-index:4;margin:0;color:#fff;mix-blend-mode:difference;font:italic 400 30px/1.18 var(--serif);letter-spacing:-.012em;text-align:center}
 .cv .j-cm .cm-dyn{transform:none}
 .cv .j-cm .cm-svg{-webkit-mask-image:none;mask-image:none}
-.cm-ln,.cm-lh{stroke-width:.72}.cm-lh{stroke-width:1.55}
-.cv .j-cm .cm-pill{left:48px;top:56px}
-.cv .j-cm .cm-sys{left:365px;top:58px;width:710px;text-align:center;font-size:23px;line-height:1.24;font-weight:350}
-.cv .j-cm .cm-lock{left:430px;top:350px;width:580px;display:flex;justify-content:center;align-items:baseline;gap:.22em;color:#fff;font-family:var(--sans);font-style:normal;font-weight:750;line-height:.9;letter-spacing:-.055em;white-space:nowrap;text-align:center}
-.cv .j-cm .cm-lock span,.cv .j-cm .cm-lock b{font:inherit;font-size:70px;letter-spacing:inherit}
-.cv .j-cm .cm-lock b{font-weight:850}
-.cv .j-cm .cm-gq{left:540px;top:454px;width:360px;margin:0;text-align:center;font:italic 400 19px/1.25 var(--serif);letter-spacing:0}
-.cv .j-cm .cm-go{left:565px;top:505px;width:310px;height:62px;display:flex;justify-content:center;padding:0 22px;background:#fff;color:#000;border:1.5px solid #fff}
-.cv .j-cm .cm-go .cm-gl{width:100%;font-size:13px;letter-spacing:.18em}
-.cv .j-cm .cm-lb{height:64px;align-items:center}
-.cm-lb[data-d="0"],.cm-lb[data-d="1"],.cm-lb[data-d="2"],.cm-lb[data-d="3"]{--hn:27px}
-.cv .j-cm .cm-pn{z-index:3}
-.cv .j-cm .cm-k{width:166px;height:70px}
-.cv .j-cm .cm-ls{opacity:0;transform:translateY(16px);transition:opacity .4s ease,transform .5s cubic-bezier(.2,.7,.1,1);pointer-events:none}
-.cv .j-cm.topicsOn .cm-ls{opacity:1;transform:none;pointer-events:auto}
-.cv .j-cm .cm-mot{display:none}
-@media (prefers-reduced-motion:reduce){.cv .j-cm .cm-ls{opacity:1;transform:none;pointer-events:auto}}
-@media (max-width:760px){.j-entry-note{font-size:24px;line-height:1.2;text-align:left}.cv .j-os .os-note{display:none}}
-
+.cm-ln,.cm-lh{fill:none;stroke:#fff;stroke-width:.62}.cm-lh{stroke-width:1.45;opacity:0;transition:opacity .35s}.j-cm.f .cm-lh{opacity:1}
+.cv .j-cm .cm-pill{left:48px;top:54px}
+.cv .j-cm .cm-lock{left:485px;top:290px;width:470px;display:flex;flex-direction:column;align-items:center;color:#fff;font-family:var(--serif);font-style:normal;font-weight:400;line-height:.76;letter-spacing:-.065em;text-align:center}
+.cv .j-cm .cm-lock span{font:inherit;font-size:88px;letter-spacing:inherit}
+.cv .j-cm .cm-sys{left:485px;top:535px;width:470px;text-align:center;font:400 18px/1.3 var(--sans);letter-spacing:-.006em;color:#fff}
+.cv .j-cm .cm-go{left:520px;top:632px;width:400px;height:94px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:16px 28px;background:#fff;color:#000;border-radius:52px;cursor:pointer}
+.cv .j-cm .cm-go .cm-gl{width:100%;display:flex;justify-content:center;font:400 28px/1 var(--serif);letter-spacing:-.02em;text-transform:none}.cm-go .cm-gl b{position:absolute;right:28px;font:300 25px/1 var(--sans)}
+.cv .j-cm .cm-gq{position:static;width:auto;margin:0;text-align:center;font:400 12px/1.25 var(--sans);letter-spacing:.01em}
+.cv .j-cm .cm-target{display:flex;align-items:center;gap:14px;height:52px;padding:5px 8px;background:#000;color:#fff;cursor:pointer;white-space:normal}
+.cv .j-cm .cm-target .cm-code{display:inline-flex;flex:none;align-items:center;justify-content:center;min-width:54px;height:38px;padding:0 13px;border-radius:21px;background:#fff;color:#000;font:700 13px/1 var(--sans);letter-spacing:.05em}
+.cv .j-cm .cm-target .n{font:400 29px/.98 var(--serif);letter-spacing:-.025em;text-align:left}
+.cv .j-cm .cm-target .cm-pl{margin-left:auto;flex:none;font:300 31px/1 var(--sans);transition:transform .35s}
+.cv .j-cm .cm-target:hover .cm-pl,.cv .j-cm .cm-target:focus-visible .cm-pl,.cv .j-cm .cm-target.on .cm-pl{transform:rotate(90deg)}
+.cv .j-cm .cm-target:hover .n,.cv .j-cm .cm-target:focus-visible .n,.cv .j-cm .cm-target.on .n{text-decoration:underline;text-underline-offset:.16em;text-decoration-thickness:1px}
+.stage.sysOn .j-cm button{pointer-events:auto}
+.cv .j-cm .cm-mot,.cv .j-cm .cm-ls{display:none!important}
+@media (prefers-reduced-motion:reduce){.cm-ln{stroke-dasharray:none!important;stroke-dashoffset:0!important}.cv .j-cm .cm-target{opacity:1!important;transform:none!important}}
+@media (min-width:761px){.cv .j-os{display:none}}
 @media (max-width:760px){
-  .cv .j-os{mix-blend-mode:difference;color:#fff}
-  .cv .j-os .sy{color:#fff}
-  .cv .j-os :is(.sy-ln,.sy-lh){stroke:#fff}
-  .cv .j-os :is(.sy-tab,.sy-c,.sy-x,.sy li button){border-color:#fff}
-  .cv .j-os .sy-x{background:#fff;color:#000}
+  .cv .j-os{display:none!important}.cv .j-cm{display:block;width:430px;height:860px;transform:none!important;mix-blend-mode:difference}
+  .j-entry-note{font-size:24px;line-height:1.2;text-align:left}
+  .cv .j-cm .cm-dyn{width:430px;height:860px}.cv .j-cm .cm-svg{width:430px;height:500px;top:42px;overflow:hidden}
+  .cv .j-cm .cm-pill{left:22px;top:32px}
+  .cv .j-cm .cm-target{width:202px!important;height:52px;gap:7px;padding:4px}
+  .cv .j-cm .cm-target[data-e="0"]{left:8px!important;top:92px!important}.cv .j-cm .cm-target[data-e="3"]{left:220px!important;top:92px!important}
+  .cv .j-cm .cm-target[data-e="1"]{left:8px!important;top:208px!important}.cv .j-cm .cm-target[data-e="4"]{left:220px!important;top:208px!important}
+  .cv .j-cm .cm-target[data-e="2"]{left:8px!important;top:324px!important}.cv .j-cm .cm-target[data-e="5"]{left:220px!important;top:324px!important}
+  .cv .j-cm .cm-target .cm-code{min-width:42px;height:30px;padding:0 9px;font-size:10px}.cv .j-cm .cm-target .n{font-size:17px}.cv .j-cm .cm-target .cm-pl{font-size:22px}
+  .cv .j-cm .cm-lock{left:35px;top:438px;width:360px;line-height:.82}.cv .j-cm .cm-lock span{font-size:56px}
+  .cv .j-cm .cm-sys{left:37px;top:606px;width:356px;font-size:15px;line-height:1.3}
+  .cv .j-cm .cm-go{left:42px;top:696px;width:346px;height:104px;border-radius:54px;padding:18px 24px;gap:10px}.cv .j-cm .cm-go .cm-gl{font-size:25px}.cv .j-cm .cm-gq{font-size:12px;max-width:28ch}
 }

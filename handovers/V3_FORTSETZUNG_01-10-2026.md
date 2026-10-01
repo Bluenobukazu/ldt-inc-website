@@ -67,6 +67,15 @@ Run browser QA on the deployed candidate at 970×510, 1280×720, 1440×900 and r
 - Scroll extent before this pass was approximately 7.7 viewport heights on desktop and 7.0 on mobile (previous timeline/hold constants). It is now approximately 4.2 viewport heights on desktop and 4.4 on mobile. Exact perceived wheel/touch gestures remain device-dependent.
 - Required deployed-browser QA remains: 970×510, 1280×720, 1440×900 and mobile; forward/reverse scrub; `#system` direct load/reload/history; keyboard, touch, contrast and reduced motion.
 
+## Final reference-led System moment
+
+- Baseline for this pass: branch `work`, commit `04c80e36279c331b5ce6a14986534f50179ff123`.
+- This pass supersedes the earlier two-arc Layer 1 composition. It uses one continuous field of 42 closed, asymmetrically distorted vector contours around a large open centre; there is no perpetual motion.
+- The six direct controls follow the approved left/right order and combine a black code pill, name and persistent plus. Their knockout surfaces keep every label clear of the line field. The relationship highlight groups remain A–Positioning–B and C–Delivery–D only.
+- The central serif title, verbatim system sentence and the two-line Explore CTA are grouped in the open centre. Layer 1 generates no subtopic controls; the complete Explore view remains the only Layer 1 route to all eight subtopics and all fourteen system pages.
+- Mobile uses the same vector field but independently reflows all live text and controls rather than scaling desktop typography. Reduced Motion reveals the complete static state.
+- The previously documented shortened journey remains approximately 4.2 viewport heights on desktop and 4.4 on mobile.
+
 ## V3 remainder — unchanged
 
 The application release does not replace the V3 remainder: open line design for Explore/System footer; further visual and narrative refinement; all 133 frames against seven contract fields; remaining frame findings and full V3 QA; shared frame-by-frame review and surgical corrections. ADD-01–04, workshop-result drafts and other copy awaiting approval were not silently implemented.
