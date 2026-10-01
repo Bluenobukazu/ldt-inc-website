@@ -104,8 +104,8 @@ const STATES=[
  ['Established organisation','The business is running, but brand, operations, commercial priorities and decision structures are no longer working together cleanly.',[[6,20,8,64],[20,20,8,64],[34,20,8,64],[48,20,8,64]]],
  ['Fragmented growth','Growth has created complexity across markets, teams, partners or revenue structures and the organisation needs a system that can hold it together.',[[4,22,16,24],[26,56,10,18],[42,16,18,26],[62,46,12,22],[30,34,7,10]]]];
 const CORE='Turning complex creative and commercial environments into',CORE_IT='structured, scalable systems.';
-const SYS_LINE='I connect proposition, expansion, operations & commercial architecture so the business can operate as one.';
-const SYS_LINE_HTML='<span>I connect proposition, expansion, operations &amp; commercial architecture</span><span>so the business can operate as one.</span>';
+const SYS_LINE='I connect these dimensions so the business can operate as one.';
+const SYS_LINE_HTML='<span>I connect these dimensions</span><span>so the business can operate as one.</span>';
 const JT={1:['02','Complexity','',''],2:['03','Connect','',''],3:['04','System','One operating',SYS_LINE]};
 /* System (Lena, 27.09.2026): "One operating" in the serif stands above the title, so the heading reads One operating System without repeating the word */
 

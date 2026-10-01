@@ -92,6 +92,11 @@ Run browser QA on the deployed candidate at 970×510, 1280×720, 1440×900 and r
 - The authorised sentence is set as two explicit desktop lines: “I connect proposition, expansion, operations & commercial architecture” / “so the business can operate as one.” Narrow screens may wrap further.
 - Explanation and CTA now enter with a short overlap in timing, while their absolute positions are reserved from initial layout. Existing target plates, Explore navigation, shortened journey and footer remain unchanged.
 
+## Final System explanation copy
+
+- Baseline for this copy-only pass: branch `work`, commit `187a071eb3bad665dbb8a16d5abcd887630ac157`.
+- The System explanation is now “I connect these dimensions” / “so the business can operate as one.” with an explicit desktop break after “dimensions”. No visual, animation, navigation or footer code changed in this pass.
+
 ## V3 remainder — unchanged
 
 The application release does not replace the V3 remainder: open line design for Explore/System footer; further visual and narrative refinement; all 133 frames against seven contract fields; remaining frame findings and full V3 QA; shared frame-by-frame review and surgical corrections. ADD-01–04, workshop-result drafts and other copy awaiting approval were not silently implemented.
