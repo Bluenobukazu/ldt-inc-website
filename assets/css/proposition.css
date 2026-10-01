@@ -291,3 +291,8 @@
 /* short laptop windows (970 x 510): the stage keeps its proportions, nothing is squeezed into one screen */
 @media (min-width:761px) and (max-height:600px){.pp .pz-hero{min-height:0}}
 @media (prefers-reduced-motion:reduce){.pp *,.pp *::before,.pp *::after{transition:none!important}}
+/* v3 M06: contrast of the grey lines (4.5:1 on white, 3:1 for large dim list items on black) */
+.pp .pz-df span{color:#6b6b6b}
+.pp .pz-holds .pz-c{color:#666}
+.pp .pz-list li .num{color:#d6d6d6}
+.pp .pz-rail i{color:#8a8a8a}

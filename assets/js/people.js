@@ -11,12 +11,12 @@ function build(root){
   const hs=q('.pl-f0 svg'),rad=[9,7,68,8,12,6,56,8,10,6,8],gap=26;let tot=rad.reduce((a,r)=>a+2*r,0)+gap*(rad.length-1),x=(1000-tot)/2;
   rad.forEach((r,i)=>{x+=r;const c=C(hs,{cx:x.toFixed(1),cy:85,r,class:'pl-dt',style:`--d:${(i*.09).toFixed(2)}s`});x+=r+gap});
   /* 2 the role: an outline that fills with what the person needs; what is missing comes back to the same few */
-  const rs=q('.pl-rfig svg');C(rs,{cx:250,cy:150,r:124,class:'oc'});
-  const inner=C(rs,{cx:250,cy:150,r:0}),few=C(rs,{cx:760,cy:150,r:50,class:'few'}),back=[...Array(6)].map(()=>C(rs,{r:9,class:'bk'}));
+  const figs=qa('.pl-rfig svg,.pl-nfig svg').map(rs=>{C(rs,{cx:250,cy:150,r:124,class:'oc'});
+    return {inner:C(rs,{cx:250,cy:150,r:0}),few:C(rs,{cx:760,cy:150,r:50,class:'few'}),back:[...Array(6)].map(()=>C(rs,{r:9,class:'bk'}))}});
   const nb=qa('.pl-n'),nr=q('.pl-nr');
   const role=()=>{const on=nb.filter(b=>b.getAttribute('aria-pressed')==='true').map(b=>+b.dataset.n),m=6-on.length;
-    R(inner,124*Math.sqrt(on.length/6));R(few,50+m*11);
-    back.forEach((e,k)=>{e.setAttribute('cx',(760-(50+m*11)-46-(k%2)*34).toFixed(1));e.setAttribute('cy',(100+Math.floor(k/2)*50).toFixed(1));e.style.opacity=k<m?1:0});
+    figs.forEach(({inner,few,back})=>{R(inner,124*Math.sqrt(on.length/6));R(few,50+m*11);
+      back.forEach((e,k)=>{e.setAttribute('cx',(760-(50+m*11)-46-(k%2)*34).toFixed(1));e.setAttribute('cy',(100+Math.floor(k/2)*50).toFixed(1));e.style.opacity=k<m?1:0})});
     const miss=NEED.filter((_,k)=>!on.includes(k));
     nr.textContent=m?`Still missing: ${miss.join(', ').replace(/, ([^,]*)$/,' and $1')}. So the questions and exceptions travel back.`:'Now the outcome stays where the role is.'};
   nb.forEach(b=>b.addEventListener('click',()=>{b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')!=='true');role()}));

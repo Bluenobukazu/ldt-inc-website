@@ -207,7 +207,7 @@ function Journey(st,inst){
   const osEl=document.createElement('div');osEl.className='j-os';osEl.innerHTML=`<p class="os-lead">${SYS_LINE}</p><div class="sy-host"></div><div class="os-cta"><p class="os-cl">Every part of the system opens its own page.</p><button class="os-ex" type="button" data-open="approach" data-act aria-haspopup="dialog"><span>Explore the system</span><b aria-hidden="true">+</b></button></div>`;sl.appendChild(osEl);
   /* desktop: the whole stage is one composition that the scroll builds (explore.js, compose) */
   const cmEl=document.createElement('div');cmEl.className='j-cm sy';
-  cmEl.innerHTML=`<div class="cm-dyn"></div><span class="pill cm-a cm-pill" aria-hidden="true">04</span>${RM?'<h2 class="sr">One operating System</h2>':''}<blockquote class="cm-a cm-quote"><p>\u201cThis is often where I enter: when growth, execution or commercial performance begin to outpace the structure holding the business together.\u201d</p></blockquote><p class="cm-a cm-lock" aria-hidden="true"><em>One operating</em><b>System</b></p><button class="cm-a cm-go" type="button" data-open="approach" data-act aria-haspopup="dialog"><span class="cm-gq">Every part of the system opens its own page.</span><span class="cm-gl">Explore the system<b aria-hidden="true">+</b></span></button>`;
+  cmEl.innerHTML=`<div class="cm-dyn"></div><span class="pill cm-a cm-pill" aria-hidden="true">04</span>${RM?'<h2 class="sr">One operating System</h2>':''}<p class="cm-a cm-sys">${SYS_LINE}</p><blockquote class="cm-a cm-quote"><p>\u201cThis is often where I enter: when growth, execution or commercial performance begin to outpace the structure holding the business together.\u201d</p></blockquote><p class="cm-a cm-lock" aria-hidden="true"><em>One operating</em><b>System</b></p><button class="cm-a cm-go" type="button" data-open="approach" data-act aria-haspopup="dialog"><span class="cm-gq">Every part of the system opens its own page.</span><span class="cm-gl">Explore the system<b aria-hidden="true">+</b></span></button>`;
   sl.appendChild(cmEl);sys.style.display='none';const cp={p:0},cmq=s=>cmEl.querySelector(s);
   [...dimEls,...Object.values(tickEls),vA,vB,...cEls,cue].forEach(e=>e.remove());
   let tl=null,master=null,trig=null,jState=-1,G0=G();
@@ -246,7 +246,7 @@ function Journey(st,inst){
     if(cmEl._tk){gsap.ticker.remove(cmEl._tk);cmEl._tk=null}
     /* on narrower screens the chapter rail would run into the right end of the drawing: the composition is scaled to the room that is left */
     gsap.set(cmEl,{transformOrigin:'0% 100%',scale:M?1:Math.min(1,Math.max(.66,(innerWidth-246-(innerWidth-g.W*S)/2)/(1372*S)))});
-    gsap.set([cmq('.cm-pill'),cmq('.cm-quote')],{opacity:0,y:16});gsap.set(cmq('.cm-lock'),{opacity:0,y:60});gsap.set(cmq('.cm-go'),{opacity:0,y:40});
+    gsap.set([cmq('.cm-pill'),cmq('.cm-sys'),cmq('.cm-quote')],{opacity:0,y:16});gsap.set(cmq('.cm-lock'),{opacity:0,y:60});gsap.set(cmq('.cm-go'),{opacity:0,y:40});
     const C=i=>q('.c'+i),F=i=>q('.f'+i),CL=i=>q('.clc'+i);
     [0,1,2,3].forEach(i=>{const [x,y]=g.C0[i];gsap.set([C(i),F(i),CL(i)],{attr:{cx:x,cy:y,r:g.r0}});gsap.set(C(i),{attr:{'stroke-dashoffset':1},visibility:'hidden'});gsap.set(F(i),{opacity:0})});
     gsap.set(q('.lensA'),{attr:{cx:g.C1[0][0],cy:g.C1[0][1],r:g.r1},opacity:0});gsap.set(q('.lensB'),{attr:{cx:g.C1[2][0],cy:g.C1[2][1],r:g.r1},opacity:0});
@@ -303,7 +303,8 @@ function Journey(st,inst){
       tl.to(cp,{p:1,duration:.15,ease:'none'},at(.545))
         .to(cmq('.cm-pill'),{opacity:1,y:0,duration:.03},at(.625))
         .to(cmq('.cm-lock'),{opacity:1,y:0,duration:.07,ease:'power3.out'},at(.635))
-        .to(cmq('.cm-quote'),{opacity:1,y:0,duration:.04},at(.7))
+        .to(cmq('.cm-sys'),{opacity:1,y:0,duration:.04},at(.7))
+        .to(cmq('.cm-quote'),{opacity:1,y:0,duration:.04},at(.735))
         .to(cmq('.cm-go'),{opacity:1,y:0,duration:.05,ease:'power3.out'},at(.735));
     }
     tl.to({},{duration:SYS_HOLD},at(.8));
@@ -621,7 +622,9 @@ function fillDeep(type,i){
   $('#deep').setAttribute('aria-labelledby',own?$(`#deep .dpage[data-page="${own}"] h2`).id:'deepT');
   if(own){const pg=$(`#deep .dpage[data-page="${own}"]`);
     /* relationship controls name their page; dimensions and areas resolve to the right deep dive */
-    $$('[data-area]',pg).forEach(b=>{const j=RI(b.dataset.area);if(j>=0)b.dataset.dreal=j;else b.dataset.ddim=DIMS.findIndex(x=>x.n===b.dataset.area)});
+    const CODE={Proposition:'A',Advantage:'A.1',Positioning:'A + B',Expansion:'B',Markets:'B.1',Operations:'C',People:'C.1',Technology:'C.2',Decisions:'C.3',Delivery:'C + D','Commercial Architecture':'D',Revenue:'D.1',Customers:'D.2',Partnerships:'D.3'};
+    $$('[data-area]',pg).forEach(b=>{if(b.hasAttribute('data-rel')&&!b.querySelector('.ad')&&CODE[b.dataset.area]){const c=document.createElement('span');c.className='ad l2-code';c.setAttribute('aria-hidden','true');c.textContent=CODE[b.dataset.area];b.insertBefore(c,b.firstChild)}
+      const j=RI(b.dataset.area);if(j>=0)b.dataset.dreal=j;else b.dataset.ddim=DIMS.findIndex(x=>x.n===b.dataset.area)});
     PAGE_INIT[own](pg)}
   deepNow={type,i};relStrip(o);crumb(real,i);window.LDT_XI&&LDT_XI.mark(type,i);
   const par=real?o.d.map(j=>DIMS[j].n):[],conn=real&&o.d.length>1;

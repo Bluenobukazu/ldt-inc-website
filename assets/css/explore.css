@@ -233,3 +233,18 @@
 #approach #xMap .sy li .yh{margin:0 0 0 .8em}
 #approach #xMap .sy-x .sy-k .yh{writing-mode:vertical-rl;margin:1em 0 0}
 #approach #xMap .sy li .yh,.sy li .yh{margin-left:1.5em}
+
+/* v3 point 9: the chapter sentence has its own generous text area at the top; the entry note sits small beneath the map */
+.cv .j-cm .cm-sys{left:48px;top:112px;width:480px;white-space:normal;margin:0;font-size:33px;line-height:1.14;letter-spacing:-.022em;font-weight:300;color:#fff}
+.cv .j-cm .cm-quote{left:48px;top:704px;width:344px;white-space:normal}
+.cm-quote p{font-size:16px;line-height:1.26;letter-spacing:0}
+/* v3 M06: sub codes (A.1, B.1 ...) stay readable at every size */
+.sy li button .ad{font-size:max(13px,.5em)!important;opacity:1!important}
+/* v3 point 10: the full explanation of each dimension reads at body size */
+.sy-ex{--an:1.22cqw}.sy-ex .sy-ap{max-width:21em;line-height:1.38}
+@media (max-width:760px){.sy-ex{--an:15px}}
+/* v3 M01 + point 11: the letter of each dimension is a solid code disc, so A, B, C, D read first */
+.sy-l{background:#000;color:#fff;width:1.55em;height:1.55em;font:700 .6em/1 var(--sans);border:0}
+.sy-l{-webkit-text-fill-color:#fff}
+.j-cm .sy-l{background:#fff;color:#000;-webkit-text-fill-color:#000}
+.yh{font-size:max(12px,1em)!important}.sy-k .n{font-size:max(12px,1em)}

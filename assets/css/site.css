@@ -209,3 +209,6 @@ html:not(.kbd) .ov [data-close]:focus-visible{outline:none!important;box-shadow:
 .pill{font-size:13px;font-weight:600}
 :is(.ov .bar,.ovsub,.subbar) .lbl .pill{background:#000;color:#fff;border-color:#000;padding:3px 10px}
 #rail button{font-size:11px;font-weight:600;opacity:.82}
+/* v3 M06: location label and codes never below 12px */
+.lbl,.dcur,.loc .dcur{font-size:max(12px,11px)}
+.dcur,.lbl{font-size:12.5px}

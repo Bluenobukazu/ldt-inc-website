@@ -81,3 +81,5 @@
   .ox .ox-trw{height:auto;margin-bottom:20px}.ox .ox-trv li:nth-child(odd){bottom:calc(34% + 10px)}.ox .ox-trv li{font-size:11px}.ox .ox-trv li{font-size:12px}.ox .ox-bld{font-size:12px}.ox .ox-bld li{position:absolute;left:calc(var(--i)*14.2%);width:14.2%;font-size:clamp(13px,calc(1.25*var(--u)),18px);font-weight:700;letter-spacing:-.01em;line-height:1.1}
   .ox .ox-e2 .ox-cs{margin-bottom:34px}.ox .ox-in{display:block}.ox .ox-in li{margin-bottom:18px}.ox .ox-in .n{font-size:38px}.ox .ox-dl .n{font-size:clamp(44px,15vw,70px)}.ox .ox-dl .q{font-size:20px}
 }
+/* v3 C-F08: the plus keeps clear of the long names */
+.ox .ox-in button{column-gap:calc(1.6*var(--u))}.ox .ox-in .n{font-size:calc(4.7*var(--u))}

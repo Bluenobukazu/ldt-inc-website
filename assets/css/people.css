@@ -88,3 +88,9 @@
 @keyframes pl-pr{0%{transform:scale(1);opacity:.9}100%{transform:scale(10);opacity:0}}
 @media (prefers-reduced-motion:reduce){.pl .pl-cfig .pr{animation:none}}
 .pl .pl-cyf{display:flex;flex-direction:column;align-items:center;text-align:center}.pl .pl-cyf figcaption{text-align:center}.pl .pl-cyf svg{max-width:100%}
+
+/* v3 C.1-F03: the role figure sits beside the six conditions and reads the same active set */
+.pl .pl-nd{position:relative}
+.pl .pl-nfig{position:absolute;right:0;top:31%;width:36%}.pl .pl-nfig svg{width:100%;height:auto}
+.pl .pl-nfig .oc{fill:none!important;stroke:#fff;stroke-width:2.4}.pl .pl-nfig .few,.pl .pl-nfig .bk,.pl .pl-nfig circle:not(.oc){fill:#fff}
+@media (max-width:760px){.pl .pl-nfig{position:static;width:100%;margin-top:3vh}}
