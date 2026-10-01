@@ -112,6 +112,14 @@ Run browser QA on the deployed candidate at 970×510, 1280×720, 1440×900 and r
 - Explore outlines the selected canonical card, highlights its related contour zone and scrolls it into view when necessary. This selection never creates `aria-current` or a “YOU ARE HERE” pill; those remain reserved for a Deep Dive that was actually opened.
 - The 14 Explore destinations retain their existing direct Deep Dive routing. Layer 1 design, copy and footer are unchanged.
 
+## Explore illustration and legibility refinement
+
+- Baseline: branch `work`, commit `6a561232fa52f5324e358df14a1e40cc233c77fc`.
+- The accepted long, scrollable Explore card structure remains unchanged. Its central illustration is now a tall, asymmetric woven line field with alternating fans, pinches and crossings instead of a horizontally scaled closed loop.
+- The SVG spans the card field and calculates six short connector paths from the central motif to the actual card edges after layout, keeping the endpoints attached when the layout resizes. The SVG remains pointer-transparent.
+- Common card heights and calmer header metrics keep Positioning and Delivery readable on desktop. Narrow layouts restore natural name wrapping and prioritise the card content over the illustration.
+- Full deployed-preview visual, interaction and viewport QA remains required before production approval.
+
 ## V3 remainder — unchanged
 
 The application release does not replace the V3 remainder: open line design for Explore/System footer; further visual and narrative refinement; all 133 frames against seven contract fields; remaining frame findings and full V3 QA; shared frame-by-frame review and surgical corrections. ADD-01–04, workshop-result drafts and other copy awaiting approval were not silently implemented.

@@ -18,9 +18,9 @@ function build(root,mode){
   const {dims,con}=model(),id='syc'+(++uid);
   root.classList.add('sy','sy-'+mode);
   const cols=[dims[0],con[0],dims[1],dims[2],con[1],dims[3]];
-  root.innerHTML=`<div class="sy-form"><svg class="sy-svg" aria-hidden="true" focusable="false"><defs><clipPath id="${id}"><rect class="sy-clip" x="0" y="0" width="0" height="4000"/></clipPath></defs><g class="sy-base"></g><g class="sy-hl" clip-path="url(#${id})"></g></svg></div>
+  root.innerHTML=`<div class="sy-form"><svg class="sy-svg" aria-hidden="true" focusable="false"><defs><clipPath id="${id}"><rect class="sy-clip" x="0" y="0" width="0" height="4000"/></clipPath></defs><g class="sy-base"></g><g class="sy-links"></g><g class="sy-hl" clip-path="url(#${id})"></g></svg></div>
   <div class="sy-tab">${cols.map(c=>c.areas?`<div class="sy-c sy-d" data-d="${c.i}">${mode!=='l1'?`<p class="sy-dh" aria-hidden="true"><span class="sy-l">${L[c.i]}</span><b>${c.n}</b></p>`:''}${head(c)}${mode==='ex'?`<p class="sy-ap">${c.ap}</p>`:''}<ul>${c.areas.map(area).join('')}</ul></div>`:`<div class="sy-c sy-x" data-k="${c.k}">${conn(c)}${mode==='ex'?`<p class="sy-ap">${c.ap}</p>`:''}</div>`).join('')}</div>`;
-  const svg=root.querySelector('.sy-svg'),tab=root.querySelector('.sy-tab'),base=svg.querySelector('.sy-base'),hl=svg.querySelector('.sy-hl'),clip=svg.querySelector('.sy-clip'),cEls=[...tab.children];
+  const svg=root.querySelector('.sy-svg'),tab=root.querySelector('.sy-tab'),base=svg.querySelector('.sy-base'),links=svg.querySelector('.sy-links'),hl=svg.querySelector('.sy-hl'),clip=svg.querySelector('.sy-clip'),cEls=[...tab.children];
   const M=mode==='ft'?8:mode==='ex'?13:15,N=M*2,P1=[],P2=[];
   for(let i=0;i<N;i++){const a=document.createElementNS(NS,'path'),b=document.createElementNS(NS,'path');[a,b].forEach(p=>{p.setAttribute('pathLength','1');p.style.setProperty('--i',i)});a.setAttribute('class','sy-ln');b.setAttribute('class','sy-lh');base.appendChild(a);hl.appendChild(b);P1.push(a);P2.push(b)}
   let W=0,H=0,rng=[],pts=[],T=0,here=null,pick=null;
@@ -32,23 +32,46 @@ function build(root,mode){
     else{const c=rng.map(r=>(r[0]+r[1])/2),V=mode==='ft'?[.16,.78,.03,.6,.3,.74,.03,.88,.14]:mode==='ex'?[.14,.96,.03,.72,.32,.9,.03,1,.13]:[.2,1,.03,.95,.4,.95,.03,1,.2];
       pts=[[0,V[0]],[c[0],V[1]],[c[1],V[2]],[c[2],V[3]],[(rng[2][1]+rng[3][0])/2,V[4]],[c[3],V[5]],[c[4],V[6]],[c[5],V[7]],[W,V[8]]];
       root.style.setProperty('--neckx',((rng[2][1]+rng[3][0])/2)+'px')}
-    draw(T);if(here)zone(here)};
+    draw(T);if(mode==='ex')drawLinks(f,sc);if(here)zone(here)};
   const wt=[0,0,0,0,0,0],tw=[0,0,0,0,0,0];
   const env=x=>{let i=0;while(i<pts.length-2&&x>pts[i+1][0])i++;const a=pts[i],b=pts[i+1],t=Math.min(1,Math.max(0,(x-a[0])/((b[0]-a[0])||1))),s=(1-Math.cos(t*Math.PI))/2;let e=a[1]+(b[1]-a[1])*s,m=1,ad=0;
     for(let k=0;k<6;k++){if(wt[k]<.002)continue;const c=(rng[k][0]+rng[k][1])/2,sg=(rng[k][1]-rng[k][0])*.6,g=Math.exp(-((x-c)/sg)*((x-c)/sg));if(k===1||k===4)ad+=.09*wt[k]*g;else m+=.13*wt[k]*g}
     return e*m+ad};
   function draw(t){if(!W||!pts.length)return;
     if(mode==='ex'){
-      const C=P1.length,ST=180,cx=W/2,cy=H*.5;
-      for(let j=0;j<C;j++){const f=(j-(C-1)/2)/((C-1)/2);let d='';
-        for(let k=0;k<=ST;k++){const q=k/ST*Math.PI*2,ang=q+f*(.25*Math.sin(q*2-.3)+.1*Math.sin(q*5+.6)),fan=f*(W*.06+W*.075*Math.sin(q*3-.7)),rx=W*.38*(1+.14*Math.sin(q*3+.3))+fan,ry=H*.3*(1+.16*Math.cos(q*4-.5))+f*H*.065*Math.cos(q*3+.5),x=cx+rx*Math.cos(ang)+f*W*.035*Math.sin(q*2),y=cy+ry*Math.sin(ang)+f*H*.045*Math.sin(q*3+.8);d+=(k?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}
-        d+='Z';P1[j].setAttribute('d',d);P2[j].setAttribute('d',d)}return}
+      /* A tall, woven ribbon rather than a scaled horizontal loop.  Its width
+         repeatedly opens and pinches, while its centre line drifts independently;
+         this creates the fan, crossing and depth of the supplied line reference. */
+      const C=P1.length,ST=220;
+      for(let j=0;j<C;j++){const f=(j-(C-1)/2)/((C-1)/2),edge=Math.sign(f)*Math.pow(Math.abs(f),1.14);let d='';
+        for(let k=0;k<=ST;k++){const u=k/ST,y=-18+u*(H+36),q=u*Math.PI*2,
+          centre=W*.5+W*(.028*Math.sin(q*1.12-.45)+.018*Math.sin(q*3.25+.8)),
+          breath=.032+.082*(.5+.5*Math.sin(q*2.15-.72))+.038*(.5+.5*Math.cos(q*4.4+.2)),
+          pinch=.24+.76*Math.abs(Math.sin(q*1.58+.42)),
+          weave=Math.sin(q*3.05-.5)*(.52+.48*Math.cos(q*.74)),
+          fan=W*edge*breath*pinch,
+          fold=W*f*(.034*Math.sin(q*2.55+f*.9)+.02*Math.sin(q*6.1-f)),
+          cross=W*edge*.044*weave,
+          x=centre+fan+fold+cross;
+          d+=(k?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}
+        P1[j].setAttribute('d',d);P2[j].setAttribute('d',d)}return}
     const step=W>900?7:6,amp=H*.5,cy=H/2,xs=[];for(let x=0;x<W+step;x+=step)xs.push(Math.min(x,W));
     const E=xs.map(env),WB=xs.map(x=>H*.05*Math.sin(x/W*Math.PI*3.1+1.3));
     for(let j=0;j<M;j++){const f=j/(M-1),r=(mode==='ft'?.62:.46)+(mode==='ft'?.38:.54)*Math.pow(f,1.15);let dt='',db='';
       for(let k=0;k<xs.length;k++){const x=xs[k],u=x/W,dr=(f-.5)*E[k]*H*.07*Math.sin(u*17+j*.3),sk=1+.15*Math.sin(u*9+1.1),sb=1-.12*Math.sin(u*11+.4),sw=1+.07*Math.sin(u*47+j*.55),y0=cy+WB[k]*E[k];
         dt+=(k?'L':'M')+x.toFixed(1)+' '+(y0-amp*E[k]*r*sk*sw+dr).toFixed(1);db+=(k?'L':'M')+x.toFixed(1)+' '+(y0+amp*E[k]*r*sb*sw+dr).toFixed(1)}
       P1[j].setAttribute('d',dt);P2[j].setAttribute('d',dt);P1[M+j].setAttribute('d',db);P2[M+j].setAttribute('d',db)}}
+  function drawLinks(frame,scale){
+    if(mode!=='ex')return;links.replaceChildren();
+    const mid=W/2;
+    cEls.forEach((card,i)=>{const b=card.getBoundingClientRect(),left=i<3,
+      x1=left?(b.right-frame.left)/scale:(b.left-frame.left)/scale,
+      y=(b.top+b.height*.5-frame.top)/scale,
+      x2=mid+(left?-1:1)*W*(.082+.012*Math.sin(i*1.7)),
+      bend=x1+(x2-x1)*.58,p=document.createElementNS(NS,'path');
+      p.setAttribute('class','sy-link');p.setAttribute('d',`M${x1.toFixed(1)} ${y.toFixed(1)} C${bend.toFixed(1)} ${y.toFixed(1)},${(x2+(left?18:-18)).toFixed(1)} ${y.toFixed(1)},${x2.toFixed(1)} ${y.toFixed(1)}`);links.appendChild(p)
+    })
+  }
   /* hover and focus: a dimension brings forward itself and its connector, a connector both of its dimensions */
   const zone=ix=>{if(!rng.length)return;if(mode==='ex'){const left=ix.some(i=>i<3),right=ix.some(i=>i>2);clip.setAttribute('x',left&&!right?0:right&&!left?W*.45:0);clip.setAttribute('width',left&&right?W:W*.55);return}const l=Math.min(...ix.map(i=>rng[i][0])),r=Math.max(...ix.map(i=>rng[i][1]));clip.setAttribute('x',l);clip.setAttribute('width',r-l)};
   const show=ix=>{for(let k=0;k<6;k++)tw[k]=ix&&ix.includes(k)?1:0;root.classList.toggle('f',!!ix);cEls.forEach((c,i)=>c.classList.toggle('on',!!ix&&ix.includes(i)));if(ix)zone(ix)};
