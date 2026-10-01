@@ -23,7 +23,7 @@ function build(root,mode){
   const svg=root.querySelector('.sy-svg'),tab=root.querySelector('.sy-tab'),base=svg.querySelector('.sy-base'),hl=svg.querySelector('.sy-hl'),clip=svg.querySelector('.sy-clip'),cEls=[...tab.children];
   const M=mode==='ft'?8:mode==='ex'?13:15,N=M*2,P1=[],P2=[];
   for(let i=0;i<N;i++){const a=document.createElementNS(NS,'path'),b=document.createElementNS(NS,'path');[a,b].forEach(p=>{p.setAttribute('pathLength','1');p.style.setProperty('--i',i)});a.setAttribute('class','sy-ln');b.setAttribute('class','sy-lh');base.appendChild(a);hl.appendChild(b);P1.push(a);P2.push(b)}
-  let W=0,H=0,rng=[],pts=[],T=0,here=null;
+  let W=0,H=0,rng=[],pts=[],T=0,here=null,pick=null;
   const mobile=()=>innerWidth<=760;
   const layout=()=>{W=svg.clientWidth;H=svg.clientHeight;if(!W||!H)return;svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
     const f=svg.getBoundingClientRect(),sc=f.width/W||1;
@@ -52,7 +52,7 @@ function build(root,mode){
   /* hover and focus: a dimension brings forward itself and its connector, a connector both of its dimensions */
   const zone=ix=>{if(!rng.length)return;if(mode==='ex'){const left=ix.some(i=>i<3),right=ix.some(i=>i>2);clip.setAttribute('x',left&&!right?0:right&&!left?W*.45:0);clip.setAttribute('width',left&&right?W:W*.55);return}const l=Math.min(...ix.map(i=>rng[i][0])),r=Math.max(...ix.map(i=>rng[i][1]));clip.setAttribute('x',l);clip.setAttribute('width',r-l)};
   const show=ix=>{for(let k=0;k<6;k++)tw[k]=ix&&ix.includes(k)?1:0;root.classList.toggle('f',!!ix);cEls.forEach((c,i)=>c.classList.toggle('on',!!ix&&ix.includes(i)));if(ix)zone(ix)};
-  const rest=()=>{if(here){root.classList.add('hold');zone(here)}else root.classList.remove('hold')};
+  const rest=()=>{const active=here||pick;if(active){root.classList.add('hold');zone(active)}else root.classList.remove('hold')};
   const grp=i=>({0:[0,1],1:[0,1,2],2:[1,2],3:[3,4],4:[3,4,5],5:[4,5]}[i]);
   let tm=[];const stopSweep=()=>{tm.forEach(clearTimeout);tm=[]};
   cEls.forEach((c,i)=>{['mouseenter','focusin'].forEach(e=>c.addEventListener(e,()=>{stopSweep();show(grp(i))}));['mouseleave','focusout'].forEach(e=>c.addEventListener(e,()=>{show(null);rest()}))});
@@ -66,7 +66,7 @@ function build(root,mode){
   new ResizeObserver(layout).observe(root);addEventListener('load',layout);
   /* still unless a part is hovered: the swell moves, then everything rests */
   let last=0;const tick=ts=>{requestAnimationFrame(tick);if(RMq.matches||!go||ts-last<24)return;let mv=false;for(let k=0;k<6;k++){const d=tw[k]-wt[k];if(Math.abs(d)>.004){wt[k]+=d*.2;mv=true}else if(wt[k]!==tw[k]){wt[k]=tw[k];mv=true}}if(!mv)return;last=ts;draw(T)};requestAnimationFrame(tick);
-  root._sy={cols:cEls,setHere:ix=>{here=ix;rest()},layout};
+  root._sy={cols:cEls,setHere:ix=>{here=ix;rest()},setPick:ix=>{pick=ix;rest()},layout};
   layout();upd();
   if(!host&&!ov)root.classList.add('go','done');
 }
@@ -79,15 +79,15 @@ function compose(root){
      the line field; semantic relationships are expressed only by interaction. */
   const {dims,con}=model(),dyn=root.querySelector('.cm-dyn');
   const targets=[
-    {e:0,code:'A',name:dims[0].n,attr:`data-ddim="${dims[0].i}"`,x:48,y:164,w:330},
-    {e:1,code:'A + B',name:con[0].n,attr:`data-dreal="${con[0].r}"`,x:48,y:410,w:330},
-    {e:2,code:'B',name:dims[1].n,attr:`data-ddim="${dims[1].i}"`,x:48,y:656,w:330},
-    {e:3,code:'C',name:dims[2].n,attr:`data-ddim="${dims[2].i}"`,x:1062,y:164,w:330},
-    {e:4,code:'C + D',name:con[1].n,attr:`data-dreal="${con[1].r}"`,x:1062,y:410,w:330},
-    {e:5,code:'D',name:dims[3].n,attr:`data-ddim="${dims[3].i}"`,x:1062,y:656,w:330}
+    {e:0,code:'A',name:dims[0].n,kind:'dim',i:dims[0].i,x:48,y:164,w:330},
+    {e:1,code:'A + B',name:con[0].n,kind:'real',i:con[0].r,x:48,y:410,w:330},
+    {e:2,code:'B',name:dims[1].n,kind:'dim',i:dims[1].i,x:48,y:656,w:330},
+    {e:3,code:'C',name:dims[2].n,kind:'dim',i:dims[2].i,x:1062,y:164,w:330},
+    {e:4,code:'C + D',name:con[1].n,kind:'real',i:con[1].r,x:1062,y:410,w:330},
+    {e:5,code:'D',name:dims[3].n,kind:'dim',i:dims[3].i,x:1062,y:656,w:330}
   ];
   dyn.innerHTML=`<svg class="cm-svg" viewBox="0 0 1440 900" aria-hidden="true" focusable="false"><defs><clipPath id="cmf"><rect class="cm-front" x="0" y="0" width="0" height="900"/></clipPath><clipPath id="cmz"><rect class="cm-zone" x="0" y="0" width="0" height="0"/></clipPath></defs><g clip-path="url(#cmf)"><g class="cm-base"></g><g class="cm-hl" clip-path="url(#cmz)"></g></g></svg>`+
-    targets.map(t=>`<button type="button" class="cm-a cm-target" data-e="${t.e}" ${t.attr} data-act aria-haspopup="dialog" style="left:${t.x}px;top:${t.y}px;width:${t.w}px"><span class="cm-code">${t.code}</span><span class="n">${t.name}</span><span class="cm-pl" aria-hidden="true">+</span></button>`).join('');
+    targets.map(t=>`<button type="button" class="cm-a cm-target" data-e="${t.e}" data-open="approach" data-system-kind="${t.kind}" data-system-index="${t.i}" data-act aria-haspopup="dialog" style="left:${t.x}px;top:${t.y}px;width:${t.w}px"><span class="cm-code">${t.code}</span><span class="n">${t.name}</span><span class="cm-pl" aria-hidden="true">+</span></button>`).join('');
   const svg=dyn.querySelector('.cm-svg'),base=svg.querySelector('.cm-base'),hl=svg.querySelector('.cm-hl'),front=svg.querySelector('.cm-front'),zone=svg.querySelector('.cm-zone');
   const paths=[],hi=[],COUNT=42,STEPS=240;
   for(let j=0;j<COUNT;j++){
@@ -128,6 +128,19 @@ function footer(f){
   <nav class="df-nav" aria-label="Layer 2"><button type="button" data-open="index" data-act aria-haspopup="dialog">Index</button>${dims.map(d=>`<button type="button" data-ddim="${d.i}" data-act aria-haspopup="dialog">${d.n}</button>`).join('')}<button type="button" data-go="7" data-act>Contact</button></nav>`;
   build(f.querySelector('.df-sy'),'ft');
 }
+/* A Layer 1 plate opens Explore with a temporary visual selection. This is not
+   a location marker: only a page that was actually opened receives aria-current. */
+function preselect(kind,i){
+  const root=document.querySelector('#xMap');if(!root||!root._sy)return;
+  root.querySelectorAll('.sy-c.picked').forEach(n=>n.classList.remove('picked'));
+  const btn=kind==='dim'?root.querySelector(`.sy-d[data-d="${i}"] .sy-h`):root.querySelector(`[data-dreal="${i}"]`);
+  const col=btn&&btn.closest('.sy-c');if(!col){root._sy.setPick(null);return}
+  col.classList.add('picked');const ci=root._sy.cols.indexOf(col),groups={0:[0,1],1:[0,1,2],2:[1,2],3:[3,4],4:[3,4,5],5:[4,5]};root._sy.setPick(groups[ci]||[ci]);
+  const reveal=()=>{const r=col.getBoundingClientRect();if(r.top<82||r.bottom>innerHeight-24)col.scrollIntoView({block:'center',behavior:RMq.matches?'auto':'smooth'})};
+  requestAnimationFrame(reveal);setTimeout(reveal,650)
+}
+function clearPreselect(){const root=document.querySelector('#xMap');if(!root||!root._sy)return;root.querySelectorAll('.sy-c.picked').forEach(n=>n.classList.remove('picked'));root._sy.setPick(null)}
+document.addEventListener('click',e=>{const open=e.target.closest&&e.target.closest('[data-open="approach"]');if(!open)return;if(open.dataset.systemKind)preselect(open.dataset.systemKind,+open.dataset.systemIndex);else clearPreselect()});
 /* the page the visitor is on: its column carries "You are here" */
 function mark(type,i){
   lastMark=[type,i];

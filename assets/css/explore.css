@@ -422,3 +422,6 @@ body.system-moment #railM{opacity:0;visibility:hidden}
 /* The current row stays white so the dedicated black status pill remains the only location signal. */
 .sy-ex li button[aria-current],.sy-ft li button[aria-current]{background:#fff!important;color:#000!important}
 .sy-ex li button[aria-current] .ad,.sy-ft li button[aria-current] .ad{border-color:#000!important;color:#000!important}
+/* Layer 1 preselection: visually strong, deliberately distinct from YOU ARE HERE. */
+.sy-ex .sy-c.picked{outline:3px solid #000!important;outline-offset:4px}
+.sy-ex .sy-c.picked :is(.sy-h,.sy-k) .plus{transform:rotate(90deg)}

@@ -105,6 +105,13 @@ Run browser QA on the deployed candidate at 970×510, 1280×720, 1440×900 and r
 - Explore is rebuilt as a wide three-column desktop system with a central responsive contour field and six real navigation cards; mobile stacks the same six groups vertically. All approved descriptions remain model-driven and left aligned.
 - The current target receives exactly one semantic `aria-current` and a separate “YOU ARE HERE” status pill beneath its name. The same marker generator continues to serve Explore and the Deep Dive footer.
 
+## Layer 1 Explore preselection amendment
+
+- Baseline: branch `work`, commit `b5fa57ec05380ae704302450c4fd75330f9acbe3`.
+- All six Layer 1 plates now use the existing `data-open="approach"` layer action. Their dimension/connector identity is carried separately as a temporary Explore selection, so the Deep Dive router does not run on the same click.
+- Explore outlines the selected canonical card, highlights its related contour zone and scrolls it into view when necessary. This selection never creates `aria-current` or a “YOU ARE HERE” pill; those remain reserved for a Deep Dive that was actually opened.
+- The 14 Explore destinations retain their existing direct Deep Dive routing. Layer 1 design, copy and footer are unchanged.
+
 ## V3 remainder — unchanged
 
 The application release does not replace the V3 remainder: open line design for Explore/System footer; further visual and narrative refinement; all 133 frames against seven contract fields; remaining frame findings and full V3 QA; shared frame-by-frame review and surgical corrections. ADD-01–04, workshop-result drafts and other copy awaiting approval were not silently implemented.
