@@ -181,7 +181,7 @@ a.crow:hover .v,a.crow:focus-visible .v{text-decoration:underline;text-underline
 
 /* legal pages */
 .legal{min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:0 var(--m)}
-.subbar{position:sticky;top:72px;z-index:50;display:flex;justify-content:space-between;align-items:center;min-height:58px;margin-top:72px;padding:7px 0;background:#fff;font-size:13px}
+.subbar{position:sticky;top:60px;z-index:50;display:flex;justify-content:space-between;align-items:center;min-height:48px;margin-top:60px;padding:2px 0;background:#fff;font-size:13px}
 .legal .kick{margin:12vh 0 8vh}
 .legal .kick .t{font-size:clamp(40px,5vw,76px)}
 .lbody{max-width:780px}
@@ -205,7 +205,7 @@ a.crow:hover .v,a.crow:focus-visible .v{text-decoration:underline;text-underline
   #index .inner{grid-template-columns:1fr}#index .ixm{height:auto;aspect-ratio:500/720;max-width:340px;justify-self:start;margin-top:4vh}.ix{grid-template-columns:52px 1fr}.ix .lg{display:none}
   .ov .bar{padding:22px var(--m)}
   .ov .ovsub{padding-top:17px}
-  .subbar{top:68px;min-height:64px;margin-top:68px;padding:10px 0}
+  .subbar{top:58px;min-height:54px;margin-top:58px;padding:5px 0}
   #band{height:82px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
@@ -233,18 +233,19 @@ html:not(.kbd) .ov [data-close]:focus-visible{outline:none!important;box-shadow:
 #rail button{font-size:11px;font-weight:600;opacity:.82}
 
 /* Every overlay uses the same frozen shell: global row, then local Back/location. */
-.ov{--layer-bar:72px;scroll-padding-top:calc(var(--layer-bar) + 70px)}
+.ov{--layer-bar:60px;scroll-padding-top:calc(var(--layer-bar) + 56px)}
 .ov>.bar{height:var(--layer-bar);min-height:var(--layer-bar);padding-block:0}
-.ov>.ovsub{position:sticky;top:var(--layer-bar);z-index:4;min-height:58px;padding:7px var(--m);background:#fff;color:#000;border-bottom:1px solid rgba(0,0,0,.18)}
+.ov>.ovsub{position:sticky;top:var(--layer-bar);z-index:4;min-height:48px;padding:2px var(--m);background:#fff;color:#000;border-bottom:1px solid rgba(0,0,0,.18)}
 .ov>.bar .ovr{display:flex;align-items:center;justify-content:flex-end;gap:clamp(18px,2.2vw,32px)}
 .ov>.bar .ovr button{min-height:44px;text-align:center}
 #approach>.ovsub{background:#000;color:#fff;border-bottom-color:rgba(255,255,255,.28)}
-@media(max-width:760px){.ov{--layer-bar:68px}.ov>.ovsub{align-items:center;min-height:64px;padding-block:10px}.ov>.bar .ovr{gap:18px;font-size:12px;line-height:1.2}}
-.ov>.bar,.ov>.ovsub{transition:transform .42s var(--ease),opacity .32s var(--ease)}
+@media(max-width:760px){.ov{--layer-bar:58px}.ov>.ovsub{align-items:center;min-height:54px;padding-block:5px}.ov>.bar .ovr{gap:18px;font-size:12px;line-height:1.2}}
+.ov>.bar,.ov>.ovsub,.subbar{transition:transform .26s var(--ease),opacity .2s var(--ease)}
 .ov.shell-folded>.bar{transform:translateY(-100%);opacity:0;pointer-events:none}
 .ov.shell-folded>.ovsub{transform:translateY(calc(-100% - var(--layer-bar)));opacity:0;pointer-events:none}
+.page-shell-folded .subbar{transform:translateY(-100%);opacity:0;pointer-events:none}
 .ov.shell-folded::before{content:"";position:fixed;z-index:6;left:0;right:0;top:0;height:24px;pointer-events:auto}
-@media(prefers-reduced-motion:reduce){.ov>.bar,.ov>.ovsub{transition:none}}
+@media(prefers-reduced-motion:reduce){.ov>.bar,.ov>.ovsub,.subbar{transition:none}}
 
 /* Compact chapter rail: stable number measure and tightly grouped rows. */
 #rail{gap:0}

@@ -113,14 +113,20 @@ totop.addEventListener('click',()=>{
 
 /* ---------- layers: the black cut opens from the click position across the screen ---------- */
 let openOv=null,lastX=innerWidth/2,returnFocus=null;
+const SHELL_DELAY=650;
 let shellT=0,shellY=0,shellHeld=false;
-const shellOpen=()=>{if(!openOv)return;openOv.classList.remove('shell-folded');clearTimeout(shellT);if(!shellHeld)shellT=setTimeout(()=>{if(openOv&&!shellHeld&&(!html.classList.contains('kbd')||!openOv.matches(':focus-within')))openOv.classList.add('shell-folded')},2000)};
+const shellOpen=()=>{if(!openOv)return;openOv.classList.remove('shell-folded');clearTimeout(shellT);if(!shellHeld)shellT=setTimeout(()=>{if(openOv&&!shellHeld&&(!html.classList.contains('kbd')||!openOv.matches(':focus-within')))openOv.classList.add('shell-folded')},SHELL_DELAY)};
 const shellReset=()=>{clearTimeout(shellT);if(openOv)openOv.classList.remove('shell-folded')};
 document.addEventListener('scroll',e=>{if(!openOv||e.target!==openOv)return;const y=openOv.scrollTop,up=y<shellY-3;shellY=y;shellOpen();if(up)shellOpen()},{passive:true,capture:true});
 addEventListener('pointermove',e=>{if(openOv&&e.clientY<90)shellOpen()},{passive:true});
 addEventListener('pointerdown',e=>{if(openOv&&e.clientY<110)shellOpen()},true);
 addEventListener('keydown',e=>{if(openOv&&(e.key==='Tab'||e.key.startsWith('Arrow')))shellOpen()},true);
 $$('.ov').forEach(ov=>{const shell=[...ov.querySelectorAll(':scope>.bar,:scope>.ovsub')];shell.forEach(el=>{el.addEventListener('mouseenter',()=>{shellHeld=true;shellOpen()});el.addEventListener('mouseleave',()=>{shellHeld=false;shellOpen()});el.addEventListener('focusin',()=>{shellHeld=html.classList.contains('kbd');shellOpen()});el.addEventListener('focusout',()=>{shellHeld=false;shellOpen()})})});
+/* Standalone pages use the same local context row, so it follows the same
+   quick reveal-then-fold rhythm as the overlay shell. */
+const pageSub=$('.subbar');let pageShellT=0,pageShellHeld=false;
+const pageShellOpen=()=>{if(!pageSub)return;d.body.classList.remove('page-shell-folded');clearTimeout(pageShellT);if(scrollY>8&&!pageShellHeld)pageShellT=setTimeout(()=>{if(!pageShellHeld&&(!html.classList.contains('kbd')||!pageSub.matches(':focus-within')))d.body.classList.add('page-shell-folded')},SHELL_DELAY)};
+if(pageSub){addEventListener('scroll',pageShellOpen,{passive:true});addEventListener('pointermove',e=>{if(e.clientY<90)pageShellOpen()},{passive:true});pageSub.addEventListener('mouseenter',()=>{pageShellHeld=true;pageShellOpen()});pageSub.addEventListener('mouseleave',()=>{pageShellHeld=false;pageShellOpen()});pageSub.addEventListener('focusin',()=>{pageShellHeld=html.classList.contains('kbd');pageShellOpen()});pageSub.addEventListener('focusout',()=>{pageShellHeld=false;pageShellOpen()})}
 /* layers remember where they came from: Back and Escape go one step back (Approach to Index, Deep Dive to Approach), the first layer closes to the page */
 let stack=[],fromPage=false;
 /* between pages the visitor keeps a trail: where they were (page, scroll position, open layers).
