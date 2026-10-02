@@ -114,12 +114,13 @@ totop.addEventListener('click',()=>{
 /* ---------- layers: the black cut opens from the click position across the screen ---------- */
 let openOv=null,lastX=innerWidth/2,returnFocus=null;
 let shellT=0,shellY=0,shellHeld=false;
-const shellOpen=()=>{if(!openOv)return;openOv.classList.remove('shell-folded');clearTimeout(shellT);if(!shellHeld)shellT=setTimeout(()=>{if(openOv&&!shellHeld&&!openOv.querySelector(':focus-within'))openOv.classList.add('shell-folded')},2000)};
+const shellOpen=()=>{if(!openOv)return;openOv.classList.remove('shell-folded');clearTimeout(shellT);if(!shellHeld)shellT=setTimeout(()=>{if(openOv&&!shellHeld&&(!html.classList.contains('kbd')||!openOv.matches(':focus-within')))openOv.classList.add('shell-folded')},2000)};
 const shellReset=()=>{clearTimeout(shellT);if(openOv)openOv.classList.remove('shell-folded')};
 document.addEventListener('scroll',e=>{if(!openOv||e.target!==openOv)return;const y=openOv.scrollTop,up=y<shellY-3;shellY=y;shellOpen();if(up)shellOpen()},{passive:true,capture:true});
 addEventListener('pointermove',e=>{if(openOv&&e.clientY<90)shellOpen()},{passive:true});
+addEventListener('pointerdown',e=>{if(openOv&&e.clientY<110)shellOpen()},true);
 addEventListener('keydown',e=>{if(openOv&&(e.key==='Tab'||e.key.startsWith('Arrow')))shellOpen()},true);
-$$('.ov').forEach(ov=>{const shell=[...ov.querySelectorAll(':scope>.bar,:scope>.ovsub')];shell.forEach(el=>{el.addEventListener('mouseenter',()=>{shellHeld=true;shellOpen()});el.addEventListener('mouseleave',()=>{shellHeld=false;shellOpen()});el.addEventListener('focusin',()=>{shellHeld=true;shellOpen()});el.addEventListener('focusout',()=>{shellHeld=false;shellOpen()})})});
+$$('.ov').forEach(ov=>{const shell=[...ov.querySelectorAll(':scope>.bar,:scope>.ovsub')];shell.forEach(el=>{el.addEventListener('mouseenter',()=>{shellHeld=true;shellOpen()});el.addEventListener('mouseleave',()=>{shellHeld=false;shellOpen()});el.addEventListener('focusin',()=>{shellHeld=html.classList.contains('kbd');shellOpen()});el.addEventListener('focusout',()=>{shellHeld=false;shellOpen()})})});
 /* layers remember where they came from: Back and Escape go one step back (Approach to Index, Deep Dive to Approach), the first layer closes to the page */
 let stack=[],fromPage=false;
 /* between pages the visitor keeps a trail: where they were (page, scroll position, open layers).

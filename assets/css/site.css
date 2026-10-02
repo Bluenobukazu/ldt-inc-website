@@ -237,6 +237,7 @@ html:not(.kbd) .ov [data-close]:focus-visible{outline:none!important;box-shadow:
 .ov>.bar,.ov>.ovsub{transition:transform .42s var(--ease),opacity .32s var(--ease)}
 .ov.shell-folded>.bar{transform:translateY(-100%);opacity:0;pointer-events:none}
 .ov.shell-folded>.ovsub{transform:translateY(calc(-100% - var(--layer-bar)));opacity:0;pointer-events:none}
+.ov.shell-folded::before{content:"";position:fixed;z-index:6;left:0;right:0;top:0;height:24px;pointer-events:auto}
 @media(prefers-reduced-motion:reduce){.ov>.bar,.ov>.ovsub{transition:none}}
 
 /* Compact chapter rail: stable number measure, quiet labels, unchanged targets. */

@@ -169,19 +169,21 @@ function preselect(kind,i){
 }
 function clearPreselect(){const root=document.querySelector('#xMap');if(!root||!root._sy)return;root.querySelectorAll('.sy-c.picked').forEach(n=>n.classList.remove('picked'));root._sy.setPick(null)}
 document.addEventListener('click',e=>{const open=e.target.closest&&e.target.closest('[data-open="approach"]');if(!open)return;if(open.dataset.systemKind)preselect(open.dataset.systemKind,+open.dataset.systemIndex);else clearPreselect()});
-/* the page the visitor is on: its column carries "You are here" */
+/* The page the visitor is on: only its existing code pill carries the visual
+   and semantic location state; no extra status copy or layout row is added. */
 function mark(type,i){
   lastMark=[type,i];
   document.querySelectorAll('.sy .here,.sy .yh').forEach(e=>{e.classList.remove('here','here-dim');if(e.classList.contains('yh'))e.remove()});
   document.querySelectorAll('.sy [aria-current]').forEach(e=>e.removeAttribute('aria-current'));
+  document.querySelectorAll('.sy .current-code').forEach(e=>e.classList.remove('current-code'));
   document.querySelectorAll('#xMap,#deepFoot .df-sy').forEach(root=>{
     if(!root._sy)return;let col,btn;
     if(type==='dim'){col=root.querySelector(`.sy-d[data-d="${i}"]`);btn=col&&col.querySelector('.sy-h')}
     else{btn=root.querySelector(`[data-dreal="${i}"]`);col=btn&&btn.closest('.sy-c')}
     if(!col||!btn){root._sy.setHere(null);return}
-    btn.setAttribute('aria-current','page');root._sy.setHere([root._sy.cols.indexOf(col)]);
+    btn.setAttribute('aria-current','page');const code=btn.querySelector('.sy-l,.ab,.ad');if(code)code.classList.add('current-code');root._sy.setHere([root._sy.cols.indexOf(col)]);
   });
 }
-function clear(root){lastMark=null;root.querySelectorAll('.here,.yh').forEach(e=>{e.classList.remove('here','here-dim');if(e.classList.contains('yh'))e.remove()});root.querySelectorAll('[aria-current]').forEach(e=>e.removeAttribute('aria-current'));const sy=root.classList.contains('sy')?root:root.querySelector('.sy');if(sy&&sy._sy)sy._sy.setHere(null)}
+function clear(root){lastMark=null;root.querySelectorAll('.here,.yh').forEach(e=>{e.classList.remove('here','here-dim');if(e.classList.contains('yh'))e.remove()});root.querySelectorAll('[aria-current]').forEach(e=>e.removeAttribute('aria-current'));root.querySelectorAll('.current-code').forEach(e=>e.classList.remove('current-code'));const sy=root.classList.contains('sy')?root:root.querySelector('.sy');if(sy&&sy._sy)sy._sy.setHere(null)}
 window.LDT_XI={clear,compose:el=>{if(D)compose(el)},build(m,data){D=data;explore(m)},landing:(el,st)=>{if(D)landing(el,st)},footer:el=>{if(D)footer(el)},mark};
 })();

@@ -512,6 +512,7 @@ body.system-moment #railM{opacity:0;visibility:hidden}
 .sy-ft li button .ad{display:inline-flex!important;align-items:center;justify-content:center;min-width:50px;padding:3px 9px!important;border:1px solid #000!important;border-radius:18px;background:#fff!important;color:#000!important;font:700 12px/1.2 var(--sans)!important;letter-spacing:.04em!important}
 .sy-ft li button span{font:500 clamp(11px,1vw,14px)/1.15 var(--sans)}.sy-ft li button i{display:block!important;color:#000;font:300 19px/1 var(--sans)}
 .sy-ft [aria-current="page"] :is(.sy-l,.ab,.ad),.sy-ex [aria-current="page"] :is(.sy-l,.ab,.ad){background:#0F766E!important;border-color:#0F766E!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
+.dfoot .sy-ft .sy-c .current-code,#approach .sy-ex .sy-c .current-code{background:#0F766E!important;border-color:#0F766E!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
 .sy-ft .sy-h:is(:hover,:focus-visible) .n,.sy-ft .sy-k:is(:hover,:focus-visible) .n,.sy-ft li button:is(:hover,:focus-visible)>span{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.16em}
 .sy-ft :is(.sy-h,.sy-k,li button):focus-visible{outline:2px solid #0F766E!important;outline-offset:3px!important;box-shadow:0 0 0 2px #fff!important}
 .sy-ft .sy-under{position:absolute;z-index:0;inset:12% -18px 4%;display:block;width:calc(100% + 36px);height:84%;margin:0;overflow:visible;pointer-events:none}.sy-ft .sy-under path{fill:none;stroke:#fff;stroke-width:.65;vector-effect:non-scaling-stroke}
