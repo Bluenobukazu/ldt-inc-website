@@ -184,6 +184,15 @@ Run browser QA on the deployed candidate at 970×510, 1280×720, 1440×900 and r
 - Context-free Explore still clears its own current marker. Returning from a Deep Dive reuses the exact shared state and updates it after every page change.
 - Deployed-preview click, responsive and visual QA remains required; no merge or production action is included.
 
+## Compact Deep-Dive navigation and folding shell
+
+- Baseline: branch `work`, commit `9ac13ed01597bef319ade23ff4c3ebefb41b153f`.
+- The closing System navigation is compacted into one desktop overview: six columns remain through 970px, card heights are content-led but aligned, and the line field now runs continuously behind the card gaps instead of occupying separate illustration bands. Mobile remains a natural one-column scroll.
+- Proposition, Expansion, Operations and Commercial Architecture remain white cards. Positioning and Delivery are black with white outlines. Codes, names, plus controls and the eight canonical subtopics retain their routes and hierarchy.
+- The exact current code pill remains the sole visible location signal in both this navigation and Explore (`#0F766E`, white type, semantic `aria-current="page"`).
+- Overlay global/local header rows fold upward after two seconds of rest without changing document flow. Scroll, upward movement, pointer movement near the top, hover and keyboard focus reopen them; Reduced Motion retains the same state logic without transition.
+- The accepted release footer follows immediately after the compact navigation. Deployed-preview interaction and visual QA remains required; no merge or production action is included.
+
 ## V3 remainder — unchanged
 
 The application release does not replace the V3 remainder: open line design for Explore/System footer; further visual and narrative refinement; all 133 frames against seven contract fields; remaining frame findings and full V3 QA; shared frame-by-frame review and surgical corrections. ADD-01–04, workshop-result drafts and other copy awaiting approval were not silently implemented.

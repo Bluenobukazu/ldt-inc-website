@@ -113,6 +113,13 @@ totop.addEventListener('click',()=>{
 
 /* ---------- layers: the black cut opens from the click position across the screen ---------- */
 let openOv=null,lastX=innerWidth/2,returnFocus=null;
+let shellT=0,shellY=0,shellHeld=false;
+const shellOpen=()=>{if(!openOv)return;openOv.classList.remove('shell-folded');clearTimeout(shellT);if(!shellHeld)shellT=setTimeout(()=>{if(openOv&&!shellHeld&&!openOv.querySelector(':focus-within'))openOv.classList.add('shell-folded')},2000)};
+const shellReset=()=>{clearTimeout(shellT);if(openOv)openOv.classList.remove('shell-folded')};
+document.addEventListener('scroll',e=>{if(!openOv||e.target!==openOv)return;const y=openOv.scrollTop,up=y<shellY-3;shellY=y;shellOpen();if(up)shellOpen()},{passive:true,capture:true});
+addEventListener('pointermove',e=>{if(openOv&&e.clientY<90)shellOpen()},{passive:true});
+addEventListener('keydown',e=>{if(openOv&&(e.key==='Tab'||e.key.startsWith('Arrow')))shellOpen()},true);
+$$('.ov').forEach(ov=>{const shell=[...ov.querySelectorAll(':scope>.bar,:scope>.ovsub')];shell.forEach(el=>{el.addEventListener('mouseenter',()=>{shellHeld=true;shellOpen()});el.addEventListener('mouseleave',()=>{shellHeld=false;shellOpen()});el.addEventListener('focusin',()=>{shellHeld=true;shellOpen()});el.addEventListener('focusout',()=>{shellHeld=false;shellOpen()})})});
 /* layers remember where they came from: Back and Escape go one step back (Approach to Index, Deep Dive to Approach), the first layer closes to the page */
 let stack=[],fromPage=false;
 /* between pages the visitor keeps a trail: where they were (page, scroll position, open layers).
@@ -135,7 +142,7 @@ function openLayer(id,fill,trigger,now,fresh){
   const ov=d.getElementById(id);if(!ov)return;
   if(openOv&&openOv!==ov){stack.push({ov:openOv,from:trigger||d.activeElement,scroll:openOv.scrollTop});closeLayer(true,true);if(fresh)stack=[]}else if(!openOv){returnFocus=trigger||d.activeElement;stack=[]}
   if(fill)fill();
-  gsap.killTweensOf(ov);openOv=ov;lenis&&lenis.stop();html.style.overflow='hidden';ov.scrollTop=0;setInert(true,ov);
+  gsap.killTweensOf(ov);openOv=ov;shellY=0;shellOpen();lenis&&lenis.stop();html.style.overflow='hidden';ov.scrollTop=0;setInert(true,ov);
   const focusIn=()=>{const f=$('[data-close]',ov);f&&f.focus({preventScroll:true})};
   d.dispatchEvent(new CustomEvent('ldt:open',{detail:id}));layersChanged();syncTop();
   if(RM||now){gsap.set(ov,{visibility:'visible',opacity:1});focusIn();return}
@@ -145,6 +152,7 @@ function openLayer(id,fill,trigger,now,fresh){
 }
 function closeLayer(instant,switching){
   if(!openOv)return;const ov=openOv;openOv=null;
+  shellReset();ov.classList.remove('shell-folded');
   if(instant||RM)gsap.set(ov,{visibility:'hidden'});else gsap.to(ov,{opacity:0,duration:.35,ease:'power2.in',onComplete:()=>gsap.set(ov,{visibility:'hidden',opacity:1})});
   if(switching)return;
   stack=[];fromPage=false;setInert(false);syncTop();html.style.overflow='';lenis&&lenis.start();
@@ -153,7 +161,7 @@ function closeLayer(instant,switching){
 }
 function back(){
   if(!openOv)return;const prev=stack.pop();if(!prev){if(fromPage&&pageBack())return;closeLayer();return}
-  const cur=openOv;openOv=prev.ov;
+  const cur=openOv;openOv=prev.ov;shellY=openOv.scrollTop;shellOpen();
   gsap.killTweensOf(prev.ov);gsap.set(prev.ov,{visibility:'visible',opacity:1});prev.ov.scrollTop=prev.scroll;setInert(true,prev.ov);
   if(RM)gsap.set(cur,{visibility:'hidden'});else gsap.to(cur,{opacity:0,duration:.35,ease:'power2.in',onComplete:()=>gsap.set(cur,{visibility:'hidden',opacity:1})});
   const f=prev.from&&prev.ov.contains(prev.from)?prev.from:$('[data-close]',prev.ov);f&&f.focus({preventScroll:true});syncTop();layersChanged();

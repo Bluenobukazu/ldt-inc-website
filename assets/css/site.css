@@ -234,6 +234,10 @@ html:not(.kbd) .ov [data-close]:focus-visible{outline:none!important;box-shadow:
 .ov>.bar .ovr button{min-height:44px;text-align:center}
 #approach>.ovsub{background:#000;color:#fff;border-bottom-color:rgba(255,255,255,.28)}
 @media(max-width:760px){.ov{--layer-bar:68px}.ov>.ovsub{align-items:center;min-height:64px;padding-block:10px}.ov>.bar .ovr{gap:18px;font-size:12px;line-height:1.2}}
+.ov>.bar,.ov>.ovsub{transition:transform .42s var(--ease),opacity .32s var(--ease)}
+.ov.shell-folded>.bar{transform:translateY(-100%);opacity:0;pointer-events:none}
+.ov.shell-folded>.ovsub{transform:translateY(calc(-100% - var(--layer-bar)));opacity:0;pointer-events:none}
+@media(prefers-reduced-motion:reduce){.ov>.bar,.ov>.ovsub{transition:none}}
 
 /* Compact chapter rail: stable number measure, quiet labels, unchanged targets. */
 #rail{gap:0}
