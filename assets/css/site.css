@@ -237,12 +237,13 @@ html:not(.kbd) .ov [data-close]:focus-visible{outline:none!important;box-shadow:
 
 /* Compact chapter rail: stable number measure, quiet labels, unchanged targets. */
 #rail{gap:0}
-#rail button{justify-content:flex-end;min-height:44px;gap:8px;color:#777;opacity:1;font:400 9px/1.1 var(--sans);letter-spacing:.09em}
+#rail button{justify-content:flex-end;min-height:34px;gap:8px;color:#777;opacity:1;font:400 9px/1.1 var(--sans);letter-spacing:.09em}
 #rail button span{display:grid;grid-template-columns:34px auto;align-items:center;column-gap:8px;white-space:nowrap}
 #rail button span b{display:inline-flex;align-items:center;justify-content:center;width:34px;height:22px;border-radius:999px;font:500 11px/1 "IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-variant-numeric:tabular-nums;letter-spacing:.02em}
 #rail button i{width:8px;opacity:.55}
 #rail button.on{color:#fff}#rail button.on span b{background:#fff;color:#000}#rail button.on i{width:18px;height:1px}
 #rail button:hover,#rail button:focus-visible{color:#fff}
+@media(pointer:coarse){#rail button{min-height:44px}}
 /* v3 M06: location label and codes never below 12px */
 .lbl,.dcur,.loc .dcur{font-size:max(12px,11px)}
 .dcur,.lbl{font-size:12.5px}

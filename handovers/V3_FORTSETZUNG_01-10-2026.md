@@ -167,6 +167,14 @@ Run browser QA on the deployed candidate at 970×510, 1280×720, 1440×900 and r
 - The accepted header order remains unchanged: Explore has Index only; Deep Dives have `Explore | Index`.
 - Deployed-preview visual QA remains required; no merge or production action is included.
 
+## Final rail and Explore-location correction
+
+- Baseline: branch `work`, commit `dc1f2d2614bf8886f148c493ca16fa0238066edb`.
+- The desktop Layer-1 rail now uses 34px visual rows with no extra gap (44px on coarse pointers). Scroll, hover and keyboard focus restore full visibility; after two seconds without interaction it returns to the existing lightly visible idle treatment. Landing and System exclusions remain unchanged.
+- Contextual black/white rail contrast continues to use the existing difference-mode shell: the active pill resolves black-on-white and white-on-black without moving its reserved number slot.
+- `YOU ARE HERE` is now rendered only in Explore. The shared marker clears stale state on context-free entry, marks exactly the last opened main or subtopic with semantic `aria-current="page"`, and uses a dark-blue in-flow status pill. The footer System navigation is not restyled in this pass.
+- Deployed-preview click and viewport QA remains required; no merge or production action is included.
+
 ## V3 remainder — unchanged
 
 The application release does not replace the V3 remainder: open line design for Explore/System footer; further visual and narrative refinement; all 133 frames against seven contract fields; remaining frame findings and full V3 QA; shared frame-by-frame review and surgical corrections. ADD-01–04, workshop-result drafts and other copy awaiting approval were not silently implemented.

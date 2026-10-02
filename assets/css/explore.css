@@ -411,8 +411,10 @@ body.system-moment #railM{opacity:0;visibility:hidden}
 .sy-ex li button span{font-size:15px}.sy-ex li button i{display:block!important;font:300 22px/1 var(--sans)}
 .sy-ex :is(.sy-h,.sy-k,li button):focus-visible{outline:2px solid #000!important;outline-offset:4px!important;box-shadow:0 0 0 2px #fff!important}
 .sy-ex .sy-x::before,.sy-ex .sy-x::after{display:none!important}
-.sy-ex .yh,.sy-ft .yh{position:static!important;display:inline-flex!important;align-items:center;width:max-content;min-height:0;margin:.55rem 0 0!important;padding:5px 9px!important;border-radius:14px;background:#151515!important;color:#fff!important;font:700 10px/1 var(--sans)!important;letter-spacing:.14em!important;text-transform:uppercase;white-space:nowrap}
-.sy-ex .yh::before,.sy-ft .yh::before{display:none!important}
+.sy-ex .yh{position:static!important;display:inline-flex!important;align-items:center;width:max-content;min-height:0;margin:.55rem 0 0!important;padding:5px 9px!important;border-radius:14px;background:#071b33!important;color:#fff!important;font:700 10px/1 var(--sans)!important;letter-spacing:.14em!important;text-transform:uppercase;white-space:nowrap}
+.sy-ft .yh{position:static!important;display:inline-flex!important;align-items:center;width:max-content;min-height:0;margin:.55rem 0 0!important;padding:5px 9px!important;border-radius:14px;background:#151515!important;color:#fff!important;font:700 10px/1 var(--sans)!important;letter-spacing:.14em!important;text-transform:uppercase;white-space:nowrap}
+.sy-ex .yh::before{display:none!important}
+.sy-ft .yh::before{display:none!important}
 .sy-ex li button .yh{grid-column:2/-1!important;grid-row:2!important;justify-self:start!important;margin:.2rem 0 0!important}
 .sy-ex li button:has(.yh){grid-template-rows:auto auto;row-gap:.15rem}
 .sy-ex .sy-k .yh{grid-column:2/-1!important;grid-row:2!important;justify-self:start!important}
@@ -459,7 +461,7 @@ body.system-moment #railM{opacity:0;visibility:hidden}
 .sy-ex ul{width:100%;margin:1rem 0 0!important;padding:.65rem 0 0!important;border-top:1px solid #000!important}
 .sy-ex li button{color:#000!important;background:#fff!important}
 .sy-ex li button .ad{background:#fff!important;color:#000!important;border:1px solid #000!important;border-radius:18px!important}
-.sy-ex .yh{background:#151515!important;color:#fff!important}
+.sy-ex .yh{background:#071b33!important;color:#fff!important}
 .sy-ex .sy-c.on{outline:1px solid #fff;outline-offset:5px}
 .sy-ex .sy-c.picked{outline-color:#fff!important}
 

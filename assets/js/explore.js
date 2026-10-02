@@ -172,19 +172,15 @@ function mark(type,i){
   lastMark=[type,i];
   document.querySelectorAll('.sy .here,.sy .yh').forEach(e=>{e.classList.remove('here','here-dim');if(e.classList.contains('yh'))e.remove()});
   document.querySelectorAll('.sy [aria-current]').forEach(e=>e.removeAttribute('aria-current'));
-  const dm=type==='dim'?[i]:D.REAL[i].d;
-  document.querySelectorAll('#deepFoot .df-nav [data-ddim]').forEach(n=>n.classList.toggle('cur',type==='dim'&&dm.includes(+n.dataset.ddim)));
-  document.querySelectorAll('.sy').forEach(root=>{
-    if(!root._sy)return;let col,btn;
-    if(type==='dim'){col=root.querySelector(`.sy-d[data-d="${i}"]`);btn=col&&col.querySelector('.sy-h')}
-    else{btn=root.querySelector(`[data-dreal="${i}"]`);col=btn&&btn.closest('.sy-c')}
-    if(!col){root._sy.setHere(null);return}
-    col.classList.add('here');btn.setAttribute('aria-current','page');
-    const y='<em class="yh">You are here</em>',n=btn.querySelector('.n');
-    if(type==='dim'){col.classList.add('here-dim');btn.insertAdjacentHTML('afterend',y)}
-    else if(n)n.insertAdjacentHTML('afterend',y);else{const ic=btn.querySelector('i');if(ic)ic.insertAdjacentHTML('beforebegin',y);else btn.insertAdjacentHTML('beforeend',y)}
-    root._sy.setHere([root._sy.cols.indexOf(col)]);
-  });
+  const root=document.querySelector('#xMap');if(!root||!root._sy)return;let col,btn;
+  if(type==='dim'){col=root.querySelector(`.sy-d[data-d="${i}"]`);btn=col&&col.querySelector('.sy-h')}
+  else{btn=root.querySelector(`[data-dreal="${i}"]`);col=btn&&btn.closest('.sy-c')}
+  if(!col||!btn){root._sy.setHere(null);return}
+  col.classList.add('here');btn.setAttribute('aria-current','page');
+  const y='<em class="yh">You are here</em>',n=btn.querySelector('.n');
+  if(type==='dim'){col.classList.add('here-dim');btn.insertAdjacentHTML('afterend',y)}
+  else if(n)n.insertAdjacentHTML('afterend',y);else btn.insertAdjacentHTML('beforeend',y);
+  root._sy.setHere([root._sy.cols.indexOf(col)]);
 }
 function clear(root){lastMark=null;root.querySelectorAll('.here,.yh').forEach(e=>{e.classList.remove('here','here-dim');if(e.classList.contains('yh'))e.remove()});root.querySelectorAll('[aria-current]').forEach(e=>e.removeAttribute('aria-current'));const sy=root.classList.contains('sy')?root:root.querySelector('.sy');if(sy&&sy._sy)sy._sy.setHere(null)}
 window.LDT_XI={clear,compose:el=>{if(D)compose(el)},build(m,data){D=data;explore(m)},landing:(el,st)=>{if(D)landing(el,st)},footer:el=>{if(D)footer(el)},mark};

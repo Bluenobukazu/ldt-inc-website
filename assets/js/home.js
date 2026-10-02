@@ -153,6 +153,11 @@ const hero=on=>{document.body.classList.toggle('hero',on);
 let active=-1;
 /* The compact desktop rail remains available throughout Layer 1. CSS hides it
    only on the landing and in the Operating-System frame. */
+(()=>{if(!matchMedia('(hover:hover) and (min-width:761px)').matches)return;
+  const rail=$('#rail'),B=document.body;let idle=0,over=false;
+  const dim=()=>{clearTimeout(idle);if(!over&&!rail.contains(document.activeElement))idle=setTimeout(()=>B.classList.add('rail-idle'),2000)};
+  const wake=()=>{B.classList.remove('rail-idle');dim()};
+  addEventListener('scroll',wake,{passive:true});rail.addEventListener('mouseenter',()=>{over=true;wake()});rail.addEventListener('mouseleave',()=>{over=false;dim()});rail.addEventListener('focusin',wake);rail.addEventListener('focusout',()=>setTimeout(dim,0));dim()})();
 function setActive(i){if(i===active)return;active=i;LDT.chapterNow=i;clearTimeout(urlT);urlT=setTimeout(syncChapterUrl,350);$$('#rail button').forEach((b,j)=>{b.classList.toggle('on',j===i);if(j===i)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current')});$('#railM').innerHTML=`<span class="pill">0${i+1}</span><span class="dcur">${CH[i]}</span>`;document.body.classList.toggle('at-end',i===7)}
 function railRect(i){const b=$$('#rail button')[i];return b&&b.offsetParent?b.querySelector('span').getBoundingClientRect():null}
 function emerge(el,i,scale=1){
