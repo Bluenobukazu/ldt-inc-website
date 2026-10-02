@@ -53,7 +53,8 @@ function build(root,mode){
          this creates the fan, crossing and depth of the supplied line reference. */
       const C=P1.length,ST=220;
       for(let j=0;j<C;j++){const f=(j-(C-1)/2)/((C-1)/2);let d='';
-        for(let k=0;k<=ST;k++){const u=k/ST,y=-18+u*(H+36),x=exX(f,u);
+        const over=48+34*(1-Math.abs(f)),top=-over+f*18,bottom=H+over+f*24;
+        for(let k=0;k<=ST;k++){const u=k/ST,y=top+u*(bottom-top),x=exX(f,u);
           d+=(k?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}
         P1[j].setAttribute('d',d);P2[j].setAttribute('d',d)}return}
     const step=W>900?7:6,amp=H*.5,cy=H/2,xs=[];for(let x=0;x<W+step;x+=step)xs.push(Math.min(x,W));
@@ -67,7 +68,7 @@ function build(root,mode){
     cEls.forEach((card,i)=>{const b=card.getBoundingClientRect(),left=i<3,
       x1=left?(b.right-frame.left)/scale:(b.left-frame.left)/scale,
       y=(b.top+b.height*.5-frame.top)/scale,
-      u=Math.max(0,Math.min(1,(y+18)/(H+36))),x2=exX(left?-1:1,u),
+      u=Math.max(0,Math.min(1,y/H)),x2=exX(left?-1:1,u),
       bend=x1+(x2-x1)*.62,p=document.createElementNS(NS,'path');
       p.setAttribute('class','sy-link');p.setAttribute('pathLength','1');p.setAttribute('d',`M${x1.toFixed(1)} ${y.toFixed(1)} C${bend.toFixed(1)} ${y.toFixed(1)},${(x2+(left?10:-10)).toFixed(1)} ${(y+(i%2?.8:-.8)).toFixed(1)},${x2.toFixed(1)} ${y.toFixed(1)}`);links.appendChild(p)
     })

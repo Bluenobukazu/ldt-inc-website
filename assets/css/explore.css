@@ -434,7 +434,7 @@ body.system-moment #railM{opacity:0;visibility:hidden}
 #approach,#approach .bar{background:#000;color:#fff}
 #approach .bar{border-bottom:1px solid rgba(255,255,255,.32)}
 #approach .bar :is(.back,.lbl,.dctx,.dcur){color:#fff}
-#approach .bar .pill{background:transparent;color:#fff;border-color:#fff}
+#approach .bar .lbl .pill{display:inline-flex;align-items:center;justify-content:center;padding:4px 11px;border:1px solid #fff;border-radius:999px;background:#000;color:#fff;line-height:1.2}
 #approach .dkick .t,#approach .dkick .t strong{color:#fff}
 #approach .sy-ex>.aentry.ax-top{box-sizing:border-box;margin-bottom:clamp(42px,6vh,76px);padding:0 0 0 1.5rem;border:0;border-left:2px solid #fff;background:transparent;color:#fff}
 #approach .sy-ex>.aentry.ax-top em{color:#fff}
@@ -469,3 +469,9 @@ body.system-moment #railM{opacity:0;visibility:hidden}
   .sy-ex .sy-c{padding:1rem!important}
 }
 @media (prefers-reduced-motion:reduce){.sy-ex .sy-link{stroke-dasharray:none!important;stroke-dashoffset:0!important}}
+
+/* Explore ends in the shared release footer, after a deliberate black pause. */
+#approach>.explore-footer{box-sizing:border-box;width:100%;margin:clamp(120px,18vh,240px) 0 0;padding:0 var(--m) max(2rem,var(--endpad));background:#000;color:#fff}
+#approach>.explore-footer .horizon{display:none}
+#approach>.explore-footer button{color:inherit;font:inherit;letter-spacing:inherit;cursor:pointer}
+#approach>.explore-footer button:focus-visible{outline:2px solid currentColor;outline-offset:2px}

@@ -129,6 +129,14 @@ Run browser QA on the deployed candidate at 970×510, 1280×720, 1440×900 and r
 - Connector endpoints are calculated from the same outside contour function used to draw the organic field, so the short curves stop at its edge instead of piercing the interior.
 - Layer 1, all fourteen Explore destinations, semantic current-location handling, the accepted footer and the production boundary remain unchanged.
 
+## Explore line-field ending and release footer
+
+- Baseline: branch `work`, commit `e18c467c59765244e0979d261d49098e46fbda5e`.
+- The Explore-only `04.1` identifier now has an explicit black fill, thin white fully rounded outline and balanced padding; system-navigation pills are unchanged.
+- Individual contour paths now begin and end at staggered off-frame positions, removing the shared flat caps while retaining the woven fans, crossings and depth. Short card connectors still terminate at the calculated outside contour.
+- After the last card and SVG field, a generous black pause leads to the accepted shared release-footer structure. Its legal, Workshops and Sitemap links retain their existing destinations; Contact uses the existing chapter navigation so the overlay closes correctly.
+- No Deep Dive footer/navigation redesign, merge or production action is included.
+
 ## V3 remainder — unchanged
 
 The application release does not replace the V3 remainder: open line design for Explore/System footer; further visual and narrative refinement; all 133 frames against seven contract fields; remaining frame findings and full V3 QA; shared frame-by-frame review and surgical corrections. ADD-01–04, workshop-result drafts and other copy awaiting approval were not silently implemented.
