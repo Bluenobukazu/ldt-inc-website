@@ -117,7 +117,10 @@ function compose(root){
   const paths=[],hi=[],COUNT=42,STEPS=240;
   for(let j=0;j<COUNT;j++){
     const f=(j-(COUNT-1)/2)/((COUNT-1)/2),a=document.createElementNS(NS,'path'),b=document.createElementNS(NS,'path');
-    let d='';
+    /* The two innermost contours pause in the upper-right title area. This
+       keeps the technical field present behind the lock-up without running a
+       dense pair of strokes through the final letters of Operating. */
+    const titleClearance=j===20||j===21;let d='',drawing=false;
     for(let k=0;k<=STEPS;k++){
       const q=k/STEPS*Math.PI*2,
         twist=f*(.3*Math.sin(q*2-.4)+.13*Math.sin(q*5+.7)),ang=q+twist,
@@ -129,10 +132,12 @@ function compose(root){
         rawX=720+rx*Math.cos(ang)+fold*Math.sin(q),
         x=rawX<18?18+(rawX-18)*.08:rawX>1422?1422+(rawX-1422)*.08:rawX,
         rawY=435+ry*Math.sin(ang)+f*62*Math.sin(q*3+.85)+22*Math.cos(q*2.2),
-        y=rawY<34?34+(rawY-34)*.08:rawY>820?820+(rawY-820)*.3:rawY;
-      d+=(k?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)
+        y=rawY<34?34+(rawY-34)*.08:rawY>820?820+(rawY-820)*.3:rawY,
+        clearTitle=titleClearance&&x>900&&x<1080&&y>230&&y<480;
+      if(clearTitle){drawing=false;continue}
+      d+=(drawing?'L':'M')+x.toFixed(1)+' '+y.toFixed(1);drawing=true
     }
-    d+='Z';
+    if(!titleClearance)d+='Z';
     for(const el of [a,b]){el.setAttribute('d',d);el.setAttribute('pathLength','1')}
     a.setAttribute('class','cm-ln');b.setAttribute('class','cm-lh');base.appendChild(a);hl.appendChild(b);paths.push(a);hi.push(b)
   }

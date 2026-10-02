@@ -130,9 +130,12 @@ const GM={W:430,H:860,m:22,
  divider:[-10,0],os:[22,326,386,530]
 };
 const G=()=>MOB()?GM:GD;
-/* reading holds (Lena, scroll QA 26.09.2026): the proposition and the Connect sentence stand a little longer, the finished System a little shorter.
-   at() maps the original V5 timeline positions onto the adjusted timeline */
-const HOLDS=[[.19,.04],[.51,.025]],SYS_HOLD=.12;
+/* reading holds (Lena, scroll QA 02.10.2026): both finished Connect statements
+   stand in full white for a real scroll section.  The holds extend the Connect
+   scene itself; they are not easing or time-based pauses.  The second statement
+   starts only after the first one's fade has completed.
+   at() maps the original V5 timeline positions onto the adjusted timeline. */
+const HOLDS=[[.19,.04],[.505,.3],[.565,.3]],SYS_HOLD=.12;
 const at=x=>HOLDS.reduce((v,[t,a])=>x>=t?v+a:v,x);
 /* Connect remains the active chapter for the complete entry statement.  The
    title hands over only as the note leaves, before the System labels arrive. */
@@ -302,7 +305,7 @@ function Journey(st,inst){
     /* 04 System: light returns, circles move into each other, shared realities appear */
     tl.to(q('.j-black'),{opacity:0,duration:.001},at(.62));
     [0,1,2,3].forEach(i=>{const [x,y]=g.C1[i];tl.to([C(i),F(i),CL(i)],{attr:{cx:x,cy:y,r:g.r1},duration:.08,ease:'power3.inOut'},at(.635))});
-    tl.set(entry,{opacity:.46,y:0},at(.505)).to(entry,{opacity:1,duration:.045,ease:'power1.out'},at(.505)).to(entry,{opacity:0,y:-14,duration:.025},at(.565));
+    tl.set(entry,{opacity:.46,y:0},at(.525)).to(entry,{opacity:1,duration:.03,ease:'power1.out'},at(.525)).to(entry,{opacity:0,y:-14,duration:.025},at(.565));
     tl.to(cp,{p:1,duration:.15,ease:'none'},at(.565))
       .to(cmq('.cm-pill'),{opacity:1,y:0,duration:.03},at(.625))
       .to(cmq('.cm-lock'),{opacity:1,y:0,duration:.07,ease:'power3.out'},at(.635))
