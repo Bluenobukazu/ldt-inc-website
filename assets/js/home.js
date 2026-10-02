@@ -134,7 +134,9 @@ const G=()=>MOB()?GM:GD;
    at() maps the original V5 timeline positions onto the adjusted timeline */
 const HOLDS=[[.19,.04],[.51,.025]],SYS_HOLD=.12;
 const at=x=>HOLDS.reduce((v,[t,a])=>x>=t?v+a:v,x);
-const SEG=[at(.2),at(.42),at(.515),1];
+/* Connect remains the active chapter for the complete entry statement.  The
+   title hands over only as the note leaves, before the System labels arrive. */
+const SEG=[at(.2),at(.42),at(.565),1];
 /* reduced motion: the finished state of each chapter on the journey timeline */
 const STILL=[0,at(.4),at(.54),9];
 let S=1;
@@ -247,7 +249,7 @@ function Journey(st,inst){
     if(cmEl._tk){gsap.ticker.remove(cmEl._tk);cmEl._tk=null}
     /* on narrower screens the chapter rail would run into the right end of the drawing: the composition is scaled to the room that is left */
     gsap.set(cmEl,{transformOrigin:'0% 100%',scale:M?1:Math.min(1,Math.max(.72,(innerWidth-2*48-(innerWidth-g.W*S)/2)/(1372*S)))});
-    gsap.set([cmq('.cm-pill'),cmq('.cm-sys')],{opacity:0,y:16});gsap.set(entry,{left:M?22:360,top:M?230:300,width:M?386:720,opacity:0,y:18});gsap.set(cmq('.cm-lock'),{opacity:0,y:50});gsap.set(cmq('.cm-go'),{opacity:0,y:24});gsap.set(cmq('.cm-mot'),{opacity:0});
+    gsap.set([cmq('.cm-pill'),cmq('.cm-sys')],{opacity:0,y:16});gsap.set(entry,{left:M?22:240,top:M?252:318,width:M?386:960,opacity:0,y:0});gsap.set(cmq('.cm-lock'),{opacity:0,y:50});gsap.set(cmq('.cm-go'),{opacity:0,y:24});gsap.set(cmq('.cm-mot'),{opacity:0});
     const C=i=>q('.c'+i),F=i=>q('.f'+i),CL=i=>q('.clc'+i);
     [0,1,2,3].forEach(i=>{const [x,y]=g.C0[i];gsap.set([C(i),F(i),CL(i)],{attr:{cx:x,cy:y,r:g.r0}});gsap.set(C(i),{attr:{'stroke-dashoffset':1},visibility:'hidden'});gsap.set(F(i),{opacity:0})});
     gsap.set(q('.lensA'),{attr:{cx:g.C1[0][0],cy:g.C1[0][1],r:g.r1},opacity:0});gsap.set(q('.lensB'),{attr:{cx:g.C1[2][0],cy:g.C1[2][1],r:g.r1},opacity:0});
@@ -300,7 +302,7 @@ function Journey(st,inst){
     /* 04 System: light returns, circles move into each other, shared realities appear */
     tl.to(q('.j-black'),{opacity:0,duration:.001},at(.62));
     [0,1,2,3].forEach(i=>{const [x,y]=g.C1[i];tl.to([C(i),F(i),CL(i)],{attr:{cx:x,cy:y,r:g.r1},duration:.08,ease:'power3.inOut'},at(.635))});
-    tl.to(entry,{opacity:1,y:0,duration:.03,ease:'power2.out'},at(.515)).to(entry,{opacity:0,y:-14,duration:.025},at(.565));
+    tl.set(entry,{opacity:.46,y:0},at(.505)).to(entry,{opacity:1,duration:.045,ease:'power1.out'},at(.505)).to(entry,{opacity:0,y:-14,duration:.025},at(.565));
     tl.to(cp,{p:1,duration:.15,ease:'none'},at(.565))
       .to(cmq('.cm-pill'),{opacity:1,y:0,duration:.03},at(.625))
       .to(cmq('.cm-lock'),{opacity:1,y:0,duration:.07,ease:'power3.out'},at(.635))
@@ -309,7 +311,7 @@ function Journey(st,inst){
     tl.to({},{duration:SYS_HOLD},at(.8));
 
     if(RM){
-      const p=STILL[inst];tl.time(Math.min(p,tl.duration()));if(inst===3){cmEl.dataset.rm='1';if(cmEl._cm)cmEl._cm.setP(1)}
+      const p=STILL[inst];tl.time(Math.min(p,tl.duration()));if(inst===2)gsap.set(entry,{opacity:1,y:0});if(inst===3){cmEl.dataset.rm='1';if(cmEl._cm)cmEl._cm.setP(1)}
       st.classList.toggle('cxOn',inst===1);st.classList.toggle('sysOn',inst===3);
       if(JT[inst]&&inst!==3){let [n,t,s,x]=JT[inst];jt.querySelector('.pill').textContent=n;jt.querySelector('.t').textContent=t;jt.querySelector('.s').innerHTML=s;jt.querySelector('.s').style.display=s?'':'none';jt.querySelector('.x').textContent=x;jt.querySelector('.x').style.display=x?'':'none';gsap.set(jt,{opacity:1})}
       else gsap.set(jt,{opacity:0});
@@ -331,7 +333,7 @@ function Journey(st,inst){
     const jBand=bandAfter($('#journey'),'white');
     trig=ScrollTrigger.create({trigger:'#journey',start:'top top',onRefresh:jBand,onToggle:jBand,end:()=>'+='+innerHeight*base*(T0+TL),pin:st,refreshPriority:2,scrub:.6,animation:master,invalidateOnRefresh:true,
       onUpdate:self=>{const p=self.progress*(T0+TL)-T0,hp=Math.min(1,self.progress*(T0+TL)/H0)*END;const s=p<SEG[0]?0:p<SEG[1]?1:p<SEG[2]?2:3;setActive(s);jTitle(s===0?-1:s);if(p>at(.565))gsap.set(jt,{opacity:0});hero(hp<.72);
-        st.classList.toggle('sysOn',p>at(.515));document.body.classList.toggle('system-moment',self.isActive&&self.progress<.995&&p>at(.515));st.classList.toggle('cxOn',p>at(.3)&&p<at(.42));jBand(self)}});
+        st.classList.toggle('sysOn',p>at(.515));document.body.classList.toggle('system-moment',self.isActive&&self.progress<.995&&p>at(.565));st.classList.toggle('cxOn',p>at(.3)&&p<at(.42));jBand(self)}});
     /* the line drawing is a pure function of the scroll position: it is right after a direct address, a resize or a rebuild as well */
     {const tk=()=>{if(!cmEl._cm||!trig)return;const w=Math.max(0,Math.min(1,((trig.progress*(T0+TL)-T0)-at(.565))/.15));if(cmEl._cp!==w||cmEl._ci!==cmEl._cm){cmEl._cp=w;cmEl._ci=cmEl._cm;cmEl._cm.setP(w)}};cmEl._tk=tk;gsap.ticker.add(tk)}
   }

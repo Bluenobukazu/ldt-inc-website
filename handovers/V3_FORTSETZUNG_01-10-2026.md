@@ -200,6 +200,14 @@ Run browser QA on the deployed candidate at 970×510, 1280×720, 1440×900 and r
 - The shared overlay shell still folds after two seconds. Programmatic pointer-open focus on Back no longer holds it open indefinitely; genuine keyboard focus and pointer hover do. Scrolling, keyboard navigation, pointer movement near the top, and a top-edge pointer/touch target reopen the shell without changing document flow.
 - The accepted closing-navigation composition, Layer-1 chapter rail, copy, and release footer are unchanged. Deployed-preview browser QA remains required; no merge or production action is included.
 
+## Layer-1 Connect statement and chapter-rail correction
+
+- Baseline: branch `work`, commit `94d07eee16229900377d23c5f93883c495bce4ad`.
+- The approved Connect entry sentence is now a centred, substantially larger Boska statement. Its position and size remain fixed while its scroll-bound colour progresses from readable grey to full white; Reduced Motion presents the complete white state immediately.
+- The `03` pill and `Connect` title remain visible through the complete reading moment. Their handover now starts only when the statement leaves and still completes before the Operating-System labels appear; the System-only rail exclusion begins at that same boundary.
+- The desktop chapter rail uses eight contiguous 44px interaction rows: approximately one-third tighter than the previously observed spacing while retaining the existing type sizes, contrast-by-background behaviour, two-second idle treatment, and Landing/System exclusions.
+- The accepted System navigation, Explore composition, location marker, Deep-Dive folding shell, and release footer are unchanged. Deployed-preview browser QA remains required; no merge or production action is included.
+
 ## V3 remainder — unchanged
 
 The application release does not replace the V3 remainder: open line design for Explore/System footer; further visual and narrative refinement; all 133 frames against seven contract fields; remaining frame findings and full V3 QA; shared frame-by-frame review and surgical corrections. ADD-01–04, workshop-result drafts and other copy awaiting approval were not silently implemented.

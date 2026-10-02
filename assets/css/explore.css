@@ -323,7 +323,7 @@ body.system-moment #rail{opacity:0;visibility:hidden;pointer-events:none}
 body.system-moment #railM{opacity:0;visibility:hidden}
 #journey .stage.sysOn{overflow:visible}
 #journey .stage.sysOn .j-cm{clip-path:inset(0 0 -38px 0)}
-.j-entry-note{z-index:4;margin:0;color:#fff;mix-blend-mode:difference;font:italic 400 30px/1.18 var(--serif);letter-spacing:-.012em;text-align:center}
+.j-entry-note{z-index:4;margin:0;color:#fff;mix-blend-mode:difference;font:italic 400 44px/1.16 var(--serif);letter-spacing:-.012em;text-align:center}
 .cv .j-cm .cm-dyn{transform:none}
 .cv .j-cm .cm-svg{-webkit-mask-image:none;mask-image:none}
 .cm-ln,.cm-lh{fill:none;stroke:#fff;stroke-width:.62}.cm-lh{stroke-width:1.45;opacity:0;transition:opacity .35s}.j-cm.f .cm-lh{opacity:1}
@@ -347,7 +347,7 @@ body.system-moment #railM{opacity:0;visibility:hidden}
 @media (min-width:761px){.cv .j-os{display:none}}
 @media (max-width:760px){
   .cv .j-os{display:none!important}.cv .j-cm{display:block;width:430px;height:860px;transform:none!important;mix-blend-mode:difference}
-  .j-entry-note{font-size:24px;line-height:1.2;text-align:left}
+  .j-entry-note{font-size:32px;line-height:1.18;text-align:center}
   .cv .j-cm .cm-dyn{width:430px;height:860px}.cv .j-cm .cm-svg{width:430px;height:500px;top:42px;overflow:hidden}
   .cv .j-cm .cm-pill{left:22px;top:32px}
   .cv .j-cm .cm-target{width:202px!important;height:52px;gap:7px;padding:4px}
