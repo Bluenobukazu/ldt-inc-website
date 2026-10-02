@@ -368,7 +368,7 @@ body.system-moment #railM{opacity:0;visibility:hidden}
 .cv .j-cm .cm-lock{left:475px;top:254px;width:490px;line-height:.82;letter-spacing:-.05em}
 .cv .j-cm .cm-lock span{font-family:var(--serif);font-style:normal;font-weight:600;font-size:92px;letter-spacing:inherit}
 .cv .j-cm .cm-lock span:first-child{font-style:italic;font-weight:400;font-size:76px;margin-bottom:5px}
-.cv .j-cm .cm-lock span:nth-child(3){margin-top:10px}
+.cv .j-cm .cm-lock span:nth-child(3){position:relative;left:.75em;margin-top:10px;transform:translateY(-15%)}
 .cv .j-cm .cm-sys{left:410px;top:530px;width:620px;font-size:18px;line-height:1.34;padding:0;text-align:center;background:transparent}
 .cv .j-cm .cm-sys span{display:block;white-space:nowrap}
 .cv .j-cm .cm-go{left:465px;top:632px;width:510px;height:108px;padding:19px 40px;gap:12px;border-radius:58px}
