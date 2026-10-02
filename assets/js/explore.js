@@ -120,14 +120,14 @@ function compose(root){
     for(let k=0;k<=STEPS;k++){
       const q=k/STEPS*Math.PI*2,
         twist=f*(.3*Math.sin(q*2-.4)+.13*Math.sin(q*5+.7)),ang=q+twist,
-        lobe=1+.16*Math.sin(q*3+.25)+.08*Math.sin(q*5-1.15),
-        fan=f*(92+118*Math.sin(q*3-.7)+46*Math.cos(q*6+.35)),
-        clear=112*Math.pow(Math.max(0,Math.sin(q)),8),
-        rx=470*lobe+fan,ry=286*(1+.17*Math.cos(q*4-.5))+f*(72+88*Math.cos(q*3+.5))+clear,
+        lobe=1+.19*Math.sin(q*3+.25)+.09*Math.sin(q*5-1.15),
+        fan=f*(104+126*Math.sin(q*3-.7)+52*Math.cos(q*6+.35)),
+        clear=136*Math.pow(Math.max(0,Math.sin(q)),8),
+        rx=505*lobe+fan,ry=304*(1+.2*Math.cos(q*4-.5))+f*(78+94*Math.cos(q*3+.5))+clear,
         fold=f*(72*Math.sin(q*2+.6)+34*Math.sin(q*7-.2)),
         x=720+rx*Math.cos(ang)+fold*Math.sin(q),
-        rawY=445+ry*Math.sin(ang)+f*58*Math.sin(q*3+.85)+20*Math.cos(q*2.2),
-        y=rawY>815?815+(rawY-815)*.34:rawY;
+        rawY=435+ry*Math.sin(ang)+f*62*Math.sin(q*3+.85)+22*Math.cos(q*2.2),
+        y=rawY>820?820+(rawY-820)*.3:rawY;
       d+=(k?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)
     }
     d+='Z';
@@ -172,7 +172,7 @@ function mark(type,i){
   document.querySelectorAll('.sy .here,.sy .yh').forEach(e=>{e.classList.remove('here','here-dim');if(e.classList.contains('yh'))e.remove()});
   document.querySelectorAll('.sy [aria-current]').forEach(e=>e.removeAttribute('aria-current'));
   const dm=type==='dim'?[i]:D.REAL[i].d;
-  document.querySelectorAll('#deepFoot .df-nav [data-ddim]').forEach(n=>n.classList.toggle('cur',dm.includes(+n.dataset.ddim)));
+  document.querySelectorAll('#deepFoot .df-nav [data-ddim]').forEach(n=>n.classList.toggle('cur',type==='dim'&&dm.includes(+n.dataset.ddim)));
   document.querySelectorAll('.sy').forEach(root=>{
     if(!root._sy)return;let col,btn;
     if(type==='dim'){col=root.querySelector(`.sy-d[data-d="${i}"]`);btn=col&&col.querySelector('.sy-h')}
@@ -185,6 +185,6 @@ function mark(type,i){
     root._sy.setHere([root._sy.cols.indexOf(col)]);
   });
 }
-function clear(root){root.querySelectorAll('.here,.yh').forEach(e=>{e.classList.remove('here','here-dim');if(e.classList.contains('yh'))e.remove()});root.querySelectorAll('[aria-current]').forEach(e=>e.removeAttribute('aria-current'));const sy=root.classList.contains('sy')?root:root.querySelector('.sy');if(sy&&sy._sy)sy._sy.setHere(null)}
+function clear(root){lastMark=null;root.querySelectorAll('.here,.yh').forEach(e=>{e.classList.remove('here','here-dim');if(e.classList.contains('yh'))e.remove()});root.querySelectorAll('[aria-current]').forEach(e=>e.removeAttribute('aria-current'));const sy=root.classList.contains('sy')?root:root.querySelector('.sy');if(sy&&sy._sy)sy._sy.setHere(null)}
 window.LDT_XI={clear,compose:el=>{if(D)compose(el)},build(m,data){D=data;explore(m)},landing:(el,st)=>{if(D)landing(el,st)},footer:el=>{if(D)footer(el)},mark};
 })();

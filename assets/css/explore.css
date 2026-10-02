@@ -321,6 +321,8 @@
 /* ===== application release: reference-led Layer 1 operating-system moment ===== */
 body.system-moment #rail{opacity:0;visibility:hidden;pointer-events:none}
 body.system-moment #railM{opacity:0;visibility:hidden}
+#journey .stage.sysOn{overflow:visible}
+#journey .stage.sysOn .j-cm{clip-path:inset(0 0 -38px 0)}
 .j-entry-note{z-index:4;margin:0;color:#fff;mix-blend-mode:difference;font:italic 400 30px/1.18 var(--serif);letter-spacing:-.012em;text-align:center}
 .cv .j-cm .cm-dyn{transform:none}
 .cv .j-cm .cm-svg{-webkit-mask-image:none;mask-image:none}
@@ -408,7 +410,7 @@ body.system-moment #railM{opacity:0;visibility:hidden}
 .sy-ex li button span{font-size:15px}.sy-ex li button i{display:block!important;font:300 22px/1 var(--sans)}
 .sy-ex :is(.sy-h,.sy-k,li button):focus-visible{outline:2px solid #000!important;outline-offset:4px!important;box-shadow:0 0 0 2px #fff!important}
 .sy-ex .sy-x::before,.sy-ex .sy-x::after{display:none!important}
-.sy-ex .yh,.sy-ft .yh{position:static!important;display:inline-flex!important;align-items:center;width:max-content;min-height:0;margin:.55rem 0 0!important;padding:5px 9px!important;border-radius:14px;background:#000!important;color:#fff!important;font:700 10px/1 var(--sans)!important;letter-spacing:.14em!important;text-transform:uppercase;white-space:nowrap}
+.sy-ex .yh,.sy-ft .yh{position:static!important;display:inline-flex!important;align-items:center;width:max-content;min-height:0;margin:.55rem 0 0!important;padding:5px 9px!important;border-radius:14px;background:#151515!important;color:#fff!important;font:700 10px/1 var(--sans)!important;letter-spacing:.14em!important;text-transform:uppercase;white-space:nowrap}
 .sy-ex .yh::before,.sy-ft .yh::before{display:none!important}
 .sy-ex li button .yh{grid-column:2/-1!important;grid-row:2!important;justify-self:start!important;margin:.2rem 0 0!important}
 .sy-ex li button:has(.yh){grid-template-rows:auto auto;row-gap:.15rem}
@@ -456,7 +458,7 @@ body.system-moment #railM{opacity:0;visibility:hidden}
 .sy-ex ul{width:100%;margin:1rem 0 0!important;padding:.65rem 0 0!important;border-top:1px solid #000!important}
 .sy-ex li button{color:#000!important;background:#fff!important}
 .sy-ex li button .ad{background:#fff!important;color:#000!important;border:1px solid #000!important;border-radius:18px!important}
-.sy-ex .yh{background:#000!important;color:#fff!important}
+.sy-ex .yh{background:#151515!important;color:#fff!important}
 .sy-ex .sy-c.on{outline:1px solid #fff;outline-offset:5px}
 .sy-ex .sy-c.picked{outline-color:#fff!important}
 
@@ -477,7 +479,7 @@ body.system-moment #railM{opacity:0;visibility:hidden}
 @media (prefers-reduced-motion:reduce){.sy-ex .sy-link{stroke-dasharray:none!important;stroke-dashoffset:0!important}.sy-ex .sy-soft{transition:none!important}}
 
 /* Explore ends in the shared release footer, after a deliberate black pause. */
-#approach>.explore-footer{box-sizing:border-box;width:100%;margin:clamp(140px,20vh,260px) 0 0;padding:clamp(18px,2.8vh,32px) var(--m) max(3rem,calc(var(--endpad) + env(safe-area-inset-bottom)));background:#000;color:#fff}
+#approach>.explore-footer{box-sizing:border-box;width:100%;margin:clamp(140px,20vh,260px) 0 0;padding:clamp(48px,6.5vh,72px) var(--m) max(2rem,calc(3vh + env(safe-area-inset-bottom)));background:#000;color:#fff}
 #approach>.explore-footer .horizon{display:none}
 #approach>.explore-footer button{color:inherit;font:inherit;letter-spacing:inherit;cursor:pointer}
 #approach>.explore-footer button:focus-visible{outline:2px solid currentColor;outline-offset:2px}

@@ -119,8 +119,8 @@ a.crow:hover .v,a.crow:focus-visible .v{text-decoration:underline;text-underline
 /* page end, shared on every page (Lena, 27.09.2026): generous room above the legal line, which sits close to the bottom edge */
 :root{--endgap:18vh;--endpad:4.5vh}
 .dark footer .horizon{background:none;height:0;margin:var(--endgap) 0 0}
-.dark:has(> footer){padding-bottom:var(--endpad)!important}
-.release-footer{width:100vw;margin-left:calc(-1 * var(--m));background:#000;color:#fff;padding:clamp(16px,2.4vh,28px) var(--m) max(3rem,calc(var(--endpad) + env(safe-area-inset-bottom)));font-family:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+.dark:has(> footer){padding-bottom:0!important}
+.release-footer{width:100vw;margin-left:calc(-1 * var(--m));background:#000;color:#fff;padding:clamp(48px,6.5vh,72px) var(--m) max(2rem,calc(3vh + env(safe-area-inset-bottom)));font-family:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace}
 .release-footer .foot{display:flex;justify-content:space-between;align-items:center;gap:2rem;font-size:12px;line-height:1.5}
 .release-footer nav{display:flex;align-items:center;gap:0}
 .release-footer nav>*{display:inline-flex;align-items:center;min-height:44px}
@@ -228,12 +228,12 @@ html:not(.kbd) .ov [data-close]:focus-visible{outline:none!important;box-shadow:
 
 /* The active Layer-2 shell keeps both of its navigation rows within reach. */
 .ov:is(#approach,#deep){--layer-bar:72px;scroll-padding-top:calc(var(--layer-bar) + 70px)}
-.ov:is(#approach,#deep)>.bar{min-height:var(--layer-bar)}
+.ov:is(#approach,#deep)>.bar{height:var(--layer-bar);min-height:var(--layer-bar);padding-block:0}
 .ov:is(#approach,#deep)>.ovsub{position:sticky;top:var(--layer-bar);z-index:4;min-height:58px;padding:7px var(--m);background:#fff;color:#000;border-bottom:1px solid rgba(0,0,0,.18)}
-.ov:is(#approach,#deep)>.bar .ovr{display:flex;align-items:center;justify-content:flex-end;gap:clamp(14px,2vw,28px)}
+.ov:is(#approach,#deep)>.bar .ovr{display:flex;align-items:center;justify-content:flex-end;gap:clamp(18px,2.2vw,32px)}
 .ov:is(#approach,#deep)>.bar .ovr button{min-height:44px;text-align:center}
 #approach>.ovsub{background:#000;color:#fff;border-bottom-color:rgba(255,255,255,.28)}
-@media(max-width:760px){.ov:is(#approach,#deep){--layer-bar:88px}.ov:is(#approach,#deep)>.ovsub{align-items:flex-start;min-height:58px}.ov:is(#approach,#deep)>.bar .ovr{gap:12px;font-size:11px;line-height:1.2}.ov:is(#approach,#deep)>.bar .ovr button:first-child{max-width:12em}}
+@media(max-width:760px){.ov:is(#approach,#deep){--layer-bar:68px}.ov:is(#approach,#deep)>.ovsub{align-items:center;min-height:64px;padding-block:10px}.ov:is(#approach,#deep)>.bar .ovr{gap:18px;font-size:12px;line-height:1.2}}
 
 /* Compact chapter rail: stable number measure, quiet labels, unchanged targets. */
 #rail{gap:2px}
@@ -243,6 +243,9 @@ html:not(.kbd) .ov [data-close]:focus-visible{outline:none!important;box-shadow:
 #rail button i{width:8px;opacity:.55}
 #rail button.on{color:#fff}#rail button.on span b{background:#fff;color:#000}#rail button.on i{width:18px;height:1px}
 #rail button:hover,#rail button:focus-visible{color:#fff}
+body.rail-scroll-hidden:not(.hero):not(.system-moment) #rail{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .24s var(--ease),visibility 0s .24s}
+body.rail-scroll-hidden #rail:focus-within{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .18s var(--ease)}
+@media(prefers-reduced-motion:reduce){body.rail-scroll-hidden:not(.hero):not(.system-moment) #rail{transition:none}}
 /* v3 M06: location label and codes never below 12px */
 .lbl,.dcur,.loc .dcur{font-size:max(12px,11px)}
 .dcur,.lbl{font-size:12.5px}

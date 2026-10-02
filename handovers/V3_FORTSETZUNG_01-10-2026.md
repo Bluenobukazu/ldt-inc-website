@@ -147,6 +147,17 @@ Run browser QA on the deployed candidate at 970×510, 1280×720, 1440×900 and r
 - The Layer-1 system contour is compressed organically inside its lower frame instead of being cut at the SVG boundary. The chapter rail uses stable monospaced number slots, smaller labels and unchanged 44px interaction rows.
 - No Deep Dive footer redesign, merge or production action is included.
 
+## Surgical navigation and System correction (2 October 2026)
+
+- Baseline: branch `work`, commit `22162c052725b0b238cc2bdace3773773e29dae7`.
+- Implementation commit: `52026c7a42abb5d4ca5b04f98854567de33f0953`.
+- Global overlay-header decision: Explore shows only Index at the established right position. Every Deep Dive shows `Explore | Index`; the redundant `One Operating System` header link is removed. The local Back/location row remains sticky beneath that framed header.
+- The chapter rail now hides after a deliberate downward scroll and returns promptly on upward scroll. Keyboard focus forces it visible; its eight interaction rows remain at least 44px high.
+- Shared footer padding now places the link row lower with a smaller safe-area-aware closing pad; the redundant outer bottom pad on Layer 1 is removed.
+- The Layer-1 contour is moderately enlarged around a wider title opening. Its lower geometry is compressed into an organic tail, with only a targeted 38px continuation allowed from the active System stage.
+- Current-location state is reset when Explore is entered without Deep-Dive context. Exact Deep-Dive changes still call the shared marker; a subtopic no longer additionally activates its parent dimension in the footer navigation. The status remains semantic `aria-current="page"` and uses one reserved dark-grey `YOU ARE HERE` pill.
+- Required deployed-preview interaction and visual QA remains open in this execution environment; no merge or production action is included.
+
 ## V3 remainder — unchanged
 
 The application release does not replace the V3 remainder: open line design for Explore/System footer; further visual and narrative refinement; all 133 frames against seven contract fields; remaining frame findings and full V3 QA; shared frame-by-frame review and surgical corrections. ADD-01–04, workshop-result drafts and other copy awaiting approval were not silently implemented.
