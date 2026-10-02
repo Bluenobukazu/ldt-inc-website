@@ -18,8 +18,9 @@ function build(root,mode){
   const {dims,con}=model(),id='syc'+(++uid);
   root.classList.add('sy','sy-'+mode);
   const cols=[dims[0],con[0],dims[1],dims[2],con[1],dims[3]];
+  const under=mode==='ft'?`<svg class="sy-under" viewBox="0 0 1200 92" preserveAspectRatio="none" aria-hidden="true" focusable="false"><g>${Array.from({length:12},(_,j)=>{let d='';for(let k=0;k<=80;k++){const x=k/80*1200,u=k/80,y=46+(j-5.5)*1.65+15*Math.sin(u*Math.PI*4+j*.16)+7*Math.sin(u*Math.PI*7-j*.22);d+=(k?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}return`<path d="${d}"/>`}).join('')}</g></svg>`:'';
   root.innerHTML=`<div class="sy-form"><svg class="sy-svg" aria-hidden="true" focusable="false"><defs><clipPath id="${id}"><rect class="sy-clip" x="0" y="0" width="0" height="4000"/></clipPath><radialGradient id="${id}g"><stop offset="0" stop-color="white"/><stop offset=".62" stop-color="white" stop-opacity=".82"/><stop offset="1" stop-color="black" stop-opacity="0"/></radialGradient><mask id="${id}m" maskUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><ellipse class="sy-soft" cx="0" cy="0" rx="0" ry="0" fill="url(#${id}g)"/></mask></defs><g class="sy-base"></g><g class="sy-links"></g><g class="sy-hl" ${mode==='ex'?`mask="url(#${id}m)"`:`clip-path="url(#${id})"`}></g></svg></div>
-  <div class="sy-tab">${cols.map(c=>c.areas?`<div class="sy-c sy-d" data-d="${c.i}">${mode!=='l1'?`<p class="sy-dh" aria-hidden="true"><span class="sy-l">${L[c.i]}</span><b>${c.n}</b></p>`:''}${head(c)}${mode==='ex'?`<p class="sy-ap">${c.ap}</p>`:''}<ul>${c.areas.map(area).join('')}</ul></div>`:`<div class="sy-c sy-x" data-k="${c.k}">${conn(c)}${mode==='ex'?`<p class="sy-ap">${c.ap}</p>`:''}</div>`).join('')}</div>`;
+  <div class="sy-tab">${cols.map(c=>c.areas?`<div class="sy-c sy-d" data-d="${c.i}">${mode!=='l1'?`<p class="sy-dh" aria-hidden="true"><span class="sy-l">${L[c.i]}</span><b>${c.n}</b></p>`:''}${head(c)}${mode==='ex'?`<p class="sy-ap">${c.ap}</p>`:''}<ul>${c.areas.map(area).join('')}</ul></div>`:`<div class="sy-c sy-x" data-k="${c.k}">${conn(c)}${mode==='ex'?`<p class="sy-ap">${c.ap}</p>`:''}</div>`).join('')}</div>${under}`;
   const svg=root.querySelector('.sy-svg'),tab=root.querySelector('.sy-tab'),base=svg.querySelector('.sy-base'),links=svg.querySelector('.sy-links'),hl=svg.querySelector('.sy-hl'),clip=svg.querySelector('.sy-clip'),soft=svg.querySelector('.sy-soft'),cEls=[...tab.children];
   const M=mode==='ft'?8:mode==='ex'?13:15,N=M*2,P1=[],P2=[];
   for(let i=0;i<N;i++){const a=document.createElementNS(NS,'path'),b=document.createElementNS(NS,'path');[a,b].forEach(p=>{p.setAttribute('pathLength','1');p.style.setProperty('--i',i)});a.setAttribute('class','sy-ln');b.setAttribute('class','sy-lh');base.appendChild(a);hl.appendChild(b);P1.push(a);P2.push(b)}
@@ -150,8 +151,9 @@ function landing(el){build(el,'l1')}
 /* ---- footer ---- */
 function footer(f){
   const {dims}=model();
-  f.innerHTML=`<div class="df-head"><h2 class="df-t">Navigation</h2><p class="df-s">One operating system</p></div><div class="df-sy"></div>
-  <nav class="df-nav" aria-label="Layer 2"><button type="button" data-open="index" data-act aria-haspopup="dialog">Index</button>${dims.map(d=>`<button type="button" data-ddim="${d.i}" data-act aria-haspopup="dialog">${d.n}</button>`).join('')}<button type="button" data-go="7" data-act>Contact</button></nav>`;
+  f.innerHTML=`<div class="df-head"><h2 class="df-t">Navigation</h2><p class="df-s">One Operating System</p></div><div class="df-sy"></div>
+  <nav class="df-nav" aria-label="Layer 2"><button type="button" data-open="index" data-act aria-haspopup="dialog">Index</button>${dims.map(d=>`<button type="button" data-ddim="${d.i}" data-act aria-haspopup="dialog">${d.n}</button>`).join('')}<button type="button" data-go="7" data-act>Contact</button></nav>
+  <footer class="release-footer deep-release-footer"><div class="horizon"></div><div class="foot"><nav class="footer-primary" aria-label="Legal and copyright"><span>&copy; 2026 LDT INC.</span><a href="legal/imprint.html" data-cut data-act>Imprint</a><a href="legal/privacy.html" data-cut data-act>Privacy</a></nav><nav class="footer-secondary" aria-label="Further links"><a href="workshops/" data-cut data-act>Workshops</a><a href="sitemap/" data-cut data-act>Sitemap</a><button type="button" data-go="7" data-act>Contact</button></nav></div></footer>`;
   build(f.querySelector('.df-sy'),'ft');
 }
 /* A Layer 1 plate opens Explore with a temporary visual selection. This is not
@@ -172,15 +174,13 @@ function mark(type,i){
   lastMark=[type,i];
   document.querySelectorAll('.sy .here,.sy .yh').forEach(e=>{e.classList.remove('here','here-dim');if(e.classList.contains('yh'))e.remove()});
   document.querySelectorAll('.sy [aria-current]').forEach(e=>e.removeAttribute('aria-current'));
-  const root=document.querySelector('#xMap');if(!root||!root._sy)return;let col,btn;
-  if(type==='dim'){col=root.querySelector(`.sy-d[data-d="${i}"]`);btn=col&&col.querySelector('.sy-h')}
-  else{btn=root.querySelector(`[data-dreal="${i}"]`);col=btn&&btn.closest('.sy-c')}
-  if(!col||!btn){root._sy.setHere(null);return}
-  col.classList.add('here');btn.setAttribute('aria-current','page');
-  const y='<em class="yh">You are here</em>',n=btn.querySelector('.n');
-  if(type==='dim'){col.classList.add('here-dim');btn.insertAdjacentHTML('afterend',y)}
-  else if(n)n.insertAdjacentHTML('afterend',y);else btn.insertAdjacentHTML('beforeend',y);
-  root._sy.setHere([root._sy.cols.indexOf(col)]);
+  document.querySelectorAll('#xMap,#deepFoot .df-sy').forEach(root=>{
+    if(!root._sy)return;let col,btn;
+    if(type==='dim'){col=root.querySelector(`.sy-d[data-d="${i}"]`);btn=col&&col.querySelector('.sy-h')}
+    else{btn=root.querySelector(`[data-dreal="${i}"]`);col=btn&&btn.closest('.sy-c')}
+    if(!col||!btn){root._sy.setHere(null);return}
+    btn.setAttribute('aria-current','page');root._sy.setHere([root._sy.cols.indexOf(col)]);
+  });
 }
 function clear(root){lastMark=null;root.querySelectorAll('.here,.yh').forEach(e=>{e.classList.remove('here','here-dim');if(e.classList.contains('yh'))e.remove()});root.querySelectorAll('[aria-current]').forEach(e=>e.removeAttribute('aria-current'));const sy=root.classList.contains('sy')?root:root.querySelector('.sy');if(sy&&sy._sy)sy._sy.setHere(null)}
 window.LDT_XI={clear,compose:el=>{if(D)compose(el)},build(m,data){D=data;explore(m)},landing:(el,st)=>{if(D)landing(el,st)},footer:el=>{if(D)footer(el)},mark};

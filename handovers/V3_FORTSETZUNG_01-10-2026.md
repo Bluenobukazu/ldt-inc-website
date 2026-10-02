@@ -175,6 +175,15 @@ Run browser QA on the deployed candidate at 970×510, 1280×720, 1440×900 and r
 - `YOU ARE HERE` is now rendered only in Explore. The shared marker clears stale state on context-free entry, marks exactly the last opened main or subtopic with semantic `aria-current="page"`, and uses a dark-blue in-flow status pill. The footer System navigation is not restyled in this pass.
 - Deployed-preview click and viewport QA remains required; no merge or production action is included.
 
+## Deep-Dive closing System navigation rebuild
+
+- Baseline: branch `work`, commit `329f827fa1803400ec7273fd938e9c26d7d79456`.
+- The shared Deep-Dive closing navigation is rebuilt as a black section with a white `Navigation` / `One Operating System` header, a spatial white line field, six equal white system cards, and a separate filigree lower line motif. The accepted release footer now follows it directly.
+- Desktop uses six columns while narrower layouts switch to three and then one. All fourteen existing targets remain model-driven: six main/connector pages and eight correctly assigned subtopics.
+- Current location no longer inserts `YOU ARE HERE` text or an extra row. Explore and the Deep-Dive closing navigation mark only the current entry's existing code pill with `#0F766E`, white type and semantic `aria-current="page"`; a subtopic does not mark its parent.
+- Context-free Explore still clears its own current marker. Returning from a Deep Dive reuses the exact shared state and updates it after every page change.
+- Deployed-preview click, responsive and visual QA remains required; no merge or production action is included.
+
 ## V3 remainder — unchanged
 
 The application release does not replace the V3 remainder: open line design for Explore/System footer; further visual and narrative refinement; all 133 frames against seven contract fields; remaining frame findings and full V3 QA; shared frame-by-frame review and surgical corrections. ADD-01–04, workshop-result drafts and other copy awaiting approval were not silently implemented.
