@@ -440,6 +440,7 @@ body.system-moment #railM{opacity:0;visibility:hidden}
 #approach .sy-ex>.aentry.ax-top em{color:#fff}
 
 .sy-ex .sy-ln,.sy-ex .sy-lh,.sy-ex .sy-link{stroke:#fff}
+.sy-ex .sy-soft{transition:cx .42s var(--ease),cy .42s var(--ease),rx .42s var(--ease),ry .42s var(--ease)}
 .sy-ex .sy-link{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.2s cubic-bezier(.2,.7,.1,1) .45s}
 .sy-ex.go .sy-link{stroke-dashoffset:0}
 .sy-ex .sy-tab{grid-template-columns:minmax(390px,430px) minmax(180px,1fr) minmax(390px,430px)!important;column-gap:clamp(28px,3.4vw,54px);row-gap:clamp(36px,5vw,72px)}
@@ -463,15 +464,20 @@ body.system-moment #railM{opacity:0;visibility:hidden}
   .sy-ex .sy-tab{display:block!important}.sy-ex .sy-c{width:100%;margin:0 0 1.25rem!important}
   .sy-ex .sy-link{display:none}
 }
+@media (min-width:1181px){
+  #approach .sy-ex>.aentry.ax-top{margin-bottom:clamp(92px,12vh,132px)}
+  .sy-ex .sy-form{top:clamp(210px,25vh,270px);height:calc(100% - clamp(210px,25vh,270px))}
+  .sy-ex .sy-tab{padding-top:clamp(48px,7vh,84px)}
+}
 @media (max-width:760px){
   #approach .sy-ex>.aentry.ax-top{padding-left:1.15rem}
   .sy-ex .sy-h .n,.sy-ex .sy-k .n{font-size:clamp(21px,7vw,29px)!important;white-space:normal!important}
   .sy-ex .sy-c{padding:1rem!important}
 }
-@media (prefers-reduced-motion:reduce){.sy-ex .sy-link{stroke-dasharray:none!important;stroke-dashoffset:0!important}}
+@media (prefers-reduced-motion:reduce){.sy-ex .sy-link{stroke-dasharray:none!important;stroke-dashoffset:0!important}.sy-ex .sy-soft{transition:none!important}}
 
 /* Explore ends in the shared release footer, after a deliberate black pause. */
-#approach>.explore-footer{box-sizing:border-box;width:100%;margin:clamp(120px,18vh,240px) 0 0;padding:0 var(--m) max(2rem,var(--endpad));background:#000;color:#fff}
+#approach>.explore-footer{box-sizing:border-box;width:100%;margin:clamp(140px,20vh,260px) 0 0;padding:clamp(18px,2.8vh,32px) var(--m) max(3rem,calc(var(--endpad) + env(safe-area-inset-bottom)));background:#000;color:#fff}
 #approach>.explore-footer .horizon{display:none}
 #approach>.explore-footer button{color:inherit;font:inherit;letter-spacing:inherit;cursor:pointer}
 #approach>.explore-footer button:focus-visible{outline:2px solid currentColor;outline-offset:2px}

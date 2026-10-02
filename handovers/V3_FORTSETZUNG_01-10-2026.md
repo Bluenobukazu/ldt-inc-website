@@ -137,6 +137,16 @@ Run browser QA on the deployed candidate at 970×510, 1280×720, 1440×900 and r
 - After the last card and SVG field, a generous black pause leads to the accepted shared release-footer structure. Its legal, Workshops and Sitemap links retain their existing destinations; Contact uses the existing chapter navigation so the overlay closes correctly.
 - No Deep Dive footer/navigation redesign, merge or production action is included.
 
+## Explore, Layer-2 shell and Layer-1 polish
+
+- Baseline: branch `work`, commit `adb3f35d34db449bef4b44ddba0083dbe7ed1836`.
+- Explore reserves a larger quiet zone between its entry note, line field and first card row. The upper field narrows and swings right before its staggered off-frame ending; the accepted lower ending remains intact.
+- Explore highlight duplicates now use a soft elliptical SVG mask whose position and size transition between the six relationship groups. This removes rectangular clip edges while retaining keyboard and pointer orientation.
+- Explore and the shared Deep Dive layer keep their framed top row and Back/location row sticky inside the actual overlay scroll container. Both expose `One Operating System`; Deep Dives also retain Explore with current-location transfer.
+- The shared release footer has slightly deeper, safe-area-aware vertical padding. Explore retains its additional black closing pause.
+- The Layer-1 system contour is compressed organically inside its lower frame instead of being cut at the SVG boundary. The chapter rail uses stable monospaced number slots, smaller labels and unchanged 44px interaction rows.
+- No Deep Dive footer redesign, merge or production action is included.
+
 ## V3 remainder — unchanged
 
 The application release does not replace the V3 remainder: open line design for Explore/System footer; further visual and narrative refinement; all 133 frames against seven contract fields; remaining frame findings and full V3 QA; shared frame-by-frame review and surgical corrections. ADD-01–04, workshop-result drafts and other copy awaiting approval were not silently implemented.

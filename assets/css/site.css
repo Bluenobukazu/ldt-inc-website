@@ -120,7 +120,7 @@ a.crow:hover .v,a.crow:focus-visible .v{text-decoration:underline;text-underline
 :root{--endgap:18vh;--endpad:4.5vh}
 .dark footer .horizon{background:none;height:0;margin:var(--endgap) 0 0}
 .dark:has(> footer){padding-bottom:var(--endpad)!important}
-.release-footer{width:100vw;margin-left:calc(-1 * var(--m));background:#000;color:#fff;padding:0 var(--m) max(2rem,var(--endpad));font-family:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+.release-footer{width:100vw;margin-left:calc(-1 * var(--m));background:#000;color:#fff;padding:clamp(16px,2.4vh,28px) var(--m) max(3rem,calc(var(--endpad) + env(safe-area-inset-bottom)));font-family:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace}
 .release-footer .foot{display:flex;justify-content:space-between;align-items:center;gap:2rem;font-size:12px;line-height:1.5}
 .release-footer nav{display:flex;align-items:center;gap:0}
 .release-footer nav>*{display:inline-flex;align-items:center;min-height:44px}
@@ -225,6 +225,24 @@ html:not(.kbd) .ov [data-close]:focus-visible{outline:none!important;box-shadow:
 .pill{font-size:13px;font-weight:600}
 :is(.ov .bar,.ovsub,.subbar) .lbl .pill{background:#000;color:#fff;border-color:#000;padding:3px 10px}
 #rail button{font-size:11px;font-weight:600;opacity:.82}
+
+/* The active Layer-2 shell keeps both of its navigation rows within reach. */
+.ov:is(#approach,#deep){--layer-bar:72px;scroll-padding-top:calc(var(--layer-bar) + 70px)}
+.ov:is(#approach,#deep)>.bar{min-height:var(--layer-bar)}
+.ov:is(#approach,#deep)>.ovsub{position:sticky;top:var(--layer-bar);z-index:4;min-height:58px;padding:7px var(--m);background:#fff;color:#000;border-bottom:1px solid rgba(0,0,0,.18)}
+.ov:is(#approach,#deep)>.bar .ovr{display:flex;align-items:center;justify-content:flex-end;gap:clamp(14px,2vw,28px)}
+.ov:is(#approach,#deep)>.bar .ovr button{min-height:44px;text-align:center}
+#approach>.ovsub{background:#000;color:#fff;border-bottom-color:rgba(255,255,255,.28)}
+@media(max-width:760px){.ov:is(#approach,#deep){--layer-bar:88px}.ov:is(#approach,#deep)>.ovsub{align-items:flex-start;min-height:58px}.ov:is(#approach,#deep)>.bar .ovr{gap:12px;font-size:11px;line-height:1.2}.ov:is(#approach,#deep)>.bar .ovr button:first-child{max-width:12em}}
+
+/* Compact chapter rail: stable number measure, quiet labels, unchanged targets. */
+#rail{gap:2px}
+#rail button{justify-content:flex-end;min-height:44px;gap:8px;color:#777;opacity:1;font:400 9px/1.1 var(--sans);letter-spacing:.09em}
+#rail button span{display:grid;grid-template-columns:34px auto;align-items:center;column-gap:8px;white-space:nowrap}
+#rail button span b{display:inline-flex;align-items:center;justify-content:center;width:34px;height:22px;border-radius:999px;font:500 11px/1 "IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+#rail button i{width:8px;opacity:.55}
+#rail button.on{color:#fff}#rail button.on span b{background:#fff;color:#000}#rail button.on i{width:18px;height:1px}
+#rail button:hover,#rail button:focus-visible{color:#fff}
 /* v3 M06: location label and codes never below 12px */
 .lbl,.dcur,.loc .dcur{font-size:max(12px,11px)}
 .dcur,.lbl{font-size:12.5px}

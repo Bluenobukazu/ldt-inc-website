@@ -65,7 +65,8 @@ function frameLayer(ov){
   const r=$('.ovr',bar);
   /* inside the operating system (Layer 2) the way out is the map of the system with the visitor's place marked; the Index stays one step further (Lena, 28.09.2026) */
   if(isIndex)r.appendChild(close);
-  else if(ov.id==='deep')r.innerHTML='<button type="button" class="dexp" data-open="approach" data-act aria-haspopup="dialog">Explore</button>';
+  else if(ov.id==='deep')r.innerHTML='<button type="button" data-go="3" data-act>One Operating System</button><button type="button" class="dexp" data-open="approach" data-act aria-haspopup="dialog">Explore</button>';
+  else if(ov.id==='approach')r.innerHTML='<button type="button" data-go="3" data-act>One Operating System</button><button type="button" data-open="index" data-act aria-haspopup="dialog">Index</button>';
   else r.innerHTML='<button type="button" data-open="index" data-act aria-haspopup="dialog">Index</button>';
 }
 $$('.ov').forEach(frameLayer);

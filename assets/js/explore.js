@@ -18,16 +18,16 @@ function build(root,mode){
   const {dims,con}=model(),id='syc'+(++uid);
   root.classList.add('sy','sy-'+mode);
   const cols=[dims[0],con[0],dims[1],dims[2],con[1],dims[3]];
-  root.innerHTML=`<div class="sy-form"><svg class="sy-svg" aria-hidden="true" focusable="false"><defs><clipPath id="${id}"><rect class="sy-clip" x="0" y="0" width="0" height="4000"/></clipPath></defs><g class="sy-base"></g><g class="sy-links"></g><g class="sy-hl" clip-path="url(#${id})"></g></svg></div>
+  root.innerHTML=`<div class="sy-form"><svg class="sy-svg" aria-hidden="true" focusable="false"><defs><clipPath id="${id}"><rect class="sy-clip" x="0" y="0" width="0" height="4000"/></clipPath><radialGradient id="${id}g"><stop offset="0" stop-color="white"/><stop offset=".62" stop-color="white" stop-opacity=".82"/><stop offset="1" stop-color="black" stop-opacity="0"/></radialGradient><mask id="${id}m" maskUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><ellipse class="sy-soft" cx="0" cy="0" rx="0" ry="0" fill="url(#${id}g)"/></mask></defs><g class="sy-base"></g><g class="sy-links"></g><g class="sy-hl" ${mode==='ex'?`mask="url(#${id}m)"`:`clip-path="url(#${id})"`}></g></svg></div>
   <div class="sy-tab">${cols.map(c=>c.areas?`<div class="sy-c sy-d" data-d="${c.i}">${mode!=='l1'?`<p class="sy-dh" aria-hidden="true"><span class="sy-l">${L[c.i]}</span><b>${c.n}</b></p>`:''}${head(c)}${mode==='ex'?`<p class="sy-ap">${c.ap}</p>`:''}<ul>${c.areas.map(area).join('')}</ul></div>`:`<div class="sy-c sy-x" data-k="${c.k}">${conn(c)}${mode==='ex'?`<p class="sy-ap">${c.ap}</p>`:''}</div>`).join('')}</div>`;
-  const svg=root.querySelector('.sy-svg'),tab=root.querySelector('.sy-tab'),base=svg.querySelector('.sy-base'),links=svg.querySelector('.sy-links'),hl=svg.querySelector('.sy-hl'),clip=svg.querySelector('.sy-clip'),cEls=[...tab.children];
+  const svg=root.querySelector('.sy-svg'),tab=root.querySelector('.sy-tab'),base=svg.querySelector('.sy-base'),links=svg.querySelector('.sy-links'),hl=svg.querySelector('.sy-hl'),clip=svg.querySelector('.sy-clip'),soft=svg.querySelector('.sy-soft'),cEls=[...tab.children];
   const M=mode==='ft'?8:mode==='ex'?13:15,N=M*2,P1=[],P2=[];
   for(let i=0;i<N;i++){const a=document.createElementNS(NS,'path'),b=document.createElementNS(NS,'path');[a,b].forEach(p=>{p.setAttribute('pathLength','1');p.style.setProperty('--i',i)});a.setAttribute('class','sy-ln');b.setAttribute('class','sy-lh');base.appendChild(a);hl.appendChild(b);P1.push(a);P2.push(b)}
-  let W=0,H=0,rng=[],pts=[],T=0,here=null,pick=null;
+  let W=0,H=0,rng=[],yrng=[],pts=[],T=0,here=null,pick=null;
   const mobile=()=>innerWidth<=760;
   const layout=()=>{W=svg.clientWidth;H=svg.clientHeight;if(!W||!H)return;svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
     const f=svg.getBoundingClientRect(),sc=f.width/W||1;
-    rng=cEls.map(c=>{const b=c.getBoundingClientRect();return[(b.left-f.left)/sc,(b.right-f.left)/sc]});
+    rng=cEls.map(c=>{const b=c.getBoundingClientRect();return[(b.left-f.left)/sc,(b.right-f.left)/sc]});yrng=cEls.map(c=>{const b=c.getBoundingClientRect();return[(b.top-f.top)/sc,(b.bottom-f.top)/sc]});
     if(mobile()){pts=[[0,.2],[.125,1],[.25,.03],[.375,.95],[.5,.4],[.625,.95],[.75,.03],[.875,1],[1,.2]].map(([u,e])=>[u*W,e]);rng=cEls.map((c,i)=>[W*i/6,W*(i+1)/6])}
     else{const c=rng.map(r=>(r[0]+r[1])/2),V=mode==='ft'?[.16,.78,.03,.6,.3,.74,.03,.88,.14]:mode==='ex'?[.14,.96,.03,.72,.32,.9,.03,1,.13]:[.2,1,.03,.95,.4,.95,.03,1,.2];
       pts=[[0,V[0]],[c[0],V[1]],[c[1],V[2]],[c[2],V[3]],[(rng[2][1]+rng[3][0])/2,V[4]],[c[3],V[5]],[c[4],V[6]],[c[5],V[7]],[W,V[8]]];
@@ -38,8 +38,8 @@ function build(root,mode){
     for(let k=0;k<6;k++){if(wt[k]<.002)continue;const c=(rng[k][0]+rng[k][1])/2,sg=(rng[k][1]-rng[k][0])*.6,g=Math.exp(-((x-c)/sg)*((x-c)/sg));if(k===1||k===4)ad+=.09*wt[k]*g;else m+=.13*wt[k]*g}
     return e*m+ad};
   const exX=(f,u)=>{const q=u*Math.PI*2,edge=Math.sign(f)*Math.pow(Math.abs(f),1.14),
-    centre=W*.5+W*(.028*Math.sin(q*1.12-.45)+.018*Math.sin(q*3.25+.8)),
-    breath=.038+.078*(.5+.5*Math.sin(q*2.15-.72))+.034*(.5+.5*Math.cos(q*4.4+.2)),
+    crown=Math.pow(Math.max(0,1-u),2),centre=W*.5+W*(.028*Math.sin(q*1.12-.45)+.018*Math.sin(q*3.25+.8)+.055*crown),
+    breath=(.038+.078*(.5+.5*Math.sin(q*2.15-.72))+.034*(.5+.5*Math.cos(q*4.4+.2)))*(1-.34*crown),
     pinch=.42+.58*Math.abs(Math.sin(q*1.58+.42)),
     weave=Math.sin(q*3.05-.5)*(.52+.48*Math.cos(q*.74)),
     fan=W*edge*breath*pinch,
@@ -74,7 +74,7 @@ function build(root,mode){
     })
   }
   /* hover and focus: a dimension brings forward itself and its connector, a connector both of its dimensions */
-  const zone=ix=>{if(!rng.length)return;if(mode==='ex'){const left=ix.some(i=>i<3),right=ix.some(i=>i>2);clip.setAttribute('x',left&&!right?0:right&&!left?W*.45:0);clip.setAttribute('width',left&&right?W:W*.55);return}const l=Math.min(...ix.map(i=>rng[i][0])),r=Math.max(...ix.map(i=>rng[i][1]));clip.setAttribute('x',l);clip.setAttribute('width',r-l)};
+  const zone=ix=>{if(!rng.length)return;if(mode==='ex'){const y1=Math.min(...ix.map(i=>yrng[i][0])),y2=Math.max(...ix.map(i=>yrng[i][1]));soft.style.cx=W/2+'px';soft.style.cy=(y1+y2)/2+'px';soft.style.rx=W*.23+'px';soft.style.ry=Math.max(H*.16,(y2-y1)/2+H*.07)+'px';return}const l=Math.min(...ix.map(i=>rng[i][0])),r=Math.max(...ix.map(i=>rng[i][1]));clip.setAttribute('x',l);clip.setAttribute('width',r-l)};
   const show=ix=>{for(let k=0;k<6;k++)tw[k]=ix&&ix.includes(k)?1:0;root.classList.toggle('f',!!ix);cEls.forEach((c,i)=>c.classList.toggle('on',!!ix&&ix.includes(i)));if(ix)zone(ix)};
   const rest=()=>{const active=here||pick;if(active){root.classList.add('hold');zone(active)}else root.classList.remove('hold')};
   const grp=i=>({0:[0,1],1:[0,1,2],2:[1,2],3:[3,4],4:[3,4,5],5:[4,5]}[i]);
@@ -126,7 +126,8 @@ function compose(root){
         rx=470*lobe+fan,ry=286*(1+.17*Math.cos(q*4-.5))+f*(72+88*Math.cos(q*3+.5))+clear,
         fold=f*(72*Math.sin(q*2+.6)+34*Math.sin(q*7-.2)),
         x=720+rx*Math.cos(ang)+fold*Math.sin(q),
-        y=465+ry*Math.sin(ang)+f*58*Math.sin(q*3+.85)+20*Math.cos(q*2.2);
+        rawY=445+ry*Math.sin(ang)+f*58*Math.sin(q*3+.85)+20*Math.cos(q*2.2),
+        y=rawY>815?815+(rawY-815)*.34:rawY;
       d+=(k?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)
     }
     d+='Z';
