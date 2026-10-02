@@ -110,7 +110,7 @@ function compose(root){
     {e:4,code:'C + D',name:con[1].n,kind:'real',i:con[1].r,x:1062,y:410,w:330},
     {e:5,code:'D',name:dims[3].n,kind:'dim',i:dims[3].i,x:1062,y:656,w:330}
   ];
-  dyn.innerHTML=`<svg class="cm-svg" viewBox="0 0 1440 900" aria-hidden="true" focusable="false"><defs><clipPath id="cmf"><rect class="cm-front" x="0" y="0" width="0" height="900"/></clipPath><clipPath id="cmz"><rect class="cm-zone" x="0" y="0" width="0" height="0"/></clipPath></defs><g clip-path="url(#cmf)"><g class="cm-base"></g><g class="cm-hl" clip-path="url(#cmz)"></g></g></svg>`+
+  dyn.innerHTML=`<svg class="cm-svg" viewBox="0 0 1440 900" aria-hidden="true" focusable="false"><defs><clipPath id="cmf"><rect class="cm-front" x="0" y="0" width="0" height="900"/></clipPath><radialGradient id="cmzg"><stop offset="0" stop-color="white"/><stop offset=".58" stop-color="white" stop-opacity=".82"/><stop offset="1" stop-color="black" stop-opacity="0"/></radialGradient><mask id="cmz" maskUnits="userSpaceOnUse" x="0" y="0" width="1440" height="900"><ellipse class="cm-zone" cx="720" cy="450" rx="0" ry="0" fill="url(#cmzg)"/></mask></defs><g clip-path="url(#cmf)"><g class="cm-base"></g><g class="cm-hl" mask="url(#cmz)"></g></g></svg>`+
     targets.map(t=>`<button type="button" class="cm-a cm-target" data-e="${t.e}" data-open="approach" data-system-kind="${t.kind}" data-system-index="${t.i}" data-act aria-haspopup="dialog" style="left:${t.x}px;top:${t.y}px;width:${t.w}px"><span class="cm-code">${t.code}</span><span class="n">${t.name}</span><span class="cm-pl" aria-hidden="true">+</span></button>`).join('');
   const svg=dyn.querySelector('.cm-svg'),base=svg.querySelector('.cm-base'),hl=svg.querySelector('.cm-hl'),front=svg.querySelector('.cm-front'),zone=svg.querySelector('.cm-zone');
   const paths=[],hi=[],COUNT=42,STEPS=240;
@@ -125,9 +125,10 @@ function compose(root){
         clear=136*Math.pow(Math.max(0,Math.sin(q)),8),
         rx=505*lobe+fan,ry=304*(1+.2*Math.cos(q*4-.5))+f*(78+94*Math.cos(q*3+.5))+clear,
         fold=f*(72*Math.sin(q*2+.6)+34*Math.sin(q*7-.2)),
-        x=720+rx*Math.cos(ang)+fold*Math.sin(q),
+        rawX=720+rx*Math.cos(ang)+fold*Math.sin(q),
+        x=rawX<18?18+(rawX-18)*.08:rawX>1422?1422+(rawX-1422)*.08:rawX,
         rawY=435+ry*Math.sin(ang)+f*62*Math.sin(q*3+.85)+22*Math.cos(q*2.2),
-        y=rawY>820?820+(rawY-820)*.3:rawY;
+        y=rawY<34?34+(rawY-34)*.08:rawY>820?820+(rawY-820)*.3:rawY;
       d+=(k?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)
     }
     d+='Z';
@@ -136,7 +137,7 @@ function compose(root){
   }
   const boxes=[[120,70,520,330],[80,310,440,270],[100,550,540,320],[800,70,520,330],[920,310,440,270],[800,550,540,320]];
   const grp=e=>({0:[0,1],1:[0,1,2],2:[1,2],3:[3,4],4:[3,4,5],5:[4,5]}[e]);
-  const show=ix=>{root.classList.toggle('f',!!ix);dyn.querySelectorAll('[data-e]').forEach(el=>el.classList.toggle('on',!!ix&&ix.includes(+el.dataset.e)));if(ix){const q=ix.map(i=>boxes[i]),x=Math.min(...q.map(v=>v[0])),y=Math.min(...q.map(v=>v[1])),r=Math.max(...q.map(v=>v[0]+v[2])),bt=Math.max(...q.map(v=>v[1]+v[3]));zone.setAttribute('x',x);zone.setAttribute('y',y);zone.setAttribute('width',r-x);zone.setAttribute('height',bt-y)}};
+  const show=ix=>{root.classList.toggle('f',!!ix);dyn.querySelectorAll('[data-e]').forEach(el=>el.classList.toggle('on',!!ix&&ix.includes(+el.dataset.e)));if(ix){const q=ix.map(i=>boxes[i]),x=Math.min(...q.map(v=>v[0])),y=Math.min(...q.map(v=>v[1])),r=Math.max(...q.map(v=>v[0]+v[2])),bt=Math.max(...q.map(v=>v[1]+v[3]));zone.style.cx=(x+r)/2+'px';zone.style.cy=(y+bt)/2+'px';zone.style.rx=Math.max(250,(r-x)/2+100)+'px';zone.style.ry=Math.max(180,(bt-y)/2+80)+'px'}};
   dyn.querySelectorAll('[data-e]').forEach(el=>{const ix=grp(+el.dataset.e);['mouseenter','focusin'].forEach(ev=>el.addEventListener(ev,()=>show(ix)));['mouseleave','focusout'].forEach(ev=>el.addEventListener(ev,()=>show(null)))});
   function setP(p){front.setAttribute('width',Math.max(0,Math.min(1,p))*1440);dyn.querySelectorAll('.cm-target').forEach((el,i)=>{const o=Math.max(0,Math.min(1,(p-(.2+i*.055))/.16));el.style.opacity=o;el.style.transform=`translateY(${(1-o)*10}px)`})}
   setP(0);root._cm={setP,show};if(root.dataset.rm==='1'||RMq.matches)setP(1)

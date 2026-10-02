@@ -151,15 +151,8 @@ const hero=on=>{document.body.classList.toggle('hero',on);
   /* reduced motion: identity and LDT INC swap without movement; otherwise monolith.js crossfades them with the scroll */
   if(RM){const w=$('#hdr .who'),b=$('#hdr .brand');if(w&&b){w.style.visibility=on?'':'hidden';w.style.opacity=on?1:0;b.style.visibility=on?'hidden':'visible';b.style.opacity=on?0:1}}};
 let active=-1;
-/* Desktop chapter rail: downward reading hides it; a deliberate upward move
-   returns it promptly. Keyboard focus always wins, so hidden controls never
-   become an invisible tab stop. */
-(()=>{if(!matchMedia('(hover:hover) and (min-width:761px)').matches)return;
-  const rail=$('#rail'),B=document.body;let y=scrollY,sum=0,dir=0;
-  const show=()=>B.classList.remove('rail-scroll-hidden');
-  addEventListener('scroll',()=>{if(rail.contains(document.activeElement)){show();y=scrollY;return}const d=scrollY-y;y=scrollY;if(Math.abs(d)<2)return;const n=Math.sign(d);if(n!==dir){dir=n;sum=0}sum+=d;if(sum>34)B.classList.add('rail-scroll-hidden');else if(sum<-12)show()},{passive:true});
-  rail.addEventListener('mouseenter',show);rail.addEventListener('focusin',show);
-  addEventListener('keydown',e=>{if(e.key==='Tab')show()},true)})();
+/* The compact desktop rail remains available throughout Layer 1. CSS hides it
+   only on the landing and in the Operating-System frame. */
 function setActive(i){if(i===active)return;active=i;LDT.chapterNow=i;clearTimeout(urlT);urlT=setTimeout(syncChapterUrl,350);$$('#rail button').forEach((b,j)=>{b.classList.toggle('on',j===i);if(j===i)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current')});$('#railM').innerHTML=`<span class="pill">0${i+1}</span><span class="dcur">${CH[i]}</span>`;document.body.classList.toggle('at-end',i===7)}
 function railRect(i){const b=$$('#rail button')[i];return b&&b.offsetParent?b.querySelector('span').getBoundingClientRect():null}
 function emerge(el,i,scale=1){

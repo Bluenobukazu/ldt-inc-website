@@ -158,6 +158,15 @@ Run browser QA on the deployed candidate at 970×510, 1280×720, 1440×900 and r
 - Current-location state is reset when Explore is entered without Deep-Dive context. Exact Deep-Dive changes still call the shared marker; a subtopic no longer additionally activates its parent dimension in the footer navigation. The status remains semantic `aria-current="page"` and uses one reserved dark-grey `YOU ARE HERE` pill.
 - Required deployed-preview interaction and visual QA remains open in this execution environment; no merge or production action is included.
 
+## Final surgical clarification: line field and frozen navigation
+
+- Baseline: branch `work`, commit `fa4aeed202bdbaee50e71357437f1747fe7dd667`.
+- The Layer-1 chapter rail no longer hides on downward scroll. It remains available throughout Layer 1, with zero inter-row gap and 44px rows, and is hidden only on the landing and in the Operating-System frame.
+- The frozen shell now applies to every overlay, not only Explore and Deep Dives. Page-level Back/title bars (`.subbar`) are likewise sticky below the global header on Workshops, Sitemap and Legal pages.
+- The Layer-1 System contour softly compresses any extreme left/right/top coordinates back inside the SVG instead of clipping them. Its highlight now uses the same soft elliptical gradient-mask principle as Explore rather than a rectangular clip.
+- The accepted header order remains unchanged: Explore has Index only; Deep Dives have `Explore | Index`.
+- Deployed-preview visual QA remains required; no merge or production action is included.
+
 ## V3 remainder — unchanged
 
 The application release does not replace the V3 remainder: open line design for Explore/System footer; further visual and narrative refinement; all 133 frames against seven contract fields; remaining frame findings and full V3 QA; shared frame-by-frame review and surgical corrections. ADD-01–04, workshop-result drafts and other copy awaiting approval were not silently implemented.

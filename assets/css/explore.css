@@ -327,6 +327,7 @@ body.system-moment #railM{opacity:0;visibility:hidden}
 .cv .j-cm .cm-dyn{transform:none}
 .cv .j-cm .cm-svg{-webkit-mask-image:none;mask-image:none}
 .cm-ln,.cm-lh{fill:none;stroke:#fff;stroke-width:.62}.cm-lh{stroke-width:1.45;opacity:0;transition:opacity .35s}.j-cm.f .cm-lh{opacity:1}
+.cm-zone{transition:cx .42s var(--ease),cy .42s var(--ease),rx .42s var(--ease),ry .42s var(--ease)}
 .cv .j-cm .cm-pill{left:48px;top:54px}
 .cv .j-cm .cm-lock{left:485px;top:290px;width:470px;display:flex;flex-direction:column;align-items:center;color:#fff;font-family:var(--serif);font-style:normal;font-weight:400;line-height:.76;letter-spacing:-.065em;text-align:center}
 .cv .j-cm .cm-lock span{font:inherit;font-size:88px;letter-spacing:inherit}
@@ -342,7 +343,7 @@ body.system-moment #railM{opacity:0;visibility:hidden}
 .cv .j-cm .cm-target:hover .n,.cv .j-cm .cm-target:focus-visible .n,.cv .j-cm .cm-target.on .n{text-decoration:underline;text-underline-offset:.16em;text-decoration-thickness:1px}
 .stage.sysOn .j-cm button{pointer-events:auto}
 .cv .j-cm .cm-mot,.cv .j-cm .cm-ls{display:none!important}
-@media (prefers-reduced-motion:reduce){.cm-ln{stroke-dasharray:none!important;stroke-dashoffset:0!important}.cv .j-cm .cm-target{opacity:1!important;transform:none!important}}
+@media (prefers-reduced-motion:reduce){.cm-ln{stroke-dasharray:none!important;stroke-dashoffset:0!important}.cm-zone{transition:none!important}.cv .j-cm .cm-target{opacity:1!important;transform:none!important}}
 @media (min-width:761px){.cv .j-os{display:none}}
 @media (max-width:760px){
   .cv .j-os{display:none!important}.cv .j-cm{display:block;width:430px;height:860px;transform:none!important;mix-blend-mode:difference}
