@@ -158,26 +158,20 @@ svg.sys .cross{stroke:#fff;stroke-width:1}
 #ways .row .plus{justify-self:end;font-size:clamp(24px,2.2vw,34px);font-weight:300;line-height:1;transition:transform .45s var(--ease)}
 #ways .row:hover .plus,#ways .row:focus-visible .plus{transform:rotate(90deg)}
 
-/* contact */
-/* 08 contact: the destination. The address itself is the largest thing on the black field; one line beneath it fills on hover. LinkedIn follows as the second, quieter way */
-#contact{min-height:100vh;padding-top:max(14vh,104px);display:flex;flex-direction:column;justify-content:space-between}
-#contact .c-in{display:flex;flex-direction:column;flex:1}
-#contact .kick{flex-direction:row;align-items:center;gap:16px;margin-bottom:6vh}#contact .kick .pill{margin:0}
-#contact .kick .t{font-family:var(--serif);font-style:italic;font-weight:400;font-stretch:100%;font-variation-settings:normal;font-size:clamp(34px,2.8vw,48px);letter-spacing:-.01em;line-height:1}
-#contact .open{font-size:clamp(22px,2.2vw,38px);line-height:1.12;letter-spacing:-.02em;max-width:31ch}
-.c-acts{margin-top:auto;padding-top:12vh}
-.c-mail{position:relative;display:block;width:100%;padding-bottom:2.6vh;cursor:pointer}
-.c-mail .v{display:block;font-weight:500;font-size:clamp(30px,7.9vw,122px);letter-spacing:-.045em;line-height:.95;white-space:nowrap}
-.c-line{position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(255,255,255,.35)}
-.c-line::after{content:"";position:absolute;inset:0;background:#fff;transform:scaleX(0);transform-origin:0 50%;transition:transform .8s var(--ease)}
-.c-mail:hover .c-line::after,.c-mail:focus-visible .c-line::after{transform:scaleX(1)}
-.c-mail:focus-visible{outline-offset:8px}
-.c-li{display:inline-flex;align-items:baseline;gap:22px;margin-top:3.4vh;padding:6px 0;cursor:pointer}
-.c-li .k{font-family:var(--serif);font-style:italic;font-size:clamp(20px,1.6vw,24px)}
-.c-li .v{font-size:clamp(17px,1.4vw,21px);letter-spacing:-.01em}
-.c-arr{font-size:18px;transition:transform .45s var(--ease)}
-.c-li:hover .v,.c-li:focus-visible .v{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
-.c-li:hover .c-arr,.c-li:focus-visible .c-arr{transform:translate(3px,-3px)}
+/* contact: a quiet invitation and two equal routes, with the existing rings as the counterweight */
+#contact{min-height:100vh;padding-top:max(12vh,96px);display:flex;flex-direction:column;justify-content:space-between}
+#contact .c-in{display:flex;flex-direction:column;flex:1;min-height:clamp(620px,78vh,820px);padding-right:min(42vw,560px)}
+#contact .kick{flex-direction:row;align-items:center;gap:16px;margin-bottom:clamp(64px,9vh,108px)}#contact .kick .pill{margin:0}
+#contact .kick .t{font-family:var(--sans);font-style:normal;font-weight:600;font-stretch:108%;font-variation-settings:"wdth" 108;font-size:clamp(36px,3.4vw,58px);letter-spacing:-.04em;line-height:1}
+#contact .c-copy{width:min(100%,700px)}
+#contact .open{margin:0;font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(30px,3.25vw,54px);line-height:1.16;letter-spacing:-.018em;max-width:21ch;text-wrap:balance}
+.c-acts{width:min(100%,620px);margin-top:clamp(70px,10vh,120px);border-bottom:1px solid rgba(255,255,255,.28)}
+.c-row{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:72px;padding:14px 2px;border-top:1px solid rgba(255,255,255,.28);font-family:var(--sans);font-size:clamp(22px,2vw,32px);font-weight:400;letter-spacing:-.02em;line-height:1.1;cursor:pointer;transition:padding .35s var(--ease),background-color .35s var(--ease)}
+.c-row .c-arr{flex:none;margin-left:32px;font-size:1.1em;font-weight:300;line-height:1;transition:transform .35s var(--ease)}
+.c-row:hover,.c-row:focus-visible{padding-left:12px;padding-right:12px;background:rgba(255,255,255,.07)}
+.c-row:hover .c-arr,.c-row:focus-visible .c-arr{transform:translateX(5px)}
+.c-row:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media (min-width:761px) and (max-width:1100px){#contact .c-in{padding-right:290px}#contact .kick{margin-bottom:44px}#contact .open{font-size:28px;max-width:20ch}.c-acts{margin-top:46px}.c-row{min-height:60px;font-size:22px}}
 /* on contact the chapter rail steps back, so nothing competes with the address */
 body.at-end #rail button:not(.on){opacity:.32}body.at-end #rail button:hover,body.at-end #rail button:focus-visible{opacity:1}
 
@@ -360,7 +354,7 @@ body.at-end #rail button:not(.on){opacity:.32}body.at-end #rail button:hover,bod
   .mini .lbl2{white-space:normal;max-width:48%}
   .dd{grid-template-columns:1fr}.states{grid-template-columns:1fr}
   .j-cue{justify-content:center;gap:12px}.j-cue .cl{display:none}.j-cue .ci{width:26px;height:26px;font-size:16px}
-  .c-acts{margin-top:0;padding-top:10vh}.c-mail .v{font-size:8.9vw}.c-li{gap:16px}
+  #contact{padding-top:max(11vh,86px)}#contact .c-in{min-height:0;padding-right:0}#contact .kick{margin-bottom:54px}#contact .kick .t{font-size:38px}#contact .c-copy{width:100%}#contact .open{font-size:clamp(28px,8.4vw,40px);line-height:1.17;max-width:19ch;text-wrap:pretty}.c-acts{width:100%;margin-top:64px}.c-row{min-height:64px;font-size:24px}
   .e-led::before{left:0}
   .e-axis{grid-template-columns:1fr;row-gap:4px;padding-left:18px}.e-axis span+span{padding-left:0}
   .e-case{grid-template-columns:1fr;padding:7vh 0 0 18px}
