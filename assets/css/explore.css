@@ -488,7 +488,7 @@ body.system-moment #railM{opacity:0;visibility:hidden}
 #approach>.explore-footer button:focus-visible{outline:2px solid currentColor;outline-offset:2px}
 
 /* ===== Deep-Dive closing system navigation ===== */
-.dfoot{--fu:1rem;margin:0 calc(var(--m)*-1);padding:clamp(20px,3vh,34px) var(--m) 0;background:#000;color:#fff;border:0}
+.dfoot{--fu:1rem;--serif:var(--libre-serif);margin:0 calc(var(--m)*-1);padding:clamp(20px,3vh,34px) var(--m) 0;background:#000;color:#fff;border:0}
 .dfoot .df-head{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;margin:0 0 clamp(14px,2vh,22px);padding:0;border:0}
 .dfoot .df-head::after,.dfoot .df-head::before{content:"";position:absolute;top:calc(100% + 8px);width:54px;height:1px;background:#fff}.dfoot .df-head::before{left:0}.dfoot .df-head::after{right:0}
 .dfoot .df-head{position:relative}

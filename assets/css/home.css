@@ -48,6 +48,7 @@ html.js .mono .mwm,html.js .mono .lab,html.js .mono .mscroll{opacity:0}
 .j-core .it{font-size:1.15em;letter-spacing:-.02em}
 .jt .pill{position:relative;margin-bottom:10px}
 .jt .t{position:relative;display:block;font-stretch:125%;font-variation-settings:"wdth" 125;font-weight:600;font-size:60px;letter-spacing:-.045em;line-height:.9}
+.jt .s+.t{margin-top:.12em}
 .jt .x{position:relative;display:block;line-height:1.4;letter-spacing:-.005em}
 .jt .s{position:relative;display:block;font-family:var(--serif);font-style:italic;font-size:52px;line-height:1.02;margin-top:40px;width:420px}
 
