@@ -1,4 +1,5 @@
 /* Technology (visual rebuild 30.09.2026), scoped .te on l2.css. Device: system lines and a cursor. Technology reads as operating infrastructure: rows, tabular figures, one caret. Type leads. */
+#deep .inner:has(>.te:not([hidden])){padding-top:3.5vh}
 .te .l2-f{--hv:55}.te .te-hero{--hv:76}.te .te-cwh{--hv:40}.te .te-cwl{--hv:60}.te .te-au{--hv:68}.te .te-sq{--hv:44}.te .te-ap{--hv:75}.te .te-pr{--hv:50}.te .te-tr{--hv:77}.te .te-lcf{--hv:36}.te .te-cx{--hv:64}.te .te-ea{--hv:64}.te .te-br{--hv:46}
 .te .te-word{grid-column:1/-1;font-weight:850;font-stretch:108%;font-size:calc(12.4*var(--u));letter-spacing:-.045em;line-height:.9;margin-left:calc(-.4*var(--u))}
 .te .te-k{grid-column:1/8;grid-row:2;font-size:calc(4*var(--u));font-weight:300;letter-spacing:-.035em;line-height:1.04;margin-top:calc(2*var(--u))}
