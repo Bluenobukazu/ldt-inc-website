@@ -1,0 +1,5 @@
+Original source: https://github.com/impallari/Libre-Baskerville
+Downloaded: 2026-10-02
+License: OFL.txt included.
+Copy the font files and OFL.txt into assets/fonts/libre-baskerville/.
+Preserve existing font settings; use the corresponding real weight and italic file.

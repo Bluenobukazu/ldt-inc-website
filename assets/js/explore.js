@@ -7,46 +7,77 @@ const NS='http://www.w3.org/2000/svg',RMq=matchMedia('(prefers-reduced-motion: r
 let D=null,uid=0,lastMark=null;
 const model=()=>{const {DIMS,REAL,SYS,DL,RI,ADDR}=D;
   const dims=[0,1,2,3].map(i=>{const g=SYS.find(x=>x.d===i);return{i,l:DL[i],n:DIMS[i].n,ap:DIMS[i].ap,areas:g.a.map(n=>({n,r:RI(n),a:ADDR('real',RI(n))}))}});
-  const con=[['Positioning',0,1],['Delivery',2,3]].map(([n,a,b],k)=>({k,n,r:RI(n),a:ADDR('real',RI(n)),from:dims[a],to:dims[b]}));
+  const con=[['Positioning',0,1],['Delivery',2,3]].map(([n,a,b],k)=>({k,n,r:RI(n),a:ADDR('real',RI(n)),ap:REAL[RI(n)].k||'',from:dims[a],to:dims[b]}));
   return{dims,con}};
 const head=d=>`<button type="button" class="sy-h" data-ddim="${d.i}" data-act aria-haspopup="dialog"><span class="sy-l" aria-hidden="true">${L[d.i]}</span><span class="n">${d.n}</span><span class="plus" aria-hidden="true">+</span></button>`;
 const area=a=>`<li><button type="button" data-dreal="${a.r}" data-act aria-haspopup="dialog"><b class="ad">${a.a}</b><span>${a.n}</span><i aria-hidden="true">+</i></button></li>`;
-const conn=c=>`<button type="button" class="sy-k" data-dreal="${c.r}" data-act aria-haspopup="dialog" aria-label="${c.n}, connects ${c.from.n} and ${c.to.n}"><span class="ab" aria-hidden="true">${c.a}</span><span class="n">${c.n}</span></button>`;
+const conn=c=>`<button type="button" class="sy-k" data-dreal="${c.r}" data-act aria-haspopup="dialog" aria-label="${c.n}, connects ${c.from.n} and ${c.to.n}"><span class="ab" aria-hidden="true">${c.a}</span><span class="n">${c.n}</span><span class="plus" aria-hidden="true">+</span></button>`;
 
 /* the form: lines run along the page, wind around a centre line (a twisting ribbon) and meet where the swellings pinch */
 function build(root,mode){
   const {dims,con}=model(),id='syc'+(++uid);
   root.classList.add('sy','sy-'+mode);
   const cols=[dims[0],con[0],dims[1],dims[2],con[1],dims[3]];
-  root.innerHTML=`<div class="sy-form"><svg class="sy-svg" aria-hidden="true" focusable="false"><defs><clipPath id="${id}"><rect class="sy-clip" x="0" y="0" width="0" height="4000"/></clipPath></defs><g class="sy-base"></g><g class="sy-hl" clip-path="url(#${id})"></g></svg></div>
-  <div class="sy-tab">${cols.map(c=>c.areas?`<div class="sy-c sy-d" data-d="${c.i}">${mode!=='l1'?`<p class="sy-dh" aria-hidden="true"><span class="sy-l">${L[c.i]}</span><b>${c.n}</b></p>`:''}${head(c)}${mode==='ex'?`<p class="sy-ap">${c.ap}</p>`:''}<ul>${c.areas.map(area).join('')}</ul></div>`:`<div class="sy-c sy-x" data-k="${c.k}">${conn(c)}</div>`).join('')}</div>`;
-  const svg=root.querySelector('.sy-svg'),tab=root.querySelector('.sy-tab'),base=svg.querySelector('.sy-base'),hl=svg.querySelector('.sy-hl'),clip=svg.querySelector('.sy-clip'),cEls=[...tab.children];
+  const under=mode==='ft'?`<svg class="sy-under" viewBox="0 0 1200 92" preserveAspectRatio="none" aria-hidden="true" focusable="false"><g>${Array.from({length:12},(_,j)=>{let d='';for(let k=0;k<=80;k++){const x=k/80*1200,u=k/80,y=46+(j-5.5)*1.65+15*Math.sin(u*Math.PI*4+j*.16)+7*Math.sin(u*Math.PI*7-j*.22);d+=(k?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}return`<path d="${d}"/>`}).join('')}</g></svg>`:'';
+  root.innerHTML=`<div class="sy-form"><svg class="sy-svg" aria-hidden="true" focusable="false"><defs><clipPath id="${id}"><rect class="sy-clip" x="0" y="0" width="0" height="4000"/></clipPath><radialGradient id="${id}g"><stop offset="0" stop-color="white"/><stop offset=".62" stop-color="white" stop-opacity=".82"/><stop offset="1" stop-color="black" stop-opacity="0"/></radialGradient><mask id="${id}m" maskUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><ellipse class="sy-soft" cx="0" cy="0" rx="0" ry="0" fill="url(#${id}g)"/></mask></defs><g class="sy-base"></g><g class="sy-links"></g><g class="sy-hl" ${mode==='ex'?`mask="url(#${id}m)"`:`clip-path="url(#${id})"`}></g></svg></div>
+  <div class="sy-tab">${cols.map(c=>c.areas?`<div class="sy-c sy-d" data-d="${c.i}">${mode!=='l1'?`<p class="sy-dh" aria-hidden="true"><span class="sy-l">${L[c.i]}</span><b>${c.n}</b></p>`:''}${head(c)}${mode==='ex'?`<p class="sy-ap">${c.ap}</p>`:''}<ul>${c.areas.map(area).join('')}</ul></div>`:`<div class="sy-c sy-x" data-k="${c.k}">${conn(c)}${mode==='ex'?`<p class="sy-ap">${c.ap}</p>`:''}</div>`).join('')}</div>${under}`;
+  const svg=root.querySelector('.sy-svg'),tab=root.querySelector('.sy-tab'),base=svg.querySelector('.sy-base'),links=svg.querySelector('.sy-links'),hl=svg.querySelector('.sy-hl'),clip=svg.querySelector('.sy-clip'),soft=svg.querySelector('.sy-soft'),cEls=[...tab.children];
   const M=mode==='ft'?8:mode==='ex'?13:15,N=M*2,P1=[],P2=[];
   for(let i=0;i<N;i++){const a=document.createElementNS(NS,'path'),b=document.createElementNS(NS,'path');[a,b].forEach(p=>{p.setAttribute('pathLength','1');p.style.setProperty('--i',i)});a.setAttribute('class','sy-ln');b.setAttribute('class','sy-lh');base.appendChild(a);hl.appendChild(b);P1.push(a);P2.push(b)}
-  let W=0,H=0,rng=[],pts=[],T=0,here=null;
+  let W=0,H=0,rng=[],yrng=[],pts=[],T=0,here=null,pick=null;
   const mobile=()=>innerWidth<=760;
   const layout=()=>{W=svg.clientWidth;H=svg.clientHeight;if(!W||!H)return;svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
     const f=svg.getBoundingClientRect(),sc=f.width/W||1;
-    rng=cEls.map(c=>{const b=c.getBoundingClientRect();return[(b.left-f.left)/sc,(b.right-f.left)/sc]});
+    rng=cEls.map(c=>{const b=c.getBoundingClientRect();return[(b.left-f.left)/sc,(b.right-f.left)/sc]});yrng=cEls.map(c=>{const b=c.getBoundingClientRect();return[(b.top-f.top)/sc,(b.bottom-f.top)/sc]});
     if(mobile()){pts=[[0,.2],[.125,1],[.25,.03],[.375,.95],[.5,.4],[.625,.95],[.75,.03],[.875,1],[1,.2]].map(([u,e])=>[u*W,e]);rng=cEls.map((c,i)=>[W*i/6,W*(i+1)/6])}
     else{const c=rng.map(r=>(r[0]+r[1])/2),V=mode==='ft'?[.16,.78,.03,.6,.3,.74,.03,.88,.14]:mode==='ex'?[.14,.96,.03,.72,.32,.9,.03,1,.13]:[.2,1,.03,.95,.4,.95,.03,1,.2];
       pts=[[0,V[0]],[c[0],V[1]],[c[1],V[2]],[c[2],V[3]],[(rng[2][1]+rng[3][0])/2,V[4]],[c[3],V[5]],[c[4],V[6]],[c[5],V[7]],[W,V[8]]];
       root.style.setProperty('--neckx',((rng[2][1]+rng[3][0])/2)+'px')}
-    draw(T);if(here)zone(here)};
+    draw(T);if(mode==='ex')drawLinks(f,sc);if(here)zone(here)};
   const wt=[0,0,0,0,0,0],tw=[0,0,0,0,0,0];
   const env=x=>{let i=0;while(i<pts.length-2&&x>pts[i+1][0])i++;const a=pts[i],b=pts[i+1],t=Math.min(1,Math.max(0,(x-a[0])/((b[0]-a[0])||1))),s=(1-Math.cos(t*Math.PI))/2;let e=a[1]+(b[1]-a[1])*s,m=1,ad=0;
     for(let k=0;k<6;k++){if(wt[k]<.002)continue;const c=(rng[k][0]+rng[k][1])/2,sg=(rng[k][1]-rng[k][0])*.6,g=Math.exp(-((x-c)/sg)*((x-c)/sg));if(k===1||k===4)ad+=.09*wt[k]*g;else m+=.13*wt[k]*g}
     return e*m+ad};
-  function draw(t){if(!W||!pts.length)return;const step=W>900?7:6,amp=H*.5,cy=H/2,xs=[];for(let x=0;x<W+step;x+=step)xs.push(Math.min(x,W));
+  const exX=(f,u)=>{const q=u*Math.PI*2,edge=Math.sign(f)*Math.pow(Math.abs(f),1.14),
+    crown=Math.pow(Math.max(0,1-u),2),centre=W*.5+W*(.028*Math.sin(q*1.12-.45)+.018*Math.sin(q*3.25+.8)+.055*crown),
+    breath=(.038+.078*(.5+.5*Math.sin(q*2.15-.72))+.034*(.5+.5*Math.cos(q*4.4+.2)))*(1-.34*crown),
+    pinch=.42+.58*Math.abs(Math.sin(q*1.58+.42)),
+    weave=Math.sin(q*3.05-.5)*(.52+.48*Math.cos(q*.74)),
+    fan=W*edge*breath*pinch,
+    fold=W*f*(.031*Math.sin(q*2.55+f*.9)+.017*Math.sin(q*6.1-f)),
+    cross=W*edge*.036*weave;
+    return centre+fan+fold+cross};
+  function draw(t){if(!W||!pts.length)return;
+    if(mode==='ex'){
+      /* A tall, woven ribbon rather than a scaled horizontal loop.  Its width
+         repeatedly opens and pinches, while its centre line drifts independently;
+         this creates the fan, crossing and depth of the supplied line reference. */
+      const C=P1.length,ST=220;
+      for(let j=0;j<C;j++){const f=(j-(C-1)/2)/((C-1)/2);let d='';
+        const over=48+34*(1-Math.abs(f)),top=-over+f*18,bottom=H+over+f*24;
+        for(let k=0;k<=ST;k++){const u=k/ST,y=top+u*(bottom-top),x=exX(f,u);
+          d+=(k?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}
+        P1[j].setAttribute('d',d);P2[j].setAttribute('d',d)}return}
+    const step=W>900?7:6,amp=H*.5,cy=H/2,xs=[];for(let x=0;x<W+step;x+=step)xs.push(Math.min(x,W));
     const E=xs.map(env),WB=xs.map(x=>H*.05*Math.sin(x/W*Math.PI*3.1+1.3));
     for(let j=0;j<M;j++){const f=j/(M-1),r=(mode==='ft'?.62:.46)+(mode==='ft'?.38:.54)*Math.pow(f,1.15);let dt='',db='';
       for(let k=0;k<xs.length;k++){const x=xs[k],u=x/W,dr=(f-.5)*E[k]*H*.07*Math.sin(u*17+j*.3),sk=1+.15*Math.sin(u*9+1.1),sb=1-.12*Math.sin(u*11+.4),sw=1+.07*Math.sin(u*47+j*.55),y0=cy+WB[k]*E[k];
         dt+=(k?'L':'M')+x.toFixed(1)+' '+(y0-amp*E[k]*r*sk*sw+dr).toFixed(1);db+=(k?'L':'M')+x.toFixed(1)+' '+(y0+amp*E[k]*r*sb*sw+dr).toFixed(1)}
       P1[j].setAttribute('d',dt);P2[j].setAttribute('d',dt);P1[M+j].setAttribute('d',db);P2[M+j].setAttribute('d',db)}}
+  function drawLinks(frame,scale){
+    if(mode!=='ex')return;links.replaceChildren();
+    cEls.forEach((card,i)=>{const b=card.getBoundingClientRect(),left=i<3,
+      x1=left?(b.right-frame.left)/scale:(b.left-frame.left)/scale,
+      y=(b.top+b.height*.5-frame.top)/scale,
+      u=Math.max(0,Math.min(1,y/H)),x2=exX(left?-1:1,u),
+      bend=x1+(x2-x1)*.62,p=document.createElementNS(NS,'path');
+      p.setAttribute('class','sy-link');p.setAttribute('pathLength','1');p.setAttribute('d',`M${x1.toFixed(1)} ${y.toFixed(1)} C${bend.toFixed(1)} ${y.toFixed(1)},${(x2+(left?10:-10)).toFixed(1)} ${(y+(i%2?.8:-.8)).toFixed(1)},${x2.toFixed(1)} ${y.toFixed(1)}`);links.appendChild(p)
+    })
+  }
   /* hover and focus: a dimension brings forward itself and its connector, a connector both of its dimensions */
-  const zone=ix=>{if(!rng.length)return;const l=Math.min(...ix.map(i=>rng[i][0])),r=Math.max(...ix.map(i=>rng[i][1]));clip.setAttribute('x',l);clip.setAttribute('width',r-l)};
+  const zone=ix=>{if(!rng.length)return;if(mode==='ex'){const y1=Math.min(...ix.map(i=>yrng[i][0])),y2=Math.max(...ix.map(i=>yrng[i][1]));soft.style.cx=W/2+'px';soft.style.cy=(y1+y2)/2+'px';soft.style.rx=W*.23+'px';soft.style.ry=Math.max(H*.16,(y2-y1)/2+H*.07)+'px';return}const l=Math.min(...ix.map(i=>rng[i][0])),r=Math.max(...ix.map(i=>rng[i][1]));clip.setAttribute('x',l);clip.setAttribute('width',r-l)};
   const show=ix=>{for(let k=0;k<6;k++)tw[k]=ix&&ix.includes(k)?1:0;root.classList.toggle('f',!!ix);cEls.forEach((c,i)=>c.classList.toggle('on',!!ix&&ix.includes(i)));if(ix)zone(ix)};
-  const rest=()=>{if(here){root.classList.add('hold');zone(here)}else root.classList.remove('hold')};
+  const rest=()=>{const active=here||pick;if(active){root.classList.add('hold');zone(active)}else root.classList.remove('hold')};
   const grp=i=>({0:[0,1],1:[0,1,2],2:[1,2],3:[3,4],4:[3,4,5],5:[4,5]}[i]);
   let tm=[];const stopSweep=()=>{tm.forEach(clearTimeout);tm=[]};
   cEls.forEach((c,i)=>{['mouseenter','focusin'].forEach(e=>c.addEventListener(e,()=>{stopSweep();show(grp(i))}));['mouseleave','focusout'].forEach(e=>c.addEventListener(e,()=>{show(null);rest()}))});
@@ -60,7 +91,7 @@ function build(root,mode){
   new ResizeObserver(layout).observe(root);addEventListener('load',layout);
   /* still unless a part is hovered: the swell moves, then everything rests */
   let last=0;const tick=ts=>{requestAnimationFrame(tick);if(RMq.matches||!go||ts-last<24)return;let mv=false;for(let k=0;k<6;k++){const d=tw[k]-wt[k];if(Math.abs(d)>.004){wt[k]+=d*.2;mv=true}else if(wt[k]!==tw[k]){wt[k]=tw[k];mv=true}}if(!mv)return;last=ts;draw(T)};requestAnimationFrame(tick);
-  root._sy={cols:cEls,setHere:ix=>{here=ix;rest()},layout};
+  root._sy={cols:cEls,setHere:ix=>{here=ix;rest()},setPick:ix=>{pick=ix;rest()},layout};
   layout();upd();
   if(!host&&!ov)root.classList.add('go','done');
 }
@@ -69,55 +100,48 @@ function build(root,mode){
 /* ---- Layer 1 chapter 04, desktop: one composition on the whole stage (1440 x 900). The scroll builds it: lines grow out of the black chapter,
    names, deep dives and connectors appear where the lines have reached them. Drawn in white, the stage blends it (difference): white on black, then black on white. ---- */
 function compose(root){
-  /* Layer 1 chapter 04, v3 rebuild 2: one large central composition. Two open arcs of fine lines face each other around an open interior.
-     The left arc joins Proposition (top) and Expansion (bottom) through Positioning, the right arc joins Operations (top) and Commercial Architecture (bottom) through Delivery.
-     The arcs never touch: closeness makes no relation. The interior holds the title, the sub targets and the way into Explore. */
-  const {dims,con}=model(),NSV=NS;
-  const CX=1310,SP=[[420,170],[40,300],[40,640],[420,770]],W=150,H0=.6;
-  const LB=[{d:0,x:206,y:300,lx:372,ly:268,side:0,hx:[40,150,330,300]},{d:1,x:206,y:640,lx:372,ly:612,side:0,hx:[40,490,330,300]},{d:2,x:1104,y:300,lx:706,ly:196,side:1,hx:[930,150,330,300]},{d:3,x:1104,y:640,lx:706,ly:610,side:1,hx:[930,490,330,300]}];
-  const PN=[{k:0,x:135,y:470,hx:[30,400,230,140]},{k:1,x:1175,y:470,hx:[1080,400,230,140]}];
-  const dyn=root.querySelector('.cm-dyn');
-  const lobeHtml=LB.map((b,i)=>{const d=dims[b.d];return`<div class="cm-a cm-lb" data-d="${d.i}" data-e="${[0,2,3,5][i]}" style="left:${b.x-130}px;top:${b.y-34}px;width:260px"><button type="button" class="sy-h cm-h" data-ddim="${d.i}" data-act aria-haspopup="dialog"><span class="sy-l" aria-hidden="true">${L[d.i]}</span><span class="n">${d.n}</span><span class="plus" aria-hidden="true">+</span></button></div><ul class="cm-a cm-ls" data-d="${d.i}" data-e="${[0,2,3,5][i]}" style="left:${b.lx}px;top:${b.ly}px;width:196px">${d.areas.map(area).join('')}</ul>`}).join('');
-  const CODES=['A + B','C + D'];
-  const pinHtml=PN.map(p=>{const c=con[p.k];return`<div class="cm-a cm-pn" data-k="${p.k}" data-e="${p.k?4:1}" style="left:${p.x-78}px;top:${p.y-34}px"><button type="button" class="cm-k" data-dreal="${c.r}" data-act aria-haspopup="dialog" aria-label="${c.n}, connects ${c.from.n} and ${c.to.n}"><span class="cm-code" aria-hidden="true">${CODES[p.k]}</span><span class="n">${c.n}</span><span class="cm-pl" aria-hidden="true">+</span></button></div>`}).join('');
-  dyn.innerHTML=`<svg class="cm-svg" viewBox="0 0 1440 900" aria-hidden="true" focusable="false"><defs><clipPath id="cmf"><rect class="cm-front" x="0" y="-100" width="0" height="1100"/></clipPath><clipPath id="cmz"><rect class="cm-zone" x="0" y="0" width="0" height="0"/></clipPath></defs><g clip-path="url(#cmf)"><g class="cm-base"></g><g class="cm-hl" clip-path="url(#cmz)"></g></g><g class="cm-mot"></g></svg>`+lobeHtml+pinHtml;
-  const svg=dyn.querySelector('.cm-svg'),base=svg.querySelector('.cm-base'),hl=svg.querySelector('.cm-hl'),front=svg.querySelector('.cm-front'),zone=svg.querySelector('.cm-zone'),mot=svg.querySelector('.cm-mot');
-  /* the motif continues to the note: a few fine lines fan out downwards from the interior */
-  for(let k=0;k<7;k++){const e=document.createElementNS(NSV,'path'),dx=(k-3)*5;e.setAttribute('class','cm-ln');e.setAttribute('d',`M${655+dx*.3} 760C${655+dx*.6} 782 ${655+dx} 790 ${655+dx*2.2} 806`);mot.appendChild(e)}
-  /* the spine of the left arc, a cubic curve that swings out to the left; the right arc mirrors it */
-  const N=150,K0=9,spine=[];
-  for(let k=0;k<=N;k++){const t=k/N,u=1-t,x=u*u*u*SP[0][0]+3*u*u*t*SP[1][0]+3*u*t*t*SP[2][0]+t*t*t*SP[3][0],y=u*u*u*SP[0][1]+3*u*u*t*SP[1][1]+3*u*t*t*SP[2][1]+t*t*t*SP[3][1],
-    dx=3*u*u*(SP[1][0]-SP[0][0])+6*u*t*(SP[2][0]-SP[1][0])+3*t*t*(SP[3][0]-SP[2][0]),dy=3*u*u*(SP[1][1]-SP[0][1])+6*u*t*(SP[2][1]-SP[1][1])+3*t*t*(SP[3][1]-SP[2][1]),l=Math.hypot(dx,dy)||1;
-    spine.push({t,x,y,nx:-dy/l,ny:dx/l})}
-  const M=13,arcs=[0,1].map(side=>{const P1=[],P2=[];for(let i=0;i<M*2;i++){const a=document.createElementNS(NSV,'path'),b=document.createElementNS(NSV,'path');a.setAttribute('class','cm-ln');b.setAttribute('class','cm-lh');base.appendChild(a);hl.appendChild(b);P1.push(a);P2.push(b)}return{side,P1,P2}});
-  const wt=[0,0,0,0,0,0],tw=[0,0,0,0,0,0];
-  /* swell weights per arc: [lobe top, pinch, lobe bottom] */
-  const SW=[[0,1,2],[3,4,5]],TC=[.25,.5,.75];
-  let T=0,vis=false;
-  const lbE=[...dyn.querySelectorAll('.cm-lb')],lsE=[...dyn.querySelectorAll('.cm-ls')];
-  function draw(t){
-    arcs.forEach(ar=>{const sw=SW[ar.side];
-      for(let j=0;j<M;j++){const f=j/(M-1),u=H0+(1-H0)*Math.pow(f,1.4);
-        for(let sg=0;sg<2;sg++){let d='';const uu=sg?-u:u;
-          for(let k=K0;k<=N-K0;k++){const q=spine[k],tt=q.t;let m=1;for(let e=0;e<3;e++){const w=wt[sw[e]];if(w>.002)m+=(e===1?.06:.14)*w*Math.exp(-Math.pow((tt-TC[e])/.1,2))}
-            const env=Math.sin(2*Math.PI*tt)*(1+.05*Math.sin(tt*9+j*.5+t*.2)),off=uu*W*env*m,x=q.x+q.nx*off,y=q.y+q.ny*off,X=ar.side?CX-x:x;
-            d+=(k>K0?'L':'M')+X.toFixed(1)+' '+y.toFixed(1)}
-          const idx=sg*M+j;ar.P1[idx].setAttribute('d',d);ar.P2[idx].setAttribute('d',d)}}})}
-  const ss=v=>{v=Math.min(1,Math.max(0,v));return v*v*(3-2*v)};
-  /* p: 0 to 1, how far the drawing has grown from left to right */
-  function setP(p){const fx=90+p*1520;front.setAttribute('width',Math.max(0,fx));vis=p>0;
-    dyn.querySelectorAll('.cm-lb').forEach((e,i)=>{const o=ss((fx-(LB[i].x-60))/260);e.style.opacity=o;e.style.transform=`translateY(${(1-o)*14}px)`});
-    dyn.querySelectorAll('.cm-ls').forEach((e,i)=>{[...e.children].forEach((li,r)=>{const o=ss((fx-(LB[i].lx+30+r*36))/200);li.style.opacity=o;li.style.transform=`translateY(${(1-o)*10}px)`})});
-    dyn.querySelectorAll('.cm-pn').forEach((e,i)=>{const o=ss((fx-(PN[i].x+20))/160);e.style.opacity=o;e.style.transform=`translateY(${(1-o)*10}px)`});
-    if(!vis||RMq.matches)draw(T)}
-  /* hover and focus: a part brings forward itself and what it connects. Order of the six: lobe A, Positioning, lobe B, lobe C, Delivery, lobe D */
-  const HX=[LB[0].hx,PN[0].hx,LB[1].hx,LB[2].hx,PN[1].hx,LB[3].hx];
-  const show=ix=>{for(let k=0;k<6;k++)tw[k]=ix&&ix.includes(k)?1:0;root.classList.toggle('f',!!ix);root.querySelectorAll('[data-e]').forEach(e=>e.classList.toggle('on',!!ix&&ix.includes(+e.dataset.e)));if(ix){const b=ix.map(i=>HX[i]),l=Math.min(...b.map(a=>a[0])),tp=Math.min(...b.map(a=>a[1])),r=Math.max(...b.map(a=>a[0]+a[2])),bt=Math.max(...b.map(a=>a[1]+a[3]));zone.setAttribute('x',l);zone.setAttribute('y',tp);zone.setAttribute('width',r-l);zone.setAttribute('height',bt-tp)}};
+  /* One continuous field of closed contour lines. The six controls sit outside
+     the line field; semantic relationships are expressed only by interaction. */
+  const {dims,con}=model(),dyn=root.querySelector('.cm-dyn');
+  const targets=[
+    {e:0,code:'A',name:dims[0].n,kind:'dim',i:dims[0].i,x:48,y:164,w:330},
+    {e:1,code:'A + B',name:con[0].n,kind:'real',i:con[0].r,x:48,y:410,w:330},
+    {e:2,code:'B',name:dims[1].n,kind:'dim',i:dims[1].i,x:48,y:656,w:330},
+    {e:3,code:'C',name:dims[2].n,kind:'dim',i:dims[2].i,x:1062,y:164,w:330},
+    {e:4,code:'C + D',name:con[1].n,kind:'real',i:con[1].r,x:1062,y:410,w:330},
+    {e:5,code:'D',name:dims[3].n,kind:'dim',i:dims[3].i,x:1062,y:656,w:330}
+  ];
+  dyn.innerHTML=`<svg class="cm-svg" viewBox="0 0 1440 900" aria-hidden="true" focusable="false"><defs><clipPath id="cmf"><rect class="cm-front" x="0" y="0" width="0" height="900"/></clipPath><radialGradient id="cmzg"><stop offset="0" stop-color="white"/><stop offset=".58" stop-color="white" stop-opacity=".82"/><stop offset="1" stop-color="black" stop-opacity="0"/></radialGradient><mask id="cmz" maskUnits="userSpaceOnUse" x="0" y="0" width="1440" height="900"><ellipse class="cm-zone" cx="720" cy="450" rx="0" ry="0" fill="url(#cmzg)"/></mask></defs><g clip-path="url(#cmf)"><g class="cm-base"></g><g class="cm-hl" mask="url(#cmz)"></g></g></svg>`+
+    targets.map(t=>`<button type="button" class="cm-a cm-target" data-e="${t.e}" data-open="approach" data-system-kind="${t.kind}" data-system-index="${t.i}" data-act aria-haspopup="dialog" style="left:${t.x}px;top:${t.y}px;width:${t.w}px"><span class="cm-code">${t.code}</span><span class="n">${t.name}</span><span class="cm-pl" aria-hidden="true">+</span></button>`).join('');
+  const svg=dyn.querySelector('.cm-svg'),base=svg.querySelector('.cm-base'),hl=svg.querySelector('.cm-hl'),front=svg.querySelector('.cm-front'),zone=svg.querySelector('.cm-zone');
+  const paths=[],hi=[],COUNT=42,STEPS=240;
+  for(let j=0;j<COUNT;j++){
+    const f=(j-(COUNT-1)/2)/((COUNT-1)/2),a=document.createElementNS(NS,'path'),b=document.createElementNS(NS,'path');
+    let d='';
+    for(let k=0;k<=STEPS;k++){
+      const q=k/STEPS*Math.PI*2,
+        twist=f*(.3*Math.sin(q*2-.4)+.13*Math.sin(q*5+.7)),ang=q+twist,
+        lobe=1+.19*Math.sin(q*3+.25)+.09*Math.sin(q*5-1.15),
+        fan=f*(104+126*Math.sin(q*3-.7)+52*Math.cos(q*6+.35)),
+        clear=136*Math.pow(Math.max(0,Math.sin(q)),8),
+        rx=505*lobe+fan,ry=304*(1+.2*Math.cos(q*4-.5))+f*(78+94*Math.cos(q*3+.5))+clear,
+        fold=f*(72*Math.sin(q*2+.6)+34*Math.sin(q*7-.2)),
+        rawX=720+rx*Math.cos(ang)+fold*Math.sin(q),
+        x=rawX<18?18+(rawX-18)*.08:rawX>1422?1422+(rawX-1422)*.08:rawX,
+        rawY=435+ry*Math.sin(ang)+f*62*Math.sin(q*3+.85)+22*Math.cos(q*2.2),
+        y=rawY<34?34+(rawY-34)*.08:rawY>820?820+(rawY-820)*.3:rawY;
+      d+=(k?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)
+    }
+    d+='Z';
+    for(const el of [a,b]){el.setAttribute('d',d);el.setAttribute('pathLength','1')}
+    a.setAttribute('class','cm-ln');b.setAttribute('class','cm-lh');base.appendChild(a);hl.appendChild(b);paths.push(a);hi.push(b)
+  }
+  const boxes=[[120,70,520,330],[80,310,440,270],[100,550,540,320],[800,70,520,330],[920,310,440,270],[800,550,540,320]];
   const grp=e=>({0:[0,1],1:[0,1,2],2:[1,2],3:[3,4],4:[3,4,5],5:[4,5]}[e]);
-  root.querySelectorAll('[data-e]').forEach(el=>{const e=+el.dataset.e;['mouseenter','focusin'].forEach(ev=>el.addEventListener(ev,()=>show(grp(e))));['mouseleave','focusout'].forEach(ev=>el.addEventListener(ev,()=>show(null)))});
-  draw(0);setP(0);
-  let last=0;const tick=ts=>{requestAnimationFrame(tick);if(RMq.matches||!vis||ts-last<33)return;if(!root.getClientRects().length||getComputedStyle(root).visibility==='hidden')return;last=ts;T=ts/1000;for(let k=0;k<6;k++)wt[k]+=(tw[k]-wt[k])*.16;draw(T)};requestAnimationFrame(tick);
-  root._cm={setP,show};if(root.dataset.rm==='1'||RMq.matches)setP(1);
+  const show=ix=>{root.classList.toggle('f',!!ix);dyn.querySelectorAll('[data-e]').forEach(el=>el.classList.toggle('on',!!ix&&ix.includes(+el.dataset.e)));if(ix){const q=ix.map(i=>boxes[i]),x=Math.min(...q.map(v=>v[0])),y=Math.min(...q.map(v=>v[1])),r=Math.max(...q.map(v=>v[0]+v[2])),bt=Math.max(...q.map(v=>v[1]+v[3]));zone.style.cx=(x+r)/2+'px';zone.style.cy=(y+bt)/2+'px';zone.style.rx=Math.max(250,(r-x)/2+100)+'px';zone.style.ry=Math.max(180,(bt-y)/2+80)+'px'}};
+  dyn.querySelectorAll('[data-e]').forEach(el=>{const ix=grp(+el.dataset.e);['mouseenter','focusin'].forEach(ev=>el.addEventListener(ev,()=>show(ix)));['mouseleave','focusout'].forEach(ev=>el.addEventListener(ev,()=>show(null)))});
+  function setP(p){front.setAttribute('width',Math.max(0,Math.min(1,p))*1440);dyn.querySelectorAll('.cm-target').forEach((el,i)=>{const o=Math.max(0,Math.min(1,(p-(.2+i*.055))/.16));el.style.opacity=o;el.style.transform=`translateY(${(1-o)*10}px)`})}
+  setP(0);root._cm={setP,show};if(root.dataset.rm==='1'||RMq.matches)setP(1)
 }
 
 /* ---- Explore ---- */
@@ -127,29 +151,39 @@ function landing(el){build(el,'l1')}
 /* ---- footer ---- */
 function footer(f){
   const {dims}=model();
-  f.innerHTML=`<div class="df-head"><h2 class="df-t">Navigation</h2><p class="df-s">One operating system</p></div><div class="df-sy"></div>
-  <nav class="df-nav" aria-label="Layer 2"><button type="button" data-open="index" data-act aria-haspopup="dialog">Index</button>${dims.map(d=>`<button type="button" data-ddim="${d.i}" data-act aria-haspopup="dialog">${d.n}</button>`).join('')}<button type="button" data-go="7" data-act>Contact</button></nav>`;
+  f.innerHTML=`<div class="df-head"><h2 class="df-t">Navigation</h2><p class="df-s">One Operating System</p></div><div class="df-sy"></div>
+  <nav class="df-nav" aria-label="Layer 2"><button type="button" data-open="index" data-act aria-haspopup="dialog">Index</button>${dims.map(d=>`<button type="button" data-ddim="${d.i}" data-act aria-haspopup="dialog">${d.n}</button>`).join('')}<button type="button" data-go="7" data-act>Contact</button></nav>
+  <footer class="release-footer deep-release-footer"><div class="horizon"></div><div class="foot"><nav class="footer-primary" aria-label="Legal and copyright"><span>&copy; 2026 LDT INC.</span><a href="legal/imprint.html" data-cut data-act>Imprint</a><a href="legal/privacy.html" data-cut data-act>Privacy</a></nav><nav class="footer-secondary" aria-label="Further links"><a href="workshops/" data-cut data-act>Workshops</a><a href="sitemap/" data-cut data-act>Sitemap</a><button type="button" data-go="7" data-act>Contact</button></nav></div></footer>`;
   build(f.querySelector('.df-sy'),'ft');
 }
-/* the page the visitor is on: its column carries "You are here" */
+/* A Layer 1 plate opens Explore with a temporary visual selection. This is not
+   a location marker: only a page that was actually opened receives aria-current. */
+function preselect(kind,i){
+  const root=document.querySelector('#xMap');if(!root||!root._sy)return;
+  root.querySelectorAll('.sy-c.picked').forEach(n=>n.classList.remove('picked'));
+  const btn=kind==='dim'?root.querySelector(`.sy-d[data-d="${i}"] .sy-h`):root.querySelector(`[data-dreal="${i}"]`);
+  const col=btn&&btn.closest('.sy-c');if(!col){root._sy.setPick(null);return}
+  col.classList.add('picked');const ci=root._sy.cols.indexOf(col),groups={0:[0,1],1:[0,1,2],2:[1,2],3:[3,4],4:[3,4,5],5:[4,5]};root._sy.setPick(groups[ci]||[ci]);
+  const reveal=()=>{const r=col.getBoundingClientRect();if(r.top<82||r.bottom>innerHeight-24)col.scrollIntoView({block:'center',behavior:RMq.matches?'auto':'smooth'})};
+  requestAnimationFrame(reveal);setTimeout(reveal,650)
+}
+function clearPreselect(){const root=document.querySelector('#xMap');if(!root||!root._sy)return;root.querySelectorAll('.sy-c.picked').forEach(n=>n.classList.remove('picked'));root._sy.setPick(null)}
+document.addEventListener('click',e=>{const open=e.target.closest&&e.target.closest('[data-open="approach"]');if(!open)return;if(open.dataset.systemKind)preselect(open.dataset.systemKind,+open.dataset.systemIndex);else clearPreselect()});
+/* The page the visitor is on: only its existing code pill carries the visual
+   and semantic location state; no extra status copy or layout row is added. */
 function mark(type,i){
   lastMark=[type,i];
   document.querySelectorAll('.sy .here,.sy .yh').forEach(e=>{e.classList.remove('here','here-dim');if(e.classList.contains('yh'))e.remove()});
   document.querySelectorAll('.sy [aria-current]').forEach(e=>e.removeAttribute('aria-current'));
-  const dm=type==='dim'?[i]:D.REAL[i].d;
-  document.querySelectorAll('#deepFoot .df-nav [data-ddim]').forEach(n=>n.classList.toggle('cur',dm.includes(+n.dataset.ddim)));
-  document.querySelectorAll('.sy').forEach(root=>{
+  document.querySelectorAll('.sy .current-code').forEach(e=>e.classList.remove('current-code'));
+  document.querySelectorAll('#xMap,#deepFoot .df-sy').forEach(root=>{
     if(!root._sy)return;let col,btn;
     if(type==='dim'){col=root.querySelector(`.sy-d[data-d="${i}"]`);btn=col&&col.querySelector('.sy-h')}
     else{btn=root.querySelector(`[data-dreal="${i}"]`);col=btn&&btn.closest('.sy-c')}
-    if(!col){root._sy.setHere(null);return}
-    col.classList.add('here');btn.setAttribute('aria-current','page');
-    const y='<em class="yh">You are here</em>',n=btn.querySelector('.n');
-    if(type==='dim'){col.classList.add('here-dim');col.insertAdjacentHTML('afterbegin',y)}
-    else if(n)n.insertAdjacentHTML('afterend',y);else{const ic=btn.querySelector('i');if(ic)ic.insertAdjacentHTML('beforebegin',y);else btn.insertAdjacentHTML('beforeend',y)}
-    root._sy.setHere([root._sy.cols.indexOf(col)]);
+    if(!col||!btn){root._sy.setHere(null);return}
+    btn.setAttribute('aria-current','page');const code=btn.querySelector('.sy-l,.ab,.ad');if(code)code.classList.add('current-code');root._sy.setHere([root._sy.cols.indexOf(col)]);
   });
 }
-function clear(root){root.querySelectorAll('.here,.yh').forEach(e=>{e.classList.remove('here','here-dim');if(e.classList.contains('yh'))e.remove()});root.querySelectorAll('[aria-current]').forEach(e=>e.removeAttribute('aria-current'));const sy=root.classList.contains('sy')?root:root.querySelector('.sy');if(sy&&sy._sy)sy._sy.setHere(null)}
+function clear(root){lastMark=null;root.querySelectorAll('.here,.yh').forEach(e=>{e.classList.remove('here','here-dim');if(e.classList.contains('yh'))e.remove()});root.querySelectorAll('[aria-current]').forEach(e=>e.removeAttribute('aria-current'));root.querySelectorAll('.current-code').forEach(e=>e.classList.remove('current-code'));const sy=root.classList.contains('sy')?root:root.querySelector('.sy');if(sy&&sy._sy)sy._sy.setHere(null)}
 window.LDT_XI={clear,compose:el=>{if(D)compose(el)},build(m,data){D=data;explore(m)},landing:(el,st)=>{if(D)landing(el,st)},footer:el=>{if(D)footer(el)},mark};
 })();
