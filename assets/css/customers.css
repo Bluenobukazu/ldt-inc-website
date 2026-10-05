@@ -50,3 +50,5 @@
 }
 .cux .cux-sl p.cux-n{font-size:max(calc(2.6*var(--u)),15px)!important}
 .cux .cux-syn .cux-cv svg{overflow:hidden}
+/* v3 D.2-F04: NOW STOPPED stays readable (4.5:1 on white) */
+.cux .cux-lb[data-l="ns"]{opacity:1!important;color:#595959;-webkit-text-stroke:0}

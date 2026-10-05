@@ -296,3 +296,6 @@
 .pp .pz-holds .pz-c{color:#666}
 .pp .pz-list li .num{color:#d6d6d6}
 .pp .pz-rail i{color:#8a8a8a}
+/* v3 M06: evidence labels reach 4.5:1 on white */
+.pp .pz-evs dt{color:#595959}
+.pp .pz-sub span:first-child{color:#666}

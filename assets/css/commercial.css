@@ -79,3 +79,6 @@
   .cax .cax-rz{display:block;aspect-ratio:auto}.cax .cax-rz svg{position:relative;height:auto;aspect-ratio:1040/560}.cax .cax-rl{position:static!important;transform:none!important;opacity:1!important;max-width:none;margin-top:12px;justify-items:start!important;text-align:left!important}.cax .cax-rz .ld{display:none}
   .cax .cax-brw{display:block}.cax .cax-brs{display:none}.cax .cax-nx .n{font-size:34px}.cax .cax-nx{grid-template-columns:1fr}.cax .cax-nx .n,.cax .cax-nx .q{grid-column:1}
 }
+/* v3 D-F05: the note beside the block keeps off the leader line */
+@media (min-width:761px){.cax .cax-ak[data-k="keep"]{margin-left:26px}}
+.cax .cax-ak[data-k="keep"] b,.cax .cax-ak[data-k="keep"] span{background:#000;padding-right:.35em}
