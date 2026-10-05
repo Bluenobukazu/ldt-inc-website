@@ -299,3 +299,12 @@
 /* v3 M06: evidence labels reach 4.5:1 on white */
 .pp .pz-evs dt{color:#595959}
 .pp .pz-sub span:first-child{color:#666}
+/* v3 A-F06, A-F07, A-F09: the two lines of each drift explanation stack in one flow, so they never collide on short screens */
+.pp .pz-tx p{margin:0}
+.pp .pz-tx .pz-c{margin-top:.55em}
+.pp .pz-d2 .pz-tx{grid-column:1/5;grid-row:2;margin-top:calc(6.5*var(--u))}
+.pp .pz-d3 .pz-tx{grid-column:8/-1;grid-row:3;text-align:right;margin-top:calc(3*var(--u))}
+.pp .pz-d5 .pz-tx{grid-column:9/-1;grid-row:3;text-align:right;align-self:start;margin-top:calc(1*var(--u))}
+.pp .pz-d2 .pz-tx .pz-i,.pp .pz-d2 .pz-tx .pz-c,.pp .pz-d3 .pz-tx .pz-i,.pp .pz-d3 .pz-tx .pz-c,.pp .pz-d5 .pz-tx .pz-i,.pp .pz-d5 .pz-tx .pz-c{margin-top:0}
+.pp .pz-tx .pz-c{margin-top:.55em!important}
+@media (max-width:760px){.pp .pz-tx{display:contents}.pp .pz-tx .pz-c{margin-top:inherit!important}}

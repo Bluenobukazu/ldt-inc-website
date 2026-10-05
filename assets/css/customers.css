@@ -52,3 +52,5 @@
 .cux .cux-syn .cux-cv svg{overflow:hidden}
 /* v3 D.2-F04: NOW STOPPED stays readable (4.5:1 on white) */
 .cux .cux-lb[data-l="ns"]{opacity:1!important;color:#595959;-webkit-text-stroke:0}
+/* v3 D.2-F05: the closing line keeps clear of the figure labels on short screens */
+@media (min-width:761px) and (max-height:640px){.cux .cux-fin{margin-top:7vh}}

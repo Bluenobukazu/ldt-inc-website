@@ -14,7 +14,13 @@ Libre Baskerville, Layer 1 Operating System (Codex Fassung), Connect Lesephasen,
 ## Geprüft lokal auf dem aktuellen Stand (Chrome headless, 1440 x 900 bzw. 390 x 844)
 Copy 1433 Zeilen (nur 5 bekannte Klickzustände abweichend), QA-02 6 von 6, Rauchtest 26 Ansichten, Direktaufruf, Reload, Zurück, Tastatur 444 Elemente mit Fokusring, Touch Ziele mobil ohne Verstoß, Reduced Motion alle 15 Layer ohne verdeckten Text (nur inaktive Auswahlvarianten, bewusst ausgeblendet), Kontrast Desktop und mobil (verbleibende Treffer sind Outline Schrift, Dekor oder Text auf Verlauf).
 
+## Durchlauf 05.10. Storytelling und Kurzbildschirm (970 x 510)
+Alle 133 Frames bei 970 x 510 aufgenommen, Kollisionsdetektor (qa/v3_overlap.py) und Sichtung. Echte Textkollisionen behoben: Proposition A-F06, A-F07, A-F09 (Erklärzeilen in einem Fluss, pz-tx), People C.1-F03 (Rollenfigur unter der Aussage auf kleinen Schirmen). Erzählfolge je Seite geprüft: Auftakt, Spannung, Lesart, Konsequenz und Übergang sind in Bestand und Reihenfolge verständlich, keine Textlücken. Frei von Eingriff: Advantage, Positioning, Expansion, Markets, Operations, Technology, Decisions, Delivery, Commercial Architecture, Partnerships (keine Kollision beim 970er Sichten, Struktur nach Vertrag).
+
 ## Offen
+- Revenue D.1-F07: Labels THIS YEAR / LAST YEAR / WITHOUT IT liegen bei 970 x 510 über der Stapelgrafik.
+- Customers D.2-F05: Beschriftungen CUSTOMER INITIATION / OWN und die Zeilen unter der Zeitleiste liegen bei 970 x 510 eng aufeinander.
+- Proposition A-F14: Ergebniszeile liegt bei 970 x 510 über den fünf Bereichsnamen (Animationsstand nicht abschließend geklärt).
 - Frames bei 970 x 510, 1280 x 720 und mobil nicht neu fotografiert (qa/v3_frames.py), Storytelling Durchgang pro Seite nur als Stichprobe.
 - Preview Abnahme Frame für Frame durch Lena.
 ## Freigabe ausstehend
