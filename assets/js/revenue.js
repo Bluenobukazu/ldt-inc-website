@@ -113,7 +113,7 @@ function build(root){
   const dp=$('.rvx-dep',root),sg=$('.rvx-stage',dp),st=$('.rvx-stack',dp),base=$('.rvx-base',dp),tb=$$('.rvx-t',dp),vs=$$('.rvx-vs',dp),gauge=$('.rvx-gauge',dp),tk={};$$('.rvx-tk',dp).forEach(e=>{tk[e.dataset.k]=e});
   let nh=0,full=0;
   const layoutDep=()=>{if(root.hidden||!sg.clientWidth)return;const off=dp.dataset.v==='1';if(!off){nh=base.offsetHeight;full=st.offsetHeight;gauge.style.minHeight=full+'px'}
-    const rest=full-nh;tk.top.style.bottom=full+'px';tk.ly.style.bottom=(rest+nh*.42)+'px';tk.wo.style.bottom=rest+'px';tk.top.style.opacity=off?0:1};
+    const rest=full-nh,GAP=18,lyB=rest+Math.max(nh*.42,GAP),topB=Math.max(full,lyB+GAP);/* the three scale labels keep at least one line of room between them on short screens */tk.top.style.bottom=topB+'px';tk.ly.style.bottom=lyB+'px';tk.wo.style.bottom=rest+'px';tk.top.style.opacity=off?0:1;if(!off)gauge.style.minHeight=Math.max(full,topB)+'px'};
   const showDep=k=>{dp.dataset.v=k;tb.forEach(b=>b.setAttribute('aria-pressed',String(k==='1')));vs.forEach(p=>{p.hidden=p.dataset.v!==k});layoutDep()};
   if(!root.__rvd){root.__rvd=1;tb.forEach(b=>b.addEventListener('click',()=>showDep(dp.dataset.v==='1'?'0':'1')));if('ResizeObserver' in window)new ResizeObserver(()=>layoutDep()).observe(st)}
   draws.all=()=>{drawWord();drawSlope();drawYear();drawRe();layoutDep()};

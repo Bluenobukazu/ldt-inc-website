@@ -300,11 +300,16 @@
 .pp .pz-evs dt{color:#595959}
 .pp .pz-sub span:first-child{color:#666}
 /* v3 A-F06, A-F07, A-F09: the two lines of each drift explanation stack in one flow, so they never collide on short screens */
+.pp .pz-tx{display:block}
+@media (max-width:760px){.pp .pz-tx{grid-column:1/-1!important;grid-row:auto!important;margin:1.2vh 0 0!important;text-align:left!important;max-width:none}.pp .pz-tx p{margin:0!important;max-width:none!important;text-align:left!important}.pp .pz-tx .pz-c{margin-top:.55em!important}}
+@media (min-width:761px){
+.pp .pz-tx{display:block}
 .pp .pz-tx p{margin:0}
-.pp .pz-tx .pz-c{margin-top:.55em}
 .pp .pz-d2 .pz-tx{grid-column:1/5;grid-row:2;margin-top:calc(6.5*var(--u))}
 .pp .pz-d3 .pz-tx{grid-column:8/-1;grid-row:3;text-align:right;margin-top:calc(3*var(--u))}
 .pp .pz-d5 .pz-tx{grid-column:9/-1;grid-row:3;text-align:right;align-self:start;margin-top:calc(1*var(--u))}
-.pp .pz-d2 .pz-tx .pz-i,.pp .pz-d2 .pz-tx .pz-c,.pp .pz-d3 .pz-tx .pz-i,.pp .pz-d3 .pz-tx .pz-c,.pp .pz-d5 .pz-tx .pz-i,.pp .pz-d5 .pz-tx .pz-c{margin-top:0}
-.pp .pz-tx .pz-c{margin-top:.55em!important}
-@media (max-width:760px){.pp .pz-tx{display:contents}.pp .pz-tx .pz-c{margin-top:inherit!important}}
+.pp .pz-tx .pz-i,.pp .pz-tx .pz-c{margin-top:0}
+.pp .pz-tx .pz-c{margin-top:.55em}
+}
+/* v3 A-F14: the five area names keep clear of the result line on short screens */
+.pp .pz-ev .pz-ill{margin-top:max(calc(1*var(--u)),52px);height:max(calc(16*var(--u)),96px)}

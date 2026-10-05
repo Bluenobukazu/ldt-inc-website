@@ -81,3 +81,5 @@
   .rvx .rvx-sea{flex-wrap:wrap;row-gap:10px}.rvx .rvx-sea span{font-size:20px}.rvx .rvx-sea .rvx-cv{flex:0 0 100%;order:3;height:40vw}.rvx .rvx-me{font-size:19px}.rvx .rvx-t{font-size:22px;justify-self:start;margin-top:8px}.rvx .rvx-stage{display:block}.rvx .rvx-stack{padding-left:0;margin-top:14px}.rvx .rvx-gauge{display:none}.rvx .rvx-base{font-size:clamp(34px,10vw,48px)}.rvx .rvx-sw[data-k="2"]{font-size:clamp(38px,11.5vw,56px)}.rvx .rvx-sw[data-k="1"]{font-size:clamp(46px,14vw,70px)}.rvx .rvx-sw[data-k="0"]{font-size:clamp(58px,18vw,90px)}.rvx .rvx-rl{font-size:21px;margin-top:20px}
   .rvx .rvx-three{display:block}.rvx .rvx-rq{margin-bottom:24px}.rvx .rvx-eq{font-size:24px;min-height:0}.rvx .rvx-ea{font-size:17px}.rvx .rvx-close{font-size:22px}.rvx .rvx-tree{display:block}.rvx .rvx-nx{margin-bottom:16px}.rvx .rvx-nx .n{font-size:38px}
 }
+/* v3 D.1-F07: the scale labels get their own column, the stack starts to their right */
+@media (min-width:761px){.rvx .rvx-stack{padding-left:max(calc(13*var(--u)),128px)}}
