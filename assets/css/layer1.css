@@ -48,3 +48,5 @@
   .en .en-out{height:70vw;margin-top:0}.en .en-s{padding-top:60vw;margin-bottom:30px}.en .en-s .en-cv{height:56vw}.en .en-l{font-size:26px}.en .en-s p{font-size:17px}
   .ld .ld-in{height:80vw}.ld .ld-fig{justify-self:start;text-align:left}.ld .ld-dl{padding-left:0}.ld .ld-dl>div{display:block}.ld .ld-dl dt{font-size:22px}.ld .ld-dl dd{margin-top:6px;font-size:16px}.ld .ld-thread{display:none}
 }
+
+.xe .xe-atel .nb{white-space:nowrap}
