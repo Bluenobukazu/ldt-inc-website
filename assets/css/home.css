@@ -4,7 +4,7 @@
 .stage{position:relative;height:100vh;overflow:hidden;background:#fff;isolation:isolate}
 .cv{position:absolute;left:50%;top:50%;width:1440px;height:900px;transform-origin:50% 50%;isolation:isolate}
 .cv *{position:absolute}
-.cv svg *{position:static}
+.cv .rw{position:static;display:inline}.cv svg *{position:static}
 .cut{background:#fff;mix-blend-mode:difference}
 .shinebox{overflow:hidden;pointer-events:none}
 .cv .shine{top:-20%}

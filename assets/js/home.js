@@ -135,7 +135,9 @@ const G=()=>MOB()?GM:GD;
    scene itself; they are not easing or time-based pauses.  The second statement
    starts only after the first one's fade has completed.
    at() maps the original V5 timeline positions onto the adjusted timeline. */
-const HOLDS=[[.19,.04],[.505,.3],[.565,.3]],SYS_HOLD=.12;
+const HOLDS=[[.19,.04],[.505,.14],[.565,.16]],SYS_HOLD=.12;
+/* a statement is read word by word: the words are wrapped, so the grey turns white in reading order while the visitor scrolls */
+const wordsOf=el=>{const out=[];const walk=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType===3){const f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(t=>{if(!t)return;if(/^\s+$/.test(t))f.appendChild(document.createTextNode(t));else{const w=document.createElement('span');w.className='rw';w.textContent=t;out.push(w);f.appendChild(w)}});c.replaceWith(f)}else if(c.nodeType===1&&c.tagName!=='BR')walk(c)})};walk(el);return out};
 const at=x=>HOLDS.reduce((v,[t,a])=>x>=t?v+a:v,x);
 /* Connect remains the active chapter for the complete entry statement.  The
    title hands over only as the note leaves, before the System labels arrive. */
@@ -286,7 +288,7 @@ function Journey(st,inst){
     tl.to(B,Object.assign({left:g.barAfter[0],width:g.barAfter[1],duration:.04,ease:'power3.inOut',autoRound:false},M?{top:120,height:g.H-150}:{}),.085)
       .set(core,{opacity:1},at(.125))
       .set(B,{opacity:0},at(.125))
-      .to(words,{opacity:1,stagger:.0045,duration:.01},at(.125));
+      .to(words,{opacity:1,stagger:.0055,duration:.01},at(.125));
     /* 02 Complexity: the cut breaks into a composed field of realities */
     tl.to(core,{opacity:0,duration:.02},at(.2));
     blocks.forEach(({b,l},i)=>{const [x,y,w,h,r]=g.blocks[i];tl.set(b,{opacity:1},at(.225)).to(l,{opacity:1,duration:.012},at(.225+i*.007+.07)).to([b,l],{left:x,top:y,width:w,height:h,rotation:r,duration:.08,ease:'power3.out'},at(.225+i*.007))});
@@ -305,7 +307,10 @@ function Journey(st,inst){
     /* 04 System: light returns, circles move into each other, shared realities appear */
     tl.to(q('.j-black'),{opacity:0,duration:.001},at(.62));
     [0,1,2,3].forEach(i=>{const [x,y]=g.C1[i];tl.to([C(i),F(i),CL(i)],{attr:{cx:x,cy:y,r:g.r1},duration:.08,ease:'power3.inOut'},at(.635))});
-    tl.set(entry,{opacity:.46,y:0},at(.525)).to(entry,{opacity:1,duration:.03,ease:'power1.out'},at(.525)).to(entry,{opacity:0,y:-14,duration:.025},at(.565));
+    const cW=wordsOf(q('.j-connect')),eW=wordsOf(entry);gsap.set([...cW,...eW],{opacity:RM?1:.3});
+    if(!RM){tl.fromTo(cW,{opacity:.3},{opacity:1,duration:.012,stagger:.008,ease:'none',immediateRender:false},at(.475)+.03)
+      .fromTo(eW,{opacity:.3},{opacity:1,duration:.012,stagger:.0055,ease:'none',immediateRender:false},at(.525)+.03)}
+    tl.set(entry,{opacity:0,y:0},at(.525)).to(entry,{opacity:1,duration:.03,ease:'power1.out'},at(.525)).to(entry,{opacity:0,y:-14,duration:.025},at(.565));
     tl.to(cp,{p:1,duration:.15,ease:'none'},at(.565))
       .to(cmq('.cm-pill'),{opacity:1,y:0,duration:.03},at(.625))
       .to(cmq('.cm-lock'),{opacity:1,y:0,duration:.07,ease:'power3.out'},at(.635))

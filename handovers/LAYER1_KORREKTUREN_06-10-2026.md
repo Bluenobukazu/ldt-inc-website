@@ -19,3 +19,9 @@ Ausgangscommit: 4b63c66 (Branch deploy/experience-lab-v3-continue).
 1440 x 900 und 970 x 510: Connect Text, Entry Text, System Ende, Proof Text, kein Horizontalueberlauf der Viewports, Konsole ohne Fehler. 1440 x 900: Transformation in acht Zustaenden, Rail Sichtbarkeit in 12 Scrollschritten. 390 x 844: Transformation Zustaende.
 Offen: Preview Abnahme, 1280 x 720, Tastatur, Reduced Motion, Gesamtdurchlauf.
 Beobachtung (auch im Ausgangsstand vorhanden): in der headless Mobil Emulation sind die Woerter in den schwarzen Bloecken der Transformation Endansicht ausgeblendet (clipLabels setzt visibility hidden). Auf echtem Geraet bzw. Preview pruefen.
+
+## Connect Feintuning (Lena, 06.10.)
+
+Befund: zu viel Scrollweg in Connect, und das Grau zu Weiss folgte nicht dem Lesen.
+Aenderung (home.js, home.css v305): beide Connect Aussagen werden in Woerter zerlegt (wordsOf), Woerter starten grau (.3) und werden beim Scrollen in Leserichtung weiss (Stagger), danach kurze weisse Haltephase. Haltephasen HOLDS .3/.3 auf .14/.16. Gesamtstrecke der Journey bei 1440 x 900 von 5556 auf etwa 4611 px, 970 x 510 von 3148 auf 2613 px. Entry Text startet jetzt bei Deckkraft 0 und blendet ein, danach wird er weiss. Reduced Motion: Woerter sofort weiss.
+Lokal geprueft: 1440 x 900, 970 x 510, 390 x 844 (Umbruch, Weisszustand), Konsole ohne Fehler. Preview Abnahme offen.
