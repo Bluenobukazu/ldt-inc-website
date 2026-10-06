@@ -85,3 +85,4 @@
 
 /* v3 mobile: the core label stays readable where it is wider than the cube */
 @media (max-width:700px){.cax .cax-lb.core b{background:#000;padding:2px 6px 1px}}
+@media (max-width:1100px) and (max-height:640px){.cax .cax-lb.core b{background:#000;padding:2px 6px 1px}}
