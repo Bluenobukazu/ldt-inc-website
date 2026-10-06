@@ -31,3 +31,8 @@ Lokal geprueft: 1440 x 900, 970 x 510, 390 x 844 (Umbruch, Weisszustand), Konsol
 Fund und Korrektur: Die Seite war nach dem Transformation Abschnitt 6000 px breit (Hintergrundflaechen der Staende), programmatisch horizontal scrollbar. In der Mobil Emulation weitete sich dadurch der Viewport (innerWidth 390 auf 1560), dadurch blendete clipLabels die Woerter in den schwarzen Transformation Bloecken aus. Korrektur: html{overflow-x:clip} (site.css v59, in allen fuenf Seiten hochgezaehlt). Danach scrollWidth gleich Viewport bei 1440 und 390 (auch Reduced Motion), Woerter in den Bloecken sichtbar, Seitenhoehe unveraendert.
 Geprueft lokal: Konsole ohne Fehler (1440, 1280, 970, 390, RM), keine Gedankenstriche im sichtbaren Text, Tab Lauf 70 Stopps (alle Ringe sichtbar, alle im Bild), Rail vor/zurueck ohne Ueberlagerung dauerhaft (Ausblenden beim Rueckwaertsscrollen mit .6 s Einblendung), 24 Stopp Durchlauf bei 1440.
 Beobachtungen, nicht geaendert: sieh Bericht an Lena (Ladegewicht, TTF Schriften, Zip Datei in assets/fonts, Frame Zeiten nur Software Rendering).
+
+## Aufraeumen und Schriften (06.10.)
+
+1. Zip Datei assets/fonts/Libre-Baskerville_Webfonts.zip entfernt (nirgends referenziert, Commit a08f087).
+2. Libre Baskerville: acht WOFF2 Dateien neben den TTF erzeugt (identische Glyphen und Zeichentabelle, 62 Prozent kleiner, z. B. Regular 152 KB auf 54 KB). site.css (v60) nennt WOFF2 zuerst, TTF als Rueckfall. Preload in index.html und workshops/index.html auf die WOFF2 Dateien. Darstellung unveraendert: Pixelvergleich vorher/nachher bei 1440 x 900 an vier Stellen (Connect, Proof, Ways, Contact), Textbereiche pixelgleich, Abweichungen nur in animierten Flaechen (Navigation, Ringe).
