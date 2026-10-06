@@ -2,7 +2,7 @@
 .xp .l2-f{--hv:56;--bg:#fff}.xp .l2-b{--bg:#000}.xp .xp-hero{--hv:74}.xp .xp-s3{--hv:64}.xp .xp-ev{--hv:66}.xp .xp-br{--hv:56}
 .xp .xp-cv{position:absolute;inset:0}.xp .xp-cv svg{width:100%;height:100%}
 .xp .xp-fig{position:relative;margin:0}.xp .xp-fig .xp-cv{position:absolute;inset:0}
-.xp .xp-lb{position:absolute;transform:translate(-50%,-50%);left:0;top:0;font:600 15px/1.25 var(--sans);letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;paint-order:stroke;z-index:2}
+.xp .xp-lb{position:absolute;transform:translate(-50%,-50%);left:0;top:0;font:600 15px/1.25 var(--sans);letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;paint-order:stroke;-webkit-text-stroke:7px var(--bg);z-index:2}
 .xp .xp-word{grid-column:1/-1;grid-row:1;font-weight:850;font-stretch:108%;font-size:calc(15*var(--u));letter-spacing:-.045em;line-height:.9;margin-left:calc(-.4*var(--u))}
 .xp .xp-hero .xp-k{grid-column:1/6;grid-row:2;align-self:center;font-size:calc(4.6*var(--u));font-weight:800;font-stretch:108%;letter-spacing:-.04em;line-height:1.04;margin-top:calc(2*var(--u))}
 .xp .xp-steps{grid-column:1/6;grid-row:3;display:flex;flex-wrap:wrap;gap:calc(.8*var(--u)) calc(2.4*var(--u));margin-top:calc(1.4*var(--u))}.xp .xp-steps button{all:unset;cursor:pointer;font-size:clamp(15px,calc(1.7*var(--u)),24px);font-weight:600;letter-spacing:-.01em;border-bottom:1.5px solid #000;padding-bottom:3px}.xp .xp-steps .n{margin-right:.5em;font-weight:400}.xp .xp-steps button:focus-visible{outline:2px solid #000;outline-offset:4px}.xp .xp-hero .xp-fig{grid-column:6/-1;grid-row:2/4;height:calc(40*var(--u));margin-top:calc(1.5*var(--u))}
@@ -38,3 +38,5 @@
 }
 /* v3 B-F06: the ring line stays behind the question */
 .xp .xp-nx{position:relative;z-index:60}.xp .xp-nx .q{position:relative;z-index:61;background:#000;display:inline-block;padding:0 .35em;margin-left:-.35em}
+/* v3 narrative: what Lena decides, stated under the three layers */
+.xp .xp-lena{margin:calc(2.4*var(--u)) 0 0;font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(17px,calc(2*var(--u)),28px);line-height:1.25;max-width:26em}

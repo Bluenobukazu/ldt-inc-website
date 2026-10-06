@@ -171,3 +171,42 @@ Methode: jeder Frame im Browser geöffnet und gesichtet; Besucherkenntnis aus de
 | part D.3-F11 | Revenue, Customers, Markets und Delivery vertiefen unterschiedliche Partnerschaftsbedingungen. | erfüllt (Sicht) | keine |
 
 ## Offene Kontrastbefunde: keine ungeklärten. Pixelmessung (qa/v3_pixel.py) an 14 zuvor gemeldeten Stellen: alle zwischen 5.7 und 21.0 zu 1.
+
+
+## Durchlauf 05.10. (3): Redaktionelle Freigabe, narrative Prüfung je Seite
+
+Neue Lage: Die Copy-Sperre (wortgleich, M07, "Textentscheidung: ERHALTEN") ist ausser in den Codex-Bereichen aufgehoben. Texte, Fragen und Grafikbeschriftungen dürfen narrativ überarbeitet werden. Fakten bleiben verbindlich, ADD-01 bis 04, Workshop-Ergebnisentwürfe und der Delivery-F06-Screenreader-Satz bleiben separat ausstehend.
+
+Prüfraster je Seite: Situation | was Lena erkennt | Entscheidung oder Intervention | Konsequenz | Übergang. Grundlage: Sichtung der Seiten im Browser (Layer 1 bei 1440 gescrollt, alle Deep Dives bei 390 und 1280, Teile bei 970 und 1440; Partnerships auf Desktop erst jetzt durch echtes Scrollen, siehe Korrektur unten).
+
+### Narrative Bewertung und Änderungen
+
+| Seite | Bewertung | Textänderung (Vorher / Nachher) | Grafik oder Layout |
+|---|---|---|---|
+| Layer 1 | Auftakt, Complexity, Connect, System, Proof, Transformation, Ways to Work, Contact folgen einem klaren Bogen. Complexity trägt nur Titel und Grafik, der Satz dazu steht erst in Connect. Geschützte Bereiche nicht angefasst. | Proof: "organizations" / "organisations" (einheitlich britisch) | keine. Vorschlag: einen kurzen Satz zur Complexity-Grafik prüfen (ausstehend, Codex-Bereich Connect-Folge) |
+| Workshops | Reihenfolge Frage, Herkunft der Frameworks, fünf Frameworks, Formate, Umfelder, Kontakt trägt. | keine | keine |
+| Proposition | Situation (drei Existenzen), Drift in fünf Formen, Eingriff, Belege tragen. Lena-Bezug im Eingriff war unpersönlich. | A-F10: "The work is rarely" / "My work is rarely" | Bridge-Codes A-F16 als Pillen (früher) |
+| Advantage | Vier Tests, Wachstum, Operation, Belege tragen. Bei "Reinforced" wiederholte der Untertext die Aussage. | A.1-F04: "The advantage has to hold in everyday delivery." / "It has to work on an ordinary day, without heroics." | Bridge-Pille A.1-F08 |
+| Positioning | Wahrnehmung, Vergleich, Hotel-Szenario, Position wird unterlaufen, Belege tragen. Die Prüfregel war unpersönlich. | A+B-F05: "Brand intent meets its test in the price list, ..." / "I test brand intent against the price list, ..." | Bridge-Pille A+B-F07 |
+| Expansion | Nicht Replikation, Abhängigkeiten, selektiver Wandel tragen. Es fehlte, was Lena daraus entscheidet. | B-F04 neu: "I decide what stays core before the business scales, so everything else can change without losing it." | B-F01 bis B-F04: Labels mit Halo, Speichen laufen nicht mehr durch die Schrift. Bridge-Pille B-F06 |
+| Markets | Reichweite, Bedingungen, Route, Belege tragen. Regel der Route war unpersönlich. | B.1-F04: "Commitment can deepen as the evidence does." / "I let commitment deepen as the evidence does." | Bridge-Pille B.1-F07 |
+| Operations | Rhythmus, System, Signale, Eingriff, Struktur, Belege tragen. | keine | C-F04: Punktreihen beginnen rechts der Titel (mobil) |
+| People | Rolle, Bedarf, Team, Kultur, Kapazität, Praxis tragen. | keine | C.1-F03: Figur ab 1400 px Breite unter den Bedingungen (bei 1280 überdeckte sie "The outcome") |
+| Technology | Last der Technik, Automatisierung, Wahrheit mit einem Eigentümer, Praxis tragen. | keine | C.2-F03, C.2-F06 mobil: Label und Satz laufen nicht mehr zusammen |
+| Decisions | Entscheidung benennen, Gewicht, Input gegen Autorität, Schwelle, Commitment tragen. | keine | C.3-F08: Eyebrow der Brücke einzeilig statt vier schmale Zeilen |
+| Delivery | Versprechen, Szenario, Bedingungen, Übergaben, Ausnahme, Entscheidung tragen (stark in Ich-Form). | keine | keine |
+| Commercial Architecture | Offer, Entscheidungen im Zusammenspiel, Konto, Konsequenz tragen. | keine | D-F01, D-F02 mobil: Labels weiter ausserhalb der Platten, Kernlabel mit schwarzem Grund |
+| Revenue | Summe, drei Geschäfte, Planbarkeit, Signal, Abhängigkeit tragen. | keine | D.1-F04 mobil: "THIS YEAR" nicht mehr abgeschnitten. D.1-F07: Kopf auf Abstand zur Skala, "New business" mobil nicht mehr angeschnitten |
+| Customers | Label, Erwartung, Initiative, Kontext, Antwort tragen. In D.2-F05 war die Aussage kleiner als ihre Erklärung. | keine | D.2-F05: Aussage grösser als Erklärung. D.2-F04: Labels nicht mehr übereinander |
+| Partnerships | Ablauf Interdependenz bis Entscheidung trägt. Lena-Bezug stand fast nur im Eingriff. | D.3-F02: "Define the capability gap first, ..." / "I define the capability gap first, ..." | D.3-F03: "Different contributions. One workable value exchange." / "I look for different contributions that form one workable value exchange." D.3-F05: "What did we gain, what did we give up, ..." / "What did each side gain, what did it give up, ..." |
+
+Vollständige Textdifferenz: handovers/V3_TEXTDIFFERENZ_05-10-2026.md.
+
+### Korrektur zu früheren Angaben
+Bei Partnerships sind die Anker pm-s1 bis pm-s7 auf Desktop Marker ohne Höhe. Meine früheren Frame-Aufnahmen D.3-F01 bis F10 zeigten dort alle denselben Einstieg. Diese Frames sind erst jetzt per Scroll in 1440 x 900 gesichtet worden. Bei 1280 x 720 und 970 x 510 liegen Scroll-Aufnahmen vor (qa/shots/fr/sc*), aber nur 1440 wurde ausgewertet. Bei D.3-F07 war der Satz in der weissen Leiste rechts abgeschnitten, jetzt vollständig.
+
+### Geschützte Codex-Bereiche
+Operating-System-Moment mit Linienzeichnung, Explore, Systemnavigation, Navigation und Codes, Header und Seitenleiste, Kapitelnavigation, Connect-Folge, Contact, Footer, Sitemap, Another Perspective, Legal, Libre Baskerville: nicht verändert. Hinweis: /another-perspective/ schreibt "organizations", "Programs" und "organization" (amerikanisch), die übrige Website britisch. Als Vorschlag dokumentiert, nicht geändert.
+
+### Weiterhin ausstehend
+ADD-01 bis 04, Workshop-Ergebnisentwürfe, Delivery-F06-Screenreader-Satz. Menschliche Seitenprüfung durch Lena.
