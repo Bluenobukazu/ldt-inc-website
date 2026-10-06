@@ -36,3 +36,8 @@ Beobachtungen, nicht geaendert: sieh Bericht an Lena (Ladegewicht, TTF Schriften
 
 1. Zip Datei assets/fonts/Libre-Baskerville_Webfonts.zip entfernt (nirgends referenziert, Commit a08f087).
 2. Libre Baskerville: acht WOFF2 Dateien neben den TTF erzeugt (identische Glyphen und Zeichentabelle, 62 Prozent kleiner, z. B. Regular 152 KB auf 54 KB). site.css (v60) nennt WOFF2 zuerst, TTF als Rueckfall. Preload in index.html und workshops/index.html auf die WOFF2 Dateien. Darstellung unveraendert: Pixelvergleich vorher/nachher bei 1440 x 900 an vier Stellen (Connect, Proof, Ways, Contact), Textbereiche pixelgleich, Abweichungen nur in animierten Flaechen (Navigation, Ringe).
+
+## Nachladen der Layer 2 Stile (06.10.)
+
+index.html: die 14 Stylesheets der Deep Dives (proposition, l2, advantage, positioning, markets, people, technology, decisions, customers, revenue, commercial, operations, expansion, delivery) laden jetzt ohne den ersten Bildaufbau zu blockieren (media="print" mit onload Umschaltung, Attribut data-dd). Ein Skript im Head schaltet sie sofort scharf, wenn die Adresse einen Hash traegt (direkter Deep Dive Aufruf). site, home, explore, layer1 und landing bleiben blockierend. Die Deep Dive Skripte bleiben unveraendert (nur etwa 120 KB, Reihenfolge Abhaengigkeit zu home.js, Nutzen klein).
+Geprueft lokal, 1440 x 900: Layer 1 pixelgleich an vier Stellen (nur animierte Ringe weichen ab), Deep Dives direkt per Adresse (Proposition, Revenue, People, Delivery) und nach dem Laden geoeffnet (Customers, Technology) im Endzustand gleich wie vorher. Gedrosselte Ladezeit (4G Profil, drei Laeufe, grosse Streuung): erste Darstellung Median 3456 ms auf 2948 ms, nur Richtwert.
