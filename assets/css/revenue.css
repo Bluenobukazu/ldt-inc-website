@@ -33,7 +33,7 @@
 /* the slope */
 .rvx .rvx-sig .rvx-h1{grid-column:1/9;grid-row:1}
 .rvx .rvx-slp{grid-column:1/8;grid-row:2;position:relative;min-height:calc(26*var(--u));margin-top:calc(3*var(--u))}.rvx .rvx-slp svg{position:absolute;inset:0;width:100%;height:100%}
-.rvx .rvx-slp p{position:absolute;margin:0;white-space:nowrap;line-height:1;text-transform:uppercase;color:#fff}
+.rvx .rvx-slp p{position:absolute;width:max-content;margin:0;white-space:nowrap;line-height:1;text-transform:uppercase;color:#fff}
 .rvx .sy{font-size:13px;font-weight:700;letter-spacing:.1em;transform:translateX(-50%)}.rvx .stt{font-size:13px;font-weight:600;letter-spacing:.08em;transform:translate(-50%,-50%);background:#000;padding:0 12px}.rvx .stt b{font-weight:800;margin-right:.7em}.rvx .stt i{font-style:normal;text-transform:none}
 .rvx .sg{font-size:13px;font-weight:600;letter-spacing:.06em;transform:translateY(-50%)}.rvx .sm{font-size:13px;font-weight:800;letter-spacing:.06em;transform:translateY(-50%)}.rvx .slp .sl,.rvx .sl{transform:translate(-100%,-50%)}
 .rvx .se{font-size:clamp(15px,calc(1.5*var(--u)),22px);font-weight:800;letter-spacing:.05em;transform:translateY(-.5em);transition:opacity .4s}.rvx .se small{display:block;font-size:13px;font-weight:600;letter-spacing:.14em;margin-top:6px}
@@ -72,7 +72,7 @@
   .rvx .rvx-yf{display:flex;flex-direction:column;aspect-ratio:auto;margin-top:4vh}.rvx .rvx-yf svg{position:relative;inset:auto;width:100%;height:auto;aspect-ratio:var(--ar,1.5)}
   .rvx .rvx-yf .rvx-lb.c{width:min-content;background:#fff;padding:1px 3px;line-height:1.05}.rvx .rvx-yf .rvx-st[data-k="3"]{transform:translate(-100%,-50%);padding:0}.rvx .rvx-yf .rvx-lb.o.l{transform:translate(-100%,-100%)}
   .rvx .rvx-mo{position:static;order:1;margin:6px 0 0!important;width:100%!important}.rvx .rvx-yf .rvx-note{order:2;margin-top:4vh;font-size:18px}.rvx .rvx-yf .rvx-fq{order:3;margin-top:2vh;font-size:22px;transform:none}
-  .rvx .rvx-slp{min-height:0;height:clamp(380px,56vh,460px)}.rvx .up{transform:translate(0,calc(-100% - 8px))}.rvx .up.r{transform:translate(-100%,calc(-100% - 8px));text-align:right}.rvx .sy.r{transform:translateX(-100%)}.rvx .dn{transform:translate(0,8px)}.rvx .dn.r{transform:translate(-100%,8px);text-align:right}.rvx .sy:not(.r){transform:none}.rvx .se{font-size:15px}
+  .rvx .rvx-slp{min-height:0;height:clamp(380px,56vh,460px)}.rvx .up{transform:translate(0,calc(-100% - 8px))}.rvx .up.r{transform:translate(-100%,calc(-100% - 8px));text-align:right}.rvx .sy.r{transform:none;left:auto!important;right:0;width:10em;text-align:right}.rvx .dn{transform:translate(0,8px)}.rvx .dn.r{transform:translate(-100%,8px);text-align:right}.rvx .sy:not(.r){transform:none}.rvx .se{font-size:15px}
   .rvx .rvx-h1,.rvx .rvx-h2,.rvx .rvx-opn{font-size:clamp(28px,8.4vw,40px)}.rvx .rvx-bq{font-size:20px}
   .rvx .rvx-word{display:block;margin-top:14px}.rvx .rvx-parts li{position:static;transform:none;margin-top:8px;opacity:1}.rvx .rvx-hero .rvx-k{font-size:clamp(26px,7.6vw,34px)}.rvx .rvx-hero .rvx-bq{text-align:left}
   .rvx .rvx-om{display:block}.rvx .rvx-om span{font-size:clamp(54px,18vw,90px)}.rvx .rvx-sum{display:block}.rvx .rvx-sum>div{height:46vw;margin-bottom:10px}.rvx .rvx-oc{display:block}.rvx .rvx-oc li{font-size:20px;margin-bottom:10px}
@@ -82,6 +82,6 @@
   .rvx .rvx-three{display:block}.rvx .rvx-rq{margin-bottom:24px}.rvx .rvx-eq{font-size:24px;min-height:0}.rvx .rvx-ea{font-size:17px}.rvx .rvx-close{font-size:22px}.rvx .rvx-tree{display:block}.rvx .rvx-nx{margin-bottom:16px}.rvx .rvx-nx .n{font-size:38px}
 }
 /* v3 D.1-F07: the scale labels get their own column, the stack starts to their right */
-@media (min-width:761px){.rvx .rvx-stack{padding-left:max(calc(13*var(--u)),128px)}}
+@media (min-width:761px){.rvx .rvx-stack{padding-left:max(calc(13*var(--u)),128px)}.rvx .rvx-stage{padding-top:28px}}
 /* v3 D.1-F07 mobile: the outlined New business line is no longer clipped */
-@media (max-width:760px){.rvx .rvx-base{max-height:1.5em;padding-bottom:.15em}.rvx .rvx-dep[data-v="1"] .rvx-base{max-height:0;padding:0}}
+@media (max-width:760px){.rvx .rvx-base{max-height:1.5em;padding-bottom:.15em}.rvx .rvx-dep[data-v="1"] .rvx-base{max-height:0;padding:0}.rvx .rvx-stack p.rvx-base{line-height:1.12;max-height:1.8em;padding-bottom:.2em}.rvx .rvx-dep[data-v="1"] .rvx-stack p.rvx-base{max-height:0;padding:0}}

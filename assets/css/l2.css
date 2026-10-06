@@ -32,3 +32,6 @@
 .l2 .l2-rel .ad.l2-lab{text-transform:none}
 /* v3 M01: the inserted target code sits on its own line above the name, never beside the plus */
 .l2 .l2-rel{position:relative}.l2 .l2-rel .l2-code{position:absolute;left:0;top:0;transform:translateY(-135%);margin:0;z-index:4}
+
+/* v3 mobile: the target code pill gets its own line above a bridge button instead of sitting in the headline above */
+@media (max-width:760px){.l2 .l2-rel[data-rel]{margin-top:36px!important}.pp .pz-nb .l2-rel[data-rel]{margin-top:0!important}}

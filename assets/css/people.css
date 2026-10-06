@@ -97,7 +97,7 @@
 /* v3 C.1-F11: the two targets fit their columns, codes keep clear of the plus */
 @media (min-width:761px){.pl .pl-br .l2-rel .n{font-size:clamp(34px,5.1vw,84px)}.pl .pl-br .l2-rel .ad{margin:0 .6em 0 .2em}}
 /* v3 C.1-F03: on smaller or shorter screens the role figure sits under the statement instead of over the text */
-@media (max-width:1180px),(max-height:640px){.pl .pl-nfig{position:static;width:44%;margin:2vh 0 0 auto}}
+@media (max-width:1400px),(max-height:700px){.pl .pl-nfig{position:static;width:44%;margin:2vh 0 0 auto}}
 .pl .pl-nfig svg{height:auto;aspect-ratio:1000/300}
-@media (max-width:1180px),(max-height:640px){.pl .pl-nfig{grid-column:1/-1;justify-self:end;width:min(46vw,440px);max-width:100%}}
+@media (max-width:1400px),(max-height:700px){.pl .pl-nfig{grid-column:1/-1;justify-self:end;width:min(46vw,440px);max-width:100%}}
 @media (max-width:760px){.pl .pl-nfig{justify-self:stretch;width:100%}}

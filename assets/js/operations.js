@@ -53,7 +53,7 @@ function wave(el,w,h){
 }
 /* 4 intervention: judgement once changes the track after it; compensation piles up the same way every week */
 function iv(el,w,h){
-  const g=canvas(el,w,h),root=el.closest('.ox-stk'),J=rel(el,root.querySelector('.ox-j')),Cm=rel(el,root.querySelector('.ox-c')),W=8,x0=w*.42,x1=w-24,xs=i=>lerp(x0,x1,(i+.5)/W),yj=J.cy,yc=Cm.cy+14,K=[3,4,5];
+  const g=canvas(el,w,h),root=el.closest('.ox-stk'),J=rel(el,root.querySelector('.ox-j')),Cm=rel(el,root.querySelector('.ox-c')),W=8,nar=w<500,Jb=rel(el,root.querySelector('.ox-j b')),Cb=rel(el,root.querySelector('.ox-c b')),x0=nar?Math.max(w*.42,Jb.r+18,Cb.r+18):w*.42,x1=w-24,xs=i=>lerp(x0,x1,(i+.5)/W),yj=nar?Jb.cy:J.cy,yc=nar?Cb.cy:Cm.cy+14,K=[3,4,5];
   ln(g,{x1:x0-10,x2:x1+10,y1:yj,y2:yj,'stroke-width':1});ln(g,{x1:x0-10,x2:x1+10,y1:yc,y2:yc,'stroke-width':1});
   const jd=[...Array(W)].map(()=>dot(g,{r:4})),node=dot(g,{}),ring=cc(g,{'stroke-width':1.6}),halo=cc(g,{'stroke-width':1.2}),st=[...Array(W)].map(()=>[...Array(6)].map(()=>dot(g,{r:5}))),lens=cc(g,{'stroke-width':1.8});
   const rd=Math.min(20,(x1-x0)/W*.42);

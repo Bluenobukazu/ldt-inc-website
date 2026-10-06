@@ -79,3 +79,4 @@
 }
 .de .de-fl,.de .de-zw.o span,.de .de-eq .o,.de .de-pl.e.lo b,.de .w0{font-stretch:100%;font-weight:800;letter-spacing:-.035em}.de .w0{font-weight:100}
 @media (max-width:760px){.de .de-dx .ad{font-size:18px}}
+.de .de-xh{grid-column:1/-1;grid-row:1}
