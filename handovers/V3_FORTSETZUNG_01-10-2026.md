@@ -210,3 +210,13 @@ Operating-System-Moment mit Linienzeichnung, Explore, Systemnavigation, Navigati
 
 ### Weiterhin ausstehend
 ADD-01 bis 04, Workshop-Ergebnisentwürfe, Delivery-F06-Screenreader-Satz. Menschliche Seitenprüfung durch Lena.
+
+### QA Durchlauf 05.10. (3), Stand bf87aee
+Bestanden (lokal, 127.0.0.1): Rauchtest 26 Ansichten (bad 0, die erste Ansicht scheitert bei kaltem Start gelegentlich und besteht beim Wiederholen), Direktaufruf, Reload und Zurück (bad 0), QA-02 inklusive Umschalttest (2 Zustände geprüft, Figur, Fehlt-Zeile und zweite Figur identisch), Touch-Ziele 390 x 844 (keine Verstösse), echter Tab-Lauf (444 Elemente, alle mit Fokusring), Reduced Motion (kein versteckter Text, kein horizontaler Scroll), Pixelkontrast an 6 Stellen (mindestens 7,0:1).
+Sichtung im Browser: geänderte Frames bei 390, 970 (Revenue D.1-F07), 1280 und 1440. Alle 133 Frames bei 390 und 1280 per Kontaktbogen, Partnerships Desktop nur bei 1440 ausgewertet.
+Preview (ldt-inc-git-deploy-experience-lab-v1): neuer Stand ausgeliefert, Expansion B-F04 mit neuer Zeile und Label-Halo geprüft, keine Konsolenfehler. Weitere Seiten dort nicht einzeln gesichtet.
+Nicht bestanden oder offen:
+- Skript v3_m06.py focus meldet viele Elemente (Navigation, Index, Codes). Der echte Tab-Lauf zeigt für dieselben Elemente einen Ring. Ich werte das Skript als unzuverlässig, habe es aber nicht weiter untersucht.
+- DOM-Kontrast meldet 1,00 für "Our contribution" (Partnerships, per Pixel 21:1 geprüft) und für "This is often where I enter" im System-Overlay mobil (nicht per Pixel nachgemessen, Codex-Bereich).
+- 970 x 510: nur Revenue D.1-F07 und die bereits früher korrigierten Frames neu gesichtet. Nach den heutigen Änderungen kein erneuter 970er Lauf.
+- Textvorschlag Layer 1: Der Complexity-Grafik fehlt ein erklärender Satz. Nicht umgesetzt, weil die Connect-Folge geschützt ist.
