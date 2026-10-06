@@ -253,3 +253,19 @@ Status: K = narrativ korrigiert und geprüft, U = narrativ geprüft und unverän
 - Vollständiger Zustandsnachweis (14 Klicks, alle Zustände) auf Stand 3500c55 (05.10. (1)).
 - Seitdem People nur im Layout verändert (Figur unterhalb ab 1400 px, keine Logik). Danach: 2 Zustände per echtem Klick (Stand bf87aee) und Vollauswahl, Reload, Zustandsabfolge.
 - Auf der Preview wird der Zustandsablauf am Ende dieses Durchlaufs erneut geprüft (siehe unten).
+
+### QA Abschluss 06.10., Stand ed87f68 (Preview ldt-inc-git-deploy-experience-lab-v1)
+Auf der veröffentlichten Preview geprüft (Skripte qa/v3_preview.py, v3_qa01_preview.py, v3_qa02_toggle.py, v3_flow.py über qa/v3_on_preview.py):
+- Geänderte Text- und Grafikstellen, 19 Frames bei 1440 x 900 und 390 x 844: alle 8 Textänderungen im DOM vorhanden, Layout-Frames gesichtet, keine Konsolenfehler. Nicht auf der Preview gesichtet: 970 x 510 und 1280 x 720 (dort nur lokal).
+- QA-01 (Delivery): Vertrag im DOM bei 1280 und 390 bestanden (Approval 20 Oct auf 27 Oct, Commitment live 01 Nov auf 08 Nov, Core first 01 Nov unabhängig, Rest hängt an der Freigabe, Changed openly gegen Changed quietly). Bilder von dl-ex und dl-ad gesichtet.
+- QA-02 (People): 14 echte Klicks nacheinander, jeder Zustand mit Fehlt-Zeile, Figurenradius und beiden Figuren identisch (bad 0). Damit ist der Zustandsnachweis auf dem veröffentlichten Stand vollständig.
+- Experience-Durchlauf: Landing, Contact erreichbar am Seitenende (E-Mail, LinkedIn), Explore öffnen, Deep Dive öffnen, Zurück, Brückenlink in Customers vorhanden, Desktop und mobil, keine Konsolenfehler. Das ist ein Funktionsdurchlauf, keine Neubewertung der Gestaltung der geschützten Module.
+- Partnerships 970 x 510 und 1280 x 720: echte Scrollzustände nach dem Leistenfix gesichtet, Satz in der weissen Leiste vollständig.
+- Fokus: v3_m06.py focus war ein Prüfskriptfehler (Fokus per Code löst :focus-visible nicht aus). Echter Tab-Lauf auf Customers, Partnerships und Explore (77 Elemente): alle mit Ring, alle :focus-visible. Skript mit Hinweis versehen.
+- Kontrast "This is often where I enter": echter Fehler mobil (schwarz auf schwarz, unsichtbar), behoben (weiss). Desktop war weiss. Ein Reveal-Zwischenstand existiert dort nicht, der Satz steht im Mobil-Layout statisch am Seitenende des Overlays.
+
+Verbleibend sichtbar (nicht behoben):
+- Commercial Architecture D-F01 mobil: Der Rand einer Platte berührt noch die Labels "What is agreed" und "How it is bought".
+- Partnerships D.3-F08 (Lena intervention): Die Karte "Lena intervention" berührt das Ende des Satzes. Die Karte wiederholt zudem das Label darüber.
+- Layer 1: Satz zur Complexity-Grafik (Vorschlag, geschützt). Mobil steht der Eintrittssatz im Explore-Overlay am Ende der Seite, möglicherweise sollte er oben stehen (Vorschlag, Codex-Bereich).
+- 970 x 510: kein vollständiger Neulauf nach den Änderungen vom 05. und 06.10.
