@@ -522,3 +522,6 @@ body.system-moment #railM{opacity:0;visibility:hidden}
 .dfoot>.deep-release-footer .horizon{display:none}
 .dfoot>.deep-release-footer button{color:inherit;font:inherit;letter-spacing:inherit;cursor:pointer}
 @media(max-width:760px){.dfoot{padding-top:44px}.dfoot .df-head{display:block}.dfoot .df-s{display:block;margin-top:10px}.dfoot .df-sy{padding-top:42px}.sy-ft .sy-form{inset:0 -12px}.sy-ft .sy-tab{display:block!important}.sy-ft .sy-c{min-height:0;margin-bottom:10px!important;padding:14px!important}.sy-ft .sy-h,.sy-ft .sy-k{min-height:88px}.sy-ft .sy-under{inset:4% -12px 2%;width:calc(100% + 24px);height:94%}}
+
+/* v3 QA 06.10.: on phones the entry sentence sits in the legacy layout and was black on black */
+@media (max-width:760px){#approach .inner>.aentry{color:#fff}#approach .inner>.aentry em{color:#fff}}
