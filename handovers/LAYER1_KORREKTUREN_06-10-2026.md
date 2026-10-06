@@ -25,3 +25,9 @@ Beobachtung (auch im Ausgangsstand vorhanden): in der headless Mobil Emulation s
 Befund: zu viel Scrollweg in Connect, und das Grau zu Weiss folgte nicht dem Lesen.
 Aenderung (home.js, home.css v305): beide Connect Aussagen werden in Woerter zerlegt (wordsOf), Woerter starten grau (.3) und werden beim Scrollen in Leserichtung weiss (Stagger), danach kurze weisse Haltephase. Haltephasen HOLDS .3/.3 auf .14/.16. Gesamtstrecke der Journey bei 1440 x 900 von 5556 auf etwa 4611 px, 970 x 510 von 3148 auf 2613 px. Entry Text startet jetzt bei Deckkraft 0 und blendet ein, danach wird er weiss. Reduced Motion: Woerter sofort weiss.
 Lokal geprueft: 1440 x 900, 970 x 510, 390 x 844 (Umbruch, Weisszustand), Konsole ohne Fehler. Preview Abnahme offen.
+
+## Layer 1 Final Clean QA (06.10.)
+
+Fund und Korrektur: Die Seite war nach dem Transformation Abschnitt 6000 px breit (Hintergrundflaechen der Staende), programmatisch horizontal scrollbar. In der Mobil Emulation weitete sich dadurch der Viewport (innerWidth 390 auf 1560), dadurch blendete clipLabels die Woerter in den schwarzen Transformation Bloecken aus. Korrektur: html{overflow-x:clip} (site.css v59, in allen fuenf Seiten hochgezaehlt). Danach scrollWidth gleich Viewport bei 1440 und 390 (auch Reduced Motion), Woerter in den Bloecken sichtbar, Seitenhoehe unveraendert.
+Geprueft lokal: Konsole ohne Fehler (1440, 1280, 970, 390, RM), keine Gedankenstriche im sichtbaren Text, Tab Lauf 70 Stopps (alle Ringe sichtbar, alle im Bild), Rail vor/zurueck ohne Ueberlagerung dauerhaft (Ausblenden beim Rueckwaertsscrollen mit .6 s Einblendung), 24 Stopp Durchlauf bei 1440.
+Beobachtungen, nicht geaendert: sieh Bericht an Lena (Ladegewicht, TTF Schriften, Zip Datei in assets/fonts, Frame Zeiten nur Software Rendering).
