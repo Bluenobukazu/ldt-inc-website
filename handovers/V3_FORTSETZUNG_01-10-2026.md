@@ -269,3 +269,21 @@ Verbleibend sichtbar (nicht behoben):
 - Partnerships D.3-F08 (Lena intervention): Die Karte "Lena intervention" berührt das Ende des Satzes. Die Karte wiederholt zudem das Label darüber.
 - Layer 1: Satz zur Complexity-Grafik (Vorschlag, geschützt). Mobil steht der Eintrittssatz im Explore-Overlay am Ende der Seite, möglicherweise sollte er oben stehen (Vorschlag, Codex-Bereich).
 - 970 x 510: kein vollständiger Neulauf nach den Änderungen vom 05. und 06.10.
+
+## Letzter Abschlussdurchgang 06.10. (Code-Stand 7810079)
+
+Umgesetzt:
+- Commercial Architecture D-F01 und D-F02 mobil: Die Labels "What is agreed" und "How it is bought" liegen unterhalb der Plattenränder, "What is included" darüber. Schrift nicht verkleinert, Copy und Grafik unverändert. Beim Preview-Lauf bei 970 x 510 fiel auf, dass die mobile Verschiebung auf schmalen Desktop-Grafiken "What it earns" an die Notiz von "How it is bought" schob. Daher: mobile Verschiebung nur bis 760 px Fensterbreite, bei kleinen Desktop-Fenstern eigene Abstände und das Kernlabel "The offer" mit schwarzem Grund (bei 970 x 510 war das T vom hellen Plattenrand verdeckt).
+- Partnerships D.3-F08: Die Karte rückt 40 Einheiten nach unten und berührt den Satz nicht mehr. Die doppelte Beschriftung ist aufgelöst: Über dem Satz bleibt "Lena intervention", die Karte heisst jetzt "Operating condition" (der Begriff steht im Satz selbst, nichts Neues erfunden). Textdifferenz: Karte "Lena intervention" wird "Operating condition", Desktop und Mobil.
+
+Geprüft auf der Preview (ldt-inc-git-deploy-experience-lab-v1), 970 x 510, 1280 x 720, 1440 x 900, 390 x 844:
+- 20 Frames je Größe, alle seit 3500c55 geänderten Text- und Layoutbereiche (advantage A.1-F04, commercial D-F01 und D-F02, customers D.2-F04 und D.2-F05, decisions C.3-F08, expansion B-F04, markets B.1-F04, operations C-F04, partnerships D.3-F02, F03, F05, F08, people C.1-F03, positioning A+B-F05, proposition A-F10, revenue D.1-F04 und D.1-F07, technology C.2-F03 und C.2-F06): 80 Aufnahmen ohne Konsolenfehler, die 9 geänderten Texte je Größe im DOM vorhanden (36 von 36).
+- Gesichtet: Commercial D-F01, D-F02 und Partnerships D.3-F08 in allen vier Grössen, die übrigen Frames bei 970 und 1280 per Kontaktbogen und bei 390 und 1440 aus dem vorigen Lauf.
+- Funktionscheck Desktop und mobil: Landing, Contact erreichbar, Explore, Deep Dive, Zurück, Brückenlink, keine Konsolenfehler. Der erste mobile Lauf brach wegen eines Startfehlers des Prüfwerkzeugs ab, die Wiederholung bestand.
+
+Offen, nicht in diesem Durchgang umgesetzt:
+- Revenue D.1-F07 bei 970 x 510: Die gestrichelte Skalenlinie "Last year" läuft durch die Oberkante der Outline-Zeile "New business". Das ist inhaltlich gewollt (die Linie markiert das Vorjahresniveau innerhalb des New-business-Anteils), wirkt bei dieser Fensterhöhe aber eng.
+- Partnerships D.3-F11 mobil: In der Liste "Related deep dives" bricht "C + D" vor "Delivery" in zwei Zeilen um.
+- Commercial D-F02 bei 970 x 510: Eine Plattenkante berührt knapp die Unterseite des Labels "What is agreed" in einem Animationszustand.
+- Vorschläge zu geschützten Bereichen, nicht umgesetzt: Satz zur Complexity-Grafik auf Layer 1, Eintrittssatz im Explore-Overlay mobil nach oben, britische Schreibweise auf /another-perspective/.
+- Ausstehende Textfreigaben: ADD-01 bis 04, Workshop-Ergebnisentwürfe, Screenreader-Satz für Delivery F06.

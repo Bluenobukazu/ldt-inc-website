@@ -39,3 +39,8 @@ Vorher/Nachher aller sichtbaren Textänderungen. Seiten ohne Eintrag blieben tex
 
 - Vorher: Experience moves between emerging concepts and established organizations, across brand-led, hospitality, cultural and commercial environments.
   Nachher: Experience moves between emerging concepts and established organisations, across brand-led, hospitality, cultural and commercial environments.
+
+## partnerships (06.10.)
+
+- Vorher: Lena intervention (Karte am Ende des Satzes, Desktop und Mobil)
+  Nachher: Operating condition
