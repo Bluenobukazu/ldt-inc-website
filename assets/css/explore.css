@@ -319,7 +319,7 @@
 .sy li button .ad{color:inherit!important;opacity:1!important}
 
 /* ===== application release: reference-led Layer 1 operating-system moment ===== */
-body.system-moment #rail{opacity:0;visibility:hidden;pointer-events:none}
+body.system-moment #rail,body.system-exit #rail{opacity:0;visibility:hidden;pointer-events:none}
 body.system-moment #railM{opacity:0;visibility:hidden}
 #journey .stage.sysOn{overflow:visible}
 #journey .stage.sysOn .j-cm{clip-path:inset(0 0 -38px 0)}

@@ -209,11 +209,11 @@ function Journey(st,inst){
   const cEls=DIMS.map((d,i)=>mk('button','cplus','<i></i>',{'data-dim':i,'data-act':'','aria-haspopup':'dialog','aria-label':`Open ${d.n}`}));
   const vB=mk('button','vlab','Delivery',{'data-real':RI('Delivery'),'data-act':'','aria-haspopup':'dialog'});
   /* the Venn is replaced by the Operating System drawing (rebuild 02.10.2026): the circles hand over to it */
-  const osEl=document.createElement('div');osEl.className='j-os';osEl.innerHTML=`<p class="os-lead">${SYS_LINE}</p><div class="sy-host"></div><div class="os-cta"><p class="os-cl">Every part of the system opens its own page.</p><button class="os-ex" type="button" data-open="approach" data-act aria-haspopup="dialog"><span>Explore the system</span><b aria-hidden="true">+</b></button></div>`;sl.appendChild(osEl);
+  const osEl=document.createElement('div');osEl.className='j-os';osEl.innerHTML=`<p class="os-lead">${SYS_LINE}</p><div class="sy-host"></div><div class="os-cta"><p class="os-cl">Start with the overview, then explore each area in depth.</p><button class="os-ex" type="button" data-open="approach" data-act aria-haspopup="dialog"><span>Explore the system</span><b aria-hidden="true">+</b></button></div>`;sl.appendChild(osEl);
   const entry=document.createElement('p');entry.className='j-entry-note';entry.textContent='This is often where I enter: when growth, execution or commercial performance begin to outpace the structure holding the business together.';sl.appendChild(entry);
   /* desktop: the whole stage is one composition that the scroll builds (explore.js, compose) */
   const cmEl=document.createElement('div');cmEl.className='j-cm sy';
-  cmEl.innerHTML=`<div class="cm-dyn"></div><span class="pill cm-a cm-pill" aria-hidden="true">04</span>${RM?'<h2 class="sr">One Operating System</h2>':''}<h2 class="cm-a cm-lock"><span>One</span><span>Operating</span><span>System</span></h2><p class="cm-a cm-sys">${SYS_LINE_HTML}</p><button class="cm-a cm-go" type="button" data-open="approach" data-act aria-haspopup="dialog"><span class="cm-gl">Explore the System<b aria-hidden="true">+</b></span><span class="cm-gq">Every part of the system opens its own page.</span></button>`;
+  cmEl.innerHTML=`<div class="cm-dyn"></div><span class="pill cm-a cm-pill" aria-hidden="true">04</span>${RM?'<h2 class="sr">One Operating System</h2>':''}<h2 class="cm-a cm-lock"><span>One</span><span>Operating</span><span>System</span></h2><p class="cm-a cm-sys">${SYS_LINE_HTML}</p><button class="cm-a cm-go" type="button" data-open="approach" data-act aria-haspopup="dialog"><span class="cm-gl">Explore the System<b aria-hidden="true">+</b></span><span class="cm-gq">Start with the overview, then explore each area in depth.</span></button>`;
   sl.appendChild(cmEl);sys.style.display='none';const cp={p:0},cmq=s=>cmEl.querySelector(s);
   [...dimEls,...Object.values(tickEls),vA,vB,...cEls,cue].forEach(e=>e.remove());
   let tl=null,master=null,trig=null,jState=-1,G0=G();
@@ -337,6 +337,11 @@ function Journey(st,inst){
     trig=ScrollTrigger.create({trigger:'#journey',start:'top top',onRefresh:jBand,onToggle:jBand,end:()=>'+='+innerHeight*base*(T0+TL),pin:st,refreshPriority:2,scrub:.6,animation:master,invalidateOnRefresh:true,
       onUpdate:self=>{const p=self.progress*(T0+TL)-T0,hp=Math.min(1,self.progress*(T0+TL)/H0)*END;const s=p<SEG[0]?0:p<SEG[1]?1:p<SEG[2]?2:3;setActive(s);jTitle(s===0?-1:s);if(p>at(.565))gsap.set(jt,{opacity:0});hero(hp<.72);
         st.classList.toggle('sysOn',p>at(.515));document.body.classList.toggle('system-moment',self.isActive&&self.progress<.995&&p>at(.565));st.classList.toggle('cxOn',p>at(.3)&&p<at(.42));jBand(self)}});
+    /* leaving the system: the pin has ended but the fields are still on screen; the rail returns only once no field is left under it */
+    {const clr=()=>{const r=$("#rail");if(inst!==0||!trig||!r||MOB()){document.body.classList.remove('system-exit');return}
+      let hit=false;if(scrollY>=trig.end-2&&scrollY<trig.end+innerHeight){const a=r.getBoundingClientRect();hit=[...cmEl.querySelectorAll('.cm-target')].some(e=>{const b=e.getBoundingClientRect();return b.right>a.left-14&&b.left<a.right+14&&b.bottom>a.top-14&&b.top<a.bottom+14})}
+      document.body.classList.toggle('system-exit',hit)};
+      addEventListener('scroll',clr,{passive:true});gsap.ticker.add(clr)}
     /* the line drawing is a pure function of the scroll position: it is right after a direct address, a resize or a rebuild as well */
     {const tk=()=>{if(!cmEl._cm||!trig)return;const w=Math.max(0,Math.min(1,((trig.progress*(T0+TL)-T0)-at(.565))/.15));if(cmEl._cp!==w||cmEl._ci!==cmEl._cm){cmEl._cp=w;cmEl._ci=cmEl._cm;cmEl._cm.setP(w)}};cmEl._tk=tk;gsap.ticker.add(tk)}
   }
@@ -371,22 +376,22 @@ function buildTransform(){
   const last=pos(PLATES.length-1);const shift=Math.max(0,last.x+t.ws[PLATES.length-1]-(t.W-(MOB()?22:260)));
   const [ax,ay,aw,ah,ag]=t.align;
   gsap.set('#tAxis',{left:ax-18,top:ay-40,width:1,height:PLATES.length*(ah+ag)+80,scaleY:0,transformOrigin:'50% 0%'});
-  gsap.set('#tAnchor',{left:t.anchor[0],top:t.anchor[1],opacity:0,y:20});gsap.set('#tAnchor .it',{fontSize:MOB()?28:64,width:MOB()?380:520});gsap.set('#tAnchor .when',{fontSize:MOB()?13.5:19,width:MOB()?380:470,marginTop:MOB()?12:28});gsap.set('#tAnchor .act',{marginTop:MOB()?20:36});
+  gsap.set('#tAnchor',{left:t.anchor[0],top:t.anchor[1],opacity:0,y:20});gsap.set('#tAnchor .it',{fontSize:MOB()?28:64,width:MOB()?380:520});gsap.set('#tAnchor .when',{fontSize:MOB()?13.5:19,width:MOB()?380:470,marginTop:MOB()?12:28});gsap.set('#tAnchor .act',{marginTop:MOB()?20:36});gsap.set('#tAnchor .when,#tAnchor .act',{opacity:0});
   gsap.set('#tProg',{left:t.prog[0],top:t.prog[1],width:t.prog[2],opacity:1});gsap.set('#tProg span',{fontSize:MOB()?19:32,letterSpacing:'.01em'});
   const tl=gsap.timeline({defaults:{ease:'none'},paused:RM});tTL=tl;
-  tl.to(bars.flatMap(o=>[o.b,o.l]),{x:-shift,duration:.5},0);
-  $$('#tProg span').forEach((sp,i)=>tl.call(()=>$$('#tProg span').forEach((x,j)=>x.classList.toggle('on',j<=i)),null,.02+i*.1));
-  tl.to('#tWipe',{top:-3000,duration:.08,ease:'power2.inOut'},.54).to('#tProg',{opacity:0,duration:.03},.54);
+  tl.to(bars.flatMap(o=>[o.b,o.l]),{x:-shift,duration:.36},0);
+  $$('#tProg span').forEach((sp,i)=>tl.call(()=>$$('#tProg span').forEach((x,j)=>x.classList.toggle('on',j<=i)),null,.02+i*.07));
+  tl.to('#tWipe',{top:-3000,duration:.08,ease:'power2.inOut'},.40).to('#tProg',{opacity:0,duration:.03},.40);
   /* each word dims only while it travels, so words never cross each other legibly and the screen is never empty */
-  bars.forEach(({b,l},i)=>{const st=.6+i*.018,to={left:ax+shift,top:ay+i*(ah+ag),width:aw,height:ah};
+  bars.forEach(({b,l},i)=>{const st=.46+i*.018,to={left:ax+shift,top:ay+i*(ah+ag),width:aw,height:ah};
     tl.to(l,Object.assign({fontSize:t.lfEnd,paddingLeft:MOB()?14:22,borderBottomWidth:0,duration:.12,ease:'power3.inOut'},to),st).to(l,{opacity:0,duration:.015},st+.01).to(l,{opacity:1,duration:.025},st+.095)
       /* in the white end state each word lands on its own black block */
       .set(b,to,st+.09).to(b,{opacity:1,duration:.03},st+.09)});
-  tl.to('#tAxis',{scaleY:1,duration:.06},.76).to('#tAnchor',{opacity:1,y:0,duration:.05},.8).to({},{duration:.15},.85);
+  tl.to('#tAxis',{scaleY:1,duration:.06},.62).to('#tAnchor',{opacity:1,y:0,duration:.05},.52).to('#tAnchor .when,#tAnchor .act',{opacity:1,duration:.05},.66).to({},{duration:.15},.71);
   tl.eventCallback('onUpdate',clipLabels);
   if(RM){$('#transformation').dataset.band='white';tl.progress(1);clipLabels();if(!tRail&&(tRail=1))ScrollTrigger.create({trigger:'#transformation',start:'top 55%',end:'bottom 45%',onToggle:self=>{if(self.isActive)setActive(5)}});return}
   const tBand=bandAfter($('#transformation'),'white');
-  tST=ScrollTrigger.create({trigger:'#transformation',start:'top top',end:()=>'+='+innerHeight*2.6,pin:'#tStage',refreshPriority:1,scrub:.6,animation:tl,invalidateOnRefresh:true,onToggle:self=>{if(self.isActive)setActive(5);tBand(self)},onUpdate:tBand,onRefresh:tBand});
+  tST=ScrollTrigger.create({trigger:'#transformation',start:'top top',end:()=>'+='+innerHeight*2.25,pin:'#tStage',refreshPriority:1,scrub:.6,animation:tl,invalidateOnRefresh:true,onToggle:self=>{if(self.isActive)setActive(5);tBand(self)},onUpdate:tBand,onRefresh:tBand});
 }
 
 /* ---------- proof, layers ---------- */
