@@ -135,7 +135,7 @@ const G=()=>MOB()?GM:GD;
    scene itself; they are not easing or time-based pauses.  The second statement
    starts only after the first one's fade has completed.
    at() maps the original V5 timeline positions onto the adjusted timeline. */
-const HOLDS=[[.19,.04],[.505,.14],[.565,.16]],SYS_HOLD=.12;
+const HOLDS=[[.19,.04],[.505,.14],[.565,.19]],SYS_HOLD=.12;
 /* a statement is read word by word: the words are wrapped, so the grey turns white in reading order while the visitor scrolls */
 const wordsOf=el=>{const out=[];const walk=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType===3){const f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(t=>{if(!t)return;if(/^\s+$/.test(t))f.appendChild(document.createTextNode(t));else{const w=document.createElement('span');w.className='rw';w.textContent=t;out.push(w);f.appendChild(w)}});c.replaceWith(f)}else if(c.nodeType===1&&c.tagName!=='BR')walk(c)})};walk(el);return out};
 const at=x=>HOLDS.reduce((v,[t,a])=>x>=t?v+a:v,x);
@@ -254,7 +254,7 @@ function Journey(st,inst){
     if(cmEl._tk){gsap.ticker.remove(cmEl._tk);cmEl._tk=null}
     /* on narrower screens the chapter rail would run into the right end of the drawing: the composition is scaled to the room that is left */
     gsap.set(cmEl,{transformOrigin:'0% 100%',scale:M?1:Math.min(1,Math.max(.72,(innerWidth-2*48-(innerWidth-g.W*S)/2)/(1372*S)))});
-    gsap.set([cmq('.cm-pill'),cmq('.cm-sys')],{opacity:0,y:16});gsap.set(entry,{left:M?22:240,top:M?252:318,width:M?386:960,opacity:0,y:0});gsap.set(cmq('.cm-lock'),{opacity:0,y:50});gsap.set(cmq('.cm-go'),{opacity:0,y:24});gsap.set(cmq('.cm-mot'),{opacity:0});
+    gsap.set([cmq('.cm-pill'),cmq('.cm-sys')],{opacity:0,y:16});gsap.set(entry,{left:M?22:240,top:M?252:350,width:M?386:960,opacity:0,y:0});gsap.set(cmq('.cm-lock'),{opacity:0,y:50});gsap.set(cmq('.cm-go'),{opacity:0,y:24});gsap.set(cmq('.cm-mot'),{opacity:0});
     const C=i=>q('.c'+i),F=i=>q('.f'+i),CL=i=>q('.clc'+i);
     [0,1,2,3].forEach(i=>{const [x,y]=g.C0[i];gsap.set([C(i),F(i),CL(i)],{attr:{cx:x,cy:y,r:g.r0}});gsap.set(C(i),{attr:{'stroke-dashoffset':1},visibility:'hidden'});gsap.set(F(i),{opacity:0})});
     gsap.set(q('.lensA'),{attr:{cx:g.C1[0][0],cy:g.C1[0][1],r:g.r1},opacity:0});gsap.set(q('.lensB'),{attr:{cx:g.C1[2][0],cy:g.C1[2][1],r:g.r1},opacity:0});
@@ -307,9 +307,9 @@ function Journey(st,inst){
     /* 04 System: light returns, circles move into each other, shared realities appear */
     tl.to(q('.j-black'),{opacity:0,duration:.001},at(.62));
     [0,1,2,3].forEach(i=>{const [x,y]=g.C1[i];tl.to([C(i),F(i),CL(i)],{attr:{cx:x,cy:y,r:g.r1},duration:.08,ease:'power3.inOut'},at(.635))});
-    const cW=wordsOf(q('.j-connect')),eW=wordsOf(entry);gsap.set([...cW,...eW],{opacity:RM?1:.3});
-    if(!RM){tl.fromTo(cW,{opacity:.3},{opacity:1,duration:.012,stagger:.008,ease:'none',immediateRender:false},at(.475)+.03)
-      .fromTo(eW,{opacity:.3},{opacity:1,duration:.012,stagger:.0055,ease:'none',immediateRender:false},at(.525)+.03)}
+    const cW=wordsOf(q('.j-connect')),eW=wordsOf(entry);gsap.set([...cW,...eW],{opacity:RM?1:.5});
+    if(!RM){tl.fromTo(cW,{opacity:.5},{opacity:1,duration:.01,stagger:.005,ease:'none',immediateRender:false},at(.475)+.03)
+      .fromTo(eW,{opacity:.5},{opacity:1,duration:.01,stagger:.0035,ease:'none',immediateRender:false},at(.525)+.03)}
     tl.set(entry,{opacity:0,y:0},at(.525)).to(entry,{opacity:1,duration:.03,ease:'power1.out'},at(.525)).to(entry,{opacity:0,y:-14,duration:.025},at(.565));
     tl.to(cp,{p:1,duration:.15,ease:'none'},at(.565))
       .to(cmq('.cm-pill'),{opacity:1,y:0,duration:.03},at(.625))
