@@ -56,3 +56,5 @@
 @media (min-width:761px) and (max-height:640px){.cux .cux-fin{margin-top:7vh}}
 /* v3 D.2-F05: the statement outranks its explanation */
 .cux .cux-rt .cux-b2{font-size:clamp(21px,calc(3*var(--u)),36px)}
+/* batch 2: the bridge to Partnerships keeps its size; the block runs into the page gutter so the name fits, the plus sits beside the code */
+@media (max-width:760px){.cux .cux-nx .ad{grid-column:1}.cux .cux-nx .l2-plus{grid-column:2;grid-row:1;align-self:center;margin-right:8px}.cux .cux-nx{margin-right:calc(-1*(44px - 6.67vw))}.cux .cux-nx .n{grid-column:1/-1}.cux .cux-nx .q{grid-column:1/-1;max-width:calc(100% - (44px - 6.67vw))}}

@@ -3719,6 +3719,7 @@ body.at-end #rail button:not(.on){opacity:.32}body.at-end #rail button:hover,bod
 /* closing: where to go next */
 .pa-br{background:#000;color:#fff;padding:4vh var(--m) 10vh;margin-top:-1px}
 .pa-br .xh{display:block;opacity:.6}
+.pa-br .pa-brk{margin-top:2.2vh;font-family:var(--serif);font-style:italic;font-size:clamp(22px,2.2vw,34px);line-height:1.2;color:#fff;max-width:28em}
 .pa-br ul{list-style:none;margin-top:5vh;border-top:1px solid rgba(255,255,255,.28)}
 .pa-br li{border-bottom:1px solid rgba(255,255,255,.28)}
 .pa-nx{display:grid;grid-template-columns:clamp(70px,9vw,150px) minmax(0,1fr) auto;align-items:center;width:100%;padding:2.6vh 0;text-align:left;cursor:pointer;background:none;color:#fff}
@@ -3845,7 +3846,8 @@ body.at-end #rail button:not(.on){opacity:.32}body.at-end #rail button:hover,bod
 .pa-m .pm-cn{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:3;mix-blend-mode:difference;overflow:visible}
 .pa-m .pm-cnp{stroke:#fff;stroke-width:1.4}.pa-m .pm-cn rect{fill:#fff;width:7px;height:7px}
 .pa-br .pa-nx .n{font-size:clamp(34px,10.4vw,48px)}
-.pa-nx{grid-template-columns:clamp(58px,15vw,90px) minmax(0,1fr) auto}
+.pa-nx{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"ad ad" "n ar";row-gap:4px}
+.pa-nx .ad{grid-area:ad}.pa-nx .n{grid-area:n}.pa-nx .ar{grid-area:ar;margin-left:14px}
 .pa-nx .ar{width:clamp(28px,8vw,50px)}
 .pa-br{padding-top:30px}
 }

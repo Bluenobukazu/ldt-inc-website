@@ -105,7 +105,7 @@ function build(root){
     put($('.rvx-st[data-k="0"]',yf),fx,g.mid(0,9),W,H);put($('.rvx-st[data-k="1"]',yf),fx,g.mid(1,9),W,H);
     if(n)put($('.rvx-st[data-k="3"]',yf),1192,g.mid(3,11),W,H);else put($('.rvx-st[data-k="3"]',yf),X(10)+6,g.Y(cum[4][10])-14,W,H);
     const mo=$('.rvx-mo',yf);mo.style.width=(1200/W*100)+'%';mo.style.top=n?'':(y0/H*100)+'%';
-    let ny=0;if(!n){ny=g.mid(0,11);mk(s,'line',{x1:1206,y1:ny,x2:1234,y2:ny,stroke:'#000','stroke-width':2});put($('.rvx-note',yf),1246,ny,W,H);put($('.rvx-fq',yf),1246,g.mid(1,11)-16,W,H)}
+    let ny=0;if(!n){ny=g.mid(0,11);mk(s,'line',{x1:1206,y1:ny,x2:1234,y2:ny,stroke:'#000','stroke-width':2});put($('.rvx-note',yf),1246,ny,W,H);put($('.rvx-fq',yf),1246,g.mid(1,11)-16,W,H);const fq=$('.rvx-fq',yf);fq.style.maxWidth='';fq.style.maxWidth=Math.max(120,Math.floor(yf.clientWidth-fq.offsetLeft))+'px'}
     reveal(yf,3600,p=>{ap(ss(0,.8,p));$$('.rvx-lb,.rvx-mo',yf).forEach(e=>e.style.opacity=ss(0,.3,p));$$('.rvx-st,.rvx-note,.rvx-fq',yf).forEach(e=>e.style.opacity=ss(.7,.95,p))})};
   const READ=[{past:[0,1,2,3],next:[0]},{past:[3],next:[3]},{past:[0,3],next:[0,3]}];
   const drawRe=()=>$$('.rvx-rq',root).forEach(f=>{const q=+f.dataset.q,W=1200,H=560,s=stage(f,W,H),ap=drawBands(s,year(H-8,6),'rvR'+q,READ[q],W,H,true);reveal(f,2800,p=>ap(ss(0,.85,p)))});
