@@ -93,8 +93,8 @@
 .pp .pz-list .pz-lab{grid-column:1/-1}
 .pp .pz-big{grid-column:1/-1;font-size:calc(8.9*var(--u));font-weight:800;font-stretch:108%;letter-spacing:-.045em;line-height:1;margin:calc(.6*var(--u)) 0 calc(2.4*var(--u))!important}
 .pp .pz-ls{grid-column:1/-1;list-style:none;padding:0}
-.pp .pz-ls li{display:flex;align-items:baseline;gap:calc(1.2*var(--u));padding-left:0;font-size:clamp(20px,calc(4*var(--u)),60px);font-weight:calc(700 - var(--k)*100);letter-spacing:-.035em;line-height:1.4;opacity:calc(1 - var(--k)*.13);transition:padding-left 1.6s var(--ez) calc(var(--k)*.14s)}
-.pp .in .pz-ls li{padding-left:calc(var(--k)*calc(8.2*var(--u)))}
+.pp .pz-ls li{display:flex;align-items:baseline;gap:calc(1.2*var(--u));padding-left:0;font-size:clamp(20px,calc(4*var(--u)),60px);font-weight:calc(700 - var(--k)*100);letter-spacing:-.035em;line-height:1.4;opacity:calc(1 - var(--k)*.13);padding-left:calc(var(--k)*calc(8.2*var(--u)));transform:translateX(calc(var(--k)*calc(-8.2*var(--u))));transition:transform 1.6s var(--ez) calc(var(--k)*.14s)}
+.pp .in .pz-ls li{transform:translateX(0)}
 .pp .pz-ls .num{font-size:.6em;color:#8c8c8c;-webkit-text-stroke:.4px #8c8c8c;margin-right:.3em}
 .pp .pz-ls em{font-style:normal;font-weight:300;color:#8c8c8c;font-size:.6em;margin-left:.6em}
 .pp .pz-list .pz-lab+.pz-big+.pz-lab{margin-top:calc(1*var(--u))}
@@ -258,7 +258,7 @@
   .pp .pz-r1 .pz-s b{font-size:27vw}.pp .pz-r2 .pz-s b{font-size:22vw}.pp .pz-r3 .pz-s b{font-size:19vw}
   .pp .pz-r2,.pp .pz-r3{text-align:left!important}
   .pp .pz-holds .pz-ill{height:92vw;order:5}.pp .pz-h2{font-size:17vw}.pp .pz-holds .pz-i{font-size:clamp(20px,6vw,28px)}.pp .pz-holds .pz-c{font-size:clamp(24px,7vw,34px)}
-  .pp .pz-big{font-size:19vw}.pp .pz-ls li{font-size:clamp(20px,6.2vw,28px);flex-wrap:wrap;gap:6px 10px}.pp .in .pz-ls li{padding-left:calc(var(--k)*4vw)}
+  .pp .pz-big{font-size:19vw}.pp .pz-ls li{font-size:clamp(20px,6.2vw,28px);flex-wrap:wrap;gap:6px 10px;padding-left:calc(var(--k)*4vw);transform:translateX(calc(var(--k)*-4vw))}.pp .in .pz-ls li{transform:translateX(0)}
   .pp .pz-d{min-height:0}
   .pp .pz-txt{display:contents}
   .pp .pz-txt>*{grid-column:1/-1!important;grid-row:auto!important;text-align:left!important}

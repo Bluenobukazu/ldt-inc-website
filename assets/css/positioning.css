@@ -70,3 +70,6 @@
 .po .po-t .w{font-stretch:100%;font-weight:800;letter-spacing:-.035em}
 @media (max-width:760px){.po .po-names{white-space:normal}.po .po-names .pg{font-size:15px;display:block}}
 .po .po-names .pg{font-size:max(.3em,13px)}
+
+/* mobile: Premium / Mass market change size and wrap; the block keeps the height of its tallest state, so the page does not jump */
+@media(max-width:520px){.po .po-pos{min-height:calc(39vw + 16px);align-content:flex-start}}

@@ -52,7 +52,12 @@ function x2(el,w,h){
     S.ls.forEach((l,i)=>{const heavy=i===1||i===5;l.setAttribute('stroke-width',lerp(2.2,heavy?3.4:.9,t));});
     const pr=lerp(52,66,t)*k;S.pr.setAttribute('cx',cx);S.pr.setAttribute('cy',cy);S.pr.setAttribute('r',pr);S.pr.setAttribute('stroke-width',lerp(2.6,7,t));
     halo.setAttribute('cx',cx);halo.setAttribute('cy',cy);halo.setAttribute('r',pr+14*k);halo.setAttribute('stroke-width',1.3);halo.setAttribute('opacity',ss(.4,.8,p));
-    dep.forEach((d,j)=>{const i=j?5:1,x=cx+Math.cos(A[i])*R[i],y=cy+Math.sin(A[i])*R[i];setC(d,x,y,r[i]+9*k,ss(.6,.9,p))})});
+    dep.forEach((d,j)=>{const i=j?5:1,x=cx+Math.cos(A[i])*R[i],y=cy+Math.sin(A[i])*R[i];setC(d,x,y,r[i]+9*k,ss(.6,.9,p));
+      /* the two other dependencies are named beside their rings, as the text names them */
+      const sp=el.parentNode.querySelector('[data-l="'+(j?'distributor':'account')+'"]');if(sp){const hw=sp.offsetWidth/2,o=r[i]+9*k+14,ca=Math.cos(A[i]),sa=Math.sin(A[i]);
+        /* the account is named to the right of its ring, below it where the canvas ends; the distributor sits lower left, so its name goes beside the ring */
+        let lx=x+ca*(o+hw),ly=y+sa*(o+10);if(!j){lx=x+o+hw;ly=y;if(lx+hw>w-6){lx=w-hw-6;ly=y+r[i]+9*k+22}}
+        sp.style.left=Math.max(hw+6,Math.min(w-hw-6,lx))+'px';sp.style.top=Math.max(14,Math.min(h-14,ly))+'px';sp.style.opacity=ss(.7,.95,p)}})});
 }
 /* 03: a system layer forms between core and parts; the core stays, the outer parts change with their conditions */
 function x3(el,w,h){
