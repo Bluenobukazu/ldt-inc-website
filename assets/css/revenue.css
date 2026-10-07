@@ -17,10 +17,10 @@
 .rvx .rvx-hero .rvx-bq{grid-column:7/-1;grid-row:3;margin:calc(2.4*var(--u)) 0 0;align-self:end;text-align:right}
 /* the same total */
 .rvx .rvx-same .rvx-h1{grid-column:1/-1;grid-row:1}
-.rvx .rvx-om{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:repeat(3,1fr);column-gap:calc(2*var(--u));margin:calc(4*var(--u)) 0 0}.rvx .rvx-om p{margin:0}.rvx .rvx-om span{display:block;font-size:calc(9*var(--u));font-weight:850;font-stretch:108%;letter-spacing:-.06em;line-height:.9}
+.rvx .rvx-om{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:repeat(3,1fr);column-gap:calc(5*var(--u));margin:calc(5.4*var(--u)) 0 0}.rvx .rvx-om p{margin:0}.rvx .rvx-om span{display:block;font-size:calc(9*var(--u));font-weight:850;font-stretch:108%;letter-spacing:-.06em;line-height:.9}
 .rvx .rvx-om p:nth-child(1) span{font-weight:900}.rvx .rvx-om p:nth-child(2) span{font-weight:500}.rvx .rvx-om p:nth-child(3) span{font-weight:200}
-.rvx .rvx-sum{grid-column:1/-1;grid-row:3;display:grid;grid-template-columns:repeat(3,1fr);column-gap:calc(2*var(--u));margin-top:calc(2.4*var(--u))}.rvx .rvx-sum>div{position:relative;height:calc(20*var(--u))}
-.rvx .rvx-oc{grid-column:1/-1;grid-row:4;list-style:none;margin:calc(1.4*var(--u)) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);column-gap:calc(2*var(--u))}.rvx .rvx-oc li{font-size:clamp(17px,calc(2.4*var(--u)),34px);font-weight:300;letter-spacing:-.02em;line-height:1.15}.rvx .rvx-oc b{font-weight:850}
+.rvx .rvx-sum{grid-column:1/-1;grid-row:3;display:grid;grid-template-columns:repeat(3,1fr);column-gap:calc(5*var(--u));margin-top:calc(3.2*var(--u))}.rvx .rvx-sum>div{position:relative;height:calc(23*var(--u))}
+.rvx .rvx-oc{grid-column:1/-1;grid-row:4;list-style:none;margin:calc(2.2*var(--u)) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);column-gap:calc(5*var(--u))}.rvx .rvx-oc li{font-size:clamp(17px,calc(2.4*var(--u)),34px);font-weight:300;letter-spacing:-.02em;line-height:1.15}.rvx .rvx-oc b{font-weight:850}
 /* the year */
 .rvx .rvx-yr .rvx-h1{grid-column:1/9;grid-row:1}
 .rvx .rvx-yf{grid-column:1/-1;grid-row:2;position:relative;margin:calc(3*var(--u)) 0 0;aspect-ratio:var(--ar,3.2);max-height:calc(34*var(--u));width:100%}.rvx .rvx-yf svg{position:absolute;inset:0;width:100%;height:100%}

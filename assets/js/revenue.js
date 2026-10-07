@@ -53,7 +53,7 @@ function build(root){
   const OT={ot1:(g,w,h)=>{const A=Math.min(w,h)*Math.min(w,h)*.5,r=Math.sqrt(A*.74/Math.PI),cx=w*.42,cy=h*.46,c=[];c.push([cx,cy,r]);const sm=[[.84,.2],[.92,.62],[.76,.8],[.14,.8],[.1,.2],[.64,.9]],rs=Math.sqrt(A*.26/6/Math.PI);sm.forEach(([a,b])=>c.push([w*a,h*b,rs]));return c},
     ot2:(g,w,h)=>{const N=20,A=Math.min(w,h)*Math.min(w,h)*.5,rs=Math.sqrt(A/N/Math.PI),c=[];const cols=5,rows=4;for(let i=0;i<N;i++)c.push([w*(.12+.76*(i%cols)/(cols-1)),h*(.16+.68*Math.floor(i/cols)/(rows-1)),rs]);return c},
     ot3:(g,w,h)=>{const A=Math.min(w,h)*Math.min(w,h)*.5,r=Math.sqrt(A/3/Math.PI),c=[[w*.2,h*.3,r],[w*.62,h*.68,r],[w*.84,h*.26,r]];return c}};
-  const draws={};['ot1','ot2','ot3'].forEach((k,idx)=>{draws[k]=(el,w,h)=>{const g=canvas(el,w,h),cs=OT[k](g,w,h),els=cs.map(([x,y,r])=>mk(g,'circle',{cx:x,cy:y,r:0,fill:'#fff'}));
+  const draws={};['ot1','ot2','ot3'].forEach((k,idx)=>{draws[k]=(el,w,h)=>{const g=canvas(el,w,h),cs=OT[k](g,w,h*.86),els=cs.map(([x,y,r])=>mk(g,'circle',{cx:x,cy:y,r:0,fill:'#fff'}));
     mk(g,'line',{x1:0,x2:w,y1:h-1,y2:h-1,stroke:'#fff','stroke-width':1.4});
     timed(el,2600,p=>els.forEach((e,i)=>e.setAttribute('r',cs[i][2]*ss(i*.03+idx*.05,i*.03+.35+idx*.05,p))))}});
   /* signal and what it can justify */

@@ -55,10 +55,10 @@ draws.rhy=(el,w,h)=>{const g=canvas(el,w,h),y=h*.55,x0=w*.06,sp=w*.052,ar=Math.m
   const hy=y+ar*.9,his=pt(g,{d:`M${last} ${hy} L ${x0} ${hy}`,'stroke-width':1.3}),ah=pt(g,{d:`M${x0+9} ${hy-6} L ${x0} ${hy} L ${x0+9} ${hy+6}`,'stroke-width':1.3});
   const lens=arcs.map(a=>a.getTotalLength());arcs.forEach((a,i)=>a.setAttribute('stroke-dasharray',lens[i]));const hl=his.getTotalLength();his.setAttribute('stroke-dasharray',hl);
   const stl=[...el.parentNode.querySelectorAll('.cux-st li')],cx=[x0+(ghostS-x0)*.5,ghostS,(pos[9]+pos[10])/2,(pos[11]+pos[12])/2,Math.min(w*.9,last+sp*3)];
-  cx[4]=Math.min(w-70,Math.max(cx[4],cx[3]+140));cx[3]=Math.min(cx[3],cx[4]-140);stl.forEach((li,i)=>{li.style.left=cx[i]+'px'});L(el,'ci',x0-10,y-ar-26,'translate(0,-50%)');L(el,'own',x0-10+((el.parentNode.querySelector('.cux-lb[data-l="ci"]')||{}).offsetWidth||150)+18,y-ar-26,'translate(0,-50%)');L(el,'his',(last+x0)/2,hy+22,'translate(-50%,-50%)');
+  cx[4]=Math.min(w-70,Math.max(cx[4],cx[3]+140));cx[3]=Math.min(cx[3],cx[4]-140);stl.forEach((li,i)=>{li.style.left=cx[i]+'px'});L(el,'ci',x0-10,y-ar-26,'translate(0,-50%)');{const wo=el.parentNode.querySelector('.cux-lb[data-l="own"]'),wh=el.parentNode.querySelector('.cux-lb[data-l="his"]'),ow=(wo&&wo.offsetWidth)||34,hw=(wh&&wh.offsetWidth)||80,x1=(last+x0)/2-(ow+10+hw)/2;L(el,'own',x1,hy+22,'translate(0,-50%)');L(el,'his',x1+ow+10,hy+22,'translate(0,-50%)')}
   const sp2=el.parentNode.querySelectorAll('.cux-lb');
   timed(el,6400,p=>{arcs.forEach((a,i)=>{const q=ss(.02+i*.045,.1+i*.045,p);a.setAttribute('stroke-dashoffset',lens[i]*(1-q))});gh.setAttribute('opacity',ss(.48,.56,p));fade.setAttribute('opacity',ss(.8,.88,p));
-    his.setAttribute('stroke-dashoffset',hl*(1-ss(.84,1,p)));ah.setAttribute('opacity',ss(.97,1,p));sp2[0].style.opacity=ss(0,.1,p);sp2[1].style.opacity=ss(.3,.4,p);sp2[2].style.opacity=ss(.9,1,p);
+    his.setAttribute('stroke-dashoffset',hl*(1-ss(.84,1,p)));ah.setAttribute('opacity',ss(.97,1,p));sp2[0].style.opacity=ss(0,.1,p);sp2[1].style.opacity=ss(.9,1,p);sp2[2].style.opacity=ss(.9,1,p);
     stl.forEach((li,i)=>li.style.opacity=ss([.1,.5,.62,.72,.82][i],[.18,.58,.7,.8,.9][i],p));const f=el.closest('.l2-f').querySelector('.cux-fin');if(f)f.style.opacity=ss(.9,1,p)})};
 /* 6 the record and its two narrow openings: lens shaped slits in the wall */
 draws.slit=(el,w,h)=>{const g=canvas(el,w,h),W=Math.min(w*.2,46),cx=W+4,d=`M${cx} 2 C ${cx+W} ${h*.2}, ${cx+W} ${h*.8}, ${cx} ${h-2} C ${cx-W} ${h*.8}, ${cx-W} ${h*.2}, ${cx} 2 Z`;
