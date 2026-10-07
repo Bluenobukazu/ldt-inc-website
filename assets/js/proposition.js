@@ -37,7 +37,7 @@ const DRAW={
     const S=[[[w*.02,h*.18],c.a,14,2.6,3],[[w*.0,h*.52],c.b,10,3.6,4.2],[[w*.04,h*.88],c.a,7,6,6.6]];
     S.forEach((s,i)=>{const p=P(g,`M${s[0][0]} ${s[0][1]} C${w*.3} ${s[0][1]} ${w*.42} ${K[1]+(i-1)*h*.05} ${K[0]} ${K[1]}`,s[1]);dots(g,p,s[2],s[3],s[4],s[1],0,.96)});
     mk('circle',{cx:K[0],cy:K[1],r:16,fill:c.a,class:'pz-kn'},g);
-    [['Offer',w*.02,h*.18-18],['Organisation',w*.0,h*.52-18],['Economics',w*.04,h*.88+30]].forEach(a=>T(g,Math.max(2,a[1]),a[2],a[0],c.a));
+    [['Offer',w*.02,h*.18-18],['Organization',w*.0,h*.52-18],['Economics',w*.04,h*.88+30]].forEach(a=>T(g,Math.max(2,a[1]),a[2],a[0],c.a));
     T(g,K[0],K[1]+Math.min(w,h)*.17+38,'The idea',c.s,'middle');},
   /* 01 the offer keeps growing around the idea */
   d1(el,w,h){const g=canvas(el,w,h),c=CK,cx=w/2,cy=h/2,R=Math.min(w/1.6,h/.72)/2*.98;
@@ -52,7 +52,7 @@ const DRAW={
     const n=14;for(let i=0;i<n;i++)mk('circle',{cx:w*.42+i*(w*.5/n),cy:K[1]-h*.3-i*4,r:3+i*.8,fill:c.a,class:'pz-dt',style:`--i:${i};--o:${(.35+i*.045).toFixed(2)}`},g);
     mk('circle',{cx:w*.97,cy:K[1]-h*.3-n*4-6,r:Math.min(46,w*.05),fill:c.a,class:'pz-far',style:`--fx:${K[0]-w*.97}px;--fy:${K[1]-(K[1]-h*.3-n*4-6)}px`},g);
     T(g,w*.86,K[1]-h*.3+Math.min(46,w*.05)+26,'Offer',c.a);
-    T(g,K[0]-r-10,K[1]+r+36,'Organisation',c.a,'middle');T(g,K[0]+r+10,K[1]+r+60,'Economics',c.a,'middle');
+    T(g,K[0]-r-10,K[1]+r+36,'Organization',c.a,'middle');T(g,K[0]+r+10,K[1]+r+60,'Economics',c.a,'middle');
     T(g,K[0],K[1]-r-18,'The idea',c.s,'middle')},
   /* 03 growth has moved the centre: only distance */
   d3(el,w,h){const g=canvas(el,w,h),c=CK,K=[w*.14,h*.5],B=[w*.72,h*.52],r=Math.min(w,h)*.14;
