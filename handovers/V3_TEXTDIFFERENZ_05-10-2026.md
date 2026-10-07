@@ -101,3 +101,22 @@ Markets. Erkenntnis: Der Weg zum Kunden besteht aus sieben Bedingungen (mr-tun R
 Operations. Erkenntnis: Ein laufendes Unternehmen ist eine Partitur (ox-sub "This is where I operate.", Grafik CUSTOMERS bis QUALITY), Funktionen allein tragen keinen Betrieb (ox-h "A business can work without working as a system." mit vier Nahtstellen Sales / Production, Demand / Inventory, Decision / Action, Customer promise / Operational reality), Signale zeigen frueh, was kippt (ox-h "A running business keeps telling you something." mit Signal / As a risk / As an opportunity), Eingriff ist nicht gleich Eingriff (ox-stl Judgment vs Compensation, ox-lk "What I look for"), und die Struktur muss zum Geschaeft passen (Fragility / Right-sized / Bureaucracy). Drei Betriebsrealitaeten (Running it MaHalla, Moving it, Making it operational) belegen es. Mobile Korrektur: die vier Ueberschriften standen in schmaler Spalte neben ihrem Untertitel (siehe oben).
 
 People. Erkenntnis: Wenige tragen viel (pl-k, pl-sub, Punktfeld), Rolle ist nicht Besitz (pl-h "A role is not ownership." mit sechs Bedingungen Context bis The outcome, Schluss pl-rlq "The question is not who has the role. It is whether they can carry the outcome."), ein Team ist, wo Arbeit sich bewegt (Group vs Team, Culture under pressure), Faehigkeit muss reisen (Held by one vs Traveling, pl-fw "Roles will keep changing. What people understand should not stay behind."), Kapazitaet ist nicht Kopfzahl (8 people vs 24 people, "An illustration, not a benchmark."), und die Architektur haengt vom Geschaeftstyp ab. Lena: pl-lk "Not the titles. Where the work actually sits, where the knowledge sits, and where it keeps coming back." Die Grafikregel steht jetzt als Legende, die Headline stellt die Frage, der Untertitel antwortet. QA-02 unveraendert.
+
+### Feinschliff nach Live Pruefung (07.10.2026, Ausgangscommit 54ee3da)
+
+Alle sechs SOLL Fassungen wortgleich eingesetzt, jede nur an der genannten Stelle (je genau ein Treffer in index.html).
+
+| Seite | Anker | IST | SOLL | Grund |
+|---|---|---|---|---|
+| Advantage | ad-q q2 (Chosen), p.x | Customers notice the difference. The decision stays the same. | If customers notice it but choose as before, it is not yet an advantage. | Kennzeichnet den nicht bestandenen Test eindeutig. |
+| Positioning | po-st, zweiter Satz | They compete in the comparison the customer makes. | They compete with the alternatives the customer considers. | Vorausgehender Satz "Businesses rarely compete in the category they name." unveraendert. |
+| Markets | mr-pf li.p2 (Rick Owens), span | International clients and showroom work. | (entfernt) | Wiederholt die Ueberschrift "International showrooms and clients". Kein Ersatztext. Das Raster legt die Zeile ohne zweite Zeile selbst eng. |
+| Operations | ox-e1, ox-evk | Three very different operating realities. In each, the work was to make it work in practice. | Three different settings. My role in each was to make the operation work in practice. | Label "OPERATING REALITIES" unveraendert. |
+| People | pl-sub | In most businesses, a few carry far more than their role says. | In most businesses, a few people carry far more than their job descriptions suggest. | |
+| People | pl-h ueber pl-b (Geschaeftsformen) | Different businesses, different people realities. | The team has to fit the business. | Erklaerungstext pl-cxb "There is no single right team ..." und die sechs Formen unveraendert. |
+
+Zugaengliche Fassungen: die sechs Passagen kommen nur an diesen Stellen in index.html vor (Suche ueber index.html, alle assets/js, workshops, sitemap, another-perspective): keine weiteren Fundstellen, keine aria Fassung abweichend.
+
+Visuelle Korrekturen:
+1. People, "What they need to carry it" (pl-nd): bei Viewports bis 1400 px Breite oder 700 px Hoehe stand die kleine Zustandsgrafik (pl-nfig) unter der grossen Schlussaussage (pl-rlq), weil sie ohne eigene Rasterzeile ans Ende lief. Jetzt: Auswahl (pl-nb), Ergebniszeile (pl-nr), kleine Grafik (pl-nfig, Rasterzeile 4), danach pl-rlq (Zeile 5); im DOM steht pl-nfig nach pl-nr (mobil Reihenfolge Auswahl, Ergebnis, Grafik, Schlussaussage). Oberhalb 1400 px bleibt die Grafik wie bisher rechts neben der Auswahl. Keine absolute Positionierung, keine neue Berechnung (people.css v16).
+2. Markets Einstieg (mr-k): "reach it." steht in einem lokalen nowrap Span (.mr .mr-k .mr-nw, markets.css v7). Satz wortgleich, Umbruch bei 1363, 1440, 1280, 970 und 390 ohne einzelnes "it." (letzte Zeile jeweils "reach it." bzw. "can actually reach it.").
