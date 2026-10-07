@@ -101,3 +101,6 @@
 .pl .pl-nfig svg{height:auto;aspect-ratio:1000/300}
 @media (max-width:1400px),(max-height:700px){.pl .pl-nfig{grid-column:1/-1;justify-self:end;width:min(46vw,440px);max-width:100%}}
 @media (max-width:760px){.pl .pl-nfig{justify-self:stretch;width:100%}}
+
+/* selection: the state figure sits right under the result line, before the closing question (viewports where it is not placed beside the text) */
+@media (max-width:1400px),(max-height:700px){.pl .pl-nfig{grid-row:4}.pl .pl-rlq{grid-row:5}}

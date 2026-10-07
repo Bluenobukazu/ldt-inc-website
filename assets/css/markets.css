@@ -70,3 +70,6 @@
 }
 @media (max-width:760px){.mr .mr-tc,.mr .mr-cw{font-size:11vw;white-space:normal}.mr .mr-37 em{display:block;white-space:normal}}
 .mr .mr-br .mr-xh{grid-row:1;margin-top:0}.mr .mr-br .mr-brk{margin-top:calc(1.6*var(--u))}
+
+/* the hero sentence keeps 'reach it.' together, so no line ends on a lone 'it.' */
+.mr .mr-k .mr-nw{white-space:nowrap}
