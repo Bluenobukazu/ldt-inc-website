@@ -7,9 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>{
   if(RM)return;
   gsap.from(['.w-hero .subbar','.w-hero .kick'],{opacity:0,y:20,duration:1.1,stagger:.08,ease:'expo.out',delay:.25});
-  gsap.fromTo('.w-cut',{scaleY:0,transformOrigin:'50% 0%'},{scaleY:1,duration:1.2,ease:'expo.inOut'});
-  gsap.fromTo('.w-cut .shine',{left:-260},{left:()=>$('.w-cut').offsetWidth+260,duration:1.4,delay:1,ease:'power2.inOut'});
-  gsap.from('#kq,.w-sub,.w-trio',{opacity:0,y:24,stagger:.12,duration:.9,delay:.5,ease:'expo.out',clearProps:'transform,opacity'});
+  gsap.from('#kq,.w-sub,.w-offer,.w-cta',{opacity:0,y:24,stagger:.12,duration:.9,delay:.5,ease:'expo.out',clearProps:'transform,opacity'});
 
   const up=(sel,trig,st)=>gsap.from(sel,{opacity:0,y:36,stagger:st||0,duration:.95,ease:'expo.out',clearProps:'transform,opacity',scrollTrigger:{trigger:trig,start:'top 82%'}});
   $$('.w-tp').forEach(t=>{up(t.querySelectorAll('.tp-head,.tp-q,.tp-d,.tp-fpd'),t,.1);up(t.querySelector('.tp-g'),t)});
@@ -18,6 +16,7 @@ gsap.registerPlugin(ScrollTrigger);
   up('.way','.ways',.12);
   up('.flex,.fm-go','.flex',.1);
   up('.env li','.env',.07);
+  up('.ix li','.ix',.07);
   gsap.from('.w-close .row',{opacity:0,y:40,duration:1,ease:'expo.out',clearProps:'transform,opacity',scrollTrigger:{trigger:'.w-close',start:'top 65%'}});
 });
 
@@ -40,6 +39,6 @@ if(location.hash){
 addEventListener('hashchange',()=>routeW(false));
 
 /* from the offer straight to the conversation at the end of the page */
-$('.fm-go').addEventListener('click',e=>{e.preventDefault();LDT.go($('#talk').getBoundingClientRect().top+scrollY)});
+$$('.fm-go,.w-cta').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();LDT.go($('#talk').getBoundingClientRect().top+scrollY)}));
 
 })();
