@@ -50,3 +50,20 @@
 }
 
 .xe .xe-atel .nb{white-space:nowrap}
+
+/* 08.10.2026 Lead, unten: drei Verantwortungsbereiche statt sechs Fachbegriffe. Ruhige Titel, der Satz fuehrt, viel Luft, kein Linienbuendel. */
+@media (min-width:761px){
+  .ld .ld-rows{--hv:70}
+  .ld .ld-rows .ld-h2{font-size:calc(4.2*var(--u));max-width:70%}
+  .ld .ld-dl{padding-left:0;margin-top:calc(3.6*var(--u))}
+  .ld .ld-dl>div{grid-template-columns:repeat(12,minmax(0,1fr));padding:calc(2.2*var(--u)) 0 calc(2.6*var(--u));border-top:1px solid rgba(255,255,255,.45)}
+  .ld .ld-dl dt{grid-column:1/5;font-size:calc(2.5*var(--u));font-weight:700;font-stretch:100%;letter-spacing:-.025em;line-height:1.1;align-self:start}
+  .ld .ld-dl dd{grid-column:5/12;font-size:clamp(19px,calc(2.6*var(--u)),38px);font-weight:300;letter-spacing:-.015em;line-height:1.25;align-self:start}
+  .ld .ld-act{margin-top:calc(4.2*var(--u))}
+}
+@media (max-width:760px){
+  .ld .ld-dl>div{padding:22px 0 26px;border-top:1px solid rgba(255,255,255,.45)}
+  .ld .ld-dl dt{font-size:20px;font-weight:700;font-stretch:100%}
+  .ld .ld-dl dd{font-size:19px;line-height:1.3;margin-top:10px}
+  .ld .ld-act{margin-top:30px}
+}
