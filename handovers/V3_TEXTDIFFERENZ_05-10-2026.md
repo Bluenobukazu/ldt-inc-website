@@ -224,3 +224,10 @@ Partnerships, sechs Karten Operating reality (Desktop Leinwand): wegen der laeng
 ### Zugaengliche Namen
 
 Revenue, Customers, Partnerships tragen als geoeffnete Seite den richtigen Namen. Gemessen am Zugaenglichkeitsbaum (Rolle dialog): direkter Aufruf, Aufruf ueber die Bruecke aus Commercial Architecture, Kettenaufruf Revenue, Customers, Partnerships, Zurueck, Vor, Hashwechsel, jeweils bei 1280 und 390 (Titel REVENUE, Customers, Partnerships). Ein Namensfehler war nicht reproduzierbar, deshalb keine Codeaenderung. Der Text "Commercial Architecture" erscheint dort nur als Herkunft ("Opened from", "Return to", Brotkrumen), nicht als Name der geoeffneten Seite. Falls der Befund an einer anderen Stelle gemeint war (Vorlesewerkzeug, Index, Explore), bitte Stelle nennen.
+
+### Layer 2 Feinschliff (08.10., Ausgangscommit 22818c4, Code Commit 868f185)
+
+Sichtbarer Text, der sich aendert:
+Partnerships, Ueberschrift ueber den sechs Massnahmen. IST: "Changes the operating conditions". SOLL: entfaellt (freigegeben). Satz, weisses Label "Operating condition" und die sechs Massnahmen bleiben, Desktop und Mobil.
+Decisions, Praxislisten bei MaHalla. IST: "Pricing Contracts Commercial terms Ticketing platform Settlement" und "Safety Fire safety Security" ohne Trenner. SOLL: "Pricing · Contracts · Commercial terms · Ticketing platform · Settlement" und "Safety · Fire safety · Security". Die Mittelpunkte sind erzeugte Zeichen (CSS), der Wortlaut bleibt, die Trenner sind fuer Screenreader stumm.
+Markets, vier Branchentypen: die Nummern 01 bis 04 sind nicht mehr sichtbar (Desktop seit dem Spacing Durchgang, jetzt auch mobil), weil die Typen eine eigene Auswahl bilden und 01 bis 07 nur den Bedingungen gehoeren. Die Bezeichnungen sind unveraendert.
