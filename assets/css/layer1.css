@@ -51,34 +51,42 @@
 
 .xe .xe-atel .nb{white-space:nowrap}
 
-/* 08.10.2026 Lead, unten: drei Verantwortungsbereiche statt sechs Fachbegriffe. Ruhige Titel, der Satz fuehrt, viel Luft, kein Linienbuendel. */
-@media (min-width:761px){
-  .ld .ld-rows{--hv:70}
-  .ld .ld-rows .ld-h2{font-size:calc(4.2*var(--u));max-width:70%}
-  .ld .ld-dl{padding-left:0;margin-top:calc(3.6*var(--u))}
-  .ld .ld-dl>div{grid-template-columns:repeat(12,minmax(0,1fr));padding:calc(2.2*var(--u)) 0 calc(2.6*var(--u));border-top:1px solid rgba(255,255,255,.45)}
-  .ld .ld-dl dt{grid-column:1/5;font-size:calc(2.5*var(--u));font-weight:700;font-stretch:100%;letter-spacing:-.025em;line-height:1.1;align-self:start}
-  .ld .ld-dl dd{grid-column:5/12;font-size:clamp(19px,calc(2.6*var(--u)),38px);font-weight:300;letter-spacing:-.015em;line-height:1.25;align-self:start}
-  .ld .ld-act{margin-top:calc(4.2*var(--u))}
-}
+/* 08.10.2026 Lead, neu gefuehrt in vier Lesemomenten: 1 Einstieg (Lead, Satz, Zeichnung, Teams), 2 Rollen und Einsatzform,
+   3 "What this means for your business." in drei Bereichen ohne Tabellenlinien, 4 Contact als klarer Abschluss. */
+.ld .ld-hero{--hv:60}
+.ld .ld-hero .ld-in{grid-row:1/5}
+.ld .ld-hero .ld-fig{grid-column:8/-1;grid-row:5;margin:calc(1.4*var(--u)) 0 0;justify-self:end}
+.ld .ld-roles{--hv:52;align-content:center}
+.ld .ld-roles .ld-h4{grid-column:1/-1;margin:0 0 calc(2.4*var(--u));color:#bdbdbd}
+.ld .ld-roles .ld-forms{grid-column:1/-1;display:block;margin:0;padding:0;list-style:none}
+.ld .ld-roles .ld-forms li{border:0;padding:0;margin:0;font-size:calc(6.6*var(--u));font-stretch:108%;letter-spacing:-.045em;line-height:1.02;color:#fff}
+.ld .ld-roles .ld-forms li:nth-child(1){font-weight:850}
+.ld .ld-roles .ld-forms li:nth-child(2){font-weight:450}
+.ld .ld-roles .ld-forms li:nth-child(3){font-weight:200}
+.ld .ld-roles .ld-form{grid-column:1/-1;margin:calc(3.6*var(--u)) 0 0;max-width:30em;font-family:var(--serif);font-style:italic;font-size:clamp(20px,calc(2.8*var(--u)),40px);line-height:1.2;color:#fff}
+.ld .ld-rows{--hv:62;align-content:center}
+.ld .ld-rows .ld-h2{grid-column:1/-1;margin:0;max-width:none;font-size:calc(4.6*var(--u));color:#000}
+.ld .ld-rows .ld-h2 .it{font-weight:400;letter-spacing:-.01em;margin-left:.22em}
+.ld .ld-rows .ld-dl{grid-column:1/-1;margin:calc(4*var(--u)) 0 0;padding:0}
+.ld .ld-rows .ld-dl>div{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:calc(2*var(--u));border:0;padding:0 0 calc(3.4*var(--u));align-items:start}
+.ld .ld-rows .ld-dl>div:last-child{padding-bottom:0}
+.ld .ld-rows .ld-dl dt{grid-column:1/5;font-size:calc(2.5*var(--u));font-weight:800;font-stretch:108%;letter-spacing:-.035em;line-height:1.1;color:#000;margin:0}
+.ld .ld-rows .ld-n{display:block;font-family:var(--serif);font-style:italic;font-weight:400;font-stretch:100%;letter-spacing:0;font-size:calc(5.2*var(--u));line-height:1;margin:0 0 calc(.8*var(--u));color:#000}
+.ld .ld-rows .ld-dl dd{grid-column:5/12;margin:0;font-size:clamp(19px,calc(2.7*var(--u)),40px);font-weight:300;letter-spacing:-.015em;line-height:1.22;color:#000;align-self:start;padding-top:calc(.6*var(--u))}
+.ld .ld-ct{--hv:34;align-content:center}
+.ld .ld-ct .ld-act{grid-column:1/-1;margin:0;display:flex;align-items:center;justify-content:space-between;width:100%;padding:0;border:0;border-top:2px solid #fff;padding-top:calc(3*var(--u));background:none;color:#fff;text-align:left;cursor:pointer}
+.ld .ld-ct .ld-act>span:first-child{display:flex;align-items:center;gap:calc(2.4*var(--u));font-size:calc(11*var(--u));font-weight:900;font-stretch:108%;letter-spacing:-.05em;line-height:1}
+.ld .ld-ct .ld-act .pill{font-size:clamp(13px,calc(1.5*var(--u)),20px);font-weight:600;font-stretch:100%;letter-spacing:.04em;border:1.5px solid #fff;color:#fff;padding:.35em .9em;align-self:center}
+.ld .ld-ct .ld-act .plus{display:inline-flex;align-items:center;justify-content:center;width:calc(7*var(--u));height:calc(7*var(--u));min-width:56px;min-height:56px;border:2px solid #fff;border-radius:50%;font-size:calc(4*var(--u));font-weight:300}
+.ld .ld-ct .ld-act:focus-visible{outline:2px solid #fff;outline-offset:8px}
 @media (max-width:760px){
-  .ld .ld-dl>div{padding:22px 0 26px;border-top:1px solid rgba(255,255,255,.45)}
-  .ld .ld-dl dt{font-size:20px;font-weight:700;font-stretch:100%}
-  .ld .ld-dl dd{font-size:19px;line-height:1.3;margin-top:10px}
-  .ld .ld-act{margin-top:30px}
+  .ld .ld-roles .ld-forms li{font-size:clamp(30px,9vw,40px)}
+  .ld .ld-roles .ld-form{font-size:21px;margin-top:26px}
+  .ld .ld-rows .ld-dl>div{display:block;padding-bottom:36px}
+  .ld .ld-rows .ld-dl dt{font-size:22px}.ld .ld-rows .ld-n{font-size:40px}
+  .ld .ld-rows .ld-dl dd{font-size:21px;margin-top:10px;padding-top:0}
+  .ld .ld-ct .ld-act>span:first-child{font-size:clamp(44px,15vw,64px);gap:14px}
+  .ld .ld-ct .ld-act .plus{width:56px;height:56px;font-size:30px}
 }
-
-/* 08.10.2026 Lead, Feinschliff: Rollen gross und ruhig, die Einsatzform als leise kursive Zeile; unten italic Akzent und Ziffern in der Hausschrift */
-.ld .ld-forms{display:block}
-.ld .ld-forms li{border-bottom:0;padding:0;font-size:clamp(20px,calc(3*var(--u)),44px);font-weight:800;font-stretch:108%;letter-spacing:-.04em;line-height:1.08;margin:0 0 calc(.5*var(--u))}
-.ld .ld-forms li+li{padding-top:calc(.5*var(--u));border-top:1px solid #000}
-.ld .ld-form{margin:calc(1.8*var(--u)) 0 0;max-width:30em;font-family:var(--serif);font-style:italic;font-size:clamp(17px,calc(2.1*var(--u)),30px);line-height:1.25;color:#222}
-.ld .ld-rows .ld-h2 .it{font-weight:400;letter-spacing:-.01em}
-.ld .ld-dl dt{position:relative}
-.ld .ld-n{display:block;font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(26px,calc(3.6*var(--u)),52px);letter-spacing:0;line-height:1;margin-bottom:calc(.8*var(--u));color:#fff}
-@media (max-width:760px){.ld .ld-forms li{font-size:24px}.ld .ld-form{font-size:19px}.ld .ld-n{font-size:30px;margin-bottom:8px}}
-.ld .ld-rows .ld-h2 .it{margin-left:.22em}
-.ld .ld-forms li{font-size:clamp(17px,calc(2.1*var(--u)),30px);font-weight:700;letter-spacing:-.03em;margin:0 0 calc(.35*var(--u))}
-.ld .ld-forms li+li{padding-top:calc(.35*var(--u))}
-.ld .ld-form{margin-top:calc(1.2*var(--u));font-size:clamp(16px,calc(1.9*var(--u)),26px)}
-@media (max-width:760px){.ld .ld-forms li{font-size:20px}.ld .ld-form{font-size:18px}}
+@media (min-width:761px){.ld .ld-roles .ld-forms li{font-size:calc(5.4*var(--u));white-space:nowrap}.ld .ld-roles .ld-forms li+li{margin-top:calc(.5*var(--u))}}
+@media (max-width:760px){.ld .ld-ct .ld-act>span:first-child{font-size:clamp(34px,11vw,48px);gap:10px;min-width:0}.ld .ld-ct .ld-act .plus{flex:none;width:52px;height:52px;min-width:52px;min-height:52px;margin-left:12px}.ld .ld-ct .ld-act .pill{font-size:12px;padding:.3em .7em}}
