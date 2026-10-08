@@ -3,23 +3,18 @@
 const {RM,$,$$}=LDT;
 gsap.registerPlugin(ScrollTrigger);
 
-/* the workshop question, built word by word (one of the two places for this motion) */
-const kq=$('#kq');const q=kq.textContent;
-kq.innerHTML=`<span class="sr">${q}</span>`+q.split(' ').map(w=>`<span class="w${/^(function|differentiate|perform)/i.test(w)?' key':''}" aria-hidden="true">${w}</span>`).join('');
-const words=$$('#kq .w');
-
+/* the opening sentence stays whole and readable from the first moment; it only settles in softly */
 (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>{
-  if(RM){gsap.set(words,{opacity:1});return}
+  if(RM)return;
   gsap.from(['.w-hero .subbar','.w-hero .kick'],{opacity:0,y:20,duration:1.1,stagger:.08,ease:'expo.out',delay:.25});
   gsap.fromTo('.w-cut',{scaleY:0,transformOrigin:'50% 0%'},{scaleY:1,duration:1.2,ease:'expo.inOut'});
   gsap.fromTo('.w-cut .shine',{left:-260},{left:()=>$('.w-cut').offsetWidth+260,duration:1.4,delay:1,ease:'power2.inOut'});
-  gsap.to(words,{opacity:1,stagger:.07,duration:.4,delay:.8});
+  gsap.from('#kq,.w-sub,.w-trio',{opacity:0,y:24,stagger:.12,duration:.9,delay:.5,ease:'expo.out',clearProps:'transform,opacity'});
 
   const up=(sel,trig,st)=>gsap.from(sel,{opacity:0,y:36,stagger:st||0,duration:.95,ease:'expo.out',clearProps:'transform,opacity',scrollTrigger:{trigger:trig,start:'top 82%'}});
-  up('.premise','.w-bridge');
+  $$('.w-tp').forEach(t=>{up(t.querySelectorAll('.tp-head,.tp-q,.tp-d,.tp-fpd'),t,.1);up(t.querySelector('.tp-g'),t)});
   up('.src-yr,.src-kw','.src-top',.12);
   up('.src-led div,.src-why','.src-led',.08);
-  up('.fwr','.fw',.08);
   up('.way','.ways',.12);
   up('.flex,.fm-go','.flex',.1);
   up('.env li','.env',.07);
@@ -32,8 +27,8 @@ const SEC=['practice','frameworks','formats','environments','talk'];
 function routeW(now){let h='';try{h=decodeURIComponent(location.hash.slice(1))}catch(e){}
   let el=null,pad=0;
   if(SEC.includes(h))el=$('#'+h);
-  else if(/^fwp[1-5]$/.test(h)){const p=$('#'+h),r=p&&p.closest('.fwr');
-    if(r){r.classList.add('open');const b=$('.fw-t',r);b&&b.setAttribute('aria-expanded','true');el=r;pad=110}}
+  else if(/^fwp[1-5]$/.test(h)){const p=$('#'+h),r=p&&p.closest('.w-tp');
+    if(r){el=r;pad=0}}
   if(!el)return;
   LDT.go(el.getBoundingClientRect().top+scrollY-pad,now)}
 if(location.hash){
@@ -47,10 +42,4 @@ addEventListener('hashchange',()=>routeW(false));
 /* from the offer straight to the conversation at the end of the page */
 $('.fm-go').addEventListener('click',e=>{e.preventDefault();LDT.go($('#talk').getBoundingClientRect().top+scrollY)});
 
-/* frameworks open in place: what each one works through */
-$$('.fw-t').forEach(b=>{
-  const r0=b.closest('.fwr');r0.classList.add('open');b.setAttribute('aria-expanded','true');
-  $$('.fw-d:not(.on)',b).forEach(d=>d.setAttribute('aria-hidden','true'));
-  b.addEventListener('click',()=>{const r=b.closest('.fwr'),o=!r.classList.contains('open');r.classList.toggle('open',o);b.setAttribute('aria-expanded',o)});
-});
 })();
