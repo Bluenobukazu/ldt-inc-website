@@ -90,3 +90,14 @@
 }
 @media (min-width:761px){.ld .ld-roles .ld-forms li{font-size:calc(5.4*var(--u));white-space:nowrap}.ld .ld-roles .ld-forms li+li{margin-top:calc(.5*var(--u))}}
 @media (max-width:760px){.ld .ld-ct .ld-act>span:first-child{font-size:clamp(34px,11vw,48px);gap:10px;min-width:0}.ld .ld-ct .ld-act .plus{flex:none;width:52px;height:52px;min-width:52px;min-height:52px;margin-left:12px}.ld .ld-ct .ld-act .pill{font-size:12px;padding:.3em .7em}}
+/* 08.10.2026 Feinschliff: drei Rollen mit vergleichbarer Lesbarkeit; Contact mobil mit eigener Flaeche fuer Text, Plus und den Nach-oben-Pfeil */
+.ld .ld-roles .ld-forms li:nth-child(1){font-weight:800}
+.ld .ld-roles .ld-forms li:nth-child(2){font-weight:600}
+.ld .ld-roles .ld-forms li:nth-child(3){font-weight:500}
+@media (max-width:760px){
+  .ld .ld-ct{padding-right:calc(var(--m) + 60px)}
+  .ld .ld-ct .ld-act{gap:18px}
+  .ld .ld-ct .ld-act>span:first-child{flex:1 1 auto;min-width:0}
+  .ld .ld-ct .ld-act .plus{margin-left:auto}
+}
+@media (max-width:760px){.ld .ld-ct .ld-act>span:first-child{font-size:clamp(30px,9vw,40px);gap:10px}.ld .ld-ct .ld-act .plus{width:46px;height:46px;min-width:46px;min-height:46px;font-size:26px}}
