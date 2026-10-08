@@ -278,3 +278,23 @@
   .w-lead{margin-top:3vh}#kq{font-size:clamp(19px,2.3vh + 8px,28px)}.w-sub{margin-top:1.2vh;font-size:17px}
   .w-offer{padding-top:3vh}.w-cta{margin-top:3vh}.w-why{margin-top:2.4vh}
 }
+/* kleines Fenster: Angebot zuerst mit Luft, der Ansatz (20+) folgt darunter statt den ersten Bildschirm zu fuellen */
+@media (max-height:700px) and (min-width:761px){
+  .w-hero .kick{margin-top:5vh}.w-hero .kick .t{font-size:min(10.4vw,17vh)}
+  .w-lead{margin-top:4vh}#kq{font-size:clamp(20px,2.6vh + 8px,28px)}.w-sub{margin-top:1.6vh}
+  .w-offer{order:3;margin:0;padding-top:6vh}.w-cta{order:4;margin-top:4vh}.w-why{order:5;margin-top:9vh}
+}
+
+/* Einstieg: eine starke Grafik statt Zusatzinformation. Drei Fragen, ein gemeinsamer Raum */
+.w-why{display:none}
+.w-venn{position:absolute;right:var(--m);top:15vh;width:min(29vw,62vh,440px);color:#000}
+.w-venn svg{display:block;width:100%;height:auto;overflow:visible}
+.w-venn .vt text{font-family:inherit;font-weight:700;font-size:17px;letter-spacing:-.02em;fill:#000}
+@media (max-width:1100px) and (min-width:761px){.w-venn{width:min(31vw,60vh,320px);top:17vh}}
+@media (max-width:760px){
+  .w-venn{position:static;width:min(100%,340px);margin:5vh auto 0}
+  .w-venn .vt text{font-size:18px}
+}
+@media (max-height:700px) and (min-width:761px){.w-venn{top:9vh}.w-offer{order:0}}
+@media (max-height:700px) and (min-width:761px){.w-venn{top:118px;width:min(29vw,50vh,300px)}}
+@media (max-width:760px){.w-venn .vt text{font-size:16px}}

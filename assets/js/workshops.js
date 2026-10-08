@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>{
   if(RM)return;
   gsap.from(['.w-hero .subbar','.w-hero .kick'],{opacity:0,y:20,duration:1.1,stagger:.08,ease:'expo.out',delay:.25});
-  gsap.from('#kq,.w-sub,.w-why,.w-offer,.w-cta',{opacity:0,y:24,stagger:.12,duration:.9,delay:.5,ease:'expo.out',clearProps:'transform,opacity'});
+  gsap.from('#kq,.w-sub,.w-venn,.w-offer,.w-cta',{opacity:0,y:24,stagger:.12,duration:.9,delay:.5,ease:'expo.out',clearProps:'transform,opacity'});
 
   const up=(sel,trig,st)=>gsap.from(sel,{opacity:0,y:36,stagger:st||0,duration:.95,ease:'expo.out',clearProps:'transform,opacity',scrollTrigger:{trigger:trig,start:'top 82%'}});
   $$('.w-tp').forEach(t=>{up(t.querySelectorAll('.tp-head,.tp-q,.tp-d,.tp-fpd'),t,.1);up(t.querySelector('.tp-g'),t)});

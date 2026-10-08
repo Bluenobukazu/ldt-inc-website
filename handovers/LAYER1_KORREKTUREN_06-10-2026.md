@@ -174,3 +174,5 @@ SOLL: Reihenfolge Angebot (Titel Workshops gross, Aussage, drei Angebote Guest L
 ## Workshops: dritter Durchgang (08.10.2026)
 IST: Formate ohne Orientierung, Einstieg ohne Ansatz, Zielgruppenfiguren nur mit kleinem Text.
 SOLL: Je Format die von Lena gelieferte Orientierung wortgleich (Guest Lectures, Workshops, Project-Based Modules), Zeitangaben, Remote und Combined unveraendert. Einstieg zeigt zusaetzlich 20+ Jahre und den Ansatz (vorhandene Texte), die Themenuebersicht folgt direkt nach dem Einstieg. Zielgruppen mit fetter Kernbeschriftung (Universities, Institutes, Founder programs, Creative, Private-sector brands, Established companies). Keine Gruppengroessen, Preise oder Leistungsversprechen. Assets workshops.css v67, workshops.js v24.
+
+Nachtrag Workshops Einstieg (08.10.2026): Der 20+ Block ist aus dem Einstieg entfernt (bleibt im Abschnitt Erfahrung). Stattdessen eine Grafik aus drei sich ueberlagernden Kreisen (Creative thinking, Commercial judgment, Operating experience) mit gefuellter gemeinsamer Flaeche, passend zur Hauptaussage "into the same room". Assets workshops.css v70, workshops.js v24.
