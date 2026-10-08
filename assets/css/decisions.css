@@ -80,3 +80,12 @@
 .de .de-fl,.de .de-zw.o span,.de .de-eq .o,.de .de-pl.e.lo b,.de .w0{font-stretch:100%;font-weight:800;letter-spacing:-.035em}.de .w0{font-weight:100}
 @media (max-width:760px){.de .de-dx .ad{font-size:18px}}
 .de .de-xh{grid-column:1/-1;grid-row:1}
+
+/* 08.10.2026: neighbouring terms read as separate items: a middle dot stays with the word before it (never alone at the start of a line) */
+.de .de-zw span:not(:last-child)::after{content:"\00b7";content:"\00b7" / "";font-weight:300;margin-left:.3em;-webkit-text-stroke:0;color:currentColor}
+.de .de-zw span:not(:last-child)::after{font-weight:900;margin-left:.25em}
+/* 08.10.2026 mobile: each weight label stays directly above its own statement and the pairs are set clearly apart; in the six perspectives the description sits on its own line under the name */
+@media (max-width:760px){
+  .de .de-st{padding:16px 0 22px}.de .de-st .c{margin-bottom:6px!important}
+  .de .de-flt .p,.de .de-flt .w{display:block}.de .de-flt .w{margin-top:6px}
+}

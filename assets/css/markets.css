@@ -91,3 +91,12 @@
   .mr .mr-rc p{font-size:clamp(20px,calc(3*var(--u)),44px)}
 }
 .mr .mr-rc p{text-wrap:balance}
+
+/* 08.10.2026: the four business types read as one choice: a quiet shared outline, the active type filled */
+.mr .mr-t b{display:none}
+.mr .mr-tg{display:flex;flex-wrap:wrap;gap:calc(1*var(--u)) calc(1.2*var(--u));align-items:center}
+.mr .mr-t{box-sizing:border-box;border:1.5px solid rgba(255,255,255,.55);border-radius:999px;padding:.5em 1.15em;width:max-content;max-width:100%;transition:background-color .35s,color .35s,border-color .35s,font-weight .5s}
+.mr .mr-t:hover{border-color:#fff}
+.mr .mr-t[aria-pressed=true]{background:#fff;color:#000;border-color:#fff}
+.mr .mr-t:focus-visible{outline:2px solid #fff;outline-offset:4px}
+@media (max-width:760px){.mr .mr-tg{gap:10px;align-items:flex-start}.mr .mr-t{font-size:20px}}

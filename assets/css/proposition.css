@@ -317,3 +317,6 @@
 .pp .pz-nb button{position:relative}
 .pp .pz-nb button>.l2-code{position:absolute;left:0;top:0;transform:translateY(-120%);grid-column:auto;display:inline-block;width:max-content;border:1.5px solid currentColor;border-radius:20px;padding:2px 10px;font:700 13px/1.3 var(--sans);letter-spacing:.08em;font-style:normal}
 @media (max-width:760px){.pp .pz-nb li{padding-top:2.4em}.pp .pz-nb li button>.l2-code{transform:translateY(-135%)}}
+
+/* 08.10.2026: each code pill sits in the free space above its own target, never on the target above it */
+@media (min-width:761px){.pp .pz-nb li{padding-top:46px}.pp .pz-nb li+li{margin-top:calc(1.2*var(--u))}}

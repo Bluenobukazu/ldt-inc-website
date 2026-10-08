@@ -73,3 +73,9 @@
 
 /* mobile: Premium / Mass market change size and wrap; the block keeps the height of its tallest state, so the page does not jump */
 @media(max-width:520px){.po .po-pos{min-height:calc(39vw + 16px);align-content:flex-start}}
+
+/* 08.10.2026: the struck decisions stay struck, and stay readable: larger and with more contrast */
+.po .po-cl li b{font-size:clamp(16px,calc(2.1*var(--u)),30px)}.po .po-cl li span{font-size:clamp(15px,calc(1.7*var(--u)),24px)}
+.po .po-cl.inc li.left{opacity:.8}.po .po-cl.inc li.left b,.po .po-cl.inc li.left span{text-decoration-thickness:2px}.po .po-cl.inc li.left b{font-weight:400}
+@media (max-width:760px){.po .po-cl li b{font-size:19px}.po .po-cl li span{font-size:16px}}
+@media (min-width:761px){.po .po-cl li{grid-template-columns:minmax(0,.5fr) minmax(0,1fr);column-gap:calc(2*var(--u))}}

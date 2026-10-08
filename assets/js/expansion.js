@@ -92,6 +92,6 @@ function x5(el,w,h){
     setC(o,lerp(cx+R-.0,w*.97,u),cy+0*u,5,ss(.5,.65,p)*(1-ss(.96,1,p)))});
 }
 window.LDT_XP={init:root=>{const fr=[...root.querySelectorAll('.l2-f')],sc=document.getElementById('deep');
-  if(!root.__xpn){root.__xpn=1;root.querySelectorAll('.xp-steps [data-go]').forEach(b=>b.addEventListener('click',()=>{const f=fr[+b.dataset.go];if(f&&sc)sc.scrollTo({top:f.getBoundingClientRect().top-sc.getBoundingClientRect().top+sc.scrollTop-104,behavior:'smooth'})}))}
+  if(!root.__xpn){root.__xpn=1;root.querySelectorAll('.xp-steps [data-xgo]').forEach(b=>b.addEventListener('click',()=>{const f=fr[+b.dataset.xgo];if(f&&sc)sc.scrollTo({top:f.getBoundingClientRect().top-sc.getBoundingClientRect().top+sc.scrollTop-104,behavior:'smooth'})}))}
   return init(root,{draw:{x0,x1,x2,x3,x4,x5}})}};
 })();

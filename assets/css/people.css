@@ -119,3 +119,5 @@
   .pl .pl-nfig{position:static;grid-column:1/-1;grid-row:4;justify-self:end;width:min(36vw,520px);max-width:100%;margin:2vh 0 0 auto}
   .pl .pl-rlq{grid-row:5}
 }
+/* 08.10.2026: the legend under the dot field was 13px; it is now 15px */
+.pl .pl-xl{font-size:15px}

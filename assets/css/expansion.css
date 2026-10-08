@@ -40,3 +40,8 @@
 .xp .xp-nx{position:relative;z-index:60}.xp .xp-nx .q{position:relative;z-index:61;background:#000;display:inline-block;padding:0 .35em;margin-left:-.35em}
 /* v3 narrative: what Lena decides, stated under the three layers */
 .xp .xp-lena{margin:calc(2.4*var(--u)) 0 0;font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(17px,calc(2*var(--u)),28px);line-height:1.25;max-width:26em}
+
+/* 08.10.2026: the three state switches use their own attribute (data-xgo). The global data-go belongs to the Layer 1 chapters and sent these buttons to Complexity, Connect and System. They keep the same touch target. */
+@media (max-width:760px),(pointer:coarse){.ov .xp-steps [data-xgo]{min-height:44px!important}}
+/* 08.10.2026 mobile: the stations of the chain use the full width of the list; the width meant for the ring drawing made each label wrap word by word */
+@media (max-width:760px){.xp .xp-ring li span{width:auto!important}}
