@@ -6,7 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 /* the title, the statement and the request settle in softly; every text is readable from the first moment */
 (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>{
   if(RM)return;
-  gsap.from(['.w-hero .subbar','.w-hero .kick'],{opacity:0,y:20,duration:1.1,stagger:.08,ease:'expo.out',delay:.2});
+  gsap.from('.w-hero .kick',{opacity:0,y:20,duration:1.1,ease:'expo.out',delay:.2,clearProps:'transform,opacity'});
   gsap.from('#kq span',{opacity:0,y:22,stagger:.16,duration:.9,delay:.55,ease:'expo.out',clearProps:'transform,opacity'});
   gsap.from('.w-side,.w-aud',{opacity:0,y:20,stagger:.12,duration:.9,delay:1,ease:'expo.out',clearProps:'transform,opacity'});
 
