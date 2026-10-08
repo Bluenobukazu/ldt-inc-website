@@ -79,3 +79,16 @@
 .po .po-cl.inc li.left{opacity:.8}.po .po-cl.inc li.left b,.po .po-cl.inc li.left span{text-decoration-thickness:2px}.po .po-cl.inc li.left b{font-weight:400}
 @media (max-width:760px){.po .po-cl li b{font-size:19px}.po .po-cl li span{font-size:16px}}
 @media (min-width:761px){.po .po-cl li{grid-template-columns:minmax(0,.5fr) minmax(0,1fr);column-gap:calc(2*var(--u))}}
+
+/* 08.10.2026 Besucherfuehrung, Positioning "An intended position can be undone...": the contrast Premium to Mass market leads;
+   the two lists read as two clearly separate groups with more air; sequencing (intended first, then produced) stays as built */
+@media (min-width:761px){
+  .po .po-dr{--hv:78}
+  .po .po-cl{margin-top:calc(3.2*var(--u))}
+  .po .po-cl li{padding:calc(1*var(--u)) 0}
+  .po .po-sum{margin-top:calc(3*var(--u))}
+}
+@media (max-width:760px){
+  .po .po-cl.pdc{margin-top:36px;padding-top:6px;border-top:2px solid #000}
+  .po .po-cl.inc{margin-top:28px}
+}

@@ -3881,3 +3881,12 @@ body.at-end #rail button:not(.on){opacity:.32}body.at-end #rail button:hover,bod
   .ov [data-go],.ov [role=tab],.ox .ox-x{min-height:44px!important}
   .ox .ox-x{min-width:44px!important;display:inline-flex;align-items:center;justify-content:center}
 }
+
+/* 08.10.2026 Besucherfuehrung, Partnerships mobil "Route + Need": the two lists are two clearly separate white groups on the grey ground;
+   the capability gap with its axis stays between them as the relation (all rows, dots and fan lines unchanged) */
+@media (max-width:760px){
+  .pa-m .pm-s2 .pm-lst{isolation:isolate}
+  .pa-m .pm-s2 .pm-lst::before{content:"";position:absolute;inset:-14px -14px -14px -14px;background:#fff;border-radius:16px;z-index:-1}
+  .pa-m .pm-s2 .pm-ax-w{margin-top:26px}
+  .pa-m .pm-s2 .pm-need{margin-bottom:14px}
+}

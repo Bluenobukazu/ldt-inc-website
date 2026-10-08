@@ -100,3 +100,17 @@
 .mr .mr-t[aria-pressed=true]{background:#fff;color:#000;border-color:#fff}
 .mr .mr-t:focus-visible{outline:2px solid #fff;outline-offset:4px}
 @media (max-width:760px){.mr .mr-tg{gap:10px;align-items:flex-start}.mr .mr-t{font-size:20px}}
+
+/* 08.10.2026 Besucherfuehrung, Markets: the seven conditions answer the chosen type. They sit directly under the choice,
+   a short line leads from the active type to them, and they are no longer louder than the choice itself. */
+@media (min-width:761px){
+  .mr .mr-cxt{--hv:50}
+  .mr .mr-tg{position:relative}
+  .mr .mr-t{position:relative}
+  .mr .mr-t[aria-pressed=true]::after{content:"";position:absolute;left:50%;top:100%;width:1.5px;height:calc(3*var(--u));background:#fff}
+  .mr .mr-wf{margin-top:calc(3*var(--u));padding-top:calc(2.2*var(--u));border-top:1.5px solid rgba(255,255,255,.55);row-gap:calc(.6*var(--u))}
+  .mr .mr-wf span{font-size:calc(4.6*var(--u))}
+  .mr .mr-wf i{font-size:.34em}
+  .mr .mr-rd{margin-top:calc(3.2*var(--u))}
+  .mr .mr-rd p{font-size:clamp(18px,calc(2.4*var(--u)),36px)}
+}

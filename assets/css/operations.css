@@ -93,3 +93,38 @@
 /* 08.10.2026: the way on to Delivery gets its own space; the code is shown once (the pill above), the written code stays for screen readers */
 .ox .ox-dl .n em{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;margin:0}
 @media (min-width:761px){.ox .ox-dl{margin-top:calc(8*var(--u))}}
+
+/* 08.10.2026 Besucherfuehrung, Operations */
+/* signals: Signal, Risk and Opportunity read as one row with larger text, the signal first and widest */
+.ox .ox-rd{--hv:80}
+@media (min-width:761px){
+  .ox .ox-rs{margin-top:calc(4.4*var(--u))}
+  .ox .ox-rs dl{grid-template-columns:1.25fr 1fr 1fr;column-gap:calc(3.2*var(--u))}
+  .ox .ox-rs dd{font-size:clamp(18px,calc(2.3*var(--u)),34px)}
+  .ox .ox-rs dt{font-size:13px}
+}
+/* intervention: the two examples are a clear choice (outlined, the chosen one filled); "What I look for" is a quiet closing line below */
+@media (min-width:761px){
+  .ox .ox-x{font-size:calc(2*var(--u));font-weight:600;font-stretch:100%;letter-spacing:0;border:1.5px solid #000;border-radius:999px;padding:.25em 1em;line-height:1.2}
+  .ox .ox-x[aria-pressed=true]{background:#000;color:#fff;font-weight:600}
+  .ox .ox-lens{grid-column:1/-1;grid-row:3;margin-top:calc(3.6*var(--u));padding-top:calc(1.4*var(--u));border-top:1px solid #000;display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);column-gap:calc(2*var(--u));align-items:baseline}
+  .ox .ox-lens h4{margin:0}
+  .ox .ox-lens p{font-size:clamp(17px,calc(2.2*var(--u)),30px);font-weight:600;letter-spacing:-.02em}
+}
+/* structure: the three closing statements get readable size */
+@media (min-width:761px){
+  .ox .ox-sz{--hv:80}
+  .ox .ox-pc p{font-size:clamp(17px,calc(2.1*var(--u)),30px);padding-top:calc(1.2*var(--u))}
+}
+/* mobile hand-overs: name left, next part right, the sentence on its own line, and a free strip below for the rings and dots */
+@media (max-width:760px){
+  .ox .ox-rows li{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;padding:12px 0 40px}
+  .ox .ox-rows .a{grid-column:1;grid-row:1;display:block}
+  .ox .ox-rows .b{grid-column:2;grid-row:1;float:none;display:block;text-align:right}
+  .ox .ox-rows .m{grid-column:1/-1;grid-row:2;clear:none}
+}
+@media (max-width:760px){
+  .ox .ox-rows li{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .ox .ox-rows .a{font-size:24px;padding-right:8px}
+  .ox .ox-rows .b{font-size:24px;padding-left:8px}
+}

@@ -89,3 +89,38 @@
   .de .de-st{padding:16px 0 22px}.de .de-st .c{margin-bottom:6px!important}
   .de .de-flt .p,.de .de-flt .w{display:block}.de .de-flt .w{margin-top:6px}
 }
+
+/* 08.10.2026 Besucherfuehrung, Decisions.
+   Input ≠ Authority: the six perspectives are one calm list (name, what they bring, their role in words as a labelled tag);
+   the conclusion (question, line of authority, Decide, One mandate) has its own place below the list. */
+.de .de-in{--hv:76}
+@media (min-width:761px){
+  .de .de-flt{display:block;margin-top:calc(1.6*var(--u))}
+  .de .de-flt ul{width:100%}
+  .de .de-flt li{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr) auto;column-gap:calc(2.4*var(--u));padding:calc(.9*var(--u)) 0;align-items:center}
+  .de .de-flt .p{font-size:calc(3*var(--u))}
+  .de .de-flt .w{font-size:clamp(15px,calc(1.8*var(--u)),26px)}
+  .de .de-auth{margin-top:calc(3.4*var(--u));border-left:0;border-top:2px solid #fff;padding:calc(1.8*var(--u)) 0 0;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,3.2fr) minmax(0,3.8fr);column-gap:calc(2.4*var(--u));align-items:end;justify-content:initial}
+  .de .de-auth .de-q{grid-column:1;grid-row:1/3;align-self:start}
+  .de .de-auth>.l2-lab{grid-column:2;grid-row:1;align-self:start}
+  .de .de-auth .de-dec{grid-column:2;grid-row:2;font-size:calc(5.6*var(--u))}
+  .de .de-auth .de-man{grid-column:3;grid-row:2;justify-self:start;font-size:clamp(18px,calc(2.4*var(--u)),34px)}
+  .de .de-inx{grid-column:1/9;margin-top:calc(2.2*var(--u))}
+}
+.de .de-flt .t{display:inline-block;justify-self:end;white-space:nowrap;border:1.5px solid #fff;border-radius:999px;padding:.35em .95em;font-size:13px;letter-spacing:.12em;color:#fff}
+.de .de-flt li.m .t{background:#fff;color:#000}
+.de .de-flt li:not(.m) .t{color:#cfcfcf;border-color:#9a9a9a}
+@media (max-width:760px){.de .de-flt .t{justify-self:start;margin-top:10px}}
+/* MaHalla: the wholesale line is a quiet row, the closing sentence stands below it on its own */
+@media (min-width:761px){
+  .de .de-prf{display:block;margin-top:calc(3*var(--u))}
+  .de .de-ws{border-top:1px solid #000;padding-top:calc(1.2*var(--u))}
+  .de .de-prf .de-q{margin-top:calc(2.4*var(--u));max-width:24em}
+}
+@media (min-width:761px){
+  .de .de-auth{grid-template-columns:minmax(0,6fr) minmax(0,6fr)}
+  .de .de-auth .de-q{grid-column:1;grid-row:1/4}
+  .de .de-auth>.l2-lab{grid-column:2;grid-row:1}
+  .de .de-auth .de-dec{grid-column:2;grid-row:2}
+  .de .de-auth .de-man{grid-column:2;grid-row:3;margin-top:calc(.4*var(--u))}
+}

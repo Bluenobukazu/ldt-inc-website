@@ -95,3 +95,23 @@
    which also left the cursor floating above "Verified state". The words now sit centred in their rows. */
 .te .te-row .k{margin:0;max-width:none}
 @media (min-width:761px){.te .te-row{padding:calc(1.6*var(--u)) 0}.te .te-mono{margin-top:calc(3.4*var(--u))}.te .te-me{margin-top:calc(3.2*var(--u))}}
+
+/* 08.10.2026 Besucherfuehrung, Technology.
+   Roles: the five tools read as one group at one weight; Lena's decision closes the list as its own group,
+   same size as the names above it, set apart by a heavier rule and space (no new focal point). */
+.te .te-roles li:nth-child(even) .n{font-weight:850}
+.te .te-roles .n{font-size:calc(3.6*var(--u))}
+.te .te-roles .m,.te .te-lena .m{font-size:13px}
+.te .te-lena{margin-top:calc(1.8*var(--u))}
+.te .te-lena .n{font-size:calc(3.6*var(--u));font-weight:900}
+.te .te-lena .v{font-size:clamp(18px,calc(2.6*var(--u)),40px)}
+/* Tools can multiply: labels and axis are larger, the two states are clearly apart */
+.te .te-tr{--hv:84}
+.te .te-src{font-size:14px}.te .te-src em{font-size:14px;color:#d0d0d0}
+.te .te-ax .axi{font-size:14px;color:#a8a8a8}
+.te .te-ax{margin:calc(2.2*var(--u)) 0}
+.te .te-sb{padding-top:calc(.4*var(--u))}
+.te .te-rec{font-size:14px}
+.te .te-src,.te .te-src em,.te .te-ax .axi,.te .te-rec{font-size:15px}
+.te .te-lane b{font-size:calc(2.9*var(--u))}
+.te .te-sts{row-gap:calc(.6*var(--u))}

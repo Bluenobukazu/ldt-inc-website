@@ -320,3 +320,34 @@
 
 /* 08.10.2026: each code pill sits in the free space above its own target, never on the target above it */
 @media (min-width:761px){.pp .pz-nb li{padding-top:46px}.pp .pz-nb li+li{margin-top:calc(1.2*var(--u))}}
+
+/* 08.10.2026 Besucherfuehrung, Proposition */
+/* MaHalla in two reading moments: first who and how big (scale, responsibility), then what became of it (transformation, circles, result) */
+.pp .pz-ev1{--hv:56}.pp .pz-ev2{--hv:56}
+@media (min-width:761px){
+  .pp .pz-ev1 .pz-lab{grid-column:1/-1;text-align:left}
+  .pp .pz-ev1 .pz-evs .e2{grid-column:1/-1;margin-top:calc(2.6*var(--u))}
+  .pp .pz-ev1 .pz-evs .e2 b{font-size:calc(3.6*var(--u))}
+  .pp .pz-ev2 .pz-evs .e3{grid-column:1/10;grid-row:1;margin-top:0;text-align:left}
+  .pp .pz-ev2 .pz-evs .e3 b{font-size:calc(4.6*var(--u));font-weight:800;line-height:1.04;letter-spacing:-.035em}
+  .pp .pz-ev2 .pz-evs .e3 span{font-size:clamp(16px,calc(1.8*var(--u)),26px);color:#555;margin-top:calc(1.2*var(--u));max-width:34em}
+  .pp .pz-ev2 .pz-ill{grid-row:2;height:calc(18*var(--u));margin-top:calc(3*var(--u))}
+  .pp .pz-ev2 .pz-evs .e4{grid-column:1/-1;grid-row:3;margin-top:calc(2.4*var(--u))}
+  .pp .pz-ev2 .pz-evs .e4 dd b{font-size:calc(4.6*var(--u));text-align:left}
+}
+/* the three ways on: one reading direction (name left, question in the middle, plus right), one weight, code pill above its own name */
+@media (min-width:761px){
+  .pp .pz-nb .n{grid-column:1/8!important;text-align:left!important;font-weight:800!important;color:#000!important;text-shadow:none!important;font-size:calc(8.2*var(--u))}
+  .pp .pz-nb .q{grid-column:8/12!important;grid-row:1!important}
+  .pp .pz-nb .plus{grid-column:12!important;grid-row:1!important;justify-self:end!important}
+  .pp .pz-nb li{padding-top:50px}.pp .pz-nb li+li{margin-top:calc(1.4*var(--u))}
+}
+/* drift patterns: explanation leads, the added line follows quieter, the question stands on its own; progress stays readable */
+@media (min-width:761px){
+  .pp .pz-d .pz-i{font-size:clamp(18px,calc(2*var(--u)),30px);font-weight:600}
+  .pp .pz-d .pz-c{font-size:clamp(16px,calc(1.5*var(--u)),23px);color:#bdbdbd;margin-top:.7em}
+  .pp .pz-d .pz-q .bos{font-size:clamp(22px,calc(2.6*var(--u)),40px)}
+  .pp .pz-d .pz-q .pz-lab{color:#c9c9c9}
+  .pp .pz-rail{font-size:22px}.pp .pz-rail i{color:#a6a6a6}.pp .pz-rail i.on{font-size:30px;color:#fff}
+  .pp .pz-rail .pz-lab{color:#c9c9c9;font-size:13px}
+}
