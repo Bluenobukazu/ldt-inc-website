@@ -95,3 +95,9 @@ Befund (Lena, Screenshots der Live Seite): beide Aussagen in Connect liefen von 
 Aenderung (home.js v228, nur Layer 1 Connect): ungelesene Woerter von 0,3 auf 0,5 Deckkraft; wortweises Weisswerden schneller (erste Aussage Abstand .008 auf .005, zweite .0055 auf .0035); Haltephase der zweiten Aussage von .16 auf .19; zweite Aussage auf Desktop 32 px tiefer (top 318 auf 350, Textblock jetzt mittig im Bild, Mobil unveraendert).
 Gemessen nach der Aenderung bei 1950 x 1040: erste Aussage ganz weiss ueber ca. 300 px, zweite Aussage ganz weiss ueber ca. 420 px, Textblock mittig (Oberkante 404, Unterkante 640 bei 1040 Hoehe). Lokal und auf der Preview gleiche Werte, Aufnahmen bei 1950, 1440 und 390 (qa/shots/fr/cn_after_* und cn_pv_*). Layer 1 Gesamtlauf bei 1440 x 900 (qa/l1_final.py): kein horizontaler Ueberlauf, keine Konsolenfehler, auch mit Reduced Motion.
 Nicht geprueft: Reduced Motion Aufnahme des Connect Standbildes, echtes Geraet.
+
+### Layer 1 Ways to Work: zwei Begleittexte (08.10., Ausgangscommit 48b9496, Code Commit 3e1b1fb)
+
+Reiner Textaustausch in index.html, kein CSS, kein JS. LEAD: "Senior leadership / strategic operating responsibility." wird "Senior leadership. Responsibility for strategy and execution." DRIVE: "Strategic Operating Partner / Fractional COO / consulting / transformation mandate." wird "Explore my operating system and the thinking behind it." Der IST Wortlaut stimmte mit dem Auftrag ueberein. Die gleichlautende Unterzeile auf der Lead Seite (ld-sub) blieb unveraendert.
+Geprueft lokal und auf der Preview bei 1363 x 936 und 390 x 844: beide Texte wortgleich, je zwei Zeilen, innerhalb der Zeile, Abstand zum Pluszeichen 71 px (Desktop) und 33 px (Mobil), kein horizontaler Ueberlauf, Fokusring an LEAD und DRIVE sichtbar, echter Klick oeffnet #lead und #explore. Keine Konsolenfehler.
+Nicht geprueft: Zielseiten ueber das Linkziel hinaus, echtes Geraet.
