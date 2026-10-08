@@ -177,3 +177,4 @@ SOLL: Je Format die von Lena gelieferte Orientierung wortgleich (Guest Lectures,
 
 Nachtrag Workshops Einstieg (08.10.2026): Der 20+ Block ist aus dem Einstieg entfernt (bleibt im Abschnitt Erfahrung). Stattdessen eine Grafik aus drei sich ueberlagernden Kreisen (Creative thinking, Commercial judgment, Operating experience) mit gefuellter gemeinsamer Flaeche, passend zur Hauptaussage "into the same room". Assets workshops.css v70, workshops.js v24.
 Nachtrag Workshops Einstieg: Angebotskarte heisst jetzt Weekend Formats (statt Workshops), damit das Wort im Einstieg nicht viermal steht. workshops.css v71.
+Nachtrag Workshops: Themenuebersicht mit je einer kleinen Zeichnung, Kreisgrafik im Einstieg baut sich beim Laden auf (Reduced Motion: sofort vollstaendig). workshops.css v72, workshops.js v25.

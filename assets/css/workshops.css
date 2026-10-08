@@ -298,3 +298,8 @@
 @media (max-height:700px) and (min-width:761px){.w-venn{top:9vh}.w-offer{order:0}}
 @media (max-height:700px) and (min-width:761px){.w-venn{top:118px;width:min(29vw,50vh,300px)}}
 @media (max-width:760px){.w-venn .vt text{font-size:16px}}
+
+/* Themenuebersicht: je Thema eine kleine Zeichnung */
+.ix-g{display:block;width:100%;max-width:150px;height:auto;margin:0 0 3vh;color:#000;overflow:visible}
+.ix a{padding-top:2.6vh}
+@media (max-width:760px){.ix-g{display:none}}

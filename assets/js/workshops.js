@@ -7,7 +7,13 @@ gsap.registerPlugin(ScrollTrigger);
 (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>{
   if(RM)return;
   gsap.from(['.w-hero .subbar','.w-hero .kick'],{opacity:0,y:20,duration:1.1,stagger:.08,ease:'expo.out',delay:.25});
-  gsap.from('#kq,.w-sub,.w-venn,.w-offer,.w-cta',{opacity:0,y:24,stagger:.12,duration:.9,delay:.5,ease:'expo.out',clearProps:'transform,opacity'});
+  /* the three circles draw themselves, then the shared room fills */
+  const vc=$$('.w-venn circle[fill="none"]');
+  if(vc.length){vc.forEach(c=>{const L=2*Math.PI*c.r.baseVal.value;c.style.strokeDasharray=L;c.style.strokeDashoffset=L});
+    gsap.to(vc,{strokeDashoffset:0,duration:1.5,stagger:.22,delay:.5,ease:'power2.inOut',onComplete:()=>vc.forEach(c=>{c.style.strokeDasharray='';c.style.strokeDashoffset=''})});
+    gsap.from('.w-venn g[clip-path]',{opacity:0,duration:.9,delay:1.7,ease:'power1.out',clearProps:'opacity'});
+    gsap.from('.w-venn .vt',{opacity:0,duration:.8,delay:1.3,clearProps:'opacity'})}
+  gsap.from('#kq,.w-sub,.w-offer,.w-cta',{opacity:0,y:24,stagger:.12,duration:.9,delay:.5,ease:'expo.out',clearProps:'transform,opacity'});
 
   const up=(sel,trig,st)=>gsap.from(sel,{opacity:0,y:36,stagger:st||0,duration:.95,ease:'expo.out',clearProps:'transform,opacity',scrollTrigger:{trigger:trig,start:'top 82%'}});
   $$('.w-tp').forEach(t=>{up(t.querySelectorAll('.tp-head,.tp-q,.tp-d,.tp-fpd'),t,.1);up(t.querySelector('.tp-g'),t)});
