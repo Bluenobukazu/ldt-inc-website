@@ -73,3 +73,21 @@
 
 /* the hero sentence keeps 'reach it.' together, so no line ends on a lone 'it.' */
 .mr .mr-k .mr-nw{white-space:nowrap}
+/* 08.10.2026 Spacing (Lena): fewer things competing in one view, more air between groups. Desktop only. */
+@media (min-width:761px){
+  /* the four types read as one choice, the seven conditions as one numbered line: the choice carries no numbers of its own */
+  .mr .mr-t b{display:none}
+  .mr .mr-t{padding-top:calc(1.4*var(--u))}
+  .mr .mr-wf{margin-top:calc(5*var(--u));row-gap:calc(1*var(--u))}
+  .mr .mr-wf i{font-size:.32em}
+  .mr .mr-rd{margin-top:calc(4.4*var(--u))}
+  /* route: the explanation sits right beside the first route, label and sentence together */
+  .mr .mr-view{margin-top:calc(2.4*var(--u))}
+  .mr .mr-vc{margin-top:calc(1.6*var(--u))}
+  .mr .mr-ly{margin-top:calc(1.8*var(--u))}
+  .mr .mr-rs{grid-column:1/7;margin-top:calc(4.4*var(--u));row-gap:calc(.4*var(--u))}
+  .mr .mr-cm{grid-column:8/-1;margin-top:calc(4.8*var(--u))}
+  .mr .mr-rc{grid-column:8/-1;align-self:start;margin-top:calc(8.6*var(--u))}
+  .mr .mr-rc p{font-size:clamp(20px,calc(3*var(--u)),44px)}
+}
+.mr .mr-rc p{text-wrap:balance}

@@ -27,7 +27,7 @@ function score(el,w,h){
     lanes.push({y,dur,L:[].concat(...L)})});
   ln(g,{x1:tx,x2:tx,y1:0,y2:h,'stroke-width':1.4});
   const step=(t,fin)=>{lanes.forEach(({y,dur,L})=>{const off=fin?0:((t/1000)/dur%1)*tw;L.forEach(m=>{let x=m.x-off;if(x<-tw*.3)x+=2*tw;if(x>tw*1.7)x-=2*tw;
-      const X=nm+x,near=clamp(1-Math.abs(X+m.wd/2-tx)/60);m.e.setAttribute('x1',X);m.e.setAttribute('x2',X+m.wd);m.e.setAttribute('stroke-width',(2.4+near*5).toFixed(1))})})};
+      const X=nm+x,near=clamp(1-Math.abs(X+m.wd/2-tx)/60);m.e.setAttribute('x1',X);m.e.setAttribute('x2',X+m.wd);m.e.setAttribute('stroke-width',(2.4+near*5).toFixed(1));m.e.setAttribute('stroke-opacity',(.34+.66*clamp(1-Math.abs(X+m.wd/2-tx)/(tw*.2))).toFixed(2))})})};
   live(el,step);
 }
 /* 2 hand-overs: items leave one part; many stall between the parts (rings), few arrive at the next (dots) */
@@ -99,7 +99,7 @@ function trv(el,w,h){if(narrow())return;
 }
 /* 8 making it operational: an idea becomes something the team carries */
 function bld(el,w,h){if(narrow())return;
-  const g=canvas(el,w,h),li0=[...el.parentNode.querySelectorAll('.ox-bld li')];li0.forEach((li,i)=>{li.style.bottom='auto';li.style.top=(h*(.78-i*.095)+14)+'px'});
+  const g=canvas(el,w,h),li0=[...el.parentNode.querySelectorAll('.ox-bld li')];li0.forEach((li,i)=>{li.style.bottom='auto';li.style.top=(h*(.78-i*.095)+14+(i===6&&!narrow()?18:0))+'px'});
   const lis=li0.map(li=>rel(el,li)),P=lis.map((l,i)=>[l.l+4,h*(.78-i*.095)]);
   const path=mk('path',{d:'M'+P.map(q=>q.join(' ')).join(' L'),fill:'none',stroke:C,'stroke-width':1.2},g),L=path.getTotalLength();path.setAttribute('stroke-dasharray',L);
   const st=P.map(q=>dot(g,{cx:q[0],cy:q[1],r:5})),idea=cc(g,{'stroke-width':2.4,r:10,fill:'#fff'}),done=dot(g,{r:5}),halo=cc(g,{'stroke-width':1.4});

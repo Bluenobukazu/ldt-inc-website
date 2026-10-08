@@ -104,3 +104,13 @@
 
 /* selection: the state figure sits right under the result line, before the closing question (viewports where it is not placed beside the text) */
 @media (max-width:1400px),(max-height:700px){.pl .pl-nfig{grid-row:4}.pl .pl-rlq{grid-row:5}}
+/* 08.10.2026 Spacing (Lena): the thought first, the way on in its own space; the business types breathe. Desktop only. */
+@media (min-width:761px){
+  .pl .pl-brk{margin-top:calc(4*var(--u))}
+  .pl .pl-x{margin-top:calc(7*var(--u))}
+  .pl .pl-xt,.pl .pl-xd{border-top:1px solid rgba(255,255,255,.4);padding-top:calc(2.4*var(--u))}
+  .pl .pl-bs{margin-top:calc(3.4*var(--u))}
+  .pl .pl-b{padding:calc(1*var(--u)) 0}
+  .pl .pl-xl{margin-top:calc(1.8*var(--u))}
+  .pl .pl-xr{margin-top:calc(4.6*var(--u))}
+}

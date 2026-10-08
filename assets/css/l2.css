@@ -35,3 +35,9 @@
 
 /* v3 mobile: the target code pill gets its own line above a bridge button instead of sitting in the headline above */
 @media (max-width:760px){.l2 .l2-rel[data-rel]{margin-top:36px!important}.pp .pz-nb .l2-rel[data-rel]{margin-top:0!important}}
+/* 08.10.2026 Spacing (Lena): on the four pages People, Operations, Markets and Technology a frame takes the height of its content plus even air,
+   not a full window, so the white and black bands between frames stay small; the top gap under the layer bar closes. Desktop only. */
+@media (min-width:761px){
+  .l2:is(.te,.ox,.mr,.pl) .l2-f{min-height:0;padding-block:clamp(48px,calc(6*var(--u)),104px)}
+  #deep .inner:has(>.l2:is(.te,.ox,.mr,.pl):not([hidden])){padding-top:0}
+}
