@@ -231,3 +231,7 @@ Sichtbarer Text, der sich aendert:
 Partnerships, Ueberschrift ueber den sechs Massnahmen. IST: "Changes the operating conditions". SOLL: entfaellt (freigegeben). Satz, weisses Label "Operating condition" und die sechs Massnahmen bleiben, Desktop und Mobil.
 Decisions, Praxislisten bei MaHalla. IST: "Pricing Contracts Commercial terms Ticketing platform Settlement" und "Safety Fire safety Security" ohne Trenner. SOLL: "Pricing · Contracts · Commercial terms · Ticketing platform · Settlement" und "Safety · Fire safety · Security". Die Mittelpunkte sind erzeugte Zeichen (CSS), der Wortlaut bleibt, die Trenner sind fuer Screenreader stumm.
 Markets, vier Branchentypen: die Nummern 01 bis 04 sind nicht mehr sichtbar (Desktop seit dem Spacing Durchgang, jetzt auch mobil), weil die Typen eine eigene Auswahl bilden und 01 bis 07 nur den Bedingungen gehoeren. Die Bezeichnungen sind unveraendert.
+
+### Layer 2 Besucherfuehrung (08.10., Code Commit 528e262)
+
+Kein Wortlaut geaendert. Sichtbare Darstellung: Decisions "Material input" und "Context" sind jetzt als Pillen gesetzt (gleicher Text), Proposition MaHalla steht in zwei Frames (gleiche Texte, gleiche Reihenfolge).

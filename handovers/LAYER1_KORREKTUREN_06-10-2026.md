@@ -131,3 +131,23 @@ H Decisions mobil, Befund bestaetigt und korrigiert: Beschriftungen standen dire
 I Expansion mobil "Worked on directly", Befund bestaetigt und korrigiert: die fuer die Ringzeichnung gedachte Breite (11u) liess die Stationen wortweise umbrechen, jetzt volle Listenbreite, jede Station eine Zeile (87 auf 43 px Hoehe).
 J Proposition und Advantage, graue Erklaerzeilen: im vollstaendig eingeblendeten Zustand gemessen, alle Erklaerzeilen mindestens 4,5:1 und mindestens 14 px, ohne Befund, nichts geaendert. Unter den Grenzen liegen nur die Schrittanzeige "Drifted 01 bis 05" (20 px, 3,29:1, Absicht: inaktive Ziffern gedaempft), zwei 13 px Beschriftungen mit gutem Kontrast und das Umrisswort "Traded away" (gewollte Kontur).
 Geprueft: lokal und auf der Preview bei 1363 x 936 (Reduced Motion), 970 x 510 (lokal) und 390 x 844, Klicks echt, Tastaturfokus an Expansion 02 und Markets Hospitality. Nicht geprueft: echtes Geraet, vollstaendiger QA 02 Lauf bei People (nur die Legende betroffen).
+
+### Layer 2 Besucherfuehrung, Punkte 1 bis 17 (08.10., Ausgangscommit b893ea9, Code Commit 528e262)
+
+Massstab (Lena): jeder Frame hat einen klaren ersten Blick und eine Hauptaussage, Grafik, Erklaerung und Beschriftung lesen sich als Einheit. Technische Sauberkeit allein gilt nicht als Abnahme. Gemessen wurde pro Lesemoment Lautstaerke (Groesse x Gewicht x Kontrast), Blockzahl, Woerter, Text unter 14 px; die Blickfuehrung ist Einschaetzung am Bild. Kein Text geaendert, keine neuen Aussagen.
+1 Decisions Input ≠ Authority: sechs Perspektiven als ruhige Liste, Material input und Context als lesbare Begriffe in Pillen (gefuellt oder umrandet, das Wort traegt die Bedeutung), Schlussfolgerung (Frage, Line of authority, Decide, One mandate) als eigener Bereich unter einer Linie. Mobil Pille unter der Beschreibung (decisions.css v10).
+2 Markets: sieben Bedingungen kleiner (4,6u statt 7u), direkt unter der Auswahl, eine Linie fuehrt vom aktiven Typ dorthin, Erklaerung eine Stufe kleiner. Keine neue Ueberschrift (markets.css v12).
+3 Proposition Uebergang: ein Lesesinn fuer alle drei Ziele (Name links, Frage Mitte, Plus rechts), gleiche Schwere, Code ueber dem eigenen Namen (proposition.css v18).
+4 Technology: Werkzeuge in einem Gewicht, Lenas Zeile gleich gross wie die Namen, abgesetzt durch Linie und Abstand; Beschriftungen und Zeitachse 15 px (technology.css v14).
+5 Positioning und Proposition: keine zeitgesteuerte Sequenz neu eingefuehrt, bestehende Einblendung bleibt (positioning.css v10).
+6 Proposition Driftmuster: Erklaerung 18 bis 30 px, Zusatz heller und etwas groesser, Frage groesser, Fortschrittsanzeige 22 und 30 px und heller.
+7 Customers: Lena Satz und Frage links zusammen, "A missed request alone ..." rechts ueber der Rhythmuslinie, nicht in einer Zeile gepresst (customers.css v14).
+8 Partnerships mobil Route + Need: die Routes Liste steht als weisse Gruppe, die Capability gap Achse bleibt als Beziehung, alle Zeilen, Punkte und Faecherlinien unveraendert (home.css v307).
+9 Operations: Signale als eine Zeile (Signal breiter), 18 bis 34 px; Beispielwahl 01 bis 03 als Pillen, "What I look for" als leise Schlusszeile; drei Schlusssaetze Struktur groesser; mobil Name links, Folgeteil rechts, Satz in eigener Zeile (operations.css v16).
+10 Commercial Architecture "An account ...": Praxiszeile als eigene ruhige Schlusszeile unter Grafik und Konditionen (commercial.css v8c).
+11 Positioning Szenario: mehr Luft, zwei klar getrennte Gruppen, mobil Linie zwischen Intended und Produced.
+12 Proposition MaHalla (freigegeben): zwei aufeinander aufbauende Lesemomente, erst "MaHalla, Scale, Responsibility", dann "Transformation, Kreise, Result" (index.html, proposition.css).
+13 Technology Tools can multiply: Beschriftungen 15 px, mehr Abstand der zwei Zustaende.
+14 Decisions MaHalla: Wholesale Zeile als ruhige Zeile, Schlusssatz darunter allein.
+Beibehalten: 18 "It holds" (nicht angefasst), Commercial Architecture Diagrammbeschriftungen (Punkt 11 der Liste, nur Groesse 15 px aus frueherem Stand).
+Geprueft: lokal Desktop 1363 x 936, mobil 390 x 844 (Vorher Nachher an den geaenderten Frames), Decisions bei 970 x 510; echte Klicks Operations (Beispiele 01 bis 03, Promises 1 bis 4), Markets (vier Typen), Fokus an Beispielwahl; Preview (Build mit operations.css v16): dieselben Klicks Desktop und mobil, Decisions, Proposition und Partnerships mobil im Bild. Nicht geprueft: echtes Geraet; 970 x 510 nur bei Decisions; Reduced Motion nur ueber die vorhandenen Aufnahmen; Partnerships Key needs Gruppe mobil nicht in voller Groesse gesichtet; keine neue Sequenzierung, daher kein Rueckwaertsscroll Test.
