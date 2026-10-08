@@ -114,3 +114,8 @@
   .pl .pl-xl{margin-top:calc(1.8*var(--u))}
   .pl .pl-xr{margin-top:calc(4.6*var(--u))}
 }
+/* 08.10.2026: in "What they need to carry it" the figure no longer floats over the words and the sentence; at every desktop width it sits below them, at the right */
+@media (min-width:761px){
+  .pl .pl-nfig{position:static;grid-column:1/-1;grid-row:4;justify-self:end;width:min(36vw,520px);max-width:100%;margin:2vh 0 0 auto}
+  .pl .pl-rlq{grid-row:5}
+}

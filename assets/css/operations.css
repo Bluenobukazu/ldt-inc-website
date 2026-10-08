@@ -90,3 +90,8 @@
 @media (min-width:761px){.ox .ox-bld li{text-wrap:balance}}
 .ox .ox-cap{text-wrap:balance}
 .ox .ox-k,.ox .ox-run{text-wrap:balance}
+/* 08.10.2026: the way on to Delivery gets its own space; the code is shown once (the pill above), the written code stays for screen readers */
+@media (min-width:761px){
+  .ox .ox-dl{margin-top:calc(8*var(--u))}
+  .ox .ox-dl .n em{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;margin:0}
+}
