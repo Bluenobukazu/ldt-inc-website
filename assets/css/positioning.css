@@ -92,3 +92,4 @@
   .po .po-cl.pdc{margin-top:36px;padding-top:6px;border-top:2px solid #000}
   .po .po-cl.inc{margin-top:28px}
 }
+@media (max-width:760px){.po .po-read{gap:28px;padding-top:24px}.po .po-read dd{margin-top:10px}.po .po-read dd span{line-height:1.25}}

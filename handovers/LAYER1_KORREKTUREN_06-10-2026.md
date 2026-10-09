@@ -234,3 +234,5 @@ Operations (`operations.css?v=17`): die drei Auswahlknoepfe 01, 02, 03 bei klein
 Bewusst nicht geaendert: Another Perspective Labels, Layer 1 Badges.
 
 Nachtrag Technology (`technology.css?v=16`, Lenas Hinweis "zu eng, Textsalat"): auf dem Handy mehr Luft im Lieferdatum Vergleich (4 Orte gegen 1 Besitzer) und in der Liste "Same principle. Different failure point." (Zeilenabstaende, Abstand zwischen Zaehler und Zeilen, Abstand zwischen Vorher und Nachher). Nur Handy bis 760 px.
+
+Nachtrag Gesamtdurchgang Raum (Lenas Auftrag "universell"): Alle 14 Layer 2 Seiten bei 390 px als Uebersichtsboegen gesichtet, sechs Verdachtsstellen im Vollbild. Geaendert: Positioning (`positioning.css?v=11`) auf dem Handy mehr Abstand zwischen Compared with, Price measured against, Expected. Alle anderen gesichteten Stellen (Advantage, Markets, People, Technology ausser dem schon behobenen Teil) ohne Aenderung. Nicht gesichtet: 970x510 (Abstandsscan abgebrochen, zu viele Scheinfunde), Proposition und Delivery nur im Uebersichtsbogen.
