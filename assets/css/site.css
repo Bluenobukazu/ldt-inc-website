@@ -260,3 +260,7 @@ html:not(.kbd) .ov [data-close]:focus-visible{outline:none!important;box-shadow:
 .lbl,.dcur,.loc .dcur{font-size:max(12px,11px)}
 .dcur,.lbl{font-size:12.5px}
 .sitemap-body .archive-link strong{font-size:clamp(1.25rem,2vw,1.75rem);line-height:1.15}
+
+/* phones: the top row (logo, Index) folds with the context bar (Lena 09.10.2026) */
+@media (max-width:760px){#hdr{transition:transform .26s var(--ease),opacity .2s var(--ease)}body.hdr-folded #hdr,body.page-shell-folded #hdr{transform:translateY(-100%);opacity:0;pointer-events:none}}
+@media (prefers-reduced-motion:reduce){#hdr{transition:none}}
