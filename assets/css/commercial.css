@@ -95,3 +95,4 @@
   .cax .cax-acr .cax-cn{margin-top:calc(2.4*var(--u))}
   .cax .cax-ac .cax-pf{grid-column:1/-1;grid-row:4;margin:calc(3*var(--u)) 0 0;padding-top:calc(1.4*var(--u));border-top:1px solid rgba(255,255,255,.45);font-size:clamp(16px,calc(1.7*var(--u)),24px);font-weight:400;max-width:60em;color:#e6e6e6}
 }
+@media (max-width:340px){.cax .cax-lb:not(.core):not(.base){width:max-content;max-width:10.5em}.cax .cax-lb:not(.core):not(.base) b{white-space:normal;max-width:10.5em;line-height:1.15}}

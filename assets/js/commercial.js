@@ -41,8 +41,10 @@ function opening(fig,uid){
   const lbs=[...CA_PL.map(o=>lab(o.n,o.e)),lab(CA_BASE.n,CA_BASE.e,'base')],lcore=lab('The offer','','core');K.put(lcore,K.P(0,0,64));
   const st=(o,a,b)=>[0,1,2,3].map(i=>mix(mix(o.S[i],0,a),o.H[i],b));
   const la=(G,o)=>{const w=fig.clientWidth,f=o===CA_BASE?(w<700?(innerWidth>760?2.35:1.85):1):w<500?1.7:w<700?1.4:1.24;const q=G.at(o.l[0]*f,o.l[1]*f);if(w<500&&innerWidth<=760&&o!==CA_BASE){const dy=o.n==='What is agreed'||o.n==='How it is bought'?46:o.n==='What is included'?-24:0;return [q[0],q[1]+dy]}if(w<500&&o!==CA_BASE&&(o.n==='What is agreed'||o.n==='How it is bought'))return [q[0],q[1]+22];return q};
-  return(a,b)=>{const G=K.geo(CA_BASE,st(CA_BASE,a,b));K.set(base,G);K.put(lbs[4],la(G,CA_BASE));
-    CA_PL.forEach((o,k)=>{const g=K.geo(o,st(o,a,b));K.set(plates[k],g);K.put(lbs[k],la(g,o));
+  /* narrow phones: a label never leaves the figure (320 px: 'What is included', 'How it is bought') */
+  const fitLb=e=>{if(fig.clientWidth>=500||innerWidth>760)return;const W=fig.clientWidth,hw=e.offsetWidth/2+2,x=parseFloat(e.style.left)/100*W;e.style.left=Math.min(W-hw,Math.max(hw,x))+'px'};
+  return(a,b)=>{const G=K.geo(CA_BASE,st(CA_BASE,a,b));K.set(base,G);K.put(lbs[4],la(G,CA_BASE));fitLb(lbs[4]);
+    CA_PL.forEach((o,k)=>{const g=K.geo(o,st(o,a,b));K.set(plates[k],g);K.put(lbs[k],la(g,o));fitLb(lbs[k]);
       const s=sh[k],z=g.c[0][2];s.setAttribute('points',K.pts(g.c.map(([x,y])=>K.P(x,y,0))));s.style.opacity=cl(z/40)});
     fig.classList.toggle('hist',b>.5)};
 }

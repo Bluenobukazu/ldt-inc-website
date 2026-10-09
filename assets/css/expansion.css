@@ -45,3 +45,4 @@
 @media (max-width:760px),(pointer:coarse){.ov .xp-steps [data-xgo]{min-height:44px!important}}
 /* 08.10.2026 mobile: the stations of the chain use the full width of the list; the width meant for the ring drawing made each label wrap word by word */
 @media (max-width:760px){.xp .xp-ring li span{width:auto!important}}
+@media (max-width:380px){.xp .xp-lb[data-l="copy"]{white-space:normal;width:7.8em;text-align:center;line-height:1.2}}
