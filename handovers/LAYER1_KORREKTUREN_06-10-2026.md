@@ -272,3 +272,8 @@ Nachtrag niedrige Fenster: Derselbe Rhythmus (Leiste bei Runterscrollen weg, bei
 Befund (Lena, iPhone): Nach dem Tipp auf den CTA stand die erste Zeile von "Tell me what you are working on ..." unter der Browserleiste abgeschnitten. Ursache: Der Schlussabschnitt war `min-height:100vh`. Auf dem iPhone ist 100vh hoeher als der sichtbare Bereich (Leisten eingeblendet), deshalb ragte der Abschnitt oben ueber den Bildschirm hinaus, sobald am Seitenende gestoppt wurde.
 Aenderung: `workshops.css?v=90`: `min-height:100svh` (sichtbarer Bereich) und auf dem Handy mehr Abstand oben (`max(16vh,112px)`). Im Handy Fenster (390 x 844) steht der ganze Satz 135 px unter der Oberkante.
 Grenze: Das iPhone Verhalten der Leisten habe ich nur ueber die Ursache hergeleitet, nicht auf dem Geraet nachgestellt.
+
+## 09.10.2026 Footer auf dem Handy (Lenas Entwurf)
+
+Footer bis 760 px Breite (`site.css?v=65`, alle fuenf html Dateien): obere Zeile Workshops, Sitemap, Contact rechtsbuendig und voll hell (15 px), darunter Copyright, Imprint, Privacy linksbuendig und leiser (12 px, Deckkraft 0,62). Punkte als Trenner mittig zwischen den Woertern (gleicher Abstand links und rechts, 0,75 rem). Zeilen eng (Abstand -5 px). Unter 350 px etwas kleinere Schrift. Legal Seiten bekommen seitlichen Abstand im Footer (vorher bis an den Rand). Gilt fuer alle Footer mit `.release-footer`: Startseite, Overlays (Lead, Experience, Engage, Explore), Workshops, Sitemap, Imprint, Privacy. Another Perspective hat einen eigenen Footer und blieb unveraendert.
+Geprueft bei 390 und 320 px: sechs Kontexte, kein Ueberlauf, Navigation rechts, Rechtliches links.
