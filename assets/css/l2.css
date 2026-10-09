@@ -43,3 +43,16 @@
   .l2:is(.te,.ox,.mr,.pl) .l2-f{min-height:0;padding-block:clamp(48px,calc(6*var(--u)),104px)}
   #deep .inner:has(>.l2:is(.te,.ox,.mr,.pl):not([hidden])){padding-top:0}
 }
+
+/* phones: every link tile keeps its own layout, the plus always sits at the bottom right under the text (Lena 09.10.2026) */
+@media (max-width:760px){
+  .l2 .l2-rel{position:relative;width:100%!important;max-width:none!important;padding-bottom:72px!important}
+  .l2 .l2-rel .l2-plus{position:absolute!important;right:0;bottom:0;left:auto;top:auto;margin:0!important;transform:none!important;grid-area:auto!important}
+}
+
+/* phones: link tiles read at a clear size on every page (Lena 09.10.2026) */
+@media (max-width:760px){
+  .l2 .l2-rel .n{font-size:clamp(28px,8.4vw,38px)!important;font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-top:12px}
+  .l2 .l2-rel .q{font-size:19px!important;line-height:1.3;margin-top:8px;max-width:none!important}
+  .l2 .l2-rel .ad{font-size:14px!important;padding:4px 13px}
+}

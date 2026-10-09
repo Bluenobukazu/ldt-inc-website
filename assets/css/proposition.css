@@ -351,3 +351,7 @@
   .pp .pz-rail{font-size:22px}.pp .pz-rail i{color:#a6a6a6}.pp .pz-rail i.on{font-size:30px;color:#fff}
   .pp .pz-rail .pz-lab{color:#c9c9c9;font-size:13px}
 }
+
+/* labels inside the illustrations get a halo so they stay readable over the dots (Lena 09.10.2026) */
+.pp .pz-b .pz-tx{paint-order:stroke;stroke:#000;stroke-width:6px;stroke-linejoin:round;fill:#fff}
+.pp .pz-w .pz-tx{paint-order:stroke;stroke:#fff;stroke-width:6px;stroke-linejoin:round}

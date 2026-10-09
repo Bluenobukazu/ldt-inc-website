@@ -76,3 +76,17 @@
   .cux .cux-f5 .cux-rh{grid-row:3;margin-top:calc(3*var(--u))}
   .cux .cux-f5 .cux-fin{grid-row:4}
 }
+
+/* phones: the history steps stand in a clear column below the picture, no overlap with the closing line; the contradiction list gets rows (Lena 09.10.2026) */
+@media (max-width:760px){
+  .cux .cux-rh{height:auto;margin-bottom:0;display:block}
+  .cux .cux-rh .cux-cv{position:relative;inset:auto;width:100%;height:34vw}
+  .cux .cux-st{position:relative!important;inset:auto!important;width:auto;margin-top:26px;border-left:1.5px solid currentColor;padding-left:20px}
+  .cux .cux-st li{font-size:19px;font-weight:600;line-height:1.25;margin:0 0 20px;padding:0}
+  .cux .cux-st li{opacity:1!important;transform:none!important}.cux .cux-st li:last-child{margin-bottom:0}
+  .cux .cux-fin{margin-top:44px;opacity:1!important;transform:none!important}
+  .cux .cux-s6l .cux-h{margin-bottom:30px}.cux .cux-s6l .cux-cap{margin-top:0}.cux .cux-s6l .cux-bd{margin:8px 0 34px}
+  .cux .cux-rec{margin-top:0;columns:2;column-gap:20px}
+  .cux .cux-rec li{padding:16px 0;border-top:1px solid rgba(0,0,0,.22);font-size:21px;line-height:1.1}
+  .cux .cux-f6.l2-b .cux-rec li,.cux .cux-f6[class*="-b"] .cux-rec li{border-top-color:rgba(255,255,255,.3)}
+}

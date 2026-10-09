@@ -3890,3 +3890,6 @@ body.at-end #rail button:not(.on){opacity:.32}body.at-end #rail button:hover,bod
   .pa-m .pm-s2 .pm-ax-w{margin-top:26px}
   .pa-m .pm-s2 .pm-need{margin-bottom:14px}
 }
+
+/* phones, Partnerships: the gap labels sit between the cards and are never covered (Lena 09.10.2026) */
+@media (max-width:760px){.pa-m .pm-s2 .pm-gap{height:150px;padding-top:34px}.pa-m .pm-cap2{bottom:34px}.pa-m .pm-gap{min-height:88px}.pa-m .pm-gapt .pc{font-size:14px}}

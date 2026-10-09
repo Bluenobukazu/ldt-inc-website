@@ -86,3 +86,18 @@
 /* v3 D.1-F07 mobile: the outlined New business line is no longer clipped */
 @media (max-width:760px){.rvx .rvx-base{max-height:1.5em;padding-bottom:.15em}.rvx .rvx-dep[data-v="1"] .rvx-base{max-height:0;padding:0}.rvx .rvx-stack p.rvx-base{line-height:1.12;max-height:1.8em;padding-bottom:.2em}.rvx .rvx-dep[data-v="1"] .rvx-stack p.rvx-base{max-height:0;padding:0}}
 @media (max-width:760px){.rvx .rvx-opt li{padding-block:16px}.rvx .rvx-oc li{padding-block:8px}}
+
+/* phones: One / Many / Three become three rows, each with its word, its picture and its sentence together (Lena 09.10.2026) */
+@media (max-width:760px){
+  .rvx .rvx-same{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:18px;row-gap:0;align-content:start}
+  .rvx .rvx-same .rvx-om,.rvx .rvx-same .rvx-sum,.rvx .rvx-same .rvx-oc{display:contents}
+  .rvx .rvx-same .rvx-om p{grid-column:1;position:relative;margin:34px 0 0;padding-top:30px}
+  .rvx .rvx-same .rvx-om p::before{content:"";position:absolute;left:0;top:0;width:calc(200% + 18px);border-top:1px solid #fff}
+  .rvx .rvx-same .rvx-om span{font-size:clamp(44px,13.5vw,58px);line-height:.95}
+  .rvx .rvx-same .rvx-sum>div{grid-column:2;height:40vw;min-height:0;margin:64px 0 0;padding:0;overflow:visible}
+  .rvx .rvx-same .rvx-oc li{grid-column:1;padding:12px 0 0;margin:0;font-size:19px;line-height:1.25}
+  .rvx .rvx-same .rvx-om p:nth-child(1){grid-row:2}.rvx .rvx-same .rvx-sum>div:nth-child(1){grid-row:2/4}.rvx .rvx-same .rvx-oc li:nth-child(1){grid-row:3}
+  .rvx .rvx-same .rvx-om p:nth-child(2){grid-row:4}.rvx .rvx-same .rvx-sum>div:nth-child(2){grid-row:4/6}.rvx .rvx-same .rvx-oc li:nth-child(2){grid-row:5}
+  .rvx .rvx-same .rvx-om p:nth-child(3){grid-row:6}.rvx .rvx-same .rvx-sum>div:nth-child(3){grid-row:6/8}.rvx .rvx-same .rvx-oc li:nth-child(3){grid-row:7}
+  .rvx .rvx-same .rvx-h1{grid-column:1/-1;grid-row:1}
+}

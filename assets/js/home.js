@@ -373,7 +373,7 @@ function clipLabels(){const cr=$('#tTrack').getBoundingClientRect(),m=MOB()?4:40
 function buildTransform(){
   if(tST){tST.kill();tST=null}if(tTL)tTL.kill();
   const cv=$('#tcv'),t=T();cv.style.width=t.W+'px';cv.style.height=t.H+'px';tScale=Math.min(innerWidth/t.W,innerHeight/t.H);gsap.set(cv,{xPercent:-50,yPercent:-50,scale:tScale});
-  gsap.set('#tt',{left:MOB()?22:48,top:MOB()?100:122});gsap.set('#tt .t',{fontSize:MOB()?36:60,opacity:RM||ttShown?1:0,x:0,y:0,scale:1});
+  gsap.set('#tt',{left:MOB()?22:48,top:MOB()?100:122});gsap.set('#tt .t',{fontSize:MOB()?44:60,opacity:RM||ttShown?1:0,x:0,y:0,scale:1});
   const pos=i=>({x:t.x0+i*t.dx,y:t.y0+((i*37)%5)*t.sy});
   bars.forEach(({b,l},i)=>{const p=pos(i);gsap.set([b,l],{left:p.x,top:p.y,width:t.ws[i],height:t.bh,opacity:1})});
   gsap.set(bars.map(o=>o.l),{fontSize:t.lf,paddingLeft:0,borderBottomWidth:1});gsap.set(bars.map(o=>o.b),{display:'',opacity:0});

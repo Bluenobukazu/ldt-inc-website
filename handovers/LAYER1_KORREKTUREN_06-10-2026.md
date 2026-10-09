@@ -253,3 +253,16 @@ Geprueft im Handy Fenster (390 x 844): Layer 2 (Technology, Commercial Architect
 Nachtrag Kontextleiste universell (Lenas Auftrag "egal wo, auch Layer 1"): Die obere Zeile mit Logo und Index (`#hdr`) folgt auf dem Handy demselben Rhythmus: auf Layer 1 erst nach dem Verlassen der Landing (ab 0,6 Bildschirmhoehen), runter weg, hoch (ueber 40 px) wieder da, nach etwa 3 s Stillstand weg; auf den Standalone Seiten klappt sie mit der Subbar ein. `common.js?v=53`, `site.css?v=62` (alle fuenf html Dateien). Another Perspective ist eine eigene Seite ohne common.js und wurde nicht angefasst.
 
 Nachtrag niedrige Fenster: Derselbe Rhythmus (Leiste bei Runterscrollen weg, bei Hochscrollen ueber 40 px da, nach 3 s Stillstand weg) gilt auch fuer Fenster mit 620 px Hoehe oder weniger, zum Beispiel 970x510 (`common.js?v=54`, `site.css?v=63`). Normale Desktop Fenster (zum Beispiel 1363x936) verhalten sich wie vorher (Leiste klappt erst nach 0,65 s Stillstand ein). Geprueft bei 970x510 (Layer 2, Layer 1, Workshops) und 1363x936 (Layer 2, Layer 1, kein Unterschied zu vorher).
+
+## 09.10.2026 Handy: 15 Punkte aus Lenas Screenshots
+
+1 Proposition: Label "The idea" in den Grafiken bekommt einen Rand (Halo), `proposition.css?v=20`.
+2, 5, 11 Link Kacheln (Operations C.1 bis C.3, Delivery, Partnerships und alle weiteren): Plus sitzt immer unten rechts, Kachel ueber die volle Breite, Titel einheitlich 28 bis 38 px, Frage 19 px, Pille 14 px (`l2.css?v=14`). Die Kachel behaelt ihre eigene Anordnung, das Plus ist absolut positioniert.
+3 Technology: Namen ChatGPT, Claude, Notion, Make, GitHub, Lena 22 px statt 14 px (`technology.css?v=18`).
+4 Navigation unten: Kartentitel 26 px, Unterzeilen 17 px, Pillen 14 px, Zeilenhoehe 52 px (`explore.css?v=104`).
+6 Commercial Architecture: "Nobody designed it all at once." gleich gross wie die anderen Ueberschriften (`commercial.css?v=8h`).
+7, 8 Revenue: One / Many / Three als drei Zeilen mit Wort, Satz und Grafik (`revenue.css?v=19`).
+9, 10 Customers: History Schritte als Spalte unter dem Bild (Ueberlappung behoben, alle fuenf sichtbar, Abschlusssatz sichtbar), die Liste der Gegenbeispiele mit Zeilen und Trennlinien (`customers.css?v=18`).
+12 Partnerships: Beschriftungen "Capability gap" und "Key needs" nicht mehr abgeschnitten (`home.css?v=308`).
+13, 14 Experience: jede Erfahrung als kompakte Komposition (Label, Name, Rolle, Kennzahlen in Zeilen, ein Satz), die vier Kontextgruppen als schwarze Bloecke, Mandate und Commercial depth mit mehr Luft (`layer1.css?v=17`).
+15 Layer 1: "Transformation" auf dem Handy 44 px statt 36 px (`home.js?v=230`).

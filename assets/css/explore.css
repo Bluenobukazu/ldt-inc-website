@@ -531,3 +531,15 @@ body.system-moment #railM{opacity:0;visibility:hidden}
 #lead>.explore-footer .horizon,#experience>.explore-footer .horizon,#engage>.explore-footer .horizon{display:none}
 #lead>.explore-footer button,#experience>.explore-footer button,#engage>.explore-footer button{color:inherit;font:inherit;letter-spacing:inherit;cursor:pointer}
 #lead>.explore-footer button:focus-visible,#experience>.explore-footer button:focus-visible,#engage>.explore-footer button:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+
+/* phones: the Navigation cards read at a comfortable size (Lena 09.10.2026) */
+@media(max-width:760px){
+  .sy-ft .sy-h .n,.sy-ft .sy-k .n{font-size:26px!important;line-height:1.05!important}
+  .sy-ft .sy-h .sy-l,.sy-ft .sy-k .ab{font-size:14px!important;height:30px!important;min-width:48px}
+  .sy-ft li button{min-height:52px;gap:10px!important}
+  .sy-ft li button span{font-size:17px!important;font-weight:500}
+  .sy-ft li button .ad{font-size:14px!important;min-width:56px}
+  .sy-ft li button i{font-size:24px!important}
+  .sy-ft :is(.sy-h,.sy-k) .plus{font-size:30px!important}
+  .dfoot .df-s{font-size:24px}
+}

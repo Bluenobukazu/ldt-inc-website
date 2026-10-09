@@ -97,3 +97,5 @@
 }
 @media (max-width:340px){.cax .cax-lb:not(.core):not(.base){width:max-content;max-width:10.5em}.cax .cax-lb:not(.core):not(.base) b{white-space:normal;max-width:10.5em;line-height:1.15}}
 @media (max-width:760px){.cax .cax-lb:not(.core) b{paint-order:stroke fill;-webkit-text-stroke:6px #fff}}
+
+@media (max-width:760px){.cax .cax-hs .cax-h2{font-size:8.4vw;line-height:1}}
