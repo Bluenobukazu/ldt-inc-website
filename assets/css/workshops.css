@@ -26,11 +26,11 @@
 .w-hero .kick .t .amp{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:0;margin-left:.06em}
 .w-sub{margin:3vh auto 0;font-size:clamp(18px,1.55vw,25px);line-height:1.3;color:#333;max-width:46ch}
 .w-pans{list-style:none;padding:0;align-self:stretch;margin:4.2vh calc(var(--m) * -1) 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:2px solid #000;border-bottom:2px solid #000}
-.pan{display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:2.4vh;height:clamp(236px,31vh,370px);padding:3.4vh 2vw 4vh;background:#fff;color:#000}
+.pan{display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:3vh;min-height:clamp(236px,31vh,370px);padding:4vh 2vw 4.4vh;background:#fff;color:#000}
 .pan2{background:#000;color:#fff}
 .pan-t{margin:0;font-size:clamp(26px,3.3vw,56px);line-height:1;font-weight:700;letter-spacing:-.04em}
 .pan3 .pan-t{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.015em;font-size:clamp(28px,3.6vw,60px)}
-.pan svg{display:block;width:min(74%,250px);height:auto;overflow:visible}
+.pan svg{display:block;width:auto;max-width:78%;height:clamp(104px,17vh,160px);overflow:visible;flex:none}
 .w-cta{align-self:center;margin-top:3.6vh;min-width:340px;border-top:0;background:#000;color:#fff;padding:20px 28px;text-align:left}
 .w-cta .plus{transition:transform .45s var(--ease)}
 .w-cta:hover,.w-cta:focus-visible{background:#fff;color:#000;box-shadow:inset 0 0 0 2px #000}
@@ -272,9 +272,9 @@
   .w-sub{order:1;font-size:18px;margin-top:3vh}
   .w-cta{order:2;min-width:0;width:100%;margin-top:3.6vh}
   .w-pans{order:3;grid-template-columns:1fr;margin-top:5vh}
-  .pan{height:auto;flex-direction:row;justify-content:space-between;text-align:left;padding:3vh var(--m);gap:4vw}
+  .pan{min-height:0;flex-direction:row;justify-content:space-between;text-align:left;padding:3vh var(--m);gap:4vw}
   .pan-t{font-size:clamp(26px,7.6vw,34px)}.pan3 .pan-t{font-size:clamp(28px,8vw,36px)}
-  .pan svg{width:38%;max-width:150px}
+  .pan svg{width:38%;max-width:150px;height:auto}
   .w-aud{order:4;flex-direction:column;align-items:center;margin-top:4vh}
   .w-aud li{border-left:0;padding:.9vh 0}.w-aud a{font-size:19px}
   .w-fm{padding:9vh var(--m)}
