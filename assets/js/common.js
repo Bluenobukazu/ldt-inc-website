@@ -114,8 +114,8 @@ totop.addEventListener('click',()=>{
 /* ---------- layers: the black cut opens from the click position across the screen ---------- */
 let openOv=null,lastX=innerWidth/2,returnFocus=null;
 const SHELL_DELAY=650;
-/* phones (Lena 09.10.2026): the context bar shows for about 3 s when a page opens, folds away while scrolling down, comes back when scrolling up, and folds again after about 3 s of stillness */
-const PHONE=()=>matchMedia('(max-width:760px)').matches,PH_DELAY=3000,PH_UP=40;let upAcc=0;
+/* phones and low windows, 620 px high or less (Lena 09.10.2026): the context bar shows for about 3 s when a page opens, folds away while scrolling down, comes back when scrolling up, and folds again after about 3 s of stillness */
+const PHONE=()=>matchMedia('(max-width:760px),(max-height:620px)').matches,PH_DELAY=3000,PH_UP=40;let upAcc=0;
 const shellDelay=()=>PHONE()?PH_DELAY:SHELL_DELAY;
 let shellT=0,shellY=0,shellHeld=false;
 const shellOpen=()=>{if(!openOv)return;openOv.classList.remove('shell-folded');clearTimeout(shellT);if(!shellHeld)shellT=setTimeout(()=>{if(openOv&&!shellHeld&&(!html.classList.contains('kbd')||!openOv.matches(':focus-within')))openOv.classList.add('shell-folded')},shellDelay())};
