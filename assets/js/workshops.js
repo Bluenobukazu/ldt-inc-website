@@ -3,13 +3,15 @@
 const {RM,$,$$}=LDT;
 gsap.registerPlugin(ScrollTrigger);
 
-/* the title, the statement and the request settle in softly; every text is readable from the first moment */
+/* the opening: the line draws itself from the idea through the decision to the thing that works.
+   Every text and the request button stay fully visible the whole time; the drawings are hidden by css from the first paint, so nothing flashes */
+if(!RM){
+  gsap.fromTo('.w-pans svg',{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0% 0 0)',duration:.9,stagger:.5,delay:.2,ease:'power2.inOut'});
+}
+
+/* the sections below settle in softly as they are reached */
 (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>{
   if(RM)return;
-  gsap.from('.w-hero .kick',{opacity:0,y:20,duration:1.1,ease:'expo.out',delay:.2,clearProps:'transform,opacity'});
-  gsap.from('.w-sub',{opacity:0,y:20,duration:.9,delay:.5,ease:'expo.out',clearProps:'transform,opacity'});
-  gsap.from('.w-pans .pan',{opacity:0,y:40,stagger:.14,duration:1,delay:.7,ease:'expo.out',clearProps:'transform,opacity'});
-  gsap.from('.w-cta,.w-aud',{opacity:0,y:20,stagger:.12,duration:.9,delay:1,ease:'expo.out',clearProps:'transform,opacity'});
 
   const up=(sel,trig,st)=>gsap.from(sel,{opacity:0,y:36,stagger:st||0,duration:.95,ease:'expo.out',clearProps:'transform,opacity',scrollTrigger:{trigger:trig,start:'top 82%'}});
   up('.way','.ways',.12);

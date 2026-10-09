@@ -31,6 +31,8 @@
 .pan-t{margin:0;font-size:clamp(26px,3.3vw,56px);line-height:1;font-weight:700;letter-spacing:-.04em}
 .pan3 .pan-t{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.015em;font-size:clamp(28px,3.6vw,60px)}
 .pan{overflow:hidden}
+.w-anim .w-pans svg{clip-path:inset(0 100% 0 0);animation:w-reveal 0s 4.5s forwards}
+@keyframes w-reveal{to{clip-path:inset(0 0 0 0)}}
 .pan svg{display:block;width:calc(100% + 4vw);max-width:none;margin:0 -2vw;height:auto;flex:none}
 .w-cta{align-self:center;margin-top:3.6vh;min-width:340px;border-top:0;background:#000;color:#fff;padding:20px 28px;text-align:left}
 .w-cta .plus{transition:transform .45s var(--ease)}
