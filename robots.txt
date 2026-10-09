@@ -1,4 +1,5 @@
-# Crawling is intentionally allowed so that crawlers can fetch each page
-# and read its noindex directive (meta robots + X-Robots-Tag header).
+# The active website may be indexed. Only /another-perspective/ carries a
+# noindex directive (meta robots + X-Robots-Tag header), so crawling stays allowed
+# for crawlers to read it.
 User-agent: *
 Allow: /
