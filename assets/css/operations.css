@@ -105,7 +105,7 @@
 }
 /* intervention: the two examples are a clear choice (outlined, the chosen one filled); "What I look for" is a quiet closing line below */
 @media (min-width:761px){
-  .ox .ox-x{font-size:calc(2*var(--u));font-weight:600;font-stretch:100%;letter-spacing:0;border:1.5px solid #000;border-radius:999px;padding:.25em 1em;line-height:1.2}
+  .ox .ox-x{font-size:max(13px,calc(2*var(--u)));font-weight:600;font-stretch:100%;letter-spacing:0;border:1.5px solid #000;border-radius:999px;padding:.25em 1em;line-height:1.2}
   .ox .ox-x[aria-pressed=true]{background:#000;color:#fff;font-weight:600}
   .ox .ox-lens{grid-column:1/-1;grid-row:3;margin-top:calc(3.6*var(--u));padding-top:calc(1.4*var(--u));border-top:1px solid #000;display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);column-gap:calc(2*var(--u));align-items:baseline}
   .ox .ox-lens h4{margin:0}

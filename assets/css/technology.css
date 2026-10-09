@@ -115,3 +115,4 @@
 .te .te-src,.te .te-src em,.te .te-ax .axi,.te .te-rec{font-size:15px}
 .te .te-lane b{font-size:calc(2.9*var(--u))}
 .te .te-sts{row-gap:calc(.6*var(--u))}
+@media (max-width:760px){.te .te-lane b{font-size:20px}}

@@ -226,3 +226,9 @@ Layer 2 geprueft (14 Seiten, 390 und 1363, Scrollscan auf doppelten sichtbaren T
 1. Indexierung: noindex/nofollow entfernt aus den HTML Metadaten von Startseite, Workshops, Sitemap, Imprint, Privacy und aus dem globalen Header in `vercel.json`. `/another-perspective/` bleibt gezielt auf noindex (Meta in der Seite plus Header Regel `/another-perspective/(.*)`). `robots.txt` bleibt `Allow: /`, Kommentar angepasst. Es gibt keine `sitemap.xml` und auf den aktiven Seiten keine `rel=canonical` Angabe (nur `another-perspective` hat eine, auf sich selbst); beides wurde nicht ergaenzt, weil nicht beauftragt.
 2. Interne Dokumente: neue Datei `.vercelignore` mit `handovers`. Der Ordner bleibt vollstaendig im Repository, wird aber nicht ausgeliefert. Auf der Preview liefern alle drei bisher oeffentlichen Handover Dateien 404. Die Regel haengt nicht an noindex und gilt auch nach der Freigabe der Indexierung.
 3. 320 px: Commercial Architecture (`commercial.js?v=5`, `commercial.css?v=8g`): Labels werden im Bild gehalten (Klemmung auf die Figurenbreite) und bis 340 px zweizeilig umbrochen; auf Handys bekommen die Labels einen weissen Rand, damit sie auf der Schraffur lesbar sind. Expansion (`expansion.css?v=11`): "Copied elsewhere" bricht bis 380 px zweizeilig um. Keine pauschale Schriftverkleinerung.
+
+## 09.10.2026 Zwei kleine Schriften (Lenas Auftrag)
+
+Technology (`technology.css?v=15`): die Daten (May 14, May 12, May 15, Next week) standen auf dem Handy bei 11,3 px, weil eine spaetere Basisregel die Handyregel (22 px) ueberschrieben hatte. Jetzt 20 px bis 760 px Breite. Desktop unveraendert.
+Operations (`operations.css?v=17`): die drei Auswahlknoepfe 01, 02, 03 bei kleinen Laptopfenstern (970x510) von 10,5 px auf mindestens 13 px (`max(13px, ...)`). Bei groesseren Fenstern unveraendert.
+Bewusst nicht geaendert: Another Perspective Labels, Layer 1 Badges.
