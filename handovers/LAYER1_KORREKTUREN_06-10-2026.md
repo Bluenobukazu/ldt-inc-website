@@ -232,3 +232,5 @@ Layer 2 geprueft (14 Seiten, 390 und 1363, Scrollscan auf doppelten sichtbaren T
 Technology (`technology.css?v=15`): die Daten (May 14, May 12, May 15, Next week) standen auf dem Handy bei 11,3 px, weil eine spaetere Basisregel die Handyregel (22 px) ueberschrieben hatte. Jetzt 20 px bis 760 px Breite. Desktop unveraendert.
 Operations (`operations.css?v=17`): die drei Auswahlknoepfe 01, 02, 03 bei kleinen Laptopfenstern (970x510) von 10,5 px auf mindestens 13 px (`max(13px, ...)`). Bei groesseren Fenstern unveraendert.
 Bewusst nicht geaendert: Another Perspective Labels, Layer 1 Badges.
+
+Nachtrag Technology (`technology.css?v=16`, Lenas Hinweis "zu eng, Textsalat"): auf dem Handy mehr Luft im Lieferdatum Vergleich (4 Orte gegen 1 Besitzer) und in der Liste "Same principle. Different failure point." (Zeilenabstaende, Abstand zwischen Zaehler und Zeilen, Abstand zwischen Vorher und Nachher). Nur Handy bis 760 px.

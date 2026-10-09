@@ -116,3 +116,9 @@
 .te .te-lane b{font-size:calc(2.9*var(--u))}
 .te .te-sts{row-gap:calc(.6*var(--u))}
 @media (max-width:760px){.te .te-lane b{font-size:20px}}
+/* phones: more air in the delivery date comparison and in the failure point list (Lena 09.10.2026: too tight, reads as a wall of text) */
+@media (max-width:760px){
+  .te .te-sa .te-cnt,.te .te-sb .te-cnt{margin-bottom:26px}.te .te-sb{margin-top:44px}
+  .te .te-src{padding-top:16px;margin-top:6px}.te .te-lane{margin:0 0 16px}
+  .te .te-fx li{padding-top:22px;padding-bottom:22px}.te .te-fx .f{margin:6px 0 8px}
+}
