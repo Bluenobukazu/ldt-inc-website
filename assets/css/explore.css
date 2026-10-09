@@ -525,3 +525,10 @@ body.system-moment #railM{opacity:0;visibility:hidden}
 
 /* v3 QA 06.10.: on phones the entry sentence sits in the legacy layout and was black on black */
 @media (max-width:760px){#approach .inner>.aentry{color:#fff}#approach .inner>.aentry em{color:#fff}}
+
+/* Lead and Experience: the same footer as the system page, directly under the last black block, set off by a hairline */
+#lead>.explore-footer,#experience>.explore-footer{box-sizing:border-box;width:100%;margin:0;padding:clamp(28px,4vh,44px) var(--m) max(2rem,calc(3vh + env(safe-area-inset-bottom)));background:#000;color:#fff}
+#lead>.explore-footer .horizon,#experience>.explore-footer .horizon{display:none}
+#lead>.explore-footer .foot,#experience>.explore-footer .foot{padding-top:clamp(14px,2vh,22px);border-top:1px solid rgba(255,255,255,.4)}
+#lead>.explore-footer button,#experience>.explore-footer button{color:inherit;font:inherit;letter-spacing:inherit;cursor:pointer}
+#lead>.explore-footer button:focus-visible,#experience>.explore-footer button:focus-visible{outline:2px solid currentColor;outline-offset:2px}
