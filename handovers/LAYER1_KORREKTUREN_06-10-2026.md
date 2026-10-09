@@ -214,3 +214,9 @@ Workshops (09.10.2026, Rueckmeldung vom Handy): Obere Leiste zeigt nur noch 07.2
 Messlauf auf der Preview (nur Lesen, keine Aenderung ausser Workshops): Layer 2 Seiten (Advantage bis Expansion, Fenster 1280, 970, 390, 320): keine Konsolenfehler, kein horizontaler Seitenueberlauf. Standalone Seiten (Workshops, Sitemap, Another Perspective, Imprint, Privacy) bei 1363 und 390 als Bild gesichtet.
 Behoben (workshops.css?v=89): kleine Beschriftungen auf Workshops (Function, Differentiate, Perform und die Detailzeile unter den Topics) von 11 bis 12 px auf 13 px (Desktop) und 12,5 px (Handy).
 Offen, nicht angefasst (Lenas Entscheidung): Operations Ziffern 10,5 px bei 970x510; Technology Datumsangaben 11,3 px auf dem Handy; Another Perspective Mono Labels 11 px; Layer 1 Badges (A, A+B) 10 px; 320 px Breite: Commercial Architecture und Expansion ragen 3 bis 4 px ueber den Rand.
+
+## 09.10.2026 Handy: doppelte Kapiteltitel auf Layer 1
+
+Befund (Lena, echtes Handy, Chrome, Safari, Opera): Auf dem Handy standen in den Kapiteln 02, 03, 05, 06, 07, 08 der Kapitelname und die Nummer zweimal (feste Anzeige oben `#railM` plus Titel im Bild). Auf dem Desktop nicht, dort gibt es die senkrechte Leiste.
+Aenderung: `site.css?v=61`, `#railM` im Handy Breakpoint ausgeblendet (display:none). Jedes Kapitel zeigt weiterhin seine eigene Nummer und seinen Titel im Bild. Alle fuenf html Seiten auf v=61 gesetzt.
+Layer 2 geprueft (14 Seiten, 390 und 1363, Scrollscan auf doppelten sichtbaren Text): keine doppelten Titel oder Kopfzeilen. Treffer waren gewollte Wiederholungen (Intended gegen Produced, Listen mit Fokuszeile, Diagrammbeschriftungen).

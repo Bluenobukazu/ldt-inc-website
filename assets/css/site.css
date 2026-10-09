@@ -195,7 +195,7 @@ a.crow:hover .v,a.crow:focus-visible .v{text-decoration:underline;text-underline
 @media (max-width:760px){
   :root{--m:22px;--endgap:12vh}
   #rail{display:none}
-  #railM{display:flex;align-items:center;gap:8px;top:58px;left:var(--m);font-stretch:125%;font-variation-settings:"wdth" 125;font-size:11px;letter-spacing:.13em;text-transform:uppercase}
+  #railM{display:none;align-items:center;gap:8px;top:58px;left:var(--m);font-stretch:125%;font-variation-settings:"wdth" 125;font-size:11px;letter-spacing:.13em;text-transform:uppercase}
   #railM .pill{font-stretch:100%;font-variation-settings:normal;letter-spacing:.06em}
   #railM .dcur{font-weight:600}
   #hdr{padding:22px var(--m)}
