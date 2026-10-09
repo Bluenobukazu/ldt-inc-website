@@ -266,3 +266,9 @@ Nachtrag niedrige Fenster: Derselbe Rhythmus (Leiste bei Runterscrollen weg, bei
 12 Partnerships: Beschriftungen "Capability gap" und "Key needs" nicht mehr abgeschnitten (`home.css?v=308`).
 13, 14 Experience: jede Erfahrung als kompakte Komposition (Label, Name, Rolle, Kennzahlen in Zeilen, ein Satz), die vier Kontextgruppen als schwarze Bloecke, Mandate und Commercial depth mit mehr Luft (`layer1.css?v=17`).
 15 Layer 1: "Transformation" auf dem Handy 44 px statt 36 px (`home.js?v=230`).
+
+## 09.10.2026 Workshops: Satz am Ende nach dem CTA
+
+Befund (Lena, iPhone): Nach dem Tipp auf den CTA stand die erste Zeile von "Tell me what you are working on ..." unter der Browserleiste abgeschnitten. Ursache: Der Schlussabschnitt war `min-height:100vh`. Auf dem iPhone ist 100vh hoeher als der sichtbare Bereich (Leisten eingeblendet), deshalb ragte der Abschnitt oben ueber den Bildschirm hinaus, sobald am Seitenende gestoppt wurde.
+Aenderung: `workshops.css?v=90`: `min-height:100svh` (sichtbarer Bereich) und auf dem Handy mehr Abstand oben (`max(16vh,112px)`). Im Handy Fenster (390 x 844) steht der ganze Satz 135 px unter der Oberkante.
+Grenze: Das iPhone Verhalten der Leisten habe ich nur ueber die Ursache hergeleitet, nicht auf dem Geraet nachgestellt.

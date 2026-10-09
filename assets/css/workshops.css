@@ -194,7 +194,7 @@
 .src-why b{display:block;margin:0 0 6px;font-stretch:125%;font-variation-settings:"wdth" 125;font-size:15px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
 
 /* closing: a calm request */
-.w-close{min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding-top:18vh}
+.w-close{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;padding-top:18vh}
 .w-close .row{position:relative;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #fff;border-bottom:1px solid #fff;padding:2.6vh 1.2vw;cursor:pointer}
 .w-close .row:focus-visible{outline-offset:-2px}
 .w-close .word{font-stretch:125%;font-variation-settings:"wdth" 125;font-weight:700;font-size:clamp(44px,8.4vw,160px);letter-spacing:-.05em;line-height:.9}
@@ -326,3 +326,6 @@
 .w-fm .fm-top{align-items:flex-end;flex-wrap:wrap}
 .w-ov .ov-top .sec{margin-bottom:4vh}
 @media (max-width:760px){.w-fm .fm-top .sec,.w-ov .ov-top .sec{font-size:clamp(34px,10.4vw,48px)}.w-fm .fm-top .sec{margin-bottom:2.4vh}.w-ov .ov-top .sec{margin-bottom:3vh}}
+
+/* phones: the closing section never grows past the visible screen, so the sentence stays fully readable when the button scrolls here (Lena 09.10.2026) */
+@media (max-width:760px){.w-close{padding-top:max(16vh,112px)}.w-close .cl-k{margin-bottom:7vh}}
