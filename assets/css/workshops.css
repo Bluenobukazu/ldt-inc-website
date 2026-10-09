@@ -30,7 +30,8 @@
 .pan2{background:#000;color:#fff}
 .pan-t{margin:0;font-size:clamp(26px,3.3vw,56px);line-height:1;font-weight:700;letter-spacing:-.04em}
 .pan3 .pan-t{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.015em;font-size:clamp(28px,3.6vw,60px)}
-.pan svg{display:block;width:auto;max-width:78%;height:clamp(104px,17vh,160px);overflow:visible;flex:none}
+.pan{overflow:hidden}
+.pan svg{display:block;width:calc(100% + 4vw);max-width:none;margin:0 -2vw;height:auto;flex:none}
 .w-cta{align-self:center;margin-top:3.6vh;min-width:340px;border-top:0;background:#000;color:#fff;padding:20px 28px;text-align:left}
 .w-cta .plus{transition:transform .45s var(--ease)}
 .w-cta:hover,.w-cta:focus-visible{background:#fff;color:#000;box-shadow:inset 0 0 0 2px #000}
@@ -230,28 +231,33 @@
   .tp2 .tp-q{grid-column:8/-1;grid-row:2}
   .tp2 .tp-d{grid-column:8/-1;grid-row:3;margin-top:4vh}
   .tp2 .tp-fpd{grid-column:8/-1;grid-row:4;margin-top:5vh;align-self:start}
-  /* 3: centered, the core in the middle */
-  .tp3 .tp-head{justify-content:center}
+  /* 3: centered, the core in the middle; question, explanation and drawing close together */
+  .tp3{padding:9vh var(--m)}
+  .tp3 .tp-head{justify-content:center;margin-bottom:3.6vh}
   .tp3 .tp-q{grid-column:3/11;grid-row:2;text-align:center}
-  .tp3 .tp-d{grid-column:4/10;grid-row:3;margin:4vh auto 0;text-align:center}
-  .tp3 .tp-fpd{grid-column:4/10;grid-row:4;margin-top:4vh;justify-content:center}
-  .tp3 .tp-g{grid-column:2/12;grid-row:5;margin-top:8vh}
-  /* 4: question, the full-width comparison, then the explanation under it */
-  .tp4 .tp-q{grid-column:1/9;grid-row:2}
-  .tp4 .tp-g{grid-column:1/-1;grid-row:3;margin-top:7vh}
-  .tp4 .tp-d{grid-column:1/7;grid-row:4;margin-top:5vh}
-  .tp4 .tp-fpd{grid-column:8/-1;grid-row:4;margin-top:5vh;align-self:start}
-  /* 5: the words on the left, the transition on the right */
-  .tp5 .tp-q{grid-column:1/6;grid-row:2}
-  .tp5 .tp-d{grid-column:1/6;grid-row:3;margin-top:4vh}
-  .tp5 .tp-fpd{grid-column:1/6;grid-row:4;margin-top:5vh;align-self:start}
-  .tp5 .tp-g{grid-column:7/-1;grid-row:2/5;align-self:center}
+  .tp3 .tp-d{grid-column:4/10;grid-row:3;margin:3vh auto 0;text-align:center}
+  .tp3 .tp-fpd{grid-column:4/10;grid-row:4;margin-top:3vh;justify-content:center}
+  .tp3 .tp-g{grid-column:3/11;grid-row:5;margin-top:5vh}
+  .tp3 .g3{max-width:620px;margin:0 auto;grid-template-columns:auto minmax(0,1fr);column-gap:40px;align-items:center}
+  .tp3 .g3 svg{max-width:270px}
+  /* 4: question on top, the comparison and its explanation side by side */
+  .tp4{padding:10vh var(--m)}
+  .tp4 .tp-q{grid-column:1/10;grid-row:2}
+  .tp4 .tp-g{grid-column:1/8;grid-row:3/5;margin-top:5vh}
+  .tp4 .tp-d{grid-column:9/-1;grid-row:3;margin-top:5vh;align-self:start}
+  .tp4 .tp-fpd{grid-column:9/-1;grid-row:4;margin-top:4vh;align-self:start}
+  .tp4 .g4{--x:70%;padding-top:64px}.tp4 .g4-r{height:62px}.tp4 .g4-r span{font-size:clamp(16px,1.25vw,19px)}.tp4 .g4-pos{top:24px}.tp4 .g4-line{top:54px}
+  /* 5: a wide question on top, the words left and the transition right below it */
+  .tp5 .tp-q{grid-column:1/11;grid-row:2}
+  .tp5 .tp-d{grid-column:1/6;grid-row:3;margin-top:5vh}
+  .tp5 .tp-fpd{grid-column:1/6;grid-row:4;margin-top:4vh;align-self:start}
+  .tp5 .tp-g{grid-column:7/-1;grid-row:3/5;align-self:start;margin-top:5vh}
 }
 @media (min-width:1101px){.tp2,.tp5{min-height:calc(100svh - 40px)}}
 
 /* tablet */
 @media (max-width:1100px) and (min-width:761px){
-  .pan{padding:3.4vh 1.6vw}
+  .pan{padding:3.4vh 1.6vw}.pan svg{width:calc(100% + 3.2vw);margin:0 -1.6vw}
   .tp-q,.tp-d,.tp-fpd,.tp-g{grid-column:1/-1}
   .tp-d{margin-top:3.4vh}.tp-fpd{margin-top:4vh}.tp-g{margin-top:6vh;max-width:680px}
   .tp4 .tp-g{max-width:none}
@@ -273,8 +279,8 @@
   .w-cta{order:2;min-width:0;width:100%;margin-top:3.6vh}
   .w-pans{order:3;grid-template-columns:1fr;margin-top:5vh}
   .pan{min-height:0;flex-direction:row;justify-content:space-between;text-align:left;padding:3vh var(--m);gap:4vw}
-  .pan-t{font-size:clamp(26px,7.6vw,34px)}.pan3 .pan-t{font-size:clamp(28px,8vw,36px)}
-  .pan svg{width:38%;max-width:150px;height:auto}
+  .pan-t{font-size:clamp(22px,6.4vw,30px)}.pan3 .pan-t{font-size:clamp(24px,6.9vw,32px)}
+  .pan svg{width:46%;max-width:210px;height:auto;margin:0;flex:none}.pan-t{flex:1;min-width:0}
   .w-aud{order:4;flex-direction:column;align-items:center;margin-top:4vh}
   .w-aud li{border-left:0;padding:.9vh 0}.w-aud a{font-size:19px}
   .w-fm{padding:9vh var(--m)}
@@ -311,3 +317,4 @@
   .w-close .crow{grid-template-columns:90px auto 1fr}.w-close .crow .plus{margin-left:18px}
 }
 @media (prefers-reduced-motion:reduce){.w-cta .plus,.tq a{transition:none}}
+@media (min-width:1101px){.tp3 .g3 ul{gap:34px;padding:0;justify-content:center}}
