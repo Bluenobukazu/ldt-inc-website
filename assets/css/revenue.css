@@ -85,3 +85,4 @@
 @media (min-width:761px){.rvx .rvx-stack{padding-left:max(calc(13*var(--u)),128px)}.rvx .rvx-stage{padding-top:28px}}
 /* v3 D.1-F07 mobile: the outlined New business line is no longer clipped */
 @media (max-width:760px){.rvx .rvx-base{max-height:1.5em;padding-bottom:.15em}.rvx .rvx-dep[data-v="1"] .rvx-base{max-height:0;padding:0}.rvx .rvx-stack p.rvx-base{line-height:1.12;max-height:1.8em;padding-bottom:.2em}.rvx .rvx-dep[data-v="1"] .rvx-stack p.rvx-base{max-height:0;padding:0}}
+@media (max-width:760px){.rvx .rvx-opt li{padding-block:16px}.rvx .rvx-oc li{padding-block:8px}}

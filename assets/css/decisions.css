@@ -124,3 +124,4 @@
   .de .de-auth .de-dec{grid-column:2;grid-row:2}
   .de .de-auth .de-man{grid-column:2;grid-row:3;margin-top:calc(.4*var(--u))}
 }
+@media (max-width:760px){.de .de-flt li{padding-block:16px;row-gap:6px}}

@@ -22,8 +22,10 @@
 .l2 .l2-act{background:none;color:#fff;border:0;border-top:1.5px solid #fff;border-bottom:1.5px solid #fff;padding:24px 4px;display:flex;align-items:center;justify-content:space-between;font-size:clamp(20px,calc(2.1*var(--u)),30px);font-weight:600;border-radius:0;width:100%;text-align:left;cursor:pointer}
 .l2 .l2-act .plus{font-size:36px;font-weight:300}.l2 .l2-act .pill{border:1px solid #fff;color:#fff;font-size:13px;margin-right:14px}
 @media (max-width:760px){
-  .l2 .l2-f{min-height:0;align-content:start;--u:1vw;column-gap:0;padding-block:38px;row-gap:16px}
+  .l2 .l2-f{min-height:0;align-content:start;--u:1vw;column-gap:0;padding-block:60px;row-gap:34px}
   .l2 .l2-f>*{grid-column:1/-1!important;grid-row:auto!important;margin-top:0!important;text-align:left!important}
+  /* list rows without their own padding get air on phones (zero specificity: any page rule with its own padding wins) */
+  :where(.l2 .l2-f) :is(ol,ul):not(.l2-nochip)>li{padding-block:12px}
 }
 @media (prefers-reduced-motion:reduce){.l2 *,.l2 *::before,.l2 *::after{transition:none!important}}
 @media (min-width:761px) and (max-height:620px){.l2 .l2-f{padding-block:calc(2.6*var(--u))}}

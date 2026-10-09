@@ -246,9 +246,9 @@
 /* phones: each section is recomposed into one column, order: name, picture, reading */
 @media (max-width:760px){
   .pp .pz-f{--u:1vw}
-  .pp .pz-f{column-gap:0;padding-block:38px}
+  .pp .pz-f{column-gap:0;padding-block:60px}
   .pp .pz-f>*{grid-column:1/-1!important;grid-row:auto!important;margin-top:0;text-align:left!important}
-  .pp .pz-f{row-gap:16px}
+  .pp .pz-f{row-gap:34px}
   .pp .pz-hero{min-height:calc(100svh - 120px);align-content:start}
   .pp .pz-k{font-size:clamp(28px,8.2vw,40px);margin-top:26px;text-align:left!important}
   .pp .pz-sub{font-size:19px;margin-top:40px}

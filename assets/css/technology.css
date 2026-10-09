@@ -122,3 +122,4 @@
   .te .te-src{padding-top:16px;margin-top:6px}.te .te-lane{margin:0 0 16px}
   .te .te-fx li{padding-top:22px;padding-bottom:22px}.te .te-fx .f{margin:6px 0 8px}
 }
+@media (max-width:760px){.te .te-hu li,.te .te-sy li{padding-block:12px}.te .te-roles li,.te .te-lena{padding-block:16px}.te .te-seq li{padding-top:16px;padding-bottom:10px}.te .te-chain li{padding-top:12px}}
