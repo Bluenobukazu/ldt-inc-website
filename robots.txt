@@ -3,3 +3,5 @@
 # for crawlers to read it.
 User-agent: *
 Allow: /
+
+Sitemap: https://ldt-inc.com/sitemap.xml

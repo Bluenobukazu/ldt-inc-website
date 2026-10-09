@@ -277,3 +277,8 @@ Grenze: Das iPhone Verhalten der Leisten habe ich nur ueber die Ursache hergelei
 
 Footer bis 760 px Breite (`site.css?v=65`, alle fuenf html Dateien): obere Zeile Workshops, Sitemap, Contact rechtsbuendig und voll hell (15 px), darunter Copyright, Imprint, Privacy linksbuendig und leiser (12 px, Deckkraft 0,62). Punkte als Trenner mittig zwischen den Woertern (gleicher Abstand links und rechts, 0,75 rem). Zeilen eng (Abstand -5 px). Unter 350 px etwas kleinere Schrift. Legal Seiten bekommen seitlichen Abstand im Footer (vorher bis an den Rand). Gilt fuer alle Footer mit `.release-footer`: Startseite, Overlays (Lead, Experience, Engage, Explore), Workshops, Sitemap, Imprint, Privacy. Another Perspective hat einen eigenen Footer und blieb unveraendert.
 Geprueft bei 390 und 320 px: sechs Kontexte, kein Ueberlauf, Navigation rechts, Rechtliches links.
+
+## 09.10.2026 Suchmaschinen Basis (Lenas Freigabe der fuenf Titel und Beschreibungen)
+
+Titel, Meta Beschreibung, Canonical (Production Adressen `https://ldt-inc.com/...`) und Open Graph Texte (type, site_name, locale, title, description, url) fuer Startseite, Workshops, Sitemap, Imprint, Privacy. `sitemap.xml` im Root mit genau diesen fuenf Adressen, `robots.txt` verweist darauf. Another Perspective bleibt noindex und nicht in der XML. `handovers/` bleibt per `.vercelignore` ausgeschlossen. Sitemap Beschreibung nach Lenas Aenderung: "An overview of the pages and topics on LDT INC."
+Noch nicht eingebunden: Vorschaubild (`og:image`, `twitter:card`), wartet auf Lenas Freigabe des fertigen Bildes (1200 x 630, Landing ohne Index und Scroll). Eigene Deep Dive Adressen sind nicht Teil dieses Auftrags.
