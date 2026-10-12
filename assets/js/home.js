@@ -115,7 +115,7 @@ const GD={W:1440,H:900,m:48,
  caps:[48,27],rule:[48,112],wmW:1300,wmB:330,desc:{right:92,top:618,fs:38},hint:{right:48,bottom:32},core:[48,300,820,58],barAfter:[1010,118],
  jt:[48,122],jtS:60,serifW:1370,serifB:70,
  blocks:[[520,140,290,185,-2],[260,300,200,150,2.5],[890,170,220,120,3],[660,390,250,120,-1.5],[920,340,230,120,1.5],[690,555,180,110,3],[360,500,270,150,-2],[930,520,190,120,-2.5]],
- connect:[270,372,900,44],
+ connect:[270,410,900,44],
  C0:[[640,290],[1060,290],[640,660],[1060,660]],r0:150,
  C1:[[804,286],[1054,286],[804,660],[1054,660]],r1:176,
  divider:[520,92],os:[48,330,1190,540]
@@ -124,7 +124,7 @@ const GM={W:430,H:860,m:22,
  caps:[22,21],rule:[22,96],wmW:386,wmB:330,desc:{left:22,top:586,fs:24},hint:{right:22,bottom:26},core:[22,250,340,30],barAfter:[372,36],
  jt:[22,100],jtS:40,serifW:386,serifB:112,
  blocks:[[150,200,200,130,-2],[22,250,120,100,2.5],[252,350,150,80,3],[40,380,170,84,-1.5],[230,450,170,80,1.5],[222,550,142,74,3],[22,490,180,100,-2],[60,612,130,72,-2.5]],
- connect:[22,300,386,27],
+ connect:[22,324,386,27],
  C0:[[118,520],[312,520],[118,730],[312,730]],r0:84,
  C1:[[136,462],[294,462],[136,692],[294,692]],r1:110,
  divider:[-10,0],os:[22,326,386,530]
@@ -254,7 +254,7 @@ function Journey(st,inst){
     if(cmEl._tk){gsap.ticker.remove(cmEl._tk);cmEl._tk=null}
     /* on narrower screens the chapter rail would run into the right end of the drawing: the composition is scaled to the room that is left */
     gsap.set(cmEl,{transformOrigin:'0% 100%',scale:M?1:Math.min(1,Math.max(.72,(innerWidth-2*48-(innerWidth-g.W*S)/2)/(1372*S)))});
-    gsap.set([cmq('.cm-pill'),cmq('.cm-sys')],{opacity:0,y:16});gsap.set(entry,{left:M?22:240,top:M?342:470,width:M?386:960,opacity:0,y:0});gsap.set(cmq('.cm-lock'),{opacity:0,y:50});gsap.set(cmq('.cm-go'),{opacity:0,y:24});gsap.set(cmq('.cm-mot'),{opacity:0});
+    gsap.set([cmq('.cm-pill'),cmq('.cm-sys')],{opacity:0,y:16});gsap.set(entry,{left:M?22:240,top:M?322:406,width:M?386:960,opacity:0,y:0});gsap.set(cmq('.cm-lock'),{opacity:0,y:50});gsap.set(cmq('.cm-go'),{opacity:0,y:24});gsap.set(cmq('.cm-mot'),{opacity:0});
     const C=i=>q('.c'+i),F=i=>q('.f'+i),CL=i=>q('.clc'+i);
     [0,1,2,3].forEach(i=>{const [x,y]=g.C0[i];gsap.set([C(i),F(i),CL(i)],{attr:{cx:x,cy:y,r:g.r0}});gsap.set(C(i),{attr:{'stroke-dashoffset':1},visibility:'hidden'});gsap.set(F(i),{opacity:0})});
     gsap.set(q('.lensA'),{attr:{cx:g.C1[0][0],cy:g.C1[0][1],r:g.r1},opacity:0});gsap.set(q('.lensB'),{attr:{cx:g.C1[2][0],cy:g.C1[2][1],r:g.r1},opacity:0});
