@@ -57,8 +57,7 @@ html.js .mono .mwm,html.js .mono .lab,html.js .mono .mscroll{opacity:0}
 .blab{display:flex;align-items:flex-start;justify-content:flex-start;padding:16px 18px;color:#fff;mix-blend-mode:difference;font-stretch:125%;font-variation-settings:"wdth" 125;font-size:15px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;line-height:1.1;pointer-events:none}
 
 .j-connect{font-size:46px;line-height:1.12;letter-spacing:-.02em;width:900px;text-align:center}
-.j-connect br.mb{display:none}
-@media (max-width:760px){.j-connect br.mb{display:inline}}
+@media (min-width:761px){.j-connect br.mb{display:none}}
 .j-connect .it{position:relative;display:block;font-size:1.55em;line-height:1.05;letter-spacing:-.015em;margin-top:.12em}
 .j-divider{width:1px;background:#fff}
 svg.sys{overflow:visible}

@@ -284,3 +284,8 @@ Titel, Meta Beschreibung, Canonical (Production Adressen `https://ldt-inc.com/..
 Noch nicht eingebunden: Vorschaubild (`og:image`, `twitter:card`), wartet auf Lenas Freigabe des fertigen Bildes (1200 x 630, Landing ohne Index und Scroll). Eigene Deep Dive Adressen sind nicht Teil dieses Auftrags.
 
 Vorschaubild freigegeben (Lena, 09.10.2026) fuer die Startseite: `assets/img/og-ldt-inc.png` (1200 x 630, 64 KB), eingebunden als `og:image` und `twitter:card summary_large_image` nur auf der Startseite. Workshops, Sitemap, Imprint, Privacy haben vorerst Vorschautexte ohne Bild. Spaeter: eigenes Vorschaubild fuer Workshops, das "Workshops & Guest Lectures" sichtbar benennt (Lena, nicht blockierend).
+
+## 12.10.2026 Connect: fehlendes Leerzeichen auf dem Handy
+
+Befund (Lena, iPhone): "Multiple realities,read as one connected" ohne Leerzeichen. Ursache: der Zeilenumbruch `br.mb` war auf dem Handy mit `display:inline` ueberschrieben, das iPhone Safari und Chrome behandeln das als Umbruch ohne Umbruch und streichen das Leerzeichen. Aenderung: `home.css?v=310`: der Umbruch bleibt auf dem Handy ein normaler Umbruch, nur am Desktop (ab 761 px) ist er ausgeblendet. Ergebnis im Handy Fenster (390 und 320 px): "Multiple realities," / "read as one connected" / "business system."; Desktop unveraendert (eine Zeile plus "business system.").
+Scrollverhalten: noch nicht geaendert, wartet auf Lenas genaue Beschreibung.
