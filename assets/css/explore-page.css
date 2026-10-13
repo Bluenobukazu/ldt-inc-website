@@ -1,0 +1,30 @@
+/* LDT INC | /explore/ (the Explore view as its own page). The drawing, the cards and the footer are styled by explore.css under #approach;
+   this file only gives the page its frame: black field, the context row as a black row, the padding the overlay had. */
+html[data-page="explore"],html[data-page="explore"] body{background:#000;color:#fff}
+html[data-page="explore"] #hdr{color:#fff}
+.xp{min-height:100svh;background:#000;color:#fff}
+.xp .subbar{background:#000;color:#fff;padding-inline:var(--m);border-bottom:1px solid rgba(255,255,255,.32)}
+.xp .subbar :is(.back,.lbl,.dctx,.dcur){color:#fff}
+.xp .subbar .lbl .pill{display:inline-flex;align-items:center;justify-content:center;padding:4px 11px;border:1px solid #fff;border-radius:999px;background:#000;color:#fff;line-height:1.2}
+.xp .inner{padding-inline:var(--m)}
+/* the Explore view inherits these two settings for its code pills from home.css; the page loads without home.css, so they are set here */
+#xMap .ad{margin-right:-2px;font-variant-numeric:tabular-nums}
+/* Explore's layout rules, the same as home.css gives the Explore view (home.css is not loaded on this page): title and entry line share the first row, the map below */
+.aentry{margin-top:16vh;font-size:clamp(24px,2.4vw,40px);line-height:1.18;letter-spacing:-.02em;max-width:30ch}
+.aentry em{font-family:var(--serif);font-style:italic;letter-spacing:-.005em;font-size:1.08em}
+.dkick{display:flex;flex-direction:column;align-items:flex-start}
+.dkick .t{font-stretch:125%;font-variation-settings:"wdth" 125;font-weight:600;font-size:clamp(56px,6.6vw,112px);letter-spacing:-.05em;line-height:.9}
+#approach .inner{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,25em);grid-template-areas:"t e" "m m";column-gap:5vw;align-items:end;padding-top:4vh;padding-bottom:6vh}
+#approach .dkick{grid-area:t;margin:0}
+#approach .dkick .t{font-size:clamp(42px,4.6vw,80px)}
+#approach .aentry{grid-area:e;margin:0;padding-bottom:.35em;font-size:clamp(15px,1.15vw,18px);line-height:1.4;letter-spacing:-.008em;max-width:none;color:rgba(0,0,0,.7)}
+#approach .aentry em{color:#000}
+.xmap{grid-area:m}
+@media (max-width:1000px) and (min-width:761px){#approach .inner{grid-template-columns:minmax(0,1fr) minmax(0,19em)}}
+@media (max-width:760px){
+  .dkick .t{font-size:clamp(40px,12.6vw,58px)}
+  #approach .lbl.loc{flex-wrap:nowrap;white-space:nowrap}
+  #approach .inner{grid-template-columns:1fr;grid-template-areas:"t" "e" "m";row-gap:3vh;padding-top:3vh}
+  #approach .dkick .t{font-size:clamp(40px,11vw,52px)}
+  #approach .aentry{padding:0;font-size:16px}
+}

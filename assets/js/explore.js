@@ -9,9 +9,11 @@ const model=()=>{const {DIMS,REAL,SYS,DL,RI,ADDR}=D;
   const dims=[0,1,2,3].map(i=>{const g=SYS.find(x=>x.d===i);return{i,l:DL[i],n:DIMS[i].n,ap:DIMS[i].ap,areas:g.a.map(n=>({n,r:RI(n),a:ADDR('real',RI(n))}))}});
   const con=[['Positioning',0,1],['Delivery',2,3]].map(([n,a,b],k)=>({k,n,r:RI(n),a:ADDR('real',RI(n)),ap:REAL[RI(n)].k||'',from:dims[a],to:dims[b]}));
   return{dims,con}};
-const head=d=>`<button type="button" class="sy-h" data-ddim="${d.i}" data-act aria-haspopup="dialog"><span class="sy-l" aria-hidden="true">${L[d.i]}</span><span class="n">${d.n}</span><span class="plus" aria-hidden="true">+</span></button>`;
-const area=a=>`<li><button type="button" data-dreal="${a.r}" data-act aria-haspopup="dialog"><b class="ad">${a.a}</b><span>${a.n}</span><i aria-hidden="true">+</i></button></li>`;
-const conn=c=>`<button type="button" class="sy-k" data-dreal="${c.r}" data-act aria-haspopup="dialog" aria-label="${c.n}, connects ${c.from.n} and ${c.to.n}"><span class="ab" aria-hidden="true">${c.a}</span><span class="n">${c.n}</span><span class="plus" aria-hidden="true">+</span></button>`;
+/* on the /explore/ page (D.nav) the parts lead to a Layer 2 page instead of opening a dialog */
+const pop=()=>D&&D.nav?'role="link"':'aria-haspopup="dialog"';
+const head=d=>`<button type="button" class="sy-h" data-ddim="${d.i}" data-act ${pop()}><span class="sy-l" aria-hidden="true">${L[d.i]}</span><span class="n">${d.n}</span><span class="plus" aria-hidden="true">+</span></button>`;
+const area=a=>`<li><button type="button" data-dreal="${a.r}" data-act ${pop()}><b class="ad">${a.a}</b><span>${a.n}</span><i aria-hidden="true">+</i></button></li>`;
+const conn=c=>`<button type="button" class="sy-k" data-dreal="${c.r}" data-act ${pop()} aria-label="${c.n}, connects ${c.from.n} and ${c.to.n}"><span class="ab" aria-hidden="true">${c.a}</span><span class="n">${c.n}</span><span class="plus" aria-hidden="true">+</span></button>`;
 
 /* the form: lines run along the page, wind around a centre line (a twisting ribbon) and meet where the swellings pinch */
 function build(root,mode){
