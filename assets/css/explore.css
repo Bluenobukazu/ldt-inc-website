@@ -543,3 +543,21 @@ body.system-moment #railM{opacity:0;visibility:hidden}
   .sy-ft :is(.sy-h,.sy-k) .plus{font-size:30px!important}
   .dfoot .df-s{font-size:24px}
 }
+
+/* Layer 1 chapter 04: the composition is a fixed canvas (1440x900, phones 430x860) scaled into the window; fitCanvas sets --cs to that scale.
+   Small labels keep a rendered size of at least 13px by growing in canvas units, so nothing is smaller than 13px on screen (A1, 17.10.2026). At 1440x900 the scale is 1 and nothing changes. */
+.cv .j-cm .cm-target .cm-code,.cv .j-cm .cm-pill,.cv .j-cm .cm-gq{font-size:max(13px,calc(13px/var(--cs,1)))}
+.cv .j-cm .cm-sys{font-size:max(18px,calc(13px/var(--cs,1)))}
+.cv .j-cm .cm-target .cm-code{padding:0 .5em;letter-spacing:.02em;word-spacing:-.05em}
+.cv .j-cm .cm-go{height:auto;min-height:108px;border-radius:999px}
+@media (max-width:760px){
+  .cv .j-cm .cm-sys{font-size:max(15px,calc(13px/var(--cs,1)))}
+  .cv .j-cm .cm-target .n{font-size:max(17px,calc(13px/var(--cs,1)))}
+  .cv .j-cm .cm-go{min-height:112px}
+  .cv .j-cm .cm-target .cm-code{padding:0 .4em;letter-spacing:0}
+}
+
+/* Explore (A2, 17.10.2026): below 1181px the drawing follows the quote (phones: the heading) directly, but explore.js lets the form's lines
+   start up to 82px above its box. The drawing gets that room back, so its tip stays about 12px clear of the text above it. */
+@media (max-width:1180px){.sy-ex .sy-form{margin-top:100px}}
+@media (max-width:760px){.sy-ex .sy-form{margin-top:72px}}

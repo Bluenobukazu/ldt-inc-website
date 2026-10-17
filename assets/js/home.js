@@ -145,7 +145,7 @@ const SEG=[at(.2),at(.42),at(.565),1];
 /* reduced motion: the finished state of each chapter on the journey timeline */
 const STILL=[0,at(.4),at(.54),9];
 let S=1;
-function fitCanvas(cv,W,H){cv.style.width=W+'px';cv.style.height=H+'px';S=Math.min(innerWidth/W,innerHeight/H);gsap.set(cv,{xPercent:-50,yPercent:-50,scale:S})}
+function fitCanvas(cv,W,H){cv.style.width=W+'px';cv.style.height=H+'px';S=Math.min(innerWidth/W,innerHeight/H);cv.style.setProperty('--cs',S.toFixed(4));gsap.set(cv,{xPercent:-50,yPercent:-50,scale:S})}
 const P=(el,x,y,w,h)=>gsap.set(el,Object.assign({left:x,top:y},w!=null?{width:w}:{},h!=null?{height:h}:{}));
 
 /* ---------- chapter rail: quiet on the landing, present once the visitor moves ---------- */
