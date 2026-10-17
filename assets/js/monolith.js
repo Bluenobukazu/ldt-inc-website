@@ -11,9 +11,29 @@ const seg=(t,a,b)=>clamp((t-a)/(b-a));
 let THREE=null,RoundedBoxGeometry=null;
 try{THREE=await import('three');({RoundedBoxGeometry}=await import('three/addons/geometries/RoundedBoxGeometry.js'))}catch(e){THREE=null}
 
-let W,H,MOB,R0,r=null,gl=!!THREE,scene,cam,key,rim,floor,ao,mono,frag,cells=[],mh,mw,md,hitX,baseY,tmp;
+let W,H,MOB,R0,r=null,gl=!!THREE,scene,cam,key,rim,floor,ao,mono,frag,refl,cells=[],mh,mw,md,hitX,baseY,tmp,envTex=null,fadeTex=null;
 function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)} /* stable pseudo random */
 
+/* dark glass: the light the surface reflects. One large soft box where the face looks (bright above, fading down, so the glass has depth),
+   plus thin strips for precise edge light. Built once, the shape of the monolith and its position are not touched. */
+function glassEnv(){
+  const G=d.createElement('canvas');G.width=128;G.height=256;const g=G.getContext('2d'),id=g.createImageData(128,256);
+  for(let y=0;y<256;y++)for(let x=0;x<128;x++){const k=Math.round(255*Math.pow(1-y/255,2.1)*Math.pow(Math.sin(Math.PI*x/127),.7));id.data.set([k,k,k,255],(y*128+x)*4)}
+  g.putImageData(id,0,0);const gt=new THREE.CanvasTexture(G);
+  const pm=new THREE.PMREMGenerator(r),s=new THREE.Scene();s.background=new THREE.Color(0x030303);
+  const box=(w,h,x,y,z,k,map)=>{const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({color:new THREE.Color(k,k,k),map:map||null,side:THREE.DoubleSide}));m.position.set(x,y,z);m.lookAt(0,0,0);s.add(m)};
+  box(6.5,4.6,-5.9,0,3.8,.8,gt);   /* soft box, left front */
+  box(2.6,14,5.7,.5,3.6,.9,gt);      /* quieter soft box, right front */
+  box(.35,12,3.1,0,5.6,12);          /* thin strip: one precise line of light on the right edge */
+  box(12,3,0,6.5,2,3);               /* top soft box */
+  box(.5,10,4.5,0,-6,12);box(.5,10,-4.5,0,-6,7); /* rims from behind */
+  const t=pm.fromScene(s,.03).texture;pm.dispose();return t;
+}
+/* the reflection in the floor: short and quiet, it fades out within a third of the body */
+function reflFade(){
+  const c=d.createElement('canvas');c.width=2;c.height=256;const g=c.getContext('2d'),gr=g.createLinearGradient(0,0,0,256);
+  gr.addColorStop(0,'#000');gr.addColorStop(.62,'#000');gr.addColorStop(1,'#fff');g.fillStyle=gr;g.fillRect(0,0,2,256);return new THREE.CanvasTexture(c);
+}
 function build(){
   W=innerWidth;H=innerHeight;MOB=W<=760;root.style.height=H+'px';R0=root.getBoundingClientRect();
   if(!THREE){cssOnly();return}
@@ -25,6 +45,7 @@ function build(){
   if(scene)scene.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material){if(o.material.map)o.material.map.dispose();o.material.dispose()}});
   tmp=new THREE.Object3D();
   scene=new THREE.Scene();
+  if(r){envTex=envTex||glassEnv();fadeTex=fadeTex||reflFade();scene.environment=envTex}
   cam=new THREE.PerspectiveCamera(MOB?38:26,W/H,.1,100);cam.position.set(0,MOB?1.3:1.25,MOB?10:9.4);cam.lookAt(0,MOB?1.9:1.35,0);
   scene.add(new THREE.HemisphereLight(0xffffff,0xd8d8d8,1.4));
   key=new THREE.DirectionalLight(0xffffff,2.1);key.position.set(-3.2,10,7);key.castShadow=true;key.shadow.mapSize.set(2048,2048);
@@ -35,8 +56,10 @@ function build(){
   if(g){const gr=g.createRadialGradient(128,128,0,128,128,128);gr.addColorStop(0,'rgba(0,0,0,.5)');gr.addColorStop(.35,'rgba(0,0,0,.2)');gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.fillRect(0,0,256,256)}
   ao=new THREE.Mesh(new THREE.PlaneGeometry(2.2,.9),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(cs),transparent:true,depthWrite:false}));ao.rotation.x=-Math.PI/2;ao.position.y=.002;scene.add(ao);
   mh=MOB?3.6:2.95;mw=MOB?.46:.74;md=.3;
-  const mat=new THREE.MeshStandardMaterial({color:0x0b0b0b,roughness:.6,metalness:.08});
+  /* dark glass instead of matte: same colour value, a polished surface that reflects the studio */
+  const mat=r?new THREE.MeshPhysicalMaterial({color:0x0d0d0d,metalness:0,roughness:.05,clearcoat:1,clearcoatRoughness:.03,ior:1.52,specularIntensity:1,envMapIntensity:1.5}):new THREE.MeshStandardMaterial({color:0x0b0b0b,roughness:.6,metalness:.08});
   mono=new THREE.Mesh(new RoundedBoxGeometry(mw,mh,md,4,.012),mat);mono.castShadow=true;mono.position.y=mh/2;scene.add(mono);
+  refl=null;if(r){refl=new THREE.Mesh(mono.geometry,new THREE.MeshBasicMaterial({color:0x000000,transparent:true,opacity:0,alphaMap:fadeTex,depthWrite:false,depthTest:false}));refl.renderOrder=5;refl.visible=false;scene.add(refl)}
   /* fragments: the realities that form the body */
   const nx=1,ny=MOB?1:7,cw=mw/nx,ch=mh/ny;cells=[];
   frag=new THREE.InstancedMesh(new THREE.BoxGeometry(cw,ch*.985,md),mat,nx*ny);frag.castShadow=true;scene.add(frag);
@@ -100,6 +123,9 @@ function frame(t,s){
       tmp.position.lerpVectors(c.from,c.home,p);tmp.rotation.set(c.rot.x*(1-p),c.rot.y*(1-p),c.rot.z*(1-p));
       tmp.scale.set(1,1,1);tmp.position.applyAxisAngle(new THREE.Vector3(0,1,0),rotY);
       tmp.rotation.y+=rotY;tmp.updateMatrix();frag.setMatrixAt(i,tmp.matrix)});frag.instanceMatrix.needsUpdate=true;}
+  /* the floor reflection follows the body, appears with the shadow and leaves with the scroll */
+  if(refl){const k=flying?0:(RM?1:ease.out(seg(t,1.8,2.9)))*(1-S1);refl.visible=k>.01;
+    if(refl.visible){refl.rotation.copy(mono.rotation);refl.scale.set(mono.scale.x,-mono.scale.y,mono.scale.z);refl.position.set(mono.position.x,-mono.position.y,mono.position.z);refl.material.opacity=(MOB?.14:.24)*k}}
   /* light edge sweeps once after the body is complete */
   const L=seg(t,1.8,2.9);rim.position.set(-6+12*ease.inOut(L),5,-5);rim.intensity=2.4+(L>0&&L<1?Math.sin(L*Math.PI)*1.2:0);
   const shadowK=(RM?1:ease.out(seg(t,.5,1.9)))*(1-S1);floor.material.opacity=.12*shadowK;ao.material.opacity=shadowK;
