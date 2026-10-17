@@ -11,7 +11,7 @@ const seg=(t,a,b)=>clamp((t-a)/(b-a));
 let THREE=null,RoundedBoxGeometry=null;
 try{THREE=await import('three');({RoundedBoxGeometry}=await import('three/addons/geometries/RoundedBoxGeometry.js'))}catch(e){THREE=null}
 
-let W,H,MOB,R0,r=null,gl=!!THREE,scene,cam,key,rim,floor,ao,mono,frag,refl,cells=[],mh,mw,md,hitX,baseY,tmp,envTex=null,fadeTex=null;
+let W,H,MOB,R0,r=null,gl=!!THREE,scene,cam,key,rim,floor,ao,mono,frag,refl,cells=[],mh,mw,md,hitX,baseY,tmp,envTex=null,fadeTex=null,gmat=null,tk=0;
 function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)} /* stable pseudo random */
 
 /* dark glass: the light the surface reflects. One large soft box where the face looks (bright above, fading down, so the glass has depth),
@@ -28,6 +28,31 @@ function glassEnv(){
   box(12,3,0,6.5,2,3);               /* top soft box */
   box(.5,10,4.5,0,-6,12);box(.5,10,-4.5,0,-6,7); /* rims from behind */
   const t=pm.fromScene(s,.03).texture;pm.dispose();return t;
+}
+/* the glass itself. Under the reflection the body shows what is inside it: the studio refracted through the thickness of the glass,
+   seen at a slightly different angle than the surface, so it shifts when the glass turns (that is the optical depth), plus a slow band of
+   light drifting through the body and a fine light line at grazing edges. All of it is dark and low in contrast. */
+function glassMat(){
+  const m=new THREE.MeshPhysicalMaterial({color:0x0b0b0b,metalness:0,roughness:.06,clearcoat:1,clearcoatRoughness:.03,ior:1.52,specularIntensity:1,envMapIntensity:1.4});
+  m.onBeforeCompile=sh=>{
+    sh.uniforms.uT={value:0};m.userData.sh=sh;
+    sh.vertexShader=sh.vertexShader.replace('#include <common>','#include <common>\nvarying vec3 vObj;').replace('#include <begin_vertex>','#include <begin_vertex>\nvObj=position;');
+    sh.fragmentShader=sh.fragmentShader.replace('#include <common>','#include <common>\nvarying vec3 vObj;\nuniform float uT;').replace('#include <emissivemap_fragment>',`#include <emissivemap_fragment>
+      {vec3 vd=normalize(vViewPosition);
+       float a=.12*sin(uT*.17),c=cos(a),sn=sin(a);
+       vec3 rw=inverseTransformDirection(refract(-vd,normal,.658),viewMatrix);
+       rw=vec3(c*rw.x+sn*rw.z,rw.y,-sn*rw.x+c*rw.z);
+       #ifdef ENVMAP_TYPE_CUBE_UV
+       vec3 inner=textureCubeUV(envMap,rw,.32).rgb;
+       #else
+       vec3 inner=vec3(0.);
+       #endif
+       float band=.5+.5*sin(vObj.y*1.3+uT*.22+vObj.x*2.);
+       float fr=pow(1.-clamp(dot(normal,vd),0.,1.),4.);
+       totalEmissiveRadiance+=inner*.17*(.55+.45*band)+vec3(fr*.07);}`);
+  };
+  m.customProgramCacheKey=()=>'ldtGlass1';
+  return m;
 }
 /* the reflection in the floor: short and quiet, it fades out within a third of the body */
 function reflFade(){
@@ -57,7 +82,7 @@ function build(){
   ao=new THREE.Mesh(new THREE.PlaneGeometry(2.2,.9),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(cs),transparent:true,depthWrite:false}));ao.rotation.x=-Math.PI/2;ao.position.y=.002;scene.add(ao);
   mh=MOB?3.6:2.95;mw=MOB?.46:.74;md=.3;
   /* dark glass instead of matte: same colour value, a polished surface that reflects the studio */
-  const mat=r?new THREE.MeshPhysicalMaterial({color:0x0d0d0d,metalness:0,roughness:.05,clearcoat:1,clearcoatRoughness:.03,ior:1.52,specularIntensity:1,envMapIntensity:1.5}):new THREE.MeshStandardMaterial({color:0x0b0b0b,roughness:.6,metalness:.08});
+  const mat=r?(gmat=glassMat()):new THREE.MeshStandardMaterial({color:0x0b0b0b,roughness:.6,metalness:.08});
   mono=new THREE.Mesh(new RoundedBoxGeometry(mw,mh,md,4,.012),mat);mono.castShadow=true;mono.position.y=mh/2;scene.add(mono);
   refl=null;if(r){refl=new THREE.Mesh(mono.geometry,new THREE.MeshBasicMaterial({color:0x000000,transparent:true,opacity:0,alphaMap:fadeTex,depthWrite:false,depthTest:false}));refl.renderOrder=5;refl.visible=false;scene.add(refl)}
   /* fragments: the realities that form the body */
@@ -98,6 +123,7 @@ let mx=.5,lmx=.5;
 if(!RM)addEventListener('pointermove',e=>{mx=e.clientX/innerWidth},{passive:true});
 
 function frame(t,s){
+  if(gmat&&gmat.userData.sh)gmat.userData.sh.uniforms.uT.value=RM?0:now();
   /* header: LDT INC takes the place of the identity once the landing is left (reduced motion: home.js) */
   /* same window as the prototype (.45 to .7), but one after the other: the identity has left before LDT INC arrives, so the two never overlap (Lena, 26.09.2026) */
   if(!RM){const ho=seg(s,.45,.575),hi=seg(s,.575,.7),who=d.querySelector('#hdr .who'),br=d.querySelector('#hdr .brand');
@@ -162,7 +188,8 @@ const heroS=()=>RM?0:(LDT.heroS?LDT.heroS.s:0);
 function tick(){
   if(!built)return;
   const t=clock(),s=heroS();
-  const live=dirty||s!==ls||(s<(LDT.heroEnd||1)-.001&&((t<3.3&&t0!==null)||Math.abs(mx-lmx)>.0004));
+  const on=s<(LDT.heroEnd||1)-.001;
+  const live=dirty||s!==ls||(on&&((t<3.3&&t0!==null)||Math.abs(mx-lmx)>.0004||(!RM&&!!gmat&&t0!==null&&(++tk&1))));
   if(!live)return;
   dirty=false;ls=s;frame(t,s);
 }
