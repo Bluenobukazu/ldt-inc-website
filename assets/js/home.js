@@ -138,7 +138,7 @@ const G=()=>MOB()?GM:GD;
 const HOLDS=[[.19,.04],[.505,.14],[.565,.19]],SYS_HOLD=.12;
 /* a statement is read word by word: the words are wrapped, so the grey turns white in reading order while the visitor scrolls */
 const wordsOf=el=>{const out=[];const walk=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType===3){const f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(t=>{if(!t)return;if(/^\s+$/.test(t))f.appendChild(document.createTextNode(t));else{const w=document.createElement('span');w.className='rw';w.textContent=t;out.push(w);f.appendChild(w)}});c.replaceWith(f)}else if(c.nodeType===1&&c.tagName!=='BR')walk(c)})};walk(el);return out};
-const at=x=>HOLDS.reduce((v,[t,a])=>x>=t?v+a:v,x);
+const at=x=>HOLDS.reduce((v,[t,a])=>x>=t?v+a:v,x);LDT.jat=at;
 /* Connect remains the active chapter for the complete entry statement.  The
    title hands over only as the note leaves, before the System labels arrive. */
 const SEG=[at(.2),at(.42),at(.565),1];
@@ -340,7 +340,7 @@ function Journey(st,inst){
     master.fromTo(hs,{s:0},{s:END,duration:H0},0).add(tl,T0);
     const jBand=bandAfter($('#journey'),'white');
     trig=ScrollTrigger.create({trigger:'#journey',start:'top top',onRefresh:jBand,onToggle:jBand,end:()=>'+='+innerHeight*base*(T0+TL),pin:st,refreshPriority:2,scrub:.6,animation:master,invalidateOnRefresh:true,
-      onUpdate:self=>{const p=self.progress*(T0+TL)-T0,hp=Math.min(1,self.progress*(T0+TL)/H0)*END;const s=p<SEG[0]?0:p<SEG[1]?1:p<SEG[2]?2:3;setActive(s);jTitle(s===0?-1:s);if(p>at(.565))gsap.set(jt,{opacity:0});hero(hp<.72);
+      onUpdate:self=>{const p=self.progress*(T0+TL)-T0;LDT.jp=p;const hp=Math.min(1,self.progress*(T0+TL)/H0)*END;const s=p<SEG[0]?0:p<SEG[1]?1:p<SEG[2]?2:3;setActive(s);jTitle(s===0?-1:s);if(p>at(.565))gsap.set(jt,{opacity:0});hero(hp<.72);
         st.classList.toggle('sysOn',p>at(.515));document.body.classList.toggle('system-moment',self.isActive&&self.progress<.995&&p>at(.565));st.classList.toggle('cxOn',p>at(.3)&&p<at(.42));jBand(self)}});
     /* leaving the system: the pin has ended but the fields are still on screen; the rail returns only once no field is left under it */
     {const clr=()=>{const r=$("#rail");if(inst!==0||!trig||!r||MOB()){document.body.classList.remove('system-exit');return}
