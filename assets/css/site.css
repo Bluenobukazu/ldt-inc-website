@@ -279,3 +279,5 @@ html:not(.kbd) .ov [data-close]:focus-visible{outline:none!important;box-shadow:
   html .release-footer .footer-secondary{font-size:13.5px}html .release-footer .footer-primary{font-size:11px}
   html .release-footer .foot nav>*+*::before{padding:0 .5rem}
 }
+/* desktop footer: the secondary navigation (Workshops, Sitemap, Contact) is functional, so it reads at 13px; the legal row stays at 12px (17.10.2026) */
+@media (min-width:761px){html .release-footer .footer-secondary{font-size:13px}}

@@ -211,11 +211,11 @@ function Journey(st,inst){
   const cEls=DIMS.map((d,i)=>mk('button','cplus','<i></i>',{'data-dim':i,'data-act':'','aria-haspopup':'dialog','aria-label':`Open ${d.n}`}));
   const vB=mk('button','vlab','Delivery',{'data-real':RI('Delivery'),'data-act':'','aria-haspopup':'dialog'});
   /* the Venn is replaced by the Operating System drawing (rebuild 02.10.2026): the circles hand over to it */
-  const osEl=document.createElement('div');osEl.className='j-os';osEl.innerHTML=`<p class="os-lead">${SYS_LINE}</p><div class="sy-host"></div><div class="os-cta"><p class="os-cl">Start with the overview, then discover each area in depth.</p><button class="os-ex" type="button" data-open="approach" data-act aria-haspopup="dialog"><span>Explore the system</span><b aria-hidden="true">+</b></button></div>`;sl.appendChild(osEl);
+  const osEl=document.createElement('div');osEl.className='j-os';osEl.innerHTML=`<p class="os-lead">${SYS_LINE}</p><div class="sy-host"></div><div class="os-cta"><p class="os-cl">Start with the overview, then discover <span class="nb">each area in depth.</span></p><button class="os-ex" type="button" data-open="approach" data-act aria-haspopup="dialog"><span>Explore the system</span><b aria-hidden="true">+</b></button></div>`;sl.appendChild(osEl);
   const entry=document.createElement('p');entry.className='j-entry-note';entry.textContent='This is often where I enter: when growth, execution or commercial performance begin to outpace the structure holding the business together.';sl.appendChild(entry);
   /* desktop: the whole stage is one composition that the scroll builds (explore.js, compose) */
   const cmEl=document.createElement('div');cmEl.className='j-cm sy';
-  cmEl.innerHTML=`<div class="cm-dyn"></div><span class="pill cm-a cm-pill" aria-hidden="true">04</span>${RM?'<h2 class="sr">One Operating System</h2>':''}<h2 class="cm-a cm-lock"><span>One</span><span>Operating</span><span>System</span></h2><p class="cm-a cm-sys">${SYS_LINE_HTML}</p><button class="cm-a cm-go" type="button" data-open="approach" data-act aria-haspopup="dialog"><span class="cm-gl">Explore the System<b aria-hidden="true">+</b></span><span class="cm-gq">Start with the overview, then discover each area in depth.</span></button>`;
+  cmEl.innerHTML=`<div class="cm-dyn"></div><span class="pill cm-a cm-pill" aria-hidden="true">04</span>${RM?'<h2 class="sr">One Operating System</h2>':''}<h2 class="cm-a cm-lock"><span>One</span><span>Operating</span><span>System</span></h2><p class="cm-a cm-sys">${SYS_LINE_HTML}</p><button class="cm-a cm-go" type="button" data-open="approach" data-act aria-haspopup="dialog"><span class="cm-gl">Explore the System<b aria-hidden="true">+</b></span><span class="cm-gq">Start with the overview, then discover <span class="nb">each area in depth.</span></span></button>`;
   sl.appendChild(cmEl);sys.style.display='none';const cp={p:0},cmq=s=>cmEl.querySelector(s);
   [...dimEls,...Object.values(tickEls),vA,vB,...cEls,cue].forEach(e=>e.remove());
   let tl=null,master=null,trig=null,jState=-1,G0=G();
@@ -372,7 +372,7 @@ function T(){return MOB()?{W:430,H:860,ws:[150,190,176,190,180,120,290],bh:46,x0
 function clipLabels(){const cr=$('#tTrack').getBoundingClientRect(),m=MOB()?4:40*tScale;bars.forEach(({b,l})=>{const r=l.getBoundingClientRect();l.style.visibility=(r.left>=cr.left+m&&r.right<=cr.right+1)?'visible':'hidden'})}
 function buildTransform(){
   if(tST){tST.kill();tST=null}if(tTL)tTL.kill();
-  const cv=$('#tcv'),t=T();cv.style.width=t.W+'px';cv.style.height=t.H+'px';tScale=Math.min(innerWidth/t.W,innerHeight/t.H);gsap.set(cv,{xPercent:-50,yPercent:-50,scale:tScale});
+  const cv=$('#tcv'),t=T();cv.style.width=t.W+'px';cv.style.height=t.H+'px';tScale=Math.min(innerWidth/t.W,innerHeight/t.H);cv.style.setProperty('--cs',tScale.toFixed(4));gsap.set(cv,{xPercent:-50,yPercent:-50,scale:tScale});
   gsap.set('#tt',{left:MOB()?22:48,top:MOB()?100:122});gsap.set('#tt .t',{fontSize:MOB()?44:60,opacity:RM||ttShown?1:0,x:0,y:0,scale:1});
   const pos=i=>({x:t.x0+i*t.dx,y:t.y0+((i*37)%5)*t.sy});
   bars.forEach(({b,l},i)=>{const p=pos(i);gsap.set([b,l],{left:p.x,top:p.y,width:t.ws[i],height:t.bh,opacity:1})});

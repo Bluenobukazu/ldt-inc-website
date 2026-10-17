@@ -561,3 +561,10 @@ body.system-moment #railM{opacity:0;visibility:hidden}
    start up to 82px above its box. The drawing gets that room back, so its tip stays about 12px clear of the text above it. */
 @media (max-width:1180px){.sy-ex .sy-form{margin-top:100px}}
 @media (max-width:760px){.sy-ex .sy-form{margin-top:72px}}
+
+/* Layer 1 chapter 06 (Transformation): its canvas is scaled into the window like the others, so the chapter pills keep at least 11px rendered
+   (--cs is set in home.js where the canvas is scaled; 17.10.2026) */
+#tcv .pill{font-size:max(13px,calc(11px/var(--cs,1)))}
+
+/* CTA subline of chapter 04: the last phrase never splits, so the second line is "each area in depth." and not a single orphan word (17.10.2026) */
+.cm-gq .nb,.os-cl .nb{white-space:nowrap}
