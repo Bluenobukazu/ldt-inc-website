@@ -16,13 +16,28 @@ function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x
 
 /* dark glass: the light the surface reflects. One large soft box where the face looks (bright above, fading down, so the glass has depth),
    plus thin strips for precise edge light. Built once, the shape of the monolith and its position are not touched. */
+/* the body of the monolith: same width, height and depth as before, but the section is a superellipse, so the faces are very gently curved.
+   A flat face reflects one single value and reads as a grey block; a curved one lets the light run across it. Corners are softened a little. */
+function slabGeo(w,h,d,p){
+  const a=w/2,b=d/2,N=180,pts=[];
+  for(let i=0;i<N;i++){const th=i/N*Math.PI*2,c=Math.cos(th),s=Math.sin(th);
+    pts.push(new THREE.Vector2(a*Math.sign(c)*Math.pow(Math.abs(c),2/p),b*Math.sign(s)*Math.pow(Math.abs(s),2/p)))}
+  const g=new THREE.ExtrudeGeometry(new THREE.Shape(pts),{depth:h,bevelEnabled:false,steps:1});
+  g.rotateX(-Math.PI/2);g.translate(0,-h/2,0);g.computeVertexNormals();
+  const pos=g.attributes.position,nor=g.attributes.normal,acc=new Map();
+  for(let i=0;i<pos.count;i++){if(Math.abs(nor.getY(i))>.9)continue;
+    const k=pos.getX(i).toFixed(4)+'|'+pos.getZ(i).toFixed(4),v=acc.get(k)||[0,0];v[0]+=nor.getX(i);v[1]+=nor.getZ(i);acc.set(k,v)}
+  for(let i=0;i<pos.count;i++){if(Math.abs(nor.getY(i))>.9)continue;
+    const v=acc.get(pos.getX(i).toFixed(4)+'|'+pos.getZ(i).toFixed(4)),l=Math.hypot(v[0],v[1])||1;nor.setXYZ(i,v[0]/l,0,v[1]/l)}
+  return g;
+}
 function glassEnv(){
   const G=d.createElement('canvas');G.width=128;G.height=256;const g=G.getContext('2d'),id=g.createImageData(128,256);
   for(let y=0;y<256;y++)for(let x=0;x<128;x++){const k=Math.round(255*Math.pow(1-y/255,2.1)*Math.pow(Math.sin(Math.PI*x/127),.7));id.data.set([k,k,k,255],(y*128+x)*4)}
   g.putImageData(id,0,0);const gt=new THREE.CanvasTexture(G);
   const pm=new THREE.PMREMGenerator(r),s=new THREE.Scene();s.background=new THREE.Color(0x030303);
   const box=(w,h,x,y,z,k,map)=>{const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({color:new THREE.Color(k,k,k),map:map||null,side:THREE.DoubleSide}));m.position.set(x,y,z);m.lookAt(0,0,0);s.add(m)};
-  box(6.5,4.6,-5.9,0,3.8,.8,gt);   /* soft box, left front */
+  box(6.5,4.6,-5.9,0,3.8,1.5,gt);   /* soft box, left front */
   box(2.6,14,5.7,.5,3.6,.9,gt);      /* quieter soft box, right front */
   box(.35,12,3.1,0,5.6,12);          /* thin strip: one precise line of light on the right edge */
   box(12,3,0,6.5,2,3);               /* top soft box */
@@ -49,7 +64,7 @@ function glassMat(){
        #endif
        float band=.5+.5*sin(vObj.y*1.3+uT*.22+vObj.x*2.);
        float fr=pow(1.-clamp(dot(normal,vd),0.,1.),4.);
-       totalEmissiveRadiance+=inner*.17*(.55+.45*band)+vec3(fr*.07);}`);
+       totalEmissiveRadiance+=inner*.11*(.55+.45*band)+vec3(fr*.03);}`);
   };
   m.customProgramCacheKey=()=>'ldtGlass1';
   return m;
@@ -83,7 +98,7 @@ function build(){
   mh=MOB?3.6:2.95;mw=MOB?.46:.74;md=.3;
   /* dark glass instead of matte: same colour value, a polished surface that reflects the studio */
   const mat=r?(gmat=glassMat()):new THREE.MeshStandardMaterial({color:0x0b0b0b,roughness:.6,metalness:.08});
-  mono=new THREE.Mesh(new RoundedBoxGeometry(mw,mh,md,4,.012),mat);mono.castShadow=true;mono.position.y=mh/2;scene.add(mono);
+  mono=new THREE.Mesh(slabGeo(mw,mh,md,5),mat);mono.castShadow=true;mono.position.y=mh/2;scene.add(mono);
   refl=null;if(r){refl=new THREE.Mesh(mono.geometry,new THREE.MeshBasicMaterial({color:0x000000,transparent:true,opacity:0,alphaMap:fadeTex,depthWrite:false,depthTest:false}));refl.renderOrder=5;refl.visible=false;scene.add(refl)}
   /* fragments: the realities that form the body */
   const nx=1,ny=MOB?1:7,cw=mw/nx,ch=mh/ny;cells=[];
